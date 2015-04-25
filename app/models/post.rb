@@ -43,4 +43,8 @@ class Post < ActiveRecord::Base
     return @content.html_safe
   end
 
+  def author
+    "暫時沒有作者欄位"
+  end
+
 end
