@@ -16,6 +16,14 @@ class PostsController < ApplicationController
     raise ActionController::RoutingError.new("無此文章") if not @post
   end
 
+  def search
+    
+  end
+
+  def overview
+    @groups = Post.group_by_year
+  end
+
   private
     def set_all_posts
       @posts = Post.all.order(:display_date => :desc)

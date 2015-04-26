@@ -21,7 +21,7 @@
       <div class="col-lg-6">
         <ul class="list-unstyled">
           <% @categories.each do |category| %>
-            <li><%= link_to category[:name], "/categories/#{category[:name]}" %></a></li>
+            <li><%= link_to "#{category[:name]} (#{category.posts.count})", "/categories/#{category[:name]}" %></a></li>
           <% end %>
         </ul>
       </div>
@@ -29,4 +29,7 @@
     <!-- /.row -->
   </div>
 
+  <div class="well">
+    <h5><%= link_to "瀏覽所有文章", posts_overview_path %></h5>
+  </div>
 

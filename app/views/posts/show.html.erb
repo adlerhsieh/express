@@ -1,7 +1,7 @@
 <div class="row">
 
   <!-- Blog Post Content Column -->
-  <div class="col-lg-8">
+  <div class="col-lg-9">
 
     <!-- Blog Post -->
 
@@ -13,13 +13,15 @@
     <hr>
 
     <!-- Post Content -->
-    <%= @post.parse %>
+    <div class="post">
+      <%= @post.parse %>
+    </div>
     <hr>
 
 
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <%= render partial: "widgets" %>
   </div>
 
