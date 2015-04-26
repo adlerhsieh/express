@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   private
     def set_all_posts
-      @posts = Post.all.order(:created_at => :desc)
+      @posts = Post.all.order(:display_date => :desc)
       @categories = Category.all
     end
 

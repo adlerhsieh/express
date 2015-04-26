@@ -48,12 +48,12 @@ class Post < ActiveRecord::Base
   end
 
   def self.group_by_year
-    @posts = Post.includes(:category).order(:created_at)
-    group_year = Post.order(:created_at).last[:created_at].strftime("%Y")
+    @posts = Post.includes(:category).order(:display_date)
+    group_year = Post.order(:display_date).last[:display_date].strftime("%Y")
     @groups = {}
     posts = []
     @posts.each do |post|
-      year = post[:created_at].strftime("%Y")
+      year = post[:display_date].strftime("%Y")
       if group_year != year
         @groups.merge!(group_year.to_sym => posts)
         posts = []
