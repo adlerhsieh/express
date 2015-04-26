@@ -47,4 +47,7 @@ class Post < ActiveRecord::Base
     "暫時沒有作者欄位"
   end
 
+  # def to_param
+  #   self.slug
+  # end
 end

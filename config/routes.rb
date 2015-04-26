@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/blog/:slug', to: "posts#show"
   resources :posts
   root to: "posts#index"
 
