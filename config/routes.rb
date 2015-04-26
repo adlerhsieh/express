@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get '/blog/:slug', to: "posts#show"
   resources :posts
+
+  get '/categories/:name', to: "categories#show"
+
   root to: "posts#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

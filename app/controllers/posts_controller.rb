@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post
+  before_action :set_post, only: [:show]
+  before_action :set_all_posts
 
   def index
   end
@@ -17,9 +18,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
+    def set_all_posts
       @posts = Post.all
-      @post = Post.find_by_slug(params[:slug])
       @categories = Category.all
+    end
+
+    def set_post
+      @post = Post.find_by_slug(params[:slug])
     end
 end
