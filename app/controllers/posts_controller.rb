@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :set_all_posts
 
   def index
+    @groups = Post.group_by_year
   end
 
   def new
@@ -12,14 +13,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    if not @post
-      raise ActionController::RoutingError.new("無此文章")
-    end
+    raise ActionController::RoutingError.new("無此文章") if not @post
   end
 
   private
     def set_all_posts
-      @posts = Post.all
+      @posts = Post.all.order(:created_at => :desc)
       @categories = Category.all
     end
 

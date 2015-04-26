@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get '/blog/:slug', to: "posts#show"
-  resources :posts
+  get '/blog', to: "posts#index", as: "posts"
+  get '/blog/:slug', to: "posts#show", as: "post"
+  # resources :posts
 
-  get '/categories/:name', to: "categories#show"
+  get '/categories/:name', to: "categories#show", as: "category"
 
   root to: "posts#index"
 

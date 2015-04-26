@@ -1,2 +1,11 @@
-<h1>Category#show</h1>
-<p>Find me in app/views/category/show.html.erb</p>
+<h1><%= @category[:name] %></h1>
+<hr/>
+<div class="col-lg-8">
+  <div class="posts">
+    <%= render partial: "layouts/post_list" %>
+  </div>
+</div>
+<div class="col-md-4">
+  <%= render partial: "posts/widgets" %>
+</div>
+

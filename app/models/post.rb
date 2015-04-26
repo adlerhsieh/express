@@ -47,7 +47,21 @@ class Post < ActiveRecord::Base
     "暫時沒有作者欄位"
   end
 
-  # def to_param
-  #   self.slug
-  # end
+  def self.group_by_year
+    @posts = Post.order(:created_at)
+    group_year = Post.order(:created_at).last[:created_at].strftime("%Y")
+    @groups = {}
+    posts = []
+    @posts.each do |post|
+      year = post[:created_at].strftime("%Y")
+      if group_year != year
+        @groups.merge!(group_year.to_sym => posts)
+        posts = []
+        group_year = year
+      end
+      posts.push(post)
+      @groups.merge!(group_year.to_sym => posts) if post == @posts.last
+    end
+    @groups
+  end
 end

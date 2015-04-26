@@ -1,1 +1,10 @@
-<%= @content.html_safe %>
+<h1>部落格</h1>
+<hr/>
+<div class="col-lg-8">
+  <div class="posts">
+    <%= render partial: "layouts/post_list" %>
+  </div>
+</div>
+<div class="col-md-4">
+  <%= render partial: "widgets" %>
+</div>

@@ -1,0 +1,9 @@
+<% @groups.each do |year, posts| %>
+  <div class="well year-column">
+    <h3 class="year-title"><%= year %></h3>
+    <% posts.each do |post| %>
+      <h4><%= post[:created_at].strftime("%m/%d") %>：<%= link_to post.title, post_path(post[:slug]) %></h4>
+    <% end %>
+  </div>
+<% end %>
+
