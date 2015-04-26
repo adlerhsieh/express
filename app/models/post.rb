@@ -45,12 +45,12 @@ class Post < ActiveRecord::Base
   end
 
   def author
-    "暫時沒有作者欄位"
+    "Adler"
   end
 
   def self.group_by_year
-    @posts = Post.includes(:category).order(:display_date)
-    group_year = Post.order(:display_date).last[:display_date].strftime("%Y")
+    @posts = Post.includes(:category).order(:display_date => :desc)
+    group_year = Post.order(:display_date => :desc).first[:display_date].strftime("%Y")
     @groups = {}
     posts = []
     @posts.each do |post|
