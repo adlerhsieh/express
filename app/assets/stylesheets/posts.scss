@@ -4,9 +4,39 @@
 
 pre {
   border: 0px solid white;
+  background-color: black;
+  color: white;
+  overflow-y: hidden;
+
+  code.cmd {
+    .line-numbers {
+      display: none;
+    }
+  }
+}
+
+.line-numbers {
+  opacity: 0.5;
 }
 
 h3.year-title {
   margin-top: 5px;
   margin-bottom: 25px;
 }
+
+div.post {
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.highlight-block {
+  background-color: rgb(249,255,197);
+  border-radius: 10px;
+  padding: 20px 20px;
+  border: 1px solid silver;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+

@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+var height = 0
+
+$(document).ready(function(){
+  $("pre").each(function(){
+    height = $(this).height();
+    $(this).height(height-50);
+  });
+  $("tbody tr td pre").attr('style', "");
+});
+
