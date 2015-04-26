@@ -6,15 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+categories = Category.all.map(&:name)
+db_tags = Tag.all.map(&:name)
+
 dir = "/Users/hsiehadler/Dropbox/文件/Motion Express/hexo/source/_posts"
 posts = Dir.entries(dir).delete_if {|e| [".", "..", ".DS_Store"].include? e }
 
-content = File.read(dir + "/" + posts.last)
 @text_array = []
-content.each_line do |line|
-  @text_array.push(line)
-end
-
 def @text_array.search_index(text)
   self.each do |line|
     if line.index(text)
@@ -23,9 +21,18 @@ def @text_array.search_index(text)
   end
 end
 
+content = File.read(dir + "/" + posts.last)
+content.each_line do |line|
+  @text_array.push(line)
+end
+
+slug = posts.last
+slug.gsub!(".markdown", "")
+slug.gsub!(".md", "")
 
 title_index = @text_array.search_index("title")
-@text_array[title_index].gsub!("title: ","").gsub!("title:","")
+@text_array[title_index].gsub!("title: ","")
+@text_array[title_index].gsub!("title:","")
 title = @text_array[0]
 
 category_index = @text_array.search_index("categories")
@@ -33,13 +40,15 @@ category_index = @text_array.search_index("categories")
 category = @text_array[category_index + 1]
 
 tag_index = @text_array.search_index("tags")
-tags = []
-i = 1
-while @text_array[tag_index + i].index("  - ")
-  current_tag = @text_array[tag_index + 1]
-  current_tag.gsub!("  - ", "")
-  tags.push(current_tag)
-  i += 1
+if tag_index
+  tags = []
+  i = 1
+  while @text_array[tag_index + i].index("  - ")
+    current_tag = @text_array[tag_index + 1]
+    current_tag.gsub!("  - ", "")
+    tags.push(current_tag)
+    i += 1
+  end
 end
 
 date_index = @text_array.search_index("date")
@@ -50,8 +59,30 @@ date = Date.parse(date)
 content_index = @text_array.search_index("---")
 content = @text_array[(content_index+1)..-1].join("")
 
-puts title
-puts category
-puts tags
-puts date
-puts content
+if categories.include? category 
+  cat_id = Category.find_by_name(category)[:id]
+else
+  cat = Category.create!(:name => category, :slug => category)
+  categories.push(cat[:name])
+  cat_id = cat[:id]
+end
+
+new_post = Post.create!(
+  title: title,
+  content: content,
+  slug: slug,
+  category_id: cat_id,
+  display_date: date
+)
+
+if tags.length > 0
+  tags.each do |tag|
+    if db_tags.include? tag
+      db_tag = Tag.find_by_name(tag)
+    else
+      new_tag = Tag.create!(:name => tag, :slug => tag)
+      db_tags.push(tag)
+    end
+    PostTag.create!(:post_id => new_post[:id], :tag_id => new_tag[:id])
+  end
+end
