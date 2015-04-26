@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
     }
     # raw = markdown.render(File.read(File.expand_path("../red.rb", __FILE__)))
     raw = markdown.render(content)
+    @content = ""
     while index = raw =~ /<pre>/
       @content ||= ""
       @content += raw[0..index+4]
