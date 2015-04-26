@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get '/blog', to: "posts#index", as: "posts"
   get '/blog/:slug', to: "posts#show", as: "post"
-  # resources :posts
+  get '/blog-search', to: "posts#search", as: "search"
+  get '/blog-overview', to: "posts#overview", as: "posts_overview"
 
   get '/categories/:name', to: "categories#show", as: "category"
 
