@@ -48,7 +48,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.group_by_year
-    @posts = Post.order(:created_at)
+    @posts = Post.includes(:category).order(:created_at)
     group_year = Post.order(:created_at).last[:created_at].strftime("%Y")
     @groups = {}
     posts = []
