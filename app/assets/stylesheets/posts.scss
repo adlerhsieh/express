@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  font-size: 15px;
+}
+
 pre {
   border: 0px solid white;
   background-color: black;
@@ -40,3 +44,7 @@ div.post {
   margin-bottom: 15px;
 }
 
+blockquote {
+  font-size: 15.5px;
+  background-color: #FBFFD6;
+}
