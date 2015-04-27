@@ -8,15 +8,11 @@ class Post < ActiveRecord::Base
 
   def parse
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
-    options = {
-      :line_numbers => :table,
-      :line_number_anchors => false,
-      :css => :class
-    }
-    raw = MarkdownHelper.new(markdown.render(content))
-    raw.parse_code_block
-    raw.parse_marks
-    return raw.parsed.html_safe
+    # return markdown.render(content).html_safe
+    process = MarkdownHelper.new(markdown.render(content))
+    process.parse_code_block
+    process.parse_marks
+    return process.parsed.html_safe
   end
 
   def author
