@@ -1,11 +1,12 @@
 class MarkdownHelper
   require 'coderay'
   require 'redcarpet'
-  attr_accessor :raw, :parsed
+  attr_accessor :raw, :parsed, :styled
 
   def initialize(raw)
     @raw = raw
     @parsed = ""
+    @styled = ""
     @languages = [:ruby, :cmd, :javascript] 
     @coderay_options = {
       :line_numbers => :table,
@@ -15,49 +16,54 @@ class MarkdownHelper
   end
 
   def remove_hexo_marks
-    @raw.gsub!('<div class="highlight-block">', "")
-    @raw.gsub!("<\/div>", "")
+    # @raw.gsub!('<div class="highlight-block">', "")
+    # @raw.gsub!("<\/div>", "")
     @raw.gsub!("<snippet>", "`")
     @raw.gsub!("<\/snippet>", "`")
+  end
+
+  def convert_to_blockquotes
+    # while first_index = @raw =~ /<div class="highlight-block">/
+    # end
   end
 
   def parse_markdown
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, 
                                         fenced_code_blocks: true
                                        )
-    @raw = markdown.render(@raw)
+    @parsed = markdown.render(@raw)
   end
 
   def parse_code_block_style
-    while first_index = @raw =~ /<pre>/
+    while first_index = @parsed =~ /<pre>/
       # parse pre tag
-      closing_index = @raw =~ /<\/pre>/
-      height_multiplier =  @raw[first_index...closing_index].count("\n")
-      @parsed += @raw[0..first_index+4].gsub!("pre", "pre style='height:#{height(height_multiplier)}px;'")
+      closing_index = @parsed =~ /<\/pre>/
+      height_multiplier =  @parsed[first_index...closing_index].count("\n")
+      @styled += @parsed[0..first_index+4].gsub!("pre", "pre style='height:#{height(height_multiplier)}px;'")
       # parse coderay
-      @raw = @raw[first_index+5..-1]
-      end_index = @raw =~ />/
-      code_class = @raw[0..end_index]
+      @parsed = @parsed[first_index+5..-1]
+      end_index = @parsed =~ />/
+      code_class = @parsed[0..end_index]
       @language = check_language(code_class)
-      @parsed += @raw[0..end_index]
-      @raw = @raw[end_index+1..-1]
-      end_block_index = @raw =~ /<\/code>/
-      block = CodeRay.scan(@raw[0...end_block_index], @language).html(@coderay_options)   
-      @parsed += block
+      @styled += @parsed[0..end_index]
+      @parsed = @parsed[end_index+1..-1]
+      end_block_index = @parsed =~ /<\/code>/
+      block = CodeRay.scan(@parsed[0...end_block_index], @language).html(@coderay_options)   
+      @styled += block
       # add following content
-      @raw = @raw[end_block_index-1..-1]
-      end_block_end_index = @raw =~ /<\/pre>/
-      @parsed += @raw[0..end_block_end_index+5]
-      @raw = @raw[end_block_end_index+6..-1]
+      @parsed = @parsed[end_block_index-1..-1]
+      end_block_end_index = @parsed =~ /<\/pre>/
+      @styled += @parsed[0..end_block_end_index+5]
+      @parsed = @parsed[end_block_end_index+6..-1]
     end
-    @parsed += @raw
+    @styled += @parsed
   end
 
   def parse_marks
-    @parsed.gsub!("&amp;quot;","&quot;") # 去除雙括號
-    @parsed.gsub!('&amp;<span class="comment">#39;',"&#39;") # 去除單括號(Coderay誤認為註解)
-    @parsed.gsub!('&amp;#39;</span>',"&#39;") # 去除單括號(Coderay誤認為註解的結尾)
-    @parsed.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
+    @styled.gsub!("&amp;quot;","&quot;") # 去除雙括號
+    @styled.gsub!('&amp;<span class="comment">#39;',"&#39;") # 去除單括號(Coderay誤認為註解)
+    @styled.gsub!('&amp;#39;</span>',"&#39;") # 去除單括號(Coderay誤認為註解的結尾)
+    @styled.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
   end
 
   private
