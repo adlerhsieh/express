@@ -23,8 +23,15 @@ class MarkdownHelper
   end
 
   def convert_to_blockquotes
-    # while first_index = @raw =~ /<div class="highlight-block">/
-    # end
+    while first_index = @raw =~ /<div class="highlight-block">/
+    # first_index = @raw =~ /<div class="highlight-block">/
+      end_index = @raw =~ /<\/div>/
+      block = @raw[first_index..end_index+5]
+      inserted = block.gsub("\n", "\n\n>")
+      inserted.gsub!('<div class="highlight-block">', "")
+      inserted.gsub!("</div>", "")
+      @raw.gsub!(block, inserted)
+    end
   end
 
   def parse_markdown
