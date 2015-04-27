@@ -9,7 +9,8 @@ class Post < ActiveRecord::Base
   def parse
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
     # return markdown.render(content).html_safe
-    process = MarkdownHelper.new(markdown.render(content))
+    rendered = markdown.render(content_remove_hexo_marks)
+    process = MarkdownHelper.new(rendered)
     process.parse_code_block
     process.parse_marks
     return process.parsed.html_safe
@@ -36,4 +37,11 @@ class Post < ActiveRecord::Base
     end
     @groups
   end
+
+  private
+
+    def content_remove_hexo_marks
+      # self.content.gsub!('<div class="highlight-block">', "<hr/>").gsub!("<\/div>", "<hr/>")
+      self.content.gsub!("<snippet>", "`").gsub!("<\/snippet>", "`")
+    end
 end

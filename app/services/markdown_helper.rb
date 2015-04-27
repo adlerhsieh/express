@@ -45,6 +45,14 @@ class MarkdownHelper
     @parsed.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
   end
 
+  def parse_highlight_block
+    # while index = @parsed =~ /<div class="highlight-block">/
+    #   text = @parsed[index..-1]
+    #   end_index = text =~ /<\/div>/
+    #   @parsed.
+    # end
+  end
+
   private
 
     def check_language(class_attr)
@@ -55,7 +63,7 @@ class MarkdownHelper
     end
 
     def height(multiplier)
-      base = 20
+      base = 35
       line_height = 20
       return (base + line_height * multiplier).to_s
     end
