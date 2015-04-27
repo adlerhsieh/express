@@ -1,19 +1,34 @@
 class MarkdownHelper
   require 'coderay'
+  require 'redcarpet'
   attr_accessor :raw, :parsed
 
   def initialize(raw)
     @raw = raw
     @parsed = ""
-    @parser_options = {
+    @languages = [:ruby, :cmd, :javascript] 
+    @coderay_options = {
       :line_numbers => :table,
       :line_number_anchors => false,
       :css => :class
     }
-    @languages = [:ruby, :cmd, :javascript] 
   end
 
-  def parse_code_block
+  def remove_hexo_marks
+    @raw.gsub!('<div class="highlight-block">', "")
+    @raw.gsub!("<\/div>", "")
+    @raw.gsub!("<snippet>", "`")
+    @raw.gsub!("<\/snippet>", "`")
+  end
+
+  def parse_markdown
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, 
+                                        fenced_code_blocks: true
+                                       )
+    @raw = markdown.render(@raw)
+  end
+
+  def parse_code_block_style
     while first_index = @raw =~ /<pre>/
       # parse pre tag
       closing_index = @raw =~ /<\/pre>/
@@ -27,7 +42,7 @@ class MarkdownHelper
       @parsed += @raw[0..end_index]
       @raw = @raw[end_index+1..-1]
       end_block_index = @raw =~ /<\/code>/
-      block = CodeRay.scan(@raw[0...end_block_index], @language).html(@parser_options)   
+      block = CodeRay.scan(@raw[0...end_block_index], @language).html(@coderay_options)   
       @parsed += block
       # add following content
       @raw = @raw[end_block_index-1..-1]
@@ -43,14 +58,6 @@ class MarkdownHelper
     @parsed.gsub!('&amp;<span class="comment">#39;',"&#39;") # 去除單括號(Coderay誤認為註解)
     @parsed.gsub!('&amp;#39;</span>',"&#39;") # 去除單括號(Coderay誤認為註解的結尾)
     @parsed.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
-  end
-
-  def parse_highlight_block
-    # while index = @parsed =~ /<div class="highlight-block">/
-    #   text = @parsed[index..-1]
-    #   end_index = text =~ /<\/div>/
-    #   @parsed.
-    # end
   end
 
   private
