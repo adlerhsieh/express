@@ -80,7 +80,16 @@ class MarkdownHelper
   end
 
   def remove_extras
-    @styled.gsub!("&amp;quot;","&quot;") # 去除雙括號
+    # replace quotation marks in code block into string
+    while @styled.index("&amp;quot;")
+      @counter ||= 0
+      if @counter == 0
+        @styled.sub!("&amp;quot;","<span class='string'>&quot;")
+      else
+        @styled.sub!("&amp;quot;","&quot;</span>")
+      end
+      @counter = @counter == 0 ? 1 : 0
+    end
     @styled.gsub!('&amp;<span class="comment">#39;',"&#39;") # 去除單括號(Coderay誤認為註解)
     @styled.gsub!('&amp;#39;</span>',"&#39;") # 去除單括號(Coderay誤認為註解的結尾)
     @styled.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
