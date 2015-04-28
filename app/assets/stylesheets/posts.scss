@@ -13,9 +13,16 @@ pre {
   overflow-y: hidden;
 
   code.cmd {
-    .line-numbers {
-      display: none;
-    }
+    .line-numbers { display: none; }
+    .prefix { opacity: 0.7; }
+  }
+
+  code.ruby {
+    .class, .constant { color: rgb(54,255,254); }
+    .comment { opacity: 0.6; }
+    .key, .integer, .symbol { color: rgb(235, 34, 206); }
+    .keyword { color: #FF1616; }
+    .function { color: rgb(42,219,36); }
   }
 }
 
@@ -45,6 +52,6 @@ div.post {
 }
 
 blockquote {
-  font-size: 15.5px;
+  font-size: 15px;
   background-color: #FBFFD6;
 }

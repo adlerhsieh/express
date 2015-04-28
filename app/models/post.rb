@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
     process.convert_to_blockquotes
     process.parse_markdown
     process.parse_code_block_style
-    process.parse_marks
+    process.remove_extras
     return process.styled.html_safe
   end
 

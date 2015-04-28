@@ -57,6 +57,7 @@ class MarkdownHelper
       @parsed = @parsed[end_index+1..-1]
       end_block_index = @parsed =~ /<\/code>/
       block = CodeRay.scan(@parsed[0...end_block_index], @language).html(@coderay_options).html_safe
+      parse_custom_code_block_style(block, @language)
       @styled += block
       # add following content
       @parsed = @parsed[end_block_index-1..-1]
@@ -67,12 +68,24 @@ class MarkdownHelper
     @styled += @parsed
   end
 
-  def parse_marks
+  def parse_custom_code_block_style(code, lang)
+    case lang
+    when :ruby
+      ["require ", "include ", "it ", "do \n"].each do |keyword|
+        code.gsub!(keyword, "<span class='keyword'>#{keyword}</span>")
+      end
+    when :cmd
+      code.gsub!("$", "<span class='prefix'>$</span>")
+    end
+  end
+
+  def remove_extras
     @styled.gsub!("&amp;quot;","&quot;") # 去除雙括號
     @styled.gsub!('&amp;<span class="comment">#39;',"&#39;") # 去除單括號(Coderay誤認為註解)
     @styled.gsub!('&amp;#39;</span>',"&#39;") # 去除單括號(Coderay誤認為註解的結尾)
     @styled.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
-    @styled.gsub!('&amp;gt;',"&gt;") # 去除其他單括號
+    @styled.gsub!('&amp;gt;',"&gt;")
+    @styled.gsub!('&amp;lt;',"&lt;")
   end
 
   private
@@ -86,7 +99,7 @@ class MarkdownHelper
 
     def height(multiplier)
       base = 35
-      line_height = 18
+      line_height = 19
       return (base + line_height * multiplier).to_s
     end
 
