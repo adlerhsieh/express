@@ -1,6 +1,7 @@
 class MarkdownHelper
   require 'coderay'
   require 'redcarpet'
+  # require 'albino'
   attr_accessor :raw, :parsed, :styled
 
   def initialize(raw)
@@ -55,7 +56,7 @@ class MarkdownHelper
       @styled += @parsed[0..end_index]
       @parsed = @parsed[end_index+1..-1]
       end_block_index = @parsed =~ /<\/code>/
-      block = CodeRay.scan(@parsed[0...end_block_index], @language).html(@coderay_options)   
+      block = CodeRay.scan(@parsed[0...end_block_index], @language).html(@coderay_options).html_safe
       @styled += block
       # add following content
       @parsed = @parsed[end_block_index-1..-1]
@@ -71,6 +72,7 @@ class MarkdownHelper
     @styled.gsub!('&amp;<span class="comment">#39;',"&#39;") # 去除單括號(Coderay誤認為註解)
     @styled.gsub!('&amp;#39;</span>',"&#39;") # 去除單括號(Coderay誤認為註解的結尾)
     @styled.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
+    @styled.gsub!('&amp;gt;',"&gt;") # 去除其他單括號
   end
 
   private
@@ -84,7 +86,7 @@ class MarkdownHelper
 
     def height(multiplier)
       base = 35
-      line_height = 20
+      line_height = 18
       return (base + line_height * multiplier).to_s
     end
 
