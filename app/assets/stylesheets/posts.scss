@@ -6,42 +6,6 @@ body {
   font-size: 15px;
 }
 
-pre {
-  border: 0px solid white;
-  background-color: black;
-  color: white;
-  overflow-y: hidden;
-
-  code.cmd {
-    .line-numbers { display: none; }
-    .prefix { opacity: 0.7; }
-  }
-
-  code.ruby {
-    .class, 
-    .constant { 
-      color: rgb(54,255,254); 
-    }
-    .comment, .comment .string {
-      color: gray;
-    }
-    .key, 
-    .integer, 
-    .symbol { 
-      color: #B277E0; 
-    }
-    .keyword {
-      color: #E2005C; 
-    }
-    .function { 
-      color: #8AE806; 
-    }
-    .string, .string .comment, .string .constant {
-        color: #EAED8A; 
-    }
-  }
-}
-
 .line-numbers {
   opacity: 0.5;
 }
@@ -77,6 +41,8 @@ blockquote {
   height: 50px;
   margin-bottom: 20px;
 }
+
+// Backend Editor
 
 #editor {
   height: 600px;
