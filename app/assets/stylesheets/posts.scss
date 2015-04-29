@@ -36,14 +36,30 @@ blockquote {
   background-color: #FBFFD6;
 }
 
-.editor-title {
-  font-size: 28px;
-  height: 50px;
-  margin-bottom: 20px;
-}
-
 // Backend Editor
 
 #editor {
   height: 600px;
+}
+
+.editor-title {
+  font-size: 28px;
+  height: 50px;
+}
+
+.editor-attr {
+  margin-bottom: 20px;
+}
+
+.pending {
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  display: block;
+  opacity: 0;
+  margin-top: 200px;
+  z-index: 20;
+  left: 50%;
+  margin-left: -100px;
+  text-align: center;
 }

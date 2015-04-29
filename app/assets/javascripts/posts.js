@@ -11,6 +11,7 @@ $(document).ready(function(){
     editor.renderer.setPadding(10);
     document.getElementById('editor').style.fontSize='14px';
     document.getElementById("title").focus();
+    $("#pending").hide();
 
       $("#send").click(function(){
 
@@ -41,20 +42,24 @@ $(document).ready(function(){
       var current_position = editor.selection.getCursor();
       current_row = current_position.row;
       current_column = current_position.column;
+      $("#pending").show().animate({opacity:1},100);
 
       $.ajax({
         url: "/posts/render_markdown",
         type: "POST",
         data: { "post": code }
       }).done(function(response){
-        $("#editor").hide();
+        // $("#pending").hide();
+        $("#pending").animate({opacity:0},0).hide();
+        $(".editor-attr").hide();
         $("#preview").show();
         $("#preview").html(response.post);
       });		    	
     };
 
     function toggle_edit() {
-        $("#editor").show();
+        // $("#editor").show();
+        $(".editor-attr").show();
         $("#preview").hide();
         editor.focus();
         editor.gotoLine(current_row+1, current_column, true);
