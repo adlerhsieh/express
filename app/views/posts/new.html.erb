@@ -10,15 +10,8 @@
 <pre id="editor" class="editor-attr"></pre>
 
 <div id="preview">
-  <div class="col-lg-9">
-    <h1 id="preview-title"></h1>
-    <p><a href=""><%= @post.author %></a> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
-    <hr>
-    <!-- <h4 id="preview&#45;category"></h4> -->
-    <!-- <p id="preview&#45;tags"></p> -->
-    <div id="preview-content"></div>
-  </div>
-  <div class="col-md-3">
-    <%= render partial: "widgets" %>
-  </div>
+  <h1 id="preview-title"></h1>
+  <p><a href=""><%= @post.author %></a> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
+  <hr>
+  <div id="preview-content"></div>
 </div>
