@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/categories/:name', to: "categories#show", as: "category"
+  resources :categories
+
+  get '/categories/:slug', to: "categories#show"
 
   root to: "posts#index"
 

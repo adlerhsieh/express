@@ -8,4 +8,9 @@ class CategoriesController < ApplicationController
     end
     @groups.each { |key,value| @groups.delete(key) if value.length == 0 }
   end
+
+  def index
+    categories = Category.all.map(&:name)
+    render json: {categories: categories}
+  end
 end

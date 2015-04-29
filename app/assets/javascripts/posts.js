@@ -14,9 +14,19 @@ $(document).ready(function(){
     $("#pending").hide();
     $("#preview").hide();
 
-      $("#send").click(function(){
-
+    $.ajax({
+      url: "/categories",
+      type: "GET"
+    }).done(function(response){
+      $("#category").autocomplete({
+        source: response.categories
       });
+    });
+
+
+    $("#send").click(function(){
+
+    });
 
     $(document).keydown(function(key){
       keys.push(key.which);
