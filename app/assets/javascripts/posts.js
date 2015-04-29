@@ -72,10 +72,15 @@ $(document).ready(function(){
           }).done(function(response){
             $("#pending").hide();
             if(response.result == "success"){
-              $("#success").show().animate({opacity:1},100);
-              setTimeout(function(){
-                $("#success").animate({opacity:0},100).delay(300).hide();
-              }, 1000);
+              if(location.href.indexOf("/edit") == -1){
+                location.href = "/posts/" + response.slug + "/edit";
+              }else{
+                $("#success").show().animate({opacity:1},100);
+                setTimeout(function(){
+                  $("#success").animate({opacity:0},100).delay(300).hide();
+                }, 1000);
+                
+              };
             }else{
 
             };

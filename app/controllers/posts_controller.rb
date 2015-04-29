@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find_by_slug(params[:id])
   end
 
   def show
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
           PostTag.create(post_id: @post.id, tag_id: query_tag.id)
         end
       end
-      render json: {result: "success"}
+      render json: {result: "success", slug: @post.slug}
     else
       render json: {result: "error"}
     end
