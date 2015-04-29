@@ -16,6 +16,15 @@ class PostsController < ApplicationController
 
   def show
     raise ActionController::RoutingError.new("無此文章") if not @post
+    respond_to do |format|
+      format.html
+      format.json {
+        render :json => {
+          post: @post,
+          category: @post.category
+        }
+      }
+    end
   end
 
   def create
@@ -36,6 +45,10 @@ class PostsController < ApplicationController
     else
       render json: {result: "error"}
     end
+  end
+
+  def update
+    
   end
 
   def search

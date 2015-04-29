@@ -15,6 +15,18 @@ $(document).ready(function(){
     $("#pending").hide();
     $("#confirm").hide();
     $("#preview").hide();
+    if(location.href.indexOf("/edit") != -1){
+      current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","");
+      $.ajax({
+        url: "/blog/" + current_slug + ".json",
+        type: "GET"
+      }).done(function(response){
+        $("#title").val(response.post.title);
+        $("#category").val(response.category.name);
+        $("#slug").val(response.post.slug);
+        editor.setValue(response.post.content);
+      });
+    };
 
     $.ajax({
       url: "/categories",
@@ -59,32 +71,41 @@ $(document).ready(function(){
           var tags = $("#tags").val();
           var slug = $("#slug").val();
           code = editor.session.getDocument().getAllLines();
-          $.ajax({
-            url: "/posts",
-            type: "POST",
-            data: {
-              "title": title,
-              "category": category,
-              "tags": tags,
-              "slug": slug,
-              "content": code
-            }
-          }).done(function(response){
-            $("#pending").hide();
-            if(response.result == "success"){
-              if(location.href.indexOf("/edit") == -1){
+
+          if(location.href.indexOf("/edit") == -1){
+            $.ajax({
+              url: "/posts",
+              type: "POST",
+              data: {
+                "title": title,
+                "category": category,
+                "tags": tags,
+                "slug": slug,
+                "content": code
+              }
+            }).done(function(response){
+              $("#pending").hide();
+              if(response.result == "success"){
                 location.href = "/posts/" + response.slug + "/edit";
               }else{
-                $("#success").show().animate({opacity:1},100);
-                setTimeout(function(){
-                  $("#success").animate({opacity:0},100).delay(300).hide();
-                }, 1000);
-                
+                console.log("failed");
               };
-            }else{
+            });
+          }else{
+            $.ajax({
+              url: "/posts/" + current_slug,
+              type: "PUT",
+              data: {
+                "title": title,
+                "category": category,
+                "tags": tags,
+                "slug": slug,
+                "content": code
+              }
+            }).done(function(response){
 
-            };
-          });
+            });
+          };
         };
       };
     });
