@@ -30,7 +30,8 @@ $(document).ready(function(){
 
     $(document).keyup(function(key){
       console.log(keys);
-    	delete keys[key.which];
+      keys = {};
+    	// delete keys[key.which];
     });
 
   function toggle_preview() {
@@ -49,6 +50,7 @@ $(document).ready(function(){
 
   function toggle_edit() {
       $("#editor").show();
+      $("#title").focus();
       $("#preview").hide();
   };
 
