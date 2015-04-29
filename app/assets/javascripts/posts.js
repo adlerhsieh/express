@@ -12,6 +12,7 @@ $(document).ready(function(){
     document.getElementById('editor').style.fontSize='14px';
     document.getElementById("title").focus();
     $("#pending").hide();
+    $("#preview").hide();
 
       $("#send").click(function(){
 
@@ -42,6 +43,9 @@ $(document).ready(function(){
       var current_position = editor.selection.getCursor();
       current_row = current_position.row;
       current_column = current_position.column;
+      var post_title = $('#title').val();
+      var post_category = $('#category').val();
+      var post_tags = $('#tags').val();
       $("#pending").show().animate({opacity:1},100);
 
       $.ajax({
@@ -53,7 +57,10 @@ $(document).ready(function(){
         $("#pending").animate({opacity:0},0).hide();
         $(".editor-attr").hide();
         $("#preview").show();
-        $("#preview").html(response.post);
+        $("#preview-content").html(response.post);
+        $("#preview-title").html(post_title);
+        $("#preview-category").html(post_category);
+        $("#preview-tags").html(post_tags);
       });		    	
     };
 
