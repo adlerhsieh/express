@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   get '/blog/:slug', to: "posts#show", as: "post"
   get '/blog-search', to: "posts#search", as: "search"
   get '/blog-overview', to: "posts#overview", as: "posts_overview"
+  resources :posts do
+    collection do
+      post :render_markdown
+    end
+  end
 
   get '/categories/:name', to: "categories#show", as: "category"
 

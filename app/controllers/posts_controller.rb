@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def edit
@@ -18,6 +19,12 @@ class PostsController < ApplicationController
 
   def search
     
+  end
+
+  def render_markdown
+    content = params[:post].join("\n")
+    post = Post.new(:content => content)
+    render json: {post: post.parse}
   end
 
   def overview
