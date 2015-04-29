@@ -17,6 +17,26 @@ class PostsController < ApplicationController
     raise ActionController::RoutingError.new("無此文章") if not @post
   end
 
+  def create
+    @post = Post.new(post_params)
+    @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    @post.category_id = @category[:id]
+    @post.content = params[:content].join("\n")
+    @post.display_date = Date.today
+    if @post.save
+      if params[:tags]
+        tags = params[:tags].split(",")
+        tags.each do |tag|
+          query_tag = Tag.create_with(slug: tag).find_or_create_by(name: tag)
+          PostTag.create(post_id: @post.id, tag_id: query_tag.id)
+        end
+      end
+      render json: {result: "success"}
+    else
+      render json: {result: "error"}
+    end
+  end
+
   def search
     
   end
@@ -39,5 +59,9 @@ class PostsController < ApplicationController
 
     def set_post
       @post = Post.find_by_slug(params[:slug])
+    end
+
+    def post_params
+      params.permit(:title, :slug)
     end
 end

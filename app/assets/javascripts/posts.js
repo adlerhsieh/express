@@ -3,6 +3,7 @@ $(document).ready(function(){
     var editor = ace.edit("editor");
     var keys = [];
     var preview = false;
+    var confirm_send = 0;
     editor.setTheme("ace/theme/twilight");
     editor.getSession().setMode("ace/mode/markdown");
     editor.getSession().setUseWrapMode(true);
@@ -12,6 +13,7 @@ $(document).ready(function(){
     document.getElementById('editor').style.fontSize='14px';
     document.getElementById("title").focus();
     $("#pending").hide();
+    $("#confirm").hide();
     $("#preview").hide();
 
     $.ajax({
@@ -31,6 +33,7 @@ $(document).ready(function(){
     $(document).keydown(function(key){
       keys.push(key.which);
       if(keys.indexOf(75) != -1 && keys.indexOf(91) != -1) {
+        keys.splice(keys.indexOf(75),1);
         if(preview == false){
           toggle_preview();
           preview = true;
@@ -39,7 +42,47 @@ $(document).ready(function(){
           preview = false;
         };
       };
-      });
+
+      if(keys.indexOf(13) != -1 && keys.indexOf(91) != -1) {
+        confirm_send ++;
+        keys.splice(keys.indexOf(13),1);
+        $("#confirm").show().animate({opacity:1},100);
+        setTimeout(function(){
+          $("#confirm").animate({opacity:0},100).delay(300).hide();
+          confirm_send = 0;
+        }, 1000);
+        if(confirm_send == 2){
+          confirm_send = 0;
+          $("#pending").show().animate({opacity:1},100);
+          var title = $("#title").val();
+          var category = $("#category").val();
+          var tags = $("#tags").val();
+          var slug = $("#slug").val();
+          code = editor.session.getDocument().getAllLines();
+          $.ajax({
+            url: "/posts",
+            type: "POST",
+            data: {
+              "title": title,
+              "category": category,
+              "tags": tags,
+              "slug": slug,
+              "content": code
+            }
+          }).done(function(response){
+            $("#pending").hide();
+            if(response.result == "success"){
+              $("#success").show().animate({opacity:1},100);
+              setTimeout(function(){
+                $("#success").animate({opacity:0},100).delay(300).hide();
+              }, 1000);
+            }else{
+
+            };
+          });
+        };
+      };
+    });
 
       $(document).keyup(function(key){
         keys = [];
