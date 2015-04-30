@@ -14,6 +14,8 @@ $(document).ready(function(){
     document.getElementById("title").focus();
     $("#pending").hide();
     $("#confirm").hide();
+    $("#success").hide();
+    $("#error").hide();
     $("#preview").hide();
     if(location.href.indexOf("/edit") != -1){
       current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","");
@@ -25,6 +27,8 @@ $(document).ready(function(){
         $("#category").val(response.category.name);
         $("#slug").val(response.post.slug);
         editor.setValue(response.post.content);
+        editor.gotoLine(1, current_column, true);
+        editor.scrollToLine(1, true, true, function(){});
       });
     };
 
@@ -58,14 +62,15 @@ $(document).ready(function(){
       if(keys.indexOf(13) != -1 && keys.indexOf(91) != -1) {
         confirm_send ++;
         keys.splice(keys.indexOf(13),1);
-        $("#confirm").show().animate({opacity:1},100);
+        $("#confirm").show();
         setTimeout(function(){
-          $("#confirm").animate({opacity:0},100).delay(300).hide();
+          $("#confirm").delay(300).hide();
           confirm_send = 0;
         }, 1000);
         if(confirm_send == 2){
           confirm_send = 0;
-          $("#pending").show().animate({opacity:1},100);
+          $("#confirm").hide();
+          $("#pending").show();
           var title = $("#title").val();
           var category = $("#category").val();
           var tags = $("#tags").val();
@@ -85,11 +90,12 @@ $(document).ready(function(){
               }
             }).done(function(response){
               $("#pending").hide();
-              if(response.result == "success"){
-                location.href = "/posts/" + response.slug + "/edit";
-              }else{
-                console.log("failed");
-              };
+              location.href = "/posts/" + response.slug + "/edit";
+            }).fail(function(response){
+              $("#error").show();
+              setTimeout(function(){ $("#error").delay(300).hide(); }, 1000);
+            }).always(function(response){
+              $("#pending").hide();
             });
           }else{
             $.ajax({
@@ -103,7 +109,14 @@ $(document).ready(function(){
                 "content": code
               }
             }).done(function(response){
+              $("#success").show();
+              setTimeout(function(){ $("#success").delay(300).hide(); }, 1000);
 
+            }).fail(function(response){
+              $("#error").show();
+              setTimeout(function(){ $("#error").delay(300).hide(); }, 1000);
+            }).always(function(response){
+              $("#pending").hide();
             });
           };
         };
@@ -125,7 +138,7 @@ $(document).ready(function(){
       var post_title = $('#title').val();
       var post_category = $('#category').val();
       var post_tags = $('#tags').val();
-      $("#pending").show().animate({opacity:1},100);
+      $("#pending").show();
 
       $.ajax({
         url: "/posts/render_markdown",
@@ -133,7 +146,7 @@ $(document).ready(function(){
         data: { "post": code }
       }).done(function(response){
         // $("#pending").hide();
-        $("#pending").animate({opacity:0},0).hide();
+        $("#pending").hide();
         $(".editor-attr").hide();
         $("#preview").show();
         $("#preview-content").html(response.post);
