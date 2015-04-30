@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     @post.category_id = @category[:id]
     @post.content = params[:content].join("\n")
     @post.display_date = Date.today
-    if @post.save
+    if @post.save!
       if params[:tags]
         tags = params[:tags].split(",")
         tags.each do |tag|
@@ -42,8 +42,6 @@ class PostsController < ApplicationController
         end
       end
       render json: {result: "success", slug: @post.slug}
-    else
-      render json: {result: "error"}
     end
   end
 
