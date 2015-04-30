@@ -12,10 +12,7 @@ $(document).ready(function(){
     editor.renderer.setPadding(10);
     document.getElementById('editor').style.fontSize='14px';
     document.getElementById("title").focus();
-    $("#pending").hide();
-    $("#confirm").hide();
-    $("#success").hide();
-    $("#error").hide();
+    dismiss_message();
     $("#preview").hide();
     if(location.href.indexOf("/edit") != -1){
       current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","");
@@ -69,7 +66,7 @@ $(document).ready(function(){
         }, 1000);
         if(confirm_send == 2){
           confirm_send = 0;
-          $("#confirm").hide();
+          dismiss_message();
           $("#pending").show();
           var title = $("#title").val();
           var category = $("#category").val();
@@ -89,13 +86,13 @@ $(document).ready(function(){
                 "content": code
               }
             }).done(function(response){
-              $("#pending").hide();
+              dismiss_message();
               location.href = "/posts/" + response.slug + "/edit";
             }).fail(function(response){
               $("#error").show();
               setTimeout(function(){ $("#error").delay(300).hide(); }, 1000);
             }).always(function(response){
-              $("#pending").hide();
+              dismiss_message();
             });
           }else{
             $.ajax({
@@ -116,7 +113,8 @@ $(document).ready(function(){
               $("#error").show();
               setTimeout(function(){ $("#error").delay(300).hide(); }, 1000);
             }).always(function(response){
-              $("#pending").hide();
+              // $("#pending").hide();
+              dismiss_message();
             });
           };
         };
@@ -145,8 +143,7 @@ $(document).ready(function(){
         type: "POST",
         data: { "post": code }
       }).done(function(response){
-        // $("#pending").hide();
-        $("#pending").hide();
+        dismiss_message();
         $(".editor-attr").hide();
         $("#preview").show();
         $("#preview-content").html(response.post);
@@ -163,6 +160,13 @@ $(document).ready(function(){
         editor.focus();
         editor.gotoLine(current_row+1, current_column, true);
         editor.scrollToLine(current_row, true, true, function(){});
+    };
+
+    function dismiss_message() {
+      $("#pending").hide();
+      $("#confirm").hide();
+      $("#success").hide();
+      $("#error").hide();
     };
 
     function display_pending() {
