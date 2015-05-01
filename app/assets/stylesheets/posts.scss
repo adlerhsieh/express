@@ -2,10 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  font-size: 15px;
-}
-
 .line-numbers {
   opacity: 0.5;
 }
@@ -22,14 +18,14 @@ div.post {
   }
 }
 
-.highlight-block {
-  background-color: rgb(249,255,197);
-  border-radius: 10px;
-  padding: 20px 20px;
-  border: 1px solid silver;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
+// .highlight-block {
+//   background-color: rgb(249,255,197);
+//   border-radius: 10px;
+//   padding: 20px 20px;
+//   border: 1px solid silver;
+//   margin-top: 15px;
+//   margin-bottom: 15px;
+// }
 
 blockquote {
   font-size: 15px;

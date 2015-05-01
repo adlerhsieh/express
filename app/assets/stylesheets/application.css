@@ -14,3 +14,26 @@
  *= require_self
  *= require jquery-ui
  */
+
+@font-face {
+  font-family: "Source Sans Pro";
+  /* src: url("SourceSansPro-Regular.otf"); */
+  /* src: url("SourceSansPro-Bold.otf"); */
+  src: url("SourceSansPro-Semibold.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", "Hiragino Sans GB", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h2 {
+  padding: 10px 0 15px 0;
+}
+
+h3 {
+  padding: 10px 0 10px 0;
+}
