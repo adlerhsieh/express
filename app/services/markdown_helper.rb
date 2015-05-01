@@ -108,7 +108,7 @@ class MarkdownHelper
 
     def height(multiplier)
       base = 35
-      line_height = 19
+      line_height = 20
       return (base + line_height * multiplier).to_s
     end
 
