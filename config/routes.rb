@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get '/blog', to: "posts#index", as: "posts"
   get '/blog/:slug', to: "posts#show", as: "post"
   get '/blog-search', to: "posts#search", as: "search"
