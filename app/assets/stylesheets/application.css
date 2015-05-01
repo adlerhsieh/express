@@ -28,6 +28,7 @@ body {
   font-family: "Source Sans Pro", "Helvetica Neue", "Hiragino Sans GB", sans-serif;
   font-size: 17px;
   line-height: 26px;
+  background-color: #EEEEEE;
 }
 
 h2 {
@@ -36,6 +37,10 @@ h2 {
 
 h3 {
   padding: 10px 0 10px 0;
+}
+
+h4 {
+  margin-bottom: 15px;
 }
 
 p {

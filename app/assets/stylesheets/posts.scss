@@ -2,6 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.column {
+  background-color: white;
+}
+
+.date-display {
+  color: #BABABA;
+  font-size: 14px;
+}
+
+.widget, .year-column, .single-post {
+  border: 1px solid #D8D8D8;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0 20px 0;
+}
+
+.year-column {
+  table, tr {
+    width: 100%;
+  }
+  .td-left {
+    width: 80%;
+  }
+  .td-right {
+    width: 20%;
+    text-align: right;
+  }
+}
+
 .line-numbers {
   opacity: 0.5;
 }

@@ -3,21 +3,23 @@
   <!-- Blog Post Content Column -->
   <div class="col-lg-9">
 
-    <!-- Blog Post -->
+    <div class="column single-post">
+      <!-- Blog Post -->
 
-    <!-- Title -->
-    <h1><%= @post[:title] %></h1>
+      <!-- Title -->
+      <h1><%= @post[:title] %></h1>
 
-    <!-- Author -->
-    <p><a href="#"><%= @post.author %></a> @ <%= @post.display_date.strftime("%Y-%m-%d") %></p>
-    <hr>
+      <!-- Author -->
+      <p><a href="#"><%= @post.author %></a> @ <%= @post.display_date.strftime("%Y-%m-%d") %></p>
+      <hr>
 
-    <!-- Post Content -->
-    <div class="post">
-      <%= @post.parse %>
+      <!-- Post Content -->
+      <div class="post">
+        <%= @post.parse %>
+      </div>
+      <hr>
+
     </div>
-    <hr>
-
 
   </div>
 
@@ -27,3 +29,4 @@
 
 </div>
 <!-- /.row -->
+
