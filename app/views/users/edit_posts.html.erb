@@ -1,0 +1,17 @@
+<%= render partial: "nav" %>
+<div class="col-lg-12">
+  <div class="posts">
+    <div class="column year-column">
+      <table>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td class="td-left"><h4><%= link_to post.title, edit_post_path(post[:slug]) %></h4></td>
+              <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
