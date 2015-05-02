@@ -1,0 +1,28 @@
+<div class="pending alert alert-warning" id="pending">處理中...</div>
+<div class="confirm alert alert-info" id="confirm">再按一次Cmd + Enter送出</div>
+<div class="error alert alert-danger" id="error">錯誤，請確認</div>
+<div class="success alert alert-success" id="success">儲存成功</div>
+
+<input id="title" type="text" class="form-control editor-title editor-attr" placeholder="標題" />
+<div class="col-md-3 editor-attr">
+  <input id="category" type="text" class="form-control" placeholder="分類">
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="tags" type="text" class="form-control" placeholder="標籤(逗點區隔)">
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="slug" type="text" class="form-control" placeholder="網址名稱">
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="display_date" type="text" class="form-control" placeholder="日期 (格式2015-01-01)">
+</div>
+
+<pre id="editor" class="editor-attr"></pre>
+
+<div id="preview">
+  <h1 id="preview-title"></h1>
+  <p><a href=""><%= @post.author %></a> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
+  <hr>
+  <div id="preview-content"></div>
+</div>
+
