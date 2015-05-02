@@ -15,11 +15,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories
   # resources :users
   get '/users/:name', to: "users#show"
 
   get '/categories/:slug', to: "categories#show"
+  resources :categories
 
   root to: "posts#index"
 
