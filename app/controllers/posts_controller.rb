@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   before_action :set_all_posts
 
   def index
-    @groups = Post.group_by_year
+    set_all_posts
+    # @groups = Post.group_by_year
   end
 
   def new

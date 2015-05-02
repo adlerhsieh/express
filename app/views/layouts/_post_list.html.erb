@@ -1,9 +1,8 @@
-<% @groups.each do |year, posts| %>
+<% # @groups.each do |year, posts| %>
   <div class="column year-column">
-    <!-- <h3 class="year&#45;title"><%= year %></h3> -->
     <table>
       <tbody>
-        <% posts.each do |post| %>
+        <% @posts.each do |post| %>
           <tr>
             <td class="td-left"><h4><%= link_to post.title, post_path(post[:slug]) %></h4></td>
             <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
@@ -12,5 +11,5 @@
       </tbody>
     </table>
   </div>
-<% end %>
+<% # end %>
 
