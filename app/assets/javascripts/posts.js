@@ -23,6 +23,7 @@ $(document).ready(function(){
         $("#title").val(response.post.title);
         $("#category").val(response.category.name);
         $("#slug").val(response.post.slug);
+        $("#tags").val(response.tags);
         $("#display_date").val(response.post.display_date);
         editor.setValue(response.post.content);
         editor.gotoLine(1, current_column, true);
