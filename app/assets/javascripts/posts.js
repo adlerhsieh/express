@@ -89,8 +89,8 @@ $(document).ready(function(){
               dismiss_message();
               location.href = "/posts/" + response.slug + "/edit";
             }).fail(function(response){
-              $("#error").show();
-              setTimeout(function(){ $("#error").delay(300).hide(); }, 1000);
+              setTimeout(function(){ $("#error").show(); }, 50);
+              setTimeout(function(){ $("#error").hide(); }, 1500);
             }).always(function(response){
               dismiss_message();
             });
@@ -107,11 +107,11 @@ $(document).ready(function(){
               }
             }).done(function(response){
               $("#success").show();
-              setTimeout(function(){ $("#success").delay(300).hide(); }, 1000);
-
+              setTimeout(function(){ $("#success").show(); }, 50);
+              setTimeout(function(){ $("#success").hide(); }, 1500);
             }).fail(function(response){
-              $("#error").show();
-              setTimeout(function(){ $("#error").delay(300).hide(); }, 1000);
+              setTimeout(function(){ $("#error").show(); }, 50);
+              setTimeout(function(){ $("#error").hide(); }, 1500);
             }).always(function(response){
               // $("#pending").hide();
               dismiss_message();
