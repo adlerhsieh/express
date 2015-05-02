@@ -5,6 +5,13 @@ class Post < ActiveRecord::Base
   has_many :post_tags
   has_many :tags, :through => :post_tags
   validates :title, :content, :slug, :presence => true
+  after_save :default_display_date
+
+  def default_display_date
+    if not self.display_date
+      self.update_column(:display_date, Date.today)
+    end
+  end
 
   def parse
     process = MarkdownHelper.new(self.content)
