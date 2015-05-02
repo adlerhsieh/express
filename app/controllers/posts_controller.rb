@@ -31,10 +31,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
-    @post.category_id = @category[:id]
-    @post.content = params[:content].join("\n")
-    @post.display_date = params[:display_date]
+    set_post_params
     if @post.save
       create_tags
       render json: {result: "success", slug: @post.slug}
@@ -43,10 +40,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find_by_slug(params[:slug])
-    @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
-    @post.category_id = @category[:id]
-    @post.content = params[:content].join("\n")
-    @post.display_date = params[:display_date]
+    set_post_params
     if @post.save
       refresh_tags
       render json: {result: "success"}
@@ -81,8 +75,14 @@ class PostsController < ApplicationController
       params.permit(:title, :slug)
     end
 
+    def set_post_params
+      @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+      @post.category_id = @category[:id]
+      @post.content = params[:content].join("\n")
+      @post.display_date = params[:display_date]
+    end
+
     def refresh_tags
-      # @post.tags.each {|tag| tag.delete }
       PostTag.where(:post_id => @post[:id]).each {|tag| tag.delete }
       create_tags
     end
