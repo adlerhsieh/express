@@ -4,6 +4,7 @@ $(document).ready(function(){
     var keys = [];
     var preview = false;
     var confirm_send = 0;
+    var confirm_leave = 0;
     editor.setTheme("ace/theme/twilight");
     editor.getSession().setMode("ace/mode/markdown");
     editor.getSession().setUseWrapMode(true);
@@ -47,6 +48,7 @@ $(document).ready(function(){
 
     $(document).keydown(function(key){
       keys.push(key.which);
+      // console.log(keys);
       if(keys.indexOf(75) != -1 && keys.indexOf(91) != -1) {
         keys.splice(keys.indexOf(75),1);
         if(preview == false){
@@ -55,6 +57,20 @@ $(document).ready(function(){
         }else{
           toggle_edit();
           preview = false;
+        };
+      };
+
+      if(keys.indexOf(74) != -1 && keys.indexOf(91) != -1) {
+        confirm_leave ++;
+        keys.splice(keys.indexOf(74),1);
+        $("#leave").show();
+        setTimeout(function(){
+          $("#leave").delay(300).hide();
+          confirm_leave = 0;
+        }, 1000);
+        if(confirm_leave == 2){
+          dismiss_message();
+          history.go(-1);
         };
       };
 
@@ -168,19 +184,13 @@ $(document).ready(function(){
     };
 
     function dismiss_message() {
-      $("#pending").hide();
-      $("#confirm").hide();
-      $("#success").hide();
-      $("#error").hide();
+      $(".message").hide();
+      // $("#pending").hide();
+      // $("#confirm").hide();
+      // $("#success").hide();
+      // $("#error").hide();
+      // $("#error").hide();
     };
-
-    function display_pending() {
-      $("#result").text("處理中...");
-    }
-
-    function print_result(text) {
-      $("#result").text(text);
-    }
   };
 });
 
