@@ -23,6 +23,7 @@ $(document).ready(function(){
         $("#title").val(response.post.title);
         $("#category").val(response.category.name);
         $("#slug").val(response.post.slug);
+        $("#display_date").val(response.post.display_date);
         editor.setValue(response.post.content);
         editor.gotoLine(1, current_column, true);
         editor.scrollToLine(1, true, true, function(){});
@@ -72,6 +73,7 @@ $(document).ready(function(){
           var category = $("#category").val();
           var tags = $("#tags").val();
           var slug = $("#slug").val();
+          var display_date = $("#display_date").val();
           code = editor.session.getDocument().getAllLines();
 
           if(location.href.indexOf("/edit") == -1){
@@ -83,7 +85,8 @@ $(document).ready(function(){
                 "category": category,
                 "tags": tags,
                 "slug": slug,
-                "content": code
+                "content": code,
+                "display_date": display_date
               }
             }).done(function(response){
               dismiss_message();
@@ -103,7 +106,8 @@ $(document).ready(function(){
                 "category": category,
                 "tags": tags,
                 "slug": slug,
-                "content": code
+                "content": code,
+                "display_date": display_date
               }
             }).done(function(response){
               $("#success").show();

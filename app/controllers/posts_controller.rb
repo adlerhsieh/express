@@ -33,21 +33,16 @@ class PostsController < ApplicationController
     @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
     @post.category_id = @category[:id]
     @post.content = params[:content].join("\n")
-    @post.display_date = Date.today
-    if @post.save!
-      if params[:tags]
-        tags = params[:tags].split(",")
-        tags.each do |tag|
-          query_tag = Tag.create_with(slug: tag).find_or_create_by(name: tag)
-          PostTag.create(post_id: @post.id, tag_id: query_tag.id)
-        end
-      end
+    @post.display_date = params[:display_date]
+    if @post.save
+      create_tags
       render json: {result: "success", slug: @post.slug}
     end
   end
 
   def update
-    
+    @post = Post.find_by_slug(:params[:slug])
+    @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
   end
 
   def search
@@ -76,5 +71,15 @@ class PostsController < ApplicationController
 
     def post_params
       params.permit(:title, :slug)
+    end
+
+    def create_tags
+      if params[:tags]
+        tags = params[:tags].split(",")
+        tags.each do |tag|
+          query_tag = Tag.create_with(slug: tag).find_or_create_by(name: tag)
+          PostTag.create(post_id: @post.id, tag_id: query_tag.id)
+        end
+      end
     end
 end
