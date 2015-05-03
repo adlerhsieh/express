@@ -29,6 +29,7 @@ body {
   font-size: 17px;
   line-height: 26px;
   background-color: #EEEEEE;
+  padding-top: 0px;
 }
 
 h2 {
@@ -49,4 +50,22 @@ p {
 
 .message {
   display: none;
+}
+
+.site-logo {
+  width: 50px;
+  height: 50px;
+  margin-top: -15px;
+  margin-left: 15px;
+}
+
+nav {
+  background-color: #EEEEEE;
+  margin-bottom: 30px;
+}
+
+nav a.site-title {
+  margin-left: -20px !important;
+  color: black;
+  font-size: 17px;
 }
