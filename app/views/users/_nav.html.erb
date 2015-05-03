@@ -1,8 +1,9 @@
 <ul class="nav nav-pills">
   <li id="basic_info"><%= link_to "帳號資訊", user_path(current_user["name"]) %></li>
   <% if is_admin? %>
-    <li id="edit_posts"><%= link_to "編輯文章", edit_posts_path(current_user["name"]) %></li>
-    <li id="edit_categories"><%= link_to "編輯分類", edit_categories_path(current_user["name"]) %></li>
+    <li id="new_posts"><%= link_to "新增文章", new_post_path %></li>
+    <li id="edit_posts"><%= link_to "所有文章", edit_posts_path(current_user["name"]) %></li>
+    <li id="edit_categories"><%= link_to "分類", edit_categories_path(current_user["name"]) %></li>
   <% end %>
 </ul>
 
