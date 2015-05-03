@@ -69,3 +69,18 @@ nav a.site-title {
   color: black;
   font-size: 17px;
 }
+
+img {
+  max-width: 100%;
+}
+
+.navbar {
+  border: 0px solid transparent;
+}
+.navbar-default {
+  background: transparent;
+  box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075);
+  -webkit-box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075);
+}
+
+
