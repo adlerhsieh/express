@@ -69,7 +69,7 @@ $(document).ready(function(){
         }, 1000);
         if(confirm_leave == 2){
           dismiss_message();
-          history.go(-1);
+          location.href = "/users/" + current_user.name + "/edit_posts";
         };
       };
 
