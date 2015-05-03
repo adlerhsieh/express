@@ -82,11 +82,13 @@ img {
   box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075);
   -webkit-box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075);
 }
-.navbar-nav {
-  background-color: white;
-  border-radius: 10px;
-  text-align: center;
-  border: 1px solid #D8D8D8;
+@media all and (max-width: 768px) {
+  .navbar-nav {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #D8D8D8;
+  }
 }
 
 
