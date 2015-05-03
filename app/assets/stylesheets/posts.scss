@@ -75,7 +75,7 @@ blockquote {
 // Backend Editor
 
 #editor {
-  height: 600px;
+  height: 550px;
 }
 
 .editor-title {
@@ -96,4 +96,8 @@ blockquote {
   opacity: 1;
   z-index: 20;
   text-align: center;
+}
+
+.instruction {
+  display: none;
 }
