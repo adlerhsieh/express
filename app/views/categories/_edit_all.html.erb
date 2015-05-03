@@ -12,7 +12,7 @@
       <% @categories.each do |c| %>
         <tr>
           <td class="id"><%= c[:id] %></td>
-          <td class="content"><input type="text" class="form-control" value="<%= c[:name] %>" id="<%= "name-#{c[:id]}" %>" /></td>
+          <td class="content"><input type="text" class="form-control" value="<%= c[:name] %>" id="<%= "name-#{c[:id]}" %>" placeholder="必填" /></td>
           <td class="slug"><input type="text" class="form-control" value="<%= c[:slug] %>" id="<%= "slug-#{c[:id]}" %>" /></td>
           <td class="delete"><%= link_to "刪除", category_path(c), method: :delete, data: {confirm: "確認刪除？"} %></td>
         </tr>

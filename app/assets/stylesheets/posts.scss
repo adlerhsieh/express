@@ -87,8 +87,10 @@ blockquote {
   margin-bottom: 20px;
 }
 
-.pending, .confirm, .leave, .error, .success {
+.message {
   height: 50px;
+  width: 400px;
+  margin-top: 20px;
   position: absolute;
   display: block;
   opacity: 1;
