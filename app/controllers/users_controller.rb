@@ -6,4 +6,9 @@ class UsersController < ApplicationController
   def edit_posts
     @posts = Post.order(:display_date => :desc)
   end
+
+  def edit_categories
+    @categories = Category.all
+  end
+
 end

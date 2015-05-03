@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   get '/users/:name/edit_categories', to: "users#edit_categories", as: "edit_categories"
 
   get '/categories/:slug', to: "categories#show"
-  resources :categories
+  resources :categories do
+    collection do
+      post :update_all
+    end
+  end
 
   root to: "posts#index"
 

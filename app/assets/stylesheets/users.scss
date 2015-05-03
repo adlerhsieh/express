@@ -7,3 +7,34 @@
   display: block;
   margin: 0 auto;
 }
+
+.nav-pills {
+  margin-top: 20px;
+}
+
+.categories {
+  width: 500px;
+  table, tbody {
+    width: 100%;
+    margin-bottom: 0px;
+  }
+  .id {
+    width: 10%;
+  }
+  .content {
+    width: 40%;
+  }
+  .slug {
+    width: 40%;
+  }
+  .delete {
+    width: 10%;
+    // text-align: right;
+    font-size: 14px;
+    color: red;
+  }
+  button {
+    width: 150px;
+    float: right;
+  }
+}

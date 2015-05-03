@@ -14,4 +14,23 @@ class CategoriesController < ApplicationController
     categories = Category.all.map(&:name)
     render json: {categories: categories}
   end
+
+  def destroy
+    @category = Category.find(params[:id])
+    Post.all.each do |p|
+      if p[:category_id] == @category[:id]
+        p.update_column(:category_id, nil)
+      end
+    end
+    @category.delete
+    redirect_to edit_categories_path(current_user[:name])
+  end
+
+  def update_all
+    params[:categories].each do |key, category|
+      @category = Category.find(category["id"])
+      @category.update!(category.permit("name", "slug"))
+    end
+    render json: "success"
+  end
 end
