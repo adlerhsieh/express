@@ -46,3 +46,7 @@ h4 {
 p {
   margin-bottom: 20px;
 }
+
+.message {
+  display: none;
+}

@@ -13,7 +13,6 @@ $(document).ready(function(){
     editor.renderer.setPadding(10);
     document.getElementById('editor').style.fontSize='14px';
     document.getElementById("title").focus();
-    dismiss_message();
     $("#preview").hide();
     if(location.href.indexOf("/edit") != -1){
       current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","");
@@ -183,14 +182,6 @@ $(document).ready(function(){
         editor.scrollToLine(current_row, true, true, function(){});
     };
 
-    function dismiss_message() {
-      $(".message").hide();
-      // $("#pending").hide();
-      // $("#confirm").hide();
-      // $("#success").hide();
-      // $("#error").hide();
-      // $("#error").hide();
-    };
   };
 });
 

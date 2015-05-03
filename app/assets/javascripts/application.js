@@ -28,3 +28,12 @@
 //   $("tbody tr td pre").attr('style', "");
 // });
 //
+
+function dismiss_message() {
+$(".message").hide();
+// $("#pending").hide();
+// $("#confirm").hide();
+// $("#success").hide();
+// $("#error").hide();
+// $("#error").hide();
+};
