@@ -1,1 +1,12 @@
 <%= render partial: "nav" %>
+<hr />
+<ul class="list-group">
+  <li class="list-group-item">
+    <h4 class="list-group-item-heading">Email</h4>
+    <p class="list-group-item-text"><%= current_user[:email] %></p>
+  </li>
+  <li class="list-group-item">
+    <h4 class="list-group-item-heading">帳號</h4>
+    <p class="list-group-item-text"><%= current_user[:name] %></p>
+  </li>
+</ul>
