@@ -43,7 +43,16 @@ class PostsController < ApplicationController
     set_post_params
     if @post.save
       refresh_tags
+      toggle_public if params[:toggle_public]
       render json: {result: "success"}
+    end
+  end
+
+  def toggle_public
+    if @post[:update_column]
+      @post.update_column(:is_public, false)
+    else
+      @post.update_column(:is_public, true)
     end
   end
 
