@@ -4,7 +4,7 @@
       <tbody>
         <% @posts.each do |post| %>
           <tr>
-            <td class="td-left"><h4><%= link_to post.title, post_path(post[:slug]) %> <%= content_tag(:kbd, "草稿") unless post[:is_public] %></h4></td>
+            <td class="td-left"><h4><%= link_to post.title, post_path(post[:slug]) %></h4></td>
             <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
           </tr>
         <% end %>
