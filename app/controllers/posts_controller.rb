@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_all_posts
 
   def index
-    set_all_posts
+    set_all_public_posts
     # @groups = Post.group_by_year
   end
 
@@ -62,6 +62,11 @@ class PostsController < ApplicationController
   end
 
   private
+    def set_all_public_posts
+      @posts = Post.where(:is_public => true).order(:display_date => :desc)
+      @categories = Category.all
+    end
+
     def set_all_posts
       @posts = Post.all.order(:display_date => :desc)
       @categories = Category.all
