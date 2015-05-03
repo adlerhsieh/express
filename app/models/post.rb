@@ -4,13 +4,21 @@ class Post < ActiveRecord::Base
   belongs_to :category
   has_many :post_tags
   has_many :tags, :through => :post_tags
-  validates :title, :content, :slug, :presence => true
+  # validates :title, :content, :slug, :presence => true
+  before_save :default_columns
   after_save :default_display_date
 
   def default_display_date
     if not self.display_date
       self.update_column(:display_date, Date.today)
     end
+  end
+
+  def default_columns
+    self.title = "無標題" if self.title == ""
+    self.content = "" if self.content == ""
+    self.slug = Time.now.strftime("%Y%m%d%H%M%S") if self.slug == ""
+    self.category_id = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")[:id]
   end
 
   def parse

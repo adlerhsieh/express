@@ -105,13 +105,12 @@ $(document).ready(function(){
                 "display_date": display_date
               }
             }).done(function(response){
-              dismiss_message();
               location.href = "/posts/" + response.slug + "/edit";
             }).fail(function(response){
+              dismiss_message();
               setTimeout(function(){ $("#error").show(); }, 50);
               setTimeout(function(){ $("#error").hide(); }, 1500);
             }).always(function(response){
-              dismiss_message();
             });
           }else{
             $.ajax({
