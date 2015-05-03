@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 
   # resources :users
   get '/users/:name', to: "users#show", as: "user"
-  get '/users/:name/edit_posts', to: "users#edit_posts"
+  get '/users/:name/edit_posts', to: "users#edit_posts", as: "edit_posts"
+  get '/users/:name/edit_categories', to: "users#edit_categories", as: "edit_categories"
 
   get '/categories/:slug', to: "categories#show"
   resources :categories
