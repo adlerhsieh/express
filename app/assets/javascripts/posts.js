@@ -25,6 +25,11 @@ $(document).ready(function(){
         $("#slug").val(response.post.slug);
         $("#tags").val(response.tags);
         $("#display_date").val(response.post.display_date);
+        if(response.post.is_public == true){
+          $("#is_public").css("display", "inline");
+        }else{
+          $("#is_not_public").css("display", "inline");
+        };
         editor.setValue(response.post.content);
         editor.gotoLine(1, current_column, true);
         editor.scrollToLine(1, true, true, function(){});
@@ -60,37 +65,46 @@ $(document).ready(function(){
       };
 
       if(keys.indexOf(73) != -1 && keys.indexOf(91) != -1) {
-        keys.splice(keys.indexOf(73),1);
-        $("#pending").show();
-        var title = $("#title").val();
-        var category = $("#category").val();
-        var tags = $("#tags").val();
-        var slug = $("#slug").val();
-        var display_date = $("#display_date").val();
-        code = editor.session.getDocument().getAllLines();
-        $.ajax({
-          url: "/posts/" + current_slug,
-          type: "PUT",
-          data: {
-            "title": title,
-            "category": category,
-            "tags": tags,
-            "slug": slug,
-            "content": code,
-            "display_date": display_date,
-            "toggle_public": true
-          }
-        }).done(function(response){
-          $("#success").show();
-          setTimeout(function(){ $("#success").show(); }, 50);
-          setTimeout(function(){ $("#success").hide(); }, 1500);
-        }).fail(function(response){
-          setTimeout(function(){ $("#error").show(); }, 50);
-          setTimeout(function(){ $("#error").hide(); }, 1500);
-        }).always(function(response){
-          // $("#pending").hide();
-          dismiss_message();
-        });
+        if(location.href.indexOf("/edit") != -1){
+          keys.splice(keys.indexOf(73),1);
+          $("#pending").show();
+          var title = $("#title").val();
+          var category = $("#category").val();
+          var tags = $("#tags").val();
+          var slug = $("#slug").val();
+          var display_date = $("#display_date").val();
+          code = editor.session.getDocument().getAllLines();
+          $.ajax({
+            url: "/posts/" + current_slug,
+            type: "PUT",
+            data: {
+              "title": title,
+              "category": category,
+              "tags": tags,
+              "slug": slug,
+              "content": code,
+              "display_date": display_date,
+              "toggle_public": true
+            }
+          }).done(function(response){
+            $("#success").show();
+            setTimeout(function(){ $("#success").show(); }, 50);
+            setTimeout(function(){ $("#success").hide(); }, 1500);
+            if(response.is_public == true){
+              $("#is_public").css("display", "inline");
+              $("#is_not_public").css("display", "none");
+            }else{
+              $("#is_public").css("display", "none");
+              $("#is_not_public").css("display", "inline");
+            };
+          }).fail(function(response){
+            setTimeout(function(){ $("#error").show(); }, 50);
+            setTimeout(function(){ $("#error").hide(); }, 1500);
+          }).always(function(response){
+            // $("#pending").hide();
+            dismiss_message();
+          });
+        };
       };
 
       if(keys.indexOf(74) != -1 && keys.indexOf(91) != -1) {
@@ -213,6 +227,10 @@ $(document).ready(function(){
         editor.focus();
         editor.gotoLine(current_row+1, current_column, true);
         editor.scrollToLine(current_row, true, true, function(){});
+    };
+
+    function toggle_public_tag() {
+      
     };
 
   };

@@ -44,15 +44,7 @@ class PostsController < ApplicationController
     if @post.save
       refresh_tags
       toggle_public if params[:toggle_public]
-      render json: {result: "success"}
-    end
-  end
-
-  def toggle_public
-    if @post[:update_column]
-      @post.update_column(:is_public, false)
-    else
-      @post.update_column(:is_public, true)
+      render json: {result: "success", is_public: @post[:is_public]}
     end
   end
 
@@ -71,6 +63,14 @@ class PostsController < ApplicationController
   end
 
   private
+    def toggle_public
+      if @post[:is_public]
+        @post.update_column(:is_public, false)
+      else
+        @post.update_column(:is_public, true)
+      end
+    end
+
     def set_all_public_posts
       @posts = Post.where(:is_public => true).order(:display_date => :desc)
       @categories = Category.all
