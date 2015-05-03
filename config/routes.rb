@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   end
   get '/blog', to: "posts#index", as: "posts"
   get '/blog/:slug', to: "posts#show", as: "post"
-  get '/blog-search', to: "posts#search", as: "search"
-  get '/blog-overview', to: "posts#overview", as: "posts_overview"
+  get '/author', to: "posts#author", as: "author"
   resources :posts do
     collection do
       post :render_markdown

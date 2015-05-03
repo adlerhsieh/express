@@ -48,18 +48,14 @@ class PostsController < ApplicationController
     end
   end
 
-  def search
-    
-  end
-
   def render_markdown
     content = params[:post].join("\n")
     post = Post.new(:content => content)
     render json: {post: post.parse}
   end
 
-  def overview
-    @groups = Post.group_by_year
+  def author
+    
   end
 
   private

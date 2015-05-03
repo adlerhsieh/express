@@ -16,7 +16,9 @@
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <!-- <ul class="nav navbar&#45;nav"> -->
     <!-- </ul> -->
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav">
+      <li><%= link_to("部落格", posts_path) %></li>
+      <li><%= link_to("作者", author_path) %></li>
       <% if user_signed_in? %>
         <li>
         <% if is_admin? %>
@@ -30,7 +32,7 @@
         </li>
       <% else %>
         <li>
-        <%= link_to('登入', sign_in_path) %>
+        <% link_to('登入', sign_in_path) %>
         </li>
       <% end %>
     </ul>
