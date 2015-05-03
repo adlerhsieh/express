@@ -16,20 +16,20 @@
     <ul class="nav navbar-nav">
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li>
+      <% if user_signed_in? %>
+        <li>
         <% if is_admin? %>
           <%= link_to("後台", user_path(current_user["name"])) %>
         <% else %>
           <%= link_to("帳號資訊", user_path(current_user["name"])) %>
         <% end %>
-      </li>
-      <% if user_signed_in? %>
+        </li>
         <li>
-          <%= link_to("登出", sign_out_path) %>
+        <%= link_to("登出", sign_out_path) %>
         </li>
       <% else %>
         <li>
-          <%= link_to('登入', sign_in_path) %>
+        <%= link_to('登入', sign_in_path) %>
         </li>
       <% end %>
     </ul>

@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
+  gem 'seed_dump'
 end
 
 group :development, :test do
