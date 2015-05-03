@@ -82,6 +82,7 @@ class PostsController < ApplicationController
 
     def set_post_params
       @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+      @post.title = params[:title]
       @post.category_id = @category[:id]
       @post.content = params[:content].join("\n")
       @post.display_date = params[:display_date]
