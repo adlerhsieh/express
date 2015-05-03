@@ -88,7 +88,8 @@ posts.each do |post|
     content: content,
     slug: slug,
     category_id: cat_id,
-    display_date: date
+    display_date: date,
+    is_public: true
   )
   puts "New post: ".green + "#{new_post[:title]}"
   puts "Timestamp: #{new_post[:display_date]}"

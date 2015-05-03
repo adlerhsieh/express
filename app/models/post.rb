@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
     self.title = "無標題" if self.title == ""
     self.content = "" if self.content == ""
     self.slug = Time.now.strftime("%Y%m%d%H%M%S") if self.slug == ""
-    self.category_id = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")[:id]
+    self.category_id = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")[:id] if self.category_id.nil?
   end
 
   def parse

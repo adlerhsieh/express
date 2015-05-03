@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
     #   posts.delete_if {|post| post[:category_id] != @category[:id]}
     # end
     # @groups.each { |key,value| @groups.delete(key) if value.length == 0 }
-    @posts = Post.where(:category_id => @category[:id]).order(:display_date => :desc)
+    @posts = Post.where(:category_id => @category[:id]).where(:is_public => true).order(:display_date => :desc)
   end
 
   def index
