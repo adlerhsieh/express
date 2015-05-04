@@ -55,7 +55,6 @@ class PostsController < ApplicationController
   end
 
   def author
-    
   end
 
   private
