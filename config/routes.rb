@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :screen_casts
+  resources :trainings
+
   root to: "posts#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
