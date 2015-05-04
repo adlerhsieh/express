@@ -8,7 +8,7 @@ class MarkdownHelper
     @raw = raw
     @parsed = ""
     @styled = ""
-    @languages = [:ruby, :cmd, :javascript] 
+    @languages = [:ruby, :cmd, :javascript, :json] 
     @coderay_options = {
       :line_numbers => :table,
       :line_number_anchors => false,
