@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-ace'
+end
+
 gem 'colorize'
 gem 'devise'
 

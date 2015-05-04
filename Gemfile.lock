@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
@@ -128,6 +129,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.0)
       sprockets-rails
+    rails-assets-ace (1.1.9)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.6)
@@ -211,6 +213,7 @@ DEPENDENCIES
   pry-nav
   pry-rails
   rails (= 4.2.0)
+  rails-assets-ace!
   redcarpet
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
