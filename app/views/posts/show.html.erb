@@ -10,7 +10,7 @@
       <h1><%= @post[:title] %></h1>
 
       <!-- Author -->
-      <p><a href="#"><%= @post.author %></a> @ <%= @post.display_date.strftime("%Y-%m-%d") %></p>
+      <p><%= render_author(@post.author) %> @ <%= @post.display_date.strftime("%Y-%m-%d") %></p>
       <hr>
 
       <!-- Post Content -->

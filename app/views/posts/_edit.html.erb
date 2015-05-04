@@ -24,7 +24,7 @@
 
 <div id="preview" class="column">
   <h1 id="preview-title"></h1>
-  <p><a href=""><%= @post.author %></a> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
+  <p><%= render_author(@post.author) %> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
   <hr>
   <div id="preview-content"></div>
 </div>
