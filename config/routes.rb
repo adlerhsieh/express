@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :posts do
     collection do
       post :render_markdown
+      get :search
     end
   end
 

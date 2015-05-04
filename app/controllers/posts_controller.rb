@@ -55,6 +55,10 @@ class PostsController < ApplicationController
     render json: {post: post.parse}
   end
 
+  def search
+    @posts = Post.where("title LIKE ? OR content like ?", "%#{params[:search]}%", "%#{params[:search]}%")
+  end
+
   def author
   end
 
