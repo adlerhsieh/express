@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503051337) do
+ActiveRecord::Schema.define(version: 20150504162307) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -39,11 +39,28 @@ ActiveRecord::Schema.define(version: 20150503051337) do
     t.boolean  "is_public",    limit: 1,     default: false
   end
 
+  create_table "screen_casts", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "video_embed", limit: 255
+    t.text     "content",     limit: 65535
+    t.string   "training_id", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "slug",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.string   "image_src",  limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|
