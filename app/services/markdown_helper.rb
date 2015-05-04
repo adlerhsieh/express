@@ -46,6 +46,7 @@ class MarkdownHelper
     while first_index = @parsed =~ /<pre>/
       # parse pre tag
       closing_index = @parsed =~ /<\/pre>/
+      closing_index ||= @parsed.length - 1
       height_multiplier =  @parsed[first_index...closing_index].count("\n")
       @styled += @parsed[0..first_index+4].gsub!("pre", "pre style='height:#{height(height_multiplier)}px;'")
       # parse coderay
@@ -56,12 +57,14 @@ class MarkdownHelper
       @styled += @parsed[0..end_index]
       @parsed = @parsed[end_index+1..-1]
       end_block_index = @parsed =~ /<\/code>/
+      end_block_index ||= @parsed.length - 1
       block = CodeRay.scan(@parsed[0...end_block_index], @language).html(@coderay_options).html_safe
       parse_custom_code_block_style(block, @language)
       @styled += block
       # add following content
       @parsed = @parsed[end_block_index-1..-1]
       end_block_end_index = @parsed =~ /<\/pre>/
+      end_block_end_index ||= @parsed.length - 1
       @styled += @parsed[0..end_block_end_index+5]
       @parsed = @parsed[end_block_end_index+6..-1]
     end
