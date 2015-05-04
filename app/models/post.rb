@@ -24,7 +24,7 @@ class Post < ActiveRecord::Base
   def parse
     process = MarkdownHelper.new(self.content)
     process.remove_hexo_marks
-    process.convert_to_blockquotes
+    # process.convert_to_blockquotes
     process.parse_markdown
     process.parse_code_block_style
     process.remove_extras
