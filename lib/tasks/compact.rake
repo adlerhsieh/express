@@ -9,6 +9,7 @@ task :compact do
     content.gsub!("<!--more-->", "")
     content.gsub!("<pre>", "```")
     content.gsub!("</pre>", "```")
+    content.gsub!(/```ruby .*\n/, "```ruby\n")
     File.open(dir + "/" + post, "w:UTF-8") {|file| file.write(content) }
     # new_content = "# encoding: utf-8\n\n" + content
     # File.open(dir + "/" + post, "r+") {|file| file.write(new_content) }
