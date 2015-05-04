@@ -33,5 +33,14 @@ pre {
         color: #EAED8A; 
     }
   }
+
+  code.javascript {
+    .string, .string .comment, .string .constant {
+        color: #EAED8A; 
+    }
+    .integer { 
+      color: #B277E0; 
+    }
+  }
 }
 
