@@ -5,6 +5,7 @@ $(document).ready(function(){
     var preview;
     var confirm_send;
     var confirm_leave;
+    var current_slug;
 
     initialize_editor();
     $("#preview").hide();
@@ -50,7 +51,6 @@ $(document).ready(function(){
             setTimeout(function(){ $("#error").show(); }, 50);
             setTimeout(function(){ $("#error").hide(); }, 1500);
           }).always(function(response){
-            // $("#pending").hide();
             dismiss_message();
           });
         };
@@ -122,9 +122,12 @@ $(document).ready(function(){
                 "display_date": display_date
               }
             }).done(function(response){
-              $("#success").show();
-              setTimeout(function(){ $("#success").show(); }, 50);
-              setTimeout(function(){ $("#success").hide(); }, 1500);
+              if(response.slug == current_slug){
+                setTimeout(function(){ $("#success").show(); }, 50);
+                setTimeout(function(){ $("#success").hide(); }, 1500);
+              }else{
+                location.href = "/users/" + current_user.name + "/posts/" + response.slug + "/edit";
+              };
             }).fail(function(response){
               setTimeout(function(){ $("#error").show(); }, 50);
               setTimeout(function(){ $("#error").hide(); }, 1500);
