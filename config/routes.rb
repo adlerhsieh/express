@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     collection do
       post :render_markdown
     end
+    member do
+      post :toggle_public
+    end
   end
 
   resources :users do

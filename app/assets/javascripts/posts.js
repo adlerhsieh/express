@@ -28,26 +28,15 @@ $(document).ready(function(){
         if(location.href.indexOf("/edit") != -1){
           keys.splice(keys.indexOf(73),1);
           $("#pending").show();
-          var title = $("#title").val();
-          var category = $("#category").val();
-          var tags = $("#tags").val();
           var slug = $("#slug").val();
-          var display_date = $("#display_date").val();
-          code = editor.session.getDocument().getAllLines();
           $.ajax({
-            url: "/posts/" + current_slug,
-            type: "PUT",
+            url: "/posts/" + current_slug + "/toggle_public",
+            type: "POST",
             data: {
-              "title": title,
-              "category": category,
-              "tags": tags,
               "slug": slug,
-              "content": code,
-              "display_date": display_date,
               "toggle_public": true
             }
           }).done(function(response){
-            $("#success").show();
             setTimeout(function(){ $("#success").show(); }, 50);
             setTimeout(function(){ $("#success").hide(); }, 1500);
             if(response.is_public == true){

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show]
+  before_action :set_post, only: [:show, :toggle_public]
   before_action :set_all_posts
   before_action :require_admin, only: [:create, :update]
 
@@ -31,13 +31,22 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.find_by_slug(params[:id])
     set_post_params
     if @post.save
       refresh_tags
-      toggle_public if params[:toggle_public]
-      render json: {result: "success", is_public: @post[:is_public]}
+      # toggle_public if params[:toggle_public]
+      render json: {result: "success", slug: @post.slug}
     end
+  end
+
+  def toggle_public
+    if @post[:is_public]
+      @post.update_column(:is_public, false)
+    else
+      @post.update_column(:is_public, true)
+    end
+    render json: {result: "success", is_public: @post[:is_public]}
   end
 
   def render_markdown
@@ -54,13 +63,6 @@ class PostsController < ApplicationController
   end
 
   private
-    def toggle_public
-      if @post[:is_public]
-        @post.update_column(:is_public, false)
-      else
-        @post.update_column(:is_public, true)
-      end
-    end
 
     def set_all_public_posts
       @posts = Post.where(:is_public => true).order(:display_date => :desc)
@@ -74,6 +76,7 @@ class PostsController < ApplicationController
 
     def set_post
       @post = Post.find_by_slug(params[:slug])
+      # @post = Post.find_by_slug(params[:id])
     end
 
     def post_params
@@ -83,6 +86,7 @@ class PostsController < ApplicationController
     def set_post_params
       @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
       @post.title = params[:title]
+      @post.slug = params[:slug]
       @post.category_id = @category[:id]
       @post.content = params[:content].join("\n")
       @post.display_date = params[:display_date]
