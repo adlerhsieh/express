@@ -1,15 +1,15 @@
 <ul class="nav nav-pills">
-  <li id="basic_info" class="<%= route_is? "show" %>">
+  <li class="<%= "active" if params[:controller] == "users" %>">
     <%= link_to "帳號資訊", user_path(current_user["name"]) %>
   </li>
   <% if is_admin? %>
-    <li id="new" class="">
+    <li class="<%= "active" if params[:controller] == "users/posts" && params[:action] == "new" %>">
       <%= link_to "新增文章", new_user_post_path(current_user["name"]) %>
     </li>
-    <li id="posts" class="<%= route_is? "posts" %>">
+    <li class="<%= "active" if params[:controller] == "users/posts" && params[:action] == "index" %>">
       <%= link_to "所有文章", user_posts_path(current_user["name"]) %>
     </li>
-    <li id="categories" class="<%= route_is? "categories" %>">
+    <li class="<%= "active" if params[:controller] == "users/categories" %>">
       <%= link_to "分類", edit_all_user_categories_path(current_user["name"]) %>
     </li>
   <% end %>
