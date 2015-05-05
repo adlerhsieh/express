@@ -1,58 +1,18 @@
 $(document).ready(function(){
   if(location.href.indexOf("/edit") != -1 || location.href.indexOf("/new") != -1){
-    var editor = ace.edit("editor");
-    var keys = [];
-    var preview = false;
-    var confirm_send = 0;
-    var confirm_leave = 0;
-    editor.setTheme("ace/theme/twilight");
-    editor.getSession().setMode("ace/mode/markdown");
-    editor.getSession().setUseWrapMode(true);
-    editor.$blockScrolling = Infinity; // prevent browser message
-    // editor.renderer.setShowGutter(false); // hide line number
-    editor.renderer.setPadding(10);
-    document.getElementById('editor').style.fontSize='14px';
-    document.getElementById("title").focus();
+    var editor;
+    var keys;
+    var preview;
+    var confirm_send;
+    var confirm_leave;
+
+    initialize_editor();
     $("#preview").hide();
-    if(location.href.indexOf("/edit") != -1){
-      current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
-      $.ajax({
-        url: "/blog/" + current_slug + ".json",
-        type: "GET"
-      }).done(function(response){
-        $("#title").val(response.post.title);
-        $("#category").val(response.category.name);
-        $("#slug").val(response.post.slug);
-        $("#tags").val(response.tags);
-        $("#display_date").val(response.post.display_date);
-        if(response.post.is_public == true){
-          $("#is_public").css("display", "inline");
-        }else{
-          $("#is_not_public").css("display", "inline");
-        };
-        editor.setValue(response.post.content);
-        editor.gotoLine(1, current_column, true);
-        editor.scrollToLine(1, true, true, function(){});
-      });
-    };
-
-    $.ajax({
-      url: "/categories",
-      type: "GET"
-    }).done(function(response){
-      $("#category").autocomplete({
-        source: response.categories
-      });
-    });
-
-
-    $("#send").click(function(){
-
-    });
+    initialize_content();
+    get_category_list();
 
     $(document).keydown(function(key){
       keys.push(key.which);
-      // console.log(keys);
       if(keys.indexOf(75) != -1 && keys.indexOf(91) != -1) {
         keys.splice(keys.indexOf(75),1);
         if(preview == false){
@@ -231,6 +191,57 @@ $(document).ready(function(){
 
     function toggle_public_tag() {
       
+    };
+
+    function initialize_editor() {
+      editor = ace.edit("editor");
+      keys = [];
+      preview = false;
+      confirm_send = 0;
+      confirm_leave = 0;
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/markdown");
+      editor.getSession().setUseWrapMode(true);
+      editor.$blockScrolling = Infinity; // prevent browser message
+      // editor.renderer.setShowGutter(false); // hide line number
+      editor.renderer.setPadding(10);
+      document.getElementById('editor').style.fontSize='14px';
+      document.getElementById("title").focus();
+    };
+
+    function initialize_content(){
+      if(location.href.indexOf("/edit") != -1){
+        current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
+        $.ajax({
+          url: "/blog/" + current_slug + ".json",
+          type: "GET"
+        }).done(function(response){
+          $("#title").val(response.post.title);
+          $("#category").val(response.category.name);
+          $("#slug").val(response.post.slug);
+          $("#tags").val(response.tags);
+          $("#display_date").val(response.post.display_date);
+          if(response.post.is_public == true){
+            $("#is_public").css("display", "inline");
+          }else{
+            $("#is_not_public").css("display", "inline");
+          };
+          editor.setValue(response.post.content);
+          editor.gotoLine(1, current_column, true);
+          editor.scrollToLine(1, true, true, function(){});
+        });
+      };
+    };
+
+    function get_category_list(){
+      $.ajax({
+        url: "/categories",
+        type: "GET"
+      }).done(function(response){
+        $("#category").autocomplete({
+          source: response.categories
+        });
+      });
     };
 
   };
