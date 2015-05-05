@@ -4,13 +4,13 @@
   </li>
   <% if is_admin? %>
     <li id="new" class="">
-      <%= link_to "新增文章", new_post_path %>
+      <%= link_to "新增文章", new_user_post_path(current_user["name"]) %>
     </li>
     <li id="posts" class="<%= route_is? "posts" %>">
-      <%= link_to "所有文章", edit_posts_path(current_user["name"]) %>
+      <%= link_to "所有文章", user_posts_path(current_user["name"]) %>
     </li>
     <li id="categories" class="<%= route_is? "categories" %>">
-      <%= link_to "分類", edit_categories_path(current_user["name"]) %>
+      <%= link_to "分類", edit_all_user_categories_path(current_user["name"]) %>
     </li>
   <% end %>
 </ul>

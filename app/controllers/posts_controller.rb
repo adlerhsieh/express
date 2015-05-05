@@ -1,19 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show]
   before_action :set_all_posts
-  before_action :require_admin, only: [:new, :edit, :create, :update]
+  before_action :require_admin, only: [:create, :update]
 
   def index
     set_all_public_posts
-    # @groups = Post.group_by_year
-  end
-
-  def new
-    @post = Post.new
-  end
-
-  def edit
-    @post = Post.find_by_slug(params[:id])
   end
 
   def show
@@ -63,15 +54,6 @@ class PostsController < ApplicationController
   end
 
   private
-    def require_admin
-      if current_user
-        if current_user.is_admin?
-          return
-        end
-      end
-      redirect_to sign_in_path 
-    end
-
     def toggle_public
       if @post[:is_public]
         @post.update_column(:is_public, false)

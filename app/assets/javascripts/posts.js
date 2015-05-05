@@ -15,7 +15,7 @@ $(document).ready(function(){
     document.getElementById("title").focus();
     $("#preview").hide();
     if(location.href.indexOf("/edit") != -1){
-      current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","");
+      current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
       $.ajax({
         url: "/blog/" + current_slug + ".json",
         type: "GET"
@@ -153,7 +153,7 @@ $(document).ready(function(){
                 "display_date": display_date
               }
             }).done(function(response){
-              location.href = "/posts/" + response.slug + "/edit";
+              location.href = "/users/" + current_user.name + "/posts/" + response.slug + "/edit";
             }).fail(function(response){
               dismiss_message();
               setTimeout(function(){ $("#error").show(); }, 50);

@@ -15,10 +15,17 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :users
-  get '/users/:name', to: "users#show", as: "user"
-  get '/users/:name/posts', to: "users#posts", as: "edit_posts"
-  get '/users/:name/categories', to: "users#categories", as: "edit_categories"
+  resources :users do
+    resources :posts, :controller => "users/posts"
+    resources :categories, :controller => "users/categories" do
+      collection do
+        get :edit_all
+      end
+    end
+  end
+  # get '/users/:name', to: "users#show", as: "user"
+  # get '/users/:name/posts', to: "users#posts", as: "edit_posts"
+  # get '/users/:name/categories', to: "users#categories", as: "edit_categories"
 
   get '/categories/:slug', to: "categories#show"
   resources :categories do

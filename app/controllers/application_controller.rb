@@ -9,4 +9,18 @@ class ApplicationController < ActionController::Base
       u.permit(:name, :email, :password, :password_confirmation)
     end
   end
+
+  def require_login
+    redirect_to posts_path unless current_user
+  end
+
+  def require_admin
+    if current_user
+      if current_user.is_admin?
+        return
+      end
+    end
+    redirect_to sign_in_path 
+  end
+
 end
