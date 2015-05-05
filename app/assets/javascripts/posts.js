@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  if(location.href.indexOf("/posts/") != -1){
+  if(location.href.indexOf("/edit") != -1 || location.href.indexOf("/new") != -1){
     var editor = ace.edit("editor");
     var keys = [];
     var preview = false;
@@ -117,7 +117,7 @@ $(document).ready(function(){
         }, 1000);
         if(confirm_leave == 2){
           dismiss_message();
-          location.href = "/users/" + current_user.name + "/edit_posts";
+          location.href = "/users/" + current_user.name + "/posts";
         };
       };
 

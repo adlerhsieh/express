@@ -2,8 +2,8 @@ var use_default_tab = true;
 
 $(document).ready(function(){
   if(location.href.indexOf("users") != -1){
-    tab_switch("edit_posts");
-    tab_switch("edit_categories");
+    tab_switch("posts");
+    tab_switch("categories");
     default_tab();
   };
 });
