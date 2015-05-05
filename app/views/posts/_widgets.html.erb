@@ -17,16 +17,7 @@
 
 <div class="widget column">
   <%= form_tag search_posts_path, :method => 'get' do %>
-    <!-- <div class="input&#45;group"> -->
-      <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "搜尋" %>
-      <!-- <input type="text" class="form&#45;control"> -->
-      <!-- <span class="input&#45;group&#45;btn"> -->
-        <% submit_tag "sub", :name => nil %>
-        <!-- <button class="btn btn&#45;default" type="button"> -->
-          <!-- <span class="glyphicon glyphicon&#45;search"></span> -->
-        <!-- </button> -->
-      <!-- </span> -->
-    <!-- </div> -->
+    <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "搜尋" %>
   <% end %>
 </div>
 
