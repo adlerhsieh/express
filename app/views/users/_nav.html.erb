@@ -7,10 +7,16 @@
       <%= link_to "新增文章", new_user_post_path(current_user["name"]) %>
     </li>
     <li class="<%= "active" if params[:controller] == "users/posts" && params[:action] == "index" %>">
-      <%= link_to "所有文章", user_posts_path(current_user["name"]) %>
+      <%= link_to "文章列表", user_posts_path(current_user["name"]) %>
     </li>
     <li class="<%= "active" if params[:controller] == "users/categories" %>">
-      <%= link_to "分類", edit_all_user_categories_path(current_user["name"]) %>
+      <%= link_to "文章分類", edit_all_user_categories_path(current_user["name"]) %>
+    </li>
+    <li class="<%= "active" if params[:controller] == "users/screen_casts" && params[:action] == "new" %>">
+      <%= link_to "新增教學", new_user_screen_cast_path(current_user["name"]) %>
+    </li>
+    <li class="<%= "active" if params[:controller] == "users/screen_casts" && params[:action] == "index" %>">
+      <%= link_to "教學列表", user_screen_casts_path(current_user["name"]) %>
     </li>
   <% end %>
 </ul>
