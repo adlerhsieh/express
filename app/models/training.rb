@@ -3,4 +3,5 @@ class Training < ActiveRecord::Base
   friendly_id :slug
 
   has_many :screen_casts
+  include DefaultSetter
 end
