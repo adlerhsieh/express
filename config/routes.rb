@@ -25,8 +25,16 @@ Rails.application.routes.draw do
         get :edit_all
       end
     end
-    resources :screen_casts, :controller => "users/screen_casts"
-    resources :trainings, :controller => "users/trainings"
+    resources :screen_casts, :controller => "users/screen_casts" do
+      member do
+        post :toggle_public
+      end
+    end
+    resources :trainings, :controller => "users/trainings" do
+      member do
+        post :toggle_public
+      end
+    end
   end
   # get '/users/:name', to: "users#show", as: "user"
   # get '/users/:name/posts', to: "users#posts", as: "edit_posts"
