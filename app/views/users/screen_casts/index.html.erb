@@ -1,0 +1,17 @@
+<%= render partial: "users/nav" %>
+<div class="col-lg-12">
+  <div class="posts">
+    <div class="column year-column">
+      <table>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td class="td-left"><h4><%= link_to post.title, edit_user_post_path(current_user["name"], post[:slug]) %> <%= content_tag(:code, "未公開") unless post[:is_public] %></h4></td>
+              <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

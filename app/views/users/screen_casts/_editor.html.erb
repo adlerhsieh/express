@@ -1,0 +1,38 @@
+<%= render partial: "layouts/messages" %>
+
+<div class="col-md-10 editor-attr">
+  <input id="title" type="text" class="form-control editor-title" placeholder="標題" />
+</div>
+<div class="col-md-2 editor-attr status">
+    <kbd id="is_public">已公開</kbd>
+    <code id="is_not_public">未公開</code>
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="video_embed" type="text" class="form-control" placeholder="影片網址">
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="image_embed" type="text" class="form-control" placeholder="圖片網址">
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="slug" type="text" class="form-control" placeholder="網址名稱">
+</div>
+<div class="col-md-3 editor-attr">
+  <input id="display_date" type="text" class="form-control" placeholder="日期 (格式2015-01-01)">
+</div>
+
+<pre id="editor" class="editor-attr"></pre>
+
+<div id="preview" class="column">
+  <h1 id="preview-title"></h1>
+  <p><%= render_author(@screen_cast.author) %> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
+  <hr>
+  <div id="preview-content"></div>
+</div>
+
+<div class="instruction">
+  <ul>
+    <li>Cmd + Enter 兩次送出儲存</li>
+    <li>Cmd + K 預覽</li>
+    <li>Cmd + J 兩次回到文章列表</li>
+  </ul>
+</div>
