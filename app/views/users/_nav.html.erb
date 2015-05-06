@@ -3,6 +3,9 @@
     <%= link_to "帳號資訊", user_path(current_user["name"]) %>
   </li>
   <% if is_admin? %>
+    <li class="<%= "active" if params[:controller] == "settings" && params[:action] == "index" %>">
+      <%= link_to "網站設定", settings_path %>
+    </li>
     <li class="<%= "active" if params[:controller] == "users/posts" && params[:action] == "new" %>">
       <%= link_to "新增文章", new_user_post_path(current_user["name"]) %>
     </li>

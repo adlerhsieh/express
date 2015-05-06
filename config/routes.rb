@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :settings, :only => [:index] do
+    collection do
+      post :update_all
+    end
+  end
+
   resources :users do
     resources :posts, :controller => "users/posts"
     resources :categories, :controller => "users/categories" do
