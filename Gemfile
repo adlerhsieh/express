@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 #   gem 'rails-assets-ace'
 # end
 
+gem 'friendly_id'
 gem 'colorize'
 gem 'devise'
 
