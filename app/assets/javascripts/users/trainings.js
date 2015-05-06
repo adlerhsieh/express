@@ -7,9 +7,11 @@ $(document).ready(function(){
       var confirm_send;
       var confirm_leave;
       var current_slug;
+      var screen_casts_list = false;
 
       initialize_editor();
       $("#preview").hide();
+      $("#list").hide();
       initialize_content();
 
       $(document).keydown(function(key){
@@ -22,6 +24,17 @@ $(document).ready(function(){
           }else{
             toggle_edit();
             preview = false;
+          };
+        };
+
+        if(keys.indexOf(190) != -1 && keys.indexOf(91) != -1) {
+          keys.splice(keys.indexOf(190),1);
+          if(screen_casts_list == false){
+            toggle_list(true);
+            screen_casts_list = true;
+          }else{
+            toggle_list(false);
+            screen_casts_list = false;
           };
         };
 
@@ -183,6 +196,16 @@ $(document).ready(function(){
 
       function toggle_public_tag() {
         
+      };
+
+      function toggle_list(value){
+        if(value == true){
+          $("#editor").hide();
+          $("#list").show();
+        }else{
+          $("#editor").show();
+          $("#list").hide();
+        };
       };
 
       function initialize_editor() {

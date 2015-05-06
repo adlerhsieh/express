@@ -8,10 +8,8 @@ class Users::TrainingsController < ApplicationController
   end
 
   def edit
-  end
-
-  def edit
     @training = Training.find_by_slug(params[:id])
+    @screen_casts = ScreenCast.all
   end
 
   def create

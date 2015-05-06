@@ -1,6 +1,10 @@
 class Users::ScreenCastsController < ApplicationController
   def index
     @screen_casts = ScreenCast.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @screen_casts }
+    end
   end
 
   def new

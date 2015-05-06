@@ -1,0 +1,19 @@
+<div id="list">
+  <!-- <h3>影片列表</h3> -->
+  <table class="table table-striped table-bordered">
+    <thead>
+      <th>ID</th>
+      <th>標題</th>
+      <th>屬於</td>
+    </thead>
+    <tbody>
+      <% @screen_casts.each do |s| %>
+        <tr>
+          <td><%= s.id %></td>
+          <td><%= link_to s.title, screen_cast_path(s[:slug]), target: "_blank" %></td>
+          <td><%= s.training_id ? s.training_id : "-" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
