@@ -25,6 +25,8 @@ Rails.application.routes.draw do
         get :edit_all
       end
     end
+    resources :screen_casts, :controller => "users/screen_casts"
+    resources :trainings, :controller => "users/trainings"
   end
   # get '/users/:name', to: "users#show", as: "user"
   # get '/users/:name/posts', to: "users#posts", as: "edit_posts"
