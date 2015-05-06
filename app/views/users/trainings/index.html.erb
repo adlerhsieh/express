@@ -1,17 +1,21 @@
 <%= render partial: "users/nav" %>
 <div class="col-lg-12">
-  <div class="posts">
-    <div class="column year-column">
-      <table>
-        <tbody>
-          <% @trainings.each do |training| %>
-            <tr>
-              <td class="td-left"><h4><%= link_to training.title, edit_user_training_path(current_user["name"], training[:slug]) %> <%= content_tag(:code, "未公開") unless training[:is_public] %></h4></td>
-              <td class="td-right"><span class="date-display"><%= training[:display_date].strftime("%Y-%m-%d") %></span></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+  <div class="column">
+    <table class="table talbe-striped">
+      <thead>
+        <th>標題</th>
+        <th>數量</th>
+        <th>建立時間</th>
+      </thead>
+      <tbody>
+        <% @trainings.each do |training| %>
+          <tr>
+            <td class="td-title"><h4><%= link_to training.title, edit_user_training_path(current_user["name"], training[:slug]) %> <%= content_tag(:code, "未公開") unless training[:is_public] %></h4></td>
+            <td class="td-info"><%= training.screen_casts.count %></td>
+            <td class="td-info"><span class="date-display"><%= training[:display_date].strftime("%Y-%m-%d") %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
