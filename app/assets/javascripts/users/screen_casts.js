@@ -11,7 +11,6 @@ $(document).ready(function(){
       initialize_editor();
       $("#preview").hide();
       initialize_content();
-      get_category_list();
 
       $(document).keydown(function(key){
         keys.push(key.which);
@@ -32,7 +31,7 @@ $(document).ready(function(){
             $("#pending").show();
             var slug = $("#slug").val();
             $.ajax({
-              url: "/posts/" + current_slug + "/toggle_public",
+              url: "/users/" + current_user.name + "/screen_casts/" + current_slug + "/toggle_public",
               type: "POST",
               data: {
                 "slug": slug,
@@ -67,7 +66,7 @@ $(document).ready(function(){
           }, 1000);
           if(confirm_leave == 2){
             dismiss_message();
-            location.href = "/users/" + current_user.name + "/posts";
+            location.href = "/users/" + current_user.name + "/screen_casts";
           };
         };
 
@@ -84,26 +83,26 @@ $(document).ready(function(){
             dismiss_message();
             $("#pending").show();
             var title = $("#title").val();
-            var category = $("#category").val();
-            var tags = $("#tags").val();
+            var video_embed = $("#video_embed").val();
+            var image_embed = $("#image_embed").val();
             var slug = $("#slug").val();
             var display_date = $("#display_date").val();
             code = editor.session.getDocument().getAllLines();
 
             if(location.href.indexOf("/edit") == -1){
               $.ajax({
-                url: "/posts",
+                url: "/users/" + current_user.name + "/screen_casts",
                 type: "POST",
                 data: {
                   "title": title,
-                  "category": category,
-                  "tags": tags,
+                  "video_embed": video_embed,
+                  "image_embed": image_embed,
                   "slug": slug,
                   "content": code,
                   "display_date": display_date
                 }
               }).done(function(response){
-                location.href = "/users/" + current_user.name + "/posts/" + response.slug + "/edit";
+                location.href = "/users/" + current_user.name + "/screen_casts/" + response.slug + "/edit";
               }).fail(function(response){
                 dismiss_message();
                 setTimeout(function(){ $("#error").show(); }, 50);
@@ -112,12 +111,12 @@ $(document).ready(function(){
               });
             }else{
               $.ajax({
-                url: "/posts/" + current_slug,
+                url: "/users/" + current_user.name + "/screen_casts/" + current_slug,
                 type: "PUT",
                 data: {
                   "title": title,
-                  "category": category,
-                  "tags": tags,
+                  "video_embed": video_embed,
+                  "image_embed": image_embed,
                   "slug": slug,
                   "content": code,
                   "display_date": display_date
@@ -127,7 +126,7 @@ $(document).ready(function(){
                   setTimeout(function(){ $("#success").show(); }, 50);
                   setTimeout(function(){ $("#success").hide(); }, 1500);
                 }else{
-                  location.href = "/users/" + current_user.name + "/posts/" + response.slug + "/edit";
+                  location.href = "/users/" + current_user.name + "/screen_casts/" + response.slug + "/edit";
                 };
               }).fail(function(response){
                 setTimeout(function(){ $("#error").show(); }, 50);
@@ -154,8 +153,8 @@ $(document).ready(function(){
         current_row = current_position.row;
         current_column = current_position.column;
         var post_title = $('#title').val();
-        var post_category = $('#category').val();
-        var post_tags = $('#tags').val();
+        var video_tag = $('#video_embed').val();
+        var image_tag = $('#image_embed').val();
         $("#pending").show();
 
         $.ajax({
@@ -168,8 +167,8 @@ $(document).ready(function(){
           $("#preview").show();
           $("#preview-content").html(response.post);
           $("#preview-title").html(post_title);
-          $("#preview-category").html(post_category);
-          $("#preview-tags").html(post_tags);
+          $("#preview-video").html(video_tag);
+          $("#preview-image").html(image_tag);
         });		    	
       };
 
@@ -204,37 +203,26 @@ $(document).ready(function(){
 
       function initialize_content(){
         if(location.href.indexOf("/edit") != -1){
-          current_slug = location.href.replace(location.host,"").replace("http://","").replace("/posts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
+          current_slug = location.href.replace(location.host,"").replace("http://","").replace("/screen_casts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
           $.ajax({
-            url: "/blog/" + current_slug + ".json",
+            url: "/screen_casts/" + current_slug + ".json",
             type: "GET"
           }).done(function(response){
-            $("#title").val(response.post.title);
-            $("#category").val(response.category.name);
-            $("#slug").val(response.post.slug);
-            $("#tags").val(response.tags);
-            $("#display_date").val(response.post.display_date);
-            if(response.post.is_public == true){
+            $("#title").val(response.title);
+            $("#video_embed").val(response.video_embed);
+            $("#image_embed").val(response.image_embed);
+            $("#slug").val(response.slug);
+            $("#display_date").val(response.display_date);
+            if(response.is_public == true){
               $("#is_public").css("display", "inline");
             }else{
               $("#is_not_public").css("display", "inline");
             };
-            editor.setValue(response.post.content);
+            editor.setValue(response.content);
             editor.gotoLine(1, current_column, true);
             editor.scrollToLine(1, true, true, function(){});
           });
         };
-      };
-
-      function get_category_list(){
-        $.ajax({
-          url: "/categories",
-          type: "GET"
-        }).done(function(response){
-          $("#category").autocomplete({
-            source: response.categories
-          });
-        });
       };
     };
   };
