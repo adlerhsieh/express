@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ScreenCastsController, type: :controller do
+RSpec.describe ScreencastsController, type: :controller do
 
   # describe "GET #new" do
   #   it "returns http success" do
