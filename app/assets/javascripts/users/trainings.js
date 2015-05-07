@@ -28,13 +28,15 @@ $(document).ready(function(){
         };
 
         if(keys.indexOf(190) != -1 && keys.indexOf(91) != -1) {
-          keys.splice(keys.indexOf(190),1);
-          if(screen_casts_list == false){
-            toggle_list(true);
-            screen_casts_list = true;
-          }else{
-            toggle_list(false);
-            screen_casts_list = false;
+          if(location.href.indexOf("/edit") != -1){
+            keys.splice(keys.indexOf(190),1);
+            if(screen_casts_list == false){
+              toggle_list(true);
+              screen_casts_list = true;
+            }else{
+              toggle_list(false);
+              screen_casts_list = false;
+            };
           };
         };
 
