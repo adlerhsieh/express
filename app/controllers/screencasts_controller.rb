@@ -1,6 +1,6 @@
 class ScreencastsController < ApplicationController
   def show
-    #todo redirect routing from without training to with training if training_id
+    return redirection_to_training if sceeencast_belongs_to_training
     @screencast = ScreenCast.find_by_slug(params[:id])
     cat = Category.find(@screencast[:category_id])[:name]
     if @screencast[:training_id]
@@ -14,4 +14,19 @@ class ScreencastsController < ApplicationController
       }
     end
   end
+
+  private
+    def redirection_to_training
+      training = ScreenCast.find_by_slug(params[:id]).training
+      redirect_to training_screencast_path(training[:slug], params[:id])
+    end
+
+    def sceeencast_belongs_to_training
+      if not params[:training_id]
+        if ScreenCast.find_by_slug(params[:id])[:training_id]
+          return true
+        end
+      end
+      false
+    end
 end
