@@ -266,7 +266,8 @@ angular.module("training", [])
   $http.get("/users/" + current_user.name + "/trainings/" + current_slug + "/selections").success(function(response){
     $scope.selection = response;
   });
-  $http.get("/users/" + current_user.name + "/screen_casts.json").success(function(response){
+  $http.get("/users/" + current_user.name + "/trainings/" + current_slug + "/not_selected").success(function(response){
+  // $http.get("/users/" + current_user.name + "/screen_casts.json").success(function(response){
     $scope.list = response;
   });
 
@@ -274,6 +275,7 @@ angular.module("training", [])
     index = $scope.list.indexOf(item);
     $scope.list.splice(index,1);
     $scope.selection.push(item);
+    item.training_order = $scope.selection.indexOf(item);
   };
   $scope.remove = function(item){
     index = $scope.selection.indexOf(item);

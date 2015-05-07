@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       member do
         post :toggle_public
         get :selections
+        get :not_selected
       end
     end
   end

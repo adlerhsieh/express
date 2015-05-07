@@ -4,15 +4,15 @@
     <thead>
       <th></th>
       <th>ID</th>
-      <th>標題</th>
       <th>順序</td>
+      <th>標題</th>
     </thead>
     <tbody>
         <tr ng-repeat="s in selection">
           <td class="col-md-1"><button class="btn btn-danger" ng-click="remove(s)">移除</button></td>
           <td class="col-md-1">{{s.id}}</td>
-          <td class="col-md-5"><a href="/screen_casts/{{s.slug}}" target="_blank">{{s.title}}</a></td>
-          <td class="col-md-5">{{s.training_order}}</td>
+          <td class="col-md-1">{{s.training_order}}</td>
+          <td class="col-md-9"><a href="/screen_casts/{{s.slug}}" target="_blank">{{s.title}}</a></td>
         </tr>
     </tbody>
   </table>

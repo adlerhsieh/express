@@ -18,6 +18,12 @@ class Users::TrainingsController < ApplicationController
     render :json => @screen_casts_selected
   end
 
+  def not_selected
+    @training = Training.find_by_slug(params[:id])
+    @screen_casts = ScreenCast.all
+    render :json => @screen_casts - @training.screen_casts
+  end
+
   def create
     @training = Training.new(training_params)
     @training.content = params[:content].join("\n")
