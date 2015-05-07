@@ -26,7 +26,16 @@ class Users::TrainingsController < ApplicationController
 
   def update_selections
     @training = Training.find_by_slug(params[:id])
-    render json: { updated: params[:selections] }
+    ScreenCast.where(:training_id => @training[:id]).each do |s| 
+      s.update_column(:training_id, nil)
+      s.update_column(:training_order, nil)
+    end
+    params[:selected].each do |s|
+      screen_cast = ScreenCast.find(s[:id])
+      screen_cast.update_column(:training_id, @training[:id])
+      screen_cast.update_column(:training_order, s[:training_order])
+    end
+    render json: { updated: "success" }
   end
 
   def create

@@ -1,8 +1,7 @@
 <div class="column col-lg-12" id="list" ng-app="training" ng-controller="editController">
-  <h3>已選影片</h3>
   <table class="table table-bordered table-hover">
     <thead>
-      <th></th>
+      <th>已選影片</th>
       <th>ID</th>
       <th>順序</td>
       <th>標題</th>
@@ -16,13 +15,12 @@
         </tr>
     </tbody>
   </table>
-  <h3>影片列表</h3>
   <table class="table table-bordered table-hover">
     <thead>
-      <th></th>
+      <th>影片列表</th>
       <th>ID</th>
       <th>標題</th>
-      <th>屬於</td>
+      <th>已分配給</td>
     </thead>
     <tbody>
       <tr class="click-push" ng-repeat="l in list">
