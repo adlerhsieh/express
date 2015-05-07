@@ -189,7 +189,7 @@ $(document).ready(function(){
           $("#preview-content").html(response.post);
           $("#preview-title").html(post_title);
           $("#preview-video").html(video_tag);
-          $("#preview-image").html(image_tag);
+          $("#preview-image").html("<img class='preview_image' src='" + image_tag + "' />");
         });		    	
       };
 
