@@ -20,8 +20,17 @@ class Users::TrainingsController < ApplicationController
 
   def not_selected
     @training = Training.find_by_slug(params[:id])
-    @screen_casts = ScreenCast.all
-    render :json => @screen_casts - @training.screen_casts
+    screen_casts = ScreenCast.all - @training.screen_casts
+    result = screen_casts.map do |s|
+      training = s.training
+      if s[:training_id]
+        s = s.serializable_hash
+        s["training_title"] = training.title
+        s["training_slug"] = training.slug
+      end
+      s
+    end
+    render :json => result
   end
 
   def update_selections

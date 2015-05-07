@@ -263,13 +263,13 @@ $(document).ready(function(){
 angular.module("training", [])
 .controller("editController", ['$scope','$http', function($scope,$http){
   $scope.confirm_save = 0;
+  $scope.current_user = current_user;
   $scope.keys = [];
   current_slug = location.href.replace(location.host,"").replace("http://","").replace("/trainings/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
   $http.get("/users/" + current_user.name + "/trainings/" + current_slug + "/selections").success(function(response){
     $scope.selection = response;
   });
   $http.get("/users/" + current_user.name + "/trainings/" + current_slug + "/not_selected").success(function(response){
-  // $http.get("/users/" + current_user.name + "/screen_casts.json").success(function(response){
     $scope.list = response;
   });
   $scope.insert = function(item){
