@@ -11,6 +11,7 @@ $(document).ready(function(){
       initialize_editor();
       $("#preview").hide();
       initialize_content();
+      get_category_list();
 
       $(document).keydown(function(key){
         keys.push(key.which);
@@ -83,6 +84,7 @@ $(document).ready(function(){
             dismiss_message();
             $("#pending").show();
             var title = $("#title").val();
+            var category = $("#category").val();
             var video_embed = $("#video_embed").val();
             var image_embed = $("#image_embed").val();
             var slug = $("#slug").val();
@@ -99,6 +101,7 @@ $(document).ready(function(){
                   "image_embed": image_embed,
                   "slug": slug,
                   "content": code,
+                  "category": category,
                   "display_date": display_date
                 }
               }).done(function(response){
@@ -119,6 +122,7 @@ $(document).ready(function(){
                   "image_embed": image_embed,
                   "slug": slug,
                   "content": code,
+                  "category": category,
                   "display_date": display_date
                 }
               }).done(function(response){
@@ -140,9 +144,9 @@ $(document).ready(function(){
         };
       });
 
-        $(document).keyup(function(key){
-          keys = [];
-        });
+      $(document).keyup(function(key){
+        keys = [];
+      });
 
 
       var current_row = 0;
@@ -173,16 +177,16 @@ $(document).ready(function(){
       };
 
       function toggle_edit() {
-          // $("#editor").show();
-          $(".editor-attr").show();
-          $("#preview").hide();
-          editor.focus();
-          editor.gotoLine(current_row+1, current_column, true);
-          editor.scrollToLine(current_row, true, true, function(){});
+        // $("#editor").show();
+        $(".editor-attr").show();
+        $("#preview").hide();
+        editor.focus();
+        editor.gotoLine(current_row+1, current_column, true);
+        editor.scrollToLine(current_row, true, true, function(){});
       };
 
       function toggle_public_tag() {
-        
+
       };
 
       function initialize_editor() {
@@ -211,6 +215,7 @@ $(document).ready(function(){
             $("#title").val(response.title);
             $("#video_embed").val(response.video_embed);
             $("#image_embed").val(response.image_embed);
+            $("#category").val(response.category);
             $("#slug").val(response.slug);
             $("#display_date").val(response.display_date);
             if(response.is_public == true){
@@ -224,6 +229,18 @@ $(document).ready(function(){
           });
         };
       };
+
+      function get_category_list(){
+        $.ajax({
+          url: "/categories",
+          type: "GET"
+        }).done(function(response){
+          $("#category").autocomplete({
+            source: response.categories
+          });
+        });
+      };
+
     };
   };
 });

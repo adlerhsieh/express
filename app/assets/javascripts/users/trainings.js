@@ -14,6 +14,7 @@ $(document).ready(function(){
       $("#preview").hide();
       $("#list").hide();
       initialize_content();
+      get_category_list();
 
       $(document).keydown(function(key){
         keys.push(key.which);
@@ -99,6 +100,7 @@ $(document).ready(function(){
             dismiss_message();
             $("#pending").show();
             var title = $("#title").val();
+            var category = $("#category").val();
             var video_embed = $("#video_embed").val();
             var image_embed = $("#image_embed").val();
             var slug = $("#slug").val();
@@ -115,6 +117,7 @@ $(document).ready(function(){
                   "image_embed": image_embed,
                   "slug": slug,
                   "content": code,
+                  "category": category,
                   "display_date": display_date
                 }
               }).done(function(response){
@@ -135,6 +138,7 @@ $(document).ready(function(){
                   "image_embed": image_embed,
                   "slug": slug,
                   "content": code,
+                  "category": category,
                   "display_date": display_date
                 }
               }).done(function(response){
@@ -243,6 +247,7 @@ $(document).ready(function(){
             $("#title").val(response.title);
             $("#video_embed").val(response.video_embed);
             $("#image_embed").val(response.image_embed);
+            $("#category").val(response.category);
             $("#slug").val(response.slug);
             $("#display_date").val(response.display_date);
             if(response.is_public == true){
@@ -256,6 +261,18 @@ $(document).ready(function(){
           });
         };
       };
+
+      function get_category_list(){
+        $.ajax({
+          url: "/categories",
+          type: "GET"
+        }).done(function(response){
+          $("#category").autocomplete({
+            source: response.categories
+          });
+        });
+      };
+
     };
   };
 });

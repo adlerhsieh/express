@@ -17,6 +17,8 @@ class Users::ScreenCastsController < ApplicationController
 
   def create
     @screen_cast = ScreenCast.new(screen_cast_params)
+    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    @screen_cast.category_id = category[:id]
     @screen_cast.content = params[:content].join("\n")
     if @screen_cast.save
       render json: {result: "success", slug: @screen_cast.slug}
@@ -25,6 +27,8 @@ class Users::ScreenCastsController < ApplicationController
 
   def update
     @screen_cast = ScreenCast.find_by_slug(params[:id])
+    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    @screen_cast.category_id = category[:id]
     if @screen_cast.update!(screen_cast_params) && @screen_cast.update_attribute(:content, params[:content].join("\n"))
       render json: {result: "success", slug: @screen_cast.slug}
     end

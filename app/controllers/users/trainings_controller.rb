@@ -39,10 +39,12 @@ class Users::TrainingsController < ApplicationController
       s.update_column(:training_id, nil)
       s.update_column(:training_order, nil)
     end
-    params[:selected].each do |s|
-      screen_cast = ScreenCast.find(s[:id])
-      screen_cast.update_column(:training_id, @training[:id])
-      screen_cast.update_column(:training_order, s[:training_order])
+    if params[:selected]
+      params[:selected].each do |s|
+        screen_cast = ScreenCast.find(s[:id])
+        screen_cast.update_column(:training_id, @training[:id])
+        screen_cast.update_column(:training_order, s[:training_order])
+      end
     end
     render json: { updated: "success" }
   end
@@ -50,6 +52,8 @@ class Users::TrainingsController < ApplicationController
   def create
     @training = Training.new(training_params)
     @training.content = params[:content].join("\n")
+    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    @training.category_id = category[:id]
     if @training.save
       render json: {result: "success", slug: @training.slug}
     end
@@ -57,6 +61,8 @@ class Users::TrainingsController < ApplicationController
 
   def update
     @training = Training.find_by_slug(params[:id])
+    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    @training.category_id = category[:id]
     if @training.update!(training_params) && @training.update_attribute(:content, params[:content].join("\n"))
       render json: {result: "success", slug: @training.slug}
     end
