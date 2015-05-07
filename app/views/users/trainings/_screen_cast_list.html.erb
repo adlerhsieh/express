@@ -11,7 +11,7 @@
         <tr ng-repeat="s in selection">
           <td class="col-md-1"><button class="btn btn-danger" ng-click="remove(s)">移除</button></td>
           <td class="col-md-1">{{s.id}}</td>
-          <td class="col-md-1">{{s.training_order}}</td>
+          <td class="col-md-1"><input type="text" ng-model="s.training_order" class="form-control" /></td>
           <td class="col-md-9"><a href="/screen_casts/{{s.slug}}" target="_blank">{{s.title}}</a></td>
         </tr>
     </tbody>

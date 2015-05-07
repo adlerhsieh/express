@@ -14,7 +14,7 @@ class Users::TrainingsController < ApplicationController
 
   def selections
     @training = Training.find_by_slug(params[:id])
-    @screen_casts_selected = @training.screen_casts
+    @screen_casts_selected = @training.screen_casts.order(:training_order => :asc)
     render :json => @screen_casts_selected
   end
 
@@ -22,6 +22,11 @@ class Users::TrainingsController < ApplicationController
     @training = Training.find_by_slug(params[:id])
     @screen_casts = ScreenCast.all
     render :json => @screen_casts - @training.screen_casts
+  end
+
+  def update_selections
+    @training = Training.find_by_slug(params[:id])
+    render json: { updated: params[:selections] }
   end
 
   def create

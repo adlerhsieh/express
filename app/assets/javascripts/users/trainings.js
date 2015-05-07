@@ -262,6 +262,8 @@ $(document).ready(function(){
 
 angular.module("training", [])
 .controller("editController", ['$scope','$http', function($scope,$http){
+  $scope.confirm_save = 0;
+  $scope.keys = [];
   current_slug = location.href.replace(location.host,"").replace("http://","").replace("/trainings/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
   $http.get("/users/" + current_user.name + "/trainings/" + current_slug + "/selections").success(function(response){
     $scope.selection = response;
@@ -270,7 +272,6 @@ angular.module("training", [])
   // $http.get("/users/" + current_user.name + "/screen_casts.json").success(function(response){
     $scope.list = response;
   });
-
   $scope.insert = function(item){
     index = $scope.list.indexOf(item);
     $scope.list.splice(index,1);
@@ -282,4 +283,27 @@ angular.module("training", [])
     $scope.selection.splice(index,1);
     $scope.list.push(item);
   };
+  $(document).keydown(function(key){
+    $scope.keys.push(key.which);
+    if($scope.keys.indexOf(13) != -1 && $scope.keys.indexOf(91) != -1) {
+      $scope.confirm_save ++;
+      $scope.keys.splice($scope.keys.indexOf(13),1);
+      setTimeout(function(){
+        $scope.confirm_save = 0;
+      }, 1000);
+      if($scope.confirm_save == 2){
+        $scope.confirm_save = 0;
+        $http({
+          url: "/users/" + current_user.name + "/trainings/" + current_slug + "/update_selections",
+          method: "POST",
+          data: {"selected": $scope.selection},
+          headers: {
+                     'X-CSRF-Token': $("meta[name='csrf-token']").attr("content")
+                   }
+        }).success(function(response){
+          
+        });
+      };
+    };
+  });
 }]);

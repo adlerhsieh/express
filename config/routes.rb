@@ -41,6 +41,7 @@ Rails.application.routes.draw do
         post :toggle_public
         get :selections
         get :not_selected
+        post :update_selections
       end
     end
   end
