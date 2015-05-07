@@ -8,6 +8,7 @@ $(document).ready(function(){
       var confirm_leave;
       var current_slug;
       var screen_casts_list = false;
+      var screen_casts_selection = [];
 
       initialize_editor();
       $("#preview").hide();
@@ -180,6 +181,7 @@ $(document).ready(function(){
           dismiss_message();
           $(".editor-attr").hide();
           $("#preview").show();
+          $("#list").hide();
           $("#preview-content").html(response.post);
           $("#preview-title").html(post_title);
           $("#preview-video").html(video_tag);
@@ -191,6 +193,7 @@ $(document).ready(function(){
           // $("#editor").show();
           $(".editor-attr").show();
           $("#preview").hide();
+          $("#list").hide();
           editor.focus();
           editor.gotoLine(current_row+1, current_column, true);
           editor.scrollToLine(current_row, true, true, function(){});
@@ -202,10 +205,14 @@ $(document).ready(function(){
 
       function toggle_list(value){
         if(value == true){
-          $("#editor").hide();
+          // $("#editor").hide();
+          $(".editor-attr").hide();
+          $("#preview").hide();
           $("#list").show();
         }else{
-          $("#editor").show();
+          // $("#editor").show();
+          $(".editor-attr").show();
+          $("#preview").hide();
           $("#list").hide();
         };
       };
@@ -253,3 +260,24 @@ $(document).ready(function(){
   };
 });
 
+angular.module("training", [])
+.controller("editController", ['$scope','$http', function($scope,$http){
+  current_slug = location.href.replace(location.host,"").replace("http://","").replace("/trainings/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
+  $http.get("/users/" + current_user.name + "/trainings/" + current_slug + "/selections").success(function(response){
+    $scope.selection = response;
+  });
+  $http.get("/users/" + current_user.name + "/screen_casts.json").success(function(response){
+    $scope.list = response;
+  });
+
+  $scope.insert = function(item){
+    index = $scope.list.indexOf(item);
+    $scope.list.splice(index,1);
+    $scope.selection.push(item);
+  };
+  $scope.remove = function(item){
+    index = $scope.selection.indexOf(item);
+    $scope.selection.splice(index,1);
+    $scope.list.push(item);
+  };
+}]);
