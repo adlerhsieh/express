@@ -56,8 +56,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :screen_casts
-  resources :trainings
+  resources :trainings, only: [:index, :show] do
+    resources :screen_casts
+  end
 
   root to: "posts#index"
 
