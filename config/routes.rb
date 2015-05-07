@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :trainings, :controller => "users/trainings" do
       member do
         post :toggle_public
+        get :selections
       end
     end
   end
