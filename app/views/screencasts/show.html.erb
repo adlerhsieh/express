@@ -2,7 +2,7 @@
   <% if @training %>
     <span class="series-title"><%= @training.title %></span>
   <% end %>
-  <%= content_tag(:h1, @screencast.title, :class => "screencast-title") %>
+  <h1 class="screencast-titel"><%= @screencast.title %></h1>
   <p><%= render_author(@screencast.author) %> @ <%= @screencast.display_date.strftime("%Y-%m-%d") %></p>
   <hr />
   <% if @screencast.video_embed %>
@@ -21,8 +21,6 @@
         </tr>
         <% @screencasts.each do |s| %>
           <tr class="<%= "success" if s == @screencast %>" onclick="return location.href = '<%= training_screencast_path(@training[:slug], s[:slug]) %>'">
-            <!-- <td class="center col&#45;md&#45;1"> -->
-            <!-- </td> -->
             <td>
               <span class="play-button glyphicon glyphicon-play-circle"></span>
               <%= "#{(@screencasts.index(s)+1).to_s}. #{s.title}" %>
