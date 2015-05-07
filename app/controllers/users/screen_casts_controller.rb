@@ -44,6 +44,12 @@ class Users::ScreenCastsController < ApplicationController
     render json: {result: "success", is_public: @screen_cast[:is_public]}
   end
 
+  def destroy
+    @screen_cast = ScreenCast.find_by_slug(params[:id])
+    @screen_cast.delete
+    redirect_to user_screen_casts_path(current_user["name"])
+  end
+
   private
     def screen_cast_params
       params.permit(:title, :video_embed, :image_embed, :slug, :display_date)

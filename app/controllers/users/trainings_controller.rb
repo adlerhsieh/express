@@ -78,6 +78,16 @@ class Users::TrainingsController < ApplicationController
     render json: {result: "success", is_public: @training[:is_public]}
   end
 
+  def destroy
+    @training = Training.find_by_slug(params[:id])
+    id = @training[:id]
+    ScreenCast.where(:training_id => id).each do |s|
+      s.update_column(:training_id, nil)
+    end
+    @training.delete
+    redirect_to user_trainings_path(current_user["name"])
+  end
+
   private
     def training_params
       params.permit(:title, :video_embed, :image_embed, :slug, :display_date)
