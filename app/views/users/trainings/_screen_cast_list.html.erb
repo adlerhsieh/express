@@ -1,19 +1,36 @@
-<div id="list">
-  <!-- <h3>影片列表</h3> -->
-  <table class="table table-striped table-bordered">
+<div class="column col-lg-12" id="list" ng-app="training" ng-controller="editController">
+  <h3>已選影片</h3>
+  <table class="table table-bordered table-hover">
     <thead>
+      <th></th>
+      <th>ID</th>
+      <th>標題</th>
+      <th>順序</td>
+    </thead>
+    <tbody>
+        <tr ng-repeat="s in selection">
+          <td class="col-md-1"><button class="btn btn-danger" ng-click="remove(s)">移除</button></td>
+          <td class="col-md-1">{{s.id}}</td>
+          <td class="col-md-5"><a href="/screen_casts/{{s.slug}}" target="_blank">{{s.title}}</a></td>
+          <td class="col-md-5">{{s.training_order}}</td>
+        </tr>
+    </tbody>
+  </table>
+  <h3>影片列表</h3>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <th></th>
       <th>ID</th>
       <th>標題</th>
       <th>屬於</td>
     </thead>
     <tbody>
-      <% @screen_casts.each do |s| %>
-        <tr>
-          <td><%= s.id %></td>
-          <td><%= link_to s.title, screen_cast_path(s[:slug]), target: "_blank" %></td>
-          <td><%= s.training_id ? s.training_id : "-" %></td>
-        </tr>
-      <% end %>
+      <tr class="click-push" ng-repeat="l in list">
+        <td class="col-md-1"><button class="btn btn-primary" ng-click="insert(l)">選擇</button></td>
+        <td class="col-md-1">{{l.id}}</td>
+        <td class="col-md-5"><a href="/screen_casts/{{l.slug}}" target="_blank">{{l.title}}</a></td>
+        <td class="col-md-5">{{l.training_id}}</td>
+      </tr>
     </tbody>
   </table>
 </div>
