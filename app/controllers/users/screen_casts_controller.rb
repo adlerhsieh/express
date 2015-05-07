@@ -1,4 +1,5 @@
 class Users::ScreenCastsController < ApplicationController
+  before_action :require_admin
   def index
     @screen_casts = ScreenCast.all
     respond_to do |format|

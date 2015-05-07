@@ -1,5 +1,5 @@
 class Users::PostsController < ApplicationController
-  before_action :require_admin, only: [:create, :update]
+  before_action :require_admin
 
   def index
     @posts = Post.order(:display_date => :desc)

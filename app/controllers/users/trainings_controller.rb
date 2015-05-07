@@ -1,4 +1,5 @@
 class Users::TrainingsController < ApplicationController
+  before_action :require_admin
   def index
     @trainings = Training.all
   end
