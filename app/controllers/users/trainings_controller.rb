@@ -12,6 +12,12 @@ class Users::TrainingsController < ApplicationController
     @screen_casts = ScreenCast.all
   end
 
+  def selections
+    @training = Training.find_by_slug(params[:id])
+    @screen_casts_selected = @training.screen_casts
+    render :json => @screen_casts_selected
+  end
+
   def create
     @training = Training.new(training_params)
     @training.content = params[:content].join("\n")
