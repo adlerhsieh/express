@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506162302) do
+ActiveRecord::Schema.define(version: 20150507062827) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150506162302) do
     t.integer  "author_id",      limit: 4
     t.boolean  "is_public",      limit: 1,     default: false
     t.integer  "training_order", limit: 4
+    t.integer  "category_id",    limit: 4
   end
 
   create_table "settings", force: :cascade do |t|
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150506162302) do
     t.date     "display_date"
     t.integer  "author_id",    limit: 4
     t.boolean  "is_public",    limit: 1,     default: false
+    t.integer  "category_id",  limit: 4
   end
 
   create_table "users", force: :cascade do |t|

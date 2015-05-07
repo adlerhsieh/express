@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
       end
     end
     @category.delete
-    redirect_to edit_categories_path(current_user[:name])
+    redirect_to edit_all_user_categories_path(current_user[:name])
   end
 
   def update_all
