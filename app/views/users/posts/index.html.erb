@@ -7,7 +7,7 @@
           <% @posts.each do |post| %>
             <tr>
               <td class="td-left"><h4><%= link_to post.title, edit_user_post_path(current_user["name"], post[:slug]) %> <%= content_tag(:code, "未公開") unless post[:is_public] %></h4></td>
-              <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
+              <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span><%= link_to "刪除", user_post_path(current_user["name"], post[:slug]), method: :delete, class: "delete", data: { confirm: "確定刪除？" } %></td>
             </tr>
           <% end %>
         </tbody>

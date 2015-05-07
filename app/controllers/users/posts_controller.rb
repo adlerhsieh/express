@@ -12,4 +12,11 @@ class Users::PostsController < ApplicationController
   def edit
     @post = Post.find_by_slug(params[:id])
   end
+  
+  def destroy
+    @post = Post.find_by_slug(params[:id])
+    @post.delete
+    redirect_to user_posts_path(current_user["name"])
+  end
+
 end
