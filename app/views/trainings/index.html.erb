@@ -1,2 +1,12 @@
-<h1>Trainings#index</h1>
-<p>Find me in app/views/trainings/index.html.erb</p>
+<!-- <div class="training&#45;container"> -->
+<% @trainings.each do |t| %>
+  <a href="<%= training_path(t) %>">
+    <div class="training col-lg-3 column">
+      <div class="image_tag"><%= image_tag(t.image_embed) %></div>
+      <h4 class="title"><%= t.title %></h4>
+      <span class="description"><%= t.screen_casts.count %>部影片</span>
+      <span class="date"><%= t.display_date %></span>
+    </div>
+  </a>
+<% end %>
+<!-- </div> -->
