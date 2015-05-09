@@ -25,6 +25,13 @@ class ApplicationController < ActionController::Base
 
   def load_settings
     @settings = Setting.all.map(&:serializable_hash)
+    # binding.pry
+    if params[:action] == "show" && params[:controller] != "users"
+      model = params[:controller].singularize.capitalize.constantize
+      record = model.find_by_slug(params[:id] || params[:slug])
+      meta_title = record[:title] + " | "
+      @settings.find{|s|s["key"] == "site_title"}["value"].insert(0,meta_title)
+    end
   end
 
 end
