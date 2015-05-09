@@ -9,7 +9,7 @@ class TrainingsController < ApplicationController
     respond_to do |format|
       format.html {
         if @training.screencasts.size > 0 && @training[:skip]
-          @screencast = @training.screencasts.first
+          @screencast = @training.screencasts.order(:training_order => :asc).first
           redirect_to training_screencast_path(@training[:slug], @screencast[:slug])
         end
       }

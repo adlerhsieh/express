@@ -5,7 +5,7 @@ class ScreencastsController < ApplicationController
     cat = Category.find(@screencast[:category_id])[:name]
     if @screencast[:training_id]
       @training = Training.includes(:screencasts).find(@screencast.training[:id])
-      @screencasts = @training.screencasts.order(:display_date => :asc)
+      @screencasts = @training.screencasts.order(:training_order => :asc)
     end
     respond_to do |format|
       format.html
