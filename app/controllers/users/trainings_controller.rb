@@ -10,19 +10,19 @@ class Users::TrainingsController < ApplicationController
 
   def edit
     @training = Training.find_by_slug(params[:id])
-    @screen_casts = ScreenCast.all
+    @screencasts = Screencast.all
   end
 
   def selections
     @training = Training.find_by_slug(params[:id])
-    @screen_casts_selected = @training.screen_casts.order(:training_order => :asc)
-    render :json => @screen_casts_selected
+    @screencasts_selected = @training.screencasts.order(:training_order => :asc)
+    render :json => @screencasts_selected
   end
 
   def not_selected
     @training = Training.find_by_slug(params[:id])
-    screen_casts = ScreenCast.all - @training.screen_casts
-    result = screen_casts.map do |s|
+    screencasts = Screencast.all - @training.screencasts
+    result = screencasts.map do |s|
       training = s.training
       if s[:training_id]
         s = s.serializable_hash
@@ -36,15 +36,15 @@ class Users::TrainingsController < ApplicationController
 
   def update_selections
     @training = Training.find_by_slug(params[:id])
-    ScreenCast.where(:training_id => @training[:id]).each do |s| 
+    Screencast.where(:training_id => @training[:id]).each do |s| 
       s.update_column(:training_id, nil)
       s.update_column(:training_order, nil)
     end
     if params[:selected]
       params[:selected].each do |s|
-        screen_cast = ScreenCast.find(s[:id])
-        screen_cast.update_column(:training_id, @training[:id])
-        screen_cast.update_column(:training_order, s[:training_order])
+        screencast = Screencast.find(s[:id])
+        screencast.update_column(:training_id, @training[:id])
+        screencast.update_column(:training_order, s[:training_order])
       end
     end
     render json: { updated: "success" }
@@ -82,7 +82,7 @@ class Users::TrainingsController < ApplicationController
   def destroy
     @training = Training.find_by_slug(params[:id])
     id = @training[:id]
-    ScreenCast.where(:training_id => id).each do |s|
+    Screencast.where(:training_id => id).each do |s|
       s.update_column(:training_id, nil)
     end
     @training.delete

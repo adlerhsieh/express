@@ -1,4 +1,4 @@
-class ScreenCast < ActiveRecord::Base
+class Screencast < ActiveRecord::Base
   belongs_to :training
   belongs_to :category
   before_save :default_columns

@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   has_many :posts
-  has_many :screen_casts
+  has_many :screencasts
   has_many :trainings
   scope :from_posts, -> {
     all.inject([]){|array, c|

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  if(location.href.indexOf("/screen_casts") != -1){
+  if(location.href.indexOf("/screencasts") != -1){
     if(location.href.indexOf("/edit") != -1 || location.href.indexOf("/new") != -1){
       var editor;
       var keys;
@@ -32,7 +32,7 @@ $(document).ready(function(){
             $("#pending").show();
             var slug = $("#slug").val();
             $.ajax({
-              url: "/users/" + current_user.name + "/screen_casts/" + current_slug + "/toggle_public",
+              url: "/users/" + current_user.name + "/screencasts/" + current_slug + "/toggle_public",
               type: "POST",
               data: {
                 "slug": slug,
@@ -67,7 +67,7 @@ $(document).ready(function(){
           }, 1000);
           if(confirm_leave == 2){
             dismiss_message();
-            location.href = "/users/" + current_user.name + "/screen_casts";
+            location.href = "/users/" + current_user.name + "/screencasts";
           };
         };
 
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
             if(location.href.indexOf("/edit") == -1){
               $.ajax({
-                url: "/users/" + current_user.name + "/screen_casts",
+                url: "/users/" + current_user.name + "/screencasts",
                 type: "POST",
                 data: {
                   "title": title,
@@ -105,7 +105,7 @@ $(document).ready(function(){
                   "display_date": display_date
                 }
               }).done(function(response){
-                location.href = "/users/" + current_user.name + "/screen_casts/" + response.slug + "/edit";
+                location.href = "/users/" + current_user.name + "/screencasts/" + response.slug + "/edit";
               }).fail(function(response){
                 dismiss_message();
                 setTimeout(function(){ $("#error").show(); }, 50);
@@ -114,7 +114,7 @@ $(document).ready(function(){
               });
             }else{
               $.ajax({
-                url: "/users/" + current_user.name + "/screen_casts/" + current_slug,
+                url: "/users/" + current_user.name + "/screencasts/" + current_slug,
                 type: "PUT",
                 data: {
                   "title": title,
@@ -130,7 +130,7 @@ $(document).ready(function(){
                   setTimeout(function(){ $("#success").show(); }, 50);
                   setTimeout(function(){ $("#success").hide(); }, 1500);
                 }else{
-                  location.href = "/users/" + current_user.name + "/screen_casts/" + response.slug + "/edit";
+                  location.href = "/users/" + current_user.name + "/screencasts/" + response.slug + "/edit";
                 };
               }).fail(function(response){
                 setTimeout(function(){ $("#error").show(); }, 50);
@@ -207,7 +207,7 @@ $(document).ready(function(){
 
       function initialize_content(){
         if(location.href.indexOf("/edit") != -1){
-          current_slug = location.href.replace(location.host,"").replace("http://","").replace("/screen_casts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
+          current_slug = location.href.replace(location.host,"").replace("http://","").replace("/screencasts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
           $.ajax({
             url: "/screencasts/" + current_slug + ".json",
             type: "GET"

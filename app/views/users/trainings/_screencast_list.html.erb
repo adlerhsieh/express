@@ -26,7 +26,7 @@
       <tr class="click-push" ng-repeat="l in list">
         <td class="col-md-1"><button class="btn btn-primary" ng-click="insert(l)">選擇</button></td>
         <td class="col-md-1">{{l.id}}</td>
-        <td class="col-md-5"><a href="/screen_casts/{{l.slug}}" target="_blank">{{l.title}}</a></td>
+        <td class="col-md-5"><a href="/screencasts/{{l.slug}}" target="_blank">{{l.title}}</a></td>
         <td class="col-md-5"><a href="/users/{{current_user.name}}/trainings/{{l.training_slug}}/edit" onclick="return confirm('確定離開此畫面？請先儲存資料。')">{{l.training_title}}</a></td>
       </tr>
     </tbody>

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :screen_cast do
+  factory :screencast do
     title "MyString"
 embed "MyString"
 content "MyString"

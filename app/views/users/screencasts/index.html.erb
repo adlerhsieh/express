@@ -1,0 +1,17 @@
+<%= render partial: "users/nav" %>
+<div class="col-lg-12">
+  <div class="posts">
+    <div class="column year-column">
+      <table>
+        <tbody>
+          <% @screencasts.each do |screencast| %>
+            <tr>
+              <td class="td-left"><h4><%= link_to screencast.title, edit_user_screencast_path(current_user["name"], screencast[:slug]) %> <%= content_tag(:code, "未公開") unless screencast[:is_public] %></h4></td>
+              <td class="td-right"><span class="date-display"><%= screencast[:display_date].strftime("%Y-%m-%d") %></span><%= link_to "刪除", user_screencast_path(current_user["name"], screencast[:slug]), method: :delete, class: "delete", data: { confirm: "確定刪除？" } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

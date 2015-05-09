@@ -1,5 +1,5 @@
 class Training < ActiveRecord::Base
-  has_many :screen_casts
+  has_many :screencasts
   belongs_to :category
   before_save :default_columns
   after_save :default_display_date, :default_category

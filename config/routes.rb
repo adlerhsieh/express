@@ -32,7 +32,7 @@ Rails.application.routes.draw do
         get :edit_all
       end
     end
-    resources :screen_casts, :controller => "users/screen_casts" do
+    resources :screencasts, :controller => "users/screencasts" do
       member do
         post :toggle_public
       end

@@ -15,11 +15,11 @@
     <li class="<%= "active" if params[:controller] == "users/categories" %>">
       <%= link_to "文章分類", edit_all_user_categories_path(current_user["name"]) %>
     </li>
-    <li class="<%= "active" if params[:controller] == "users/screen_casts" && params[:action] == "new" %>">
-      <%= link_to "新增影片", new_user_screen_cast_path(current_user["name"]) %>
+    <li class="<%= "active" if params[:controller] == "users/screencasts" && params[:action] == "new" %>">
+      <%= link_to "新增影片", new_user_screencast_path(current_user["name"]) %>
     </li>
-    <li class="<%= "active" if params[:controller] == "users/screen_casts" && params[:action] == "index" %>">
-      <%= link_to "影片列表", user_screen_casts_path(current_user["name"]) %>
+    <li class="<%= "active" if params[:controller] == "users/screencasts" && params[:action] == "index" %>">
+      <%= link_to "影片列表", user_screencasts_path(current_user["name"]) %>
     </li>
     <li class="<%= "active" if params[:controller] == "users/trainings" && params[:action] == "new" %>">
       <%= link_to "新增課程", new_user_training_path(current_user["name"]) %>

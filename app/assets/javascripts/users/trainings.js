@@ -7,8 +7,8 @@ $(document).ready(function(){
       var confirm_send;
       var confirm_leave;
       var current_slug;
-      var screen_casts_list = false;
-      var screen_casts_selection = [];
+      var screencasts_list = false;
+      var screencasts_selection = [];
 
       initialize_editor();
       $("#preview").hide();
@@ -32,12 +32,12 @@ $(document).ready(function(){
         if(keys.indexOf(190) != -1 && keys.indexOf(91) != -1) {
           if(location.href.indexOf("/edit") != -1){
             keys.splice(keys.indexOf(190),1);
-            if(screen_casts_list == false){
+            if(screencasts_list == false){
               toggle_list(true);
-              screen_casts_list = true;
+              screencasts_list = true;
             }else{
               toggle_list(false);
-              screen_casts_list = false;
+              screencasts_list = false;
             };
           };
         };
