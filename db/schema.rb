@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507152305) do
+ActiveRecord::Schema.define(version: 20150509143839) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150507152305) do
     t.text     "value",      limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "tag",        limit: 255
   end
 
   create_table "tags", force: :cascade do |t|
