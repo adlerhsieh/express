@@ -1,0 +1,23 @@
+<%= render partial: "users/nav" %>
+<%= render partial: "layouts/messages" %>
+
+<%= form_tag update_all_settings_path, :method => :post do %>
+  <table class="setting table table-bordered">
+    <thead>
+      <!-- <th>設定項目</th> -->
+      <!-- <th>內容</th> -->
+    </thead>
+    <tbody>
+      <% @settings.each do |s| %>
+        <tr>
+          <td class="col-md-2"><%= s.tag %></td>
+          <td class="col-md-10"><%= text_field_tag s.key, s.value, class: "form-control" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= submit_tag "更新設定", class: "btn btn-success", style: "width: 150px" %>
+<% end %>
+
+<div style="height: 40px;"></div>

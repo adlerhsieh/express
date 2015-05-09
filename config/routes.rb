@@ -18,9 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :settings, :only => [:index] do
+  resources :settings do
     collection do
       post :update_all
+      get :edit_all
     end
   end
 

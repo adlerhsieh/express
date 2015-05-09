@@ -13,6 +13,9 @@
 <%= render partial: "layouts/navbar" %>
 
 <div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible"><%= notice %></div>
+  <% end %>
   <%= yield %>
 </div>
 
