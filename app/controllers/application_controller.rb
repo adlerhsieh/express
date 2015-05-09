@@ -27,10 +27,30 @@ class ApplicationController < ActionController::Base
     @settings = Setting.all.map(&:serializable_hash)
     # binding.pry
     if params[:action] == "show" && params[:controller] != "users"
+      # find record
       model = params[:controller].singularize.capitalize.constantize
-      record = model.find_by_slug(params[:id] || params[:slug])
-      meta_title = record[:title] + " | "
-      @settings.find{|s|s["key"] == "site_title"}["value"].insert(0,meta_title)
+      record = model.includes(:category, :tags).find_by_slug(params[:id] || params[:slug])
+      # insert title
+      title = record[:title] + " | "
+      @settings.find{|s|s["key"] == "site_title"}["value"].insert(0,title)
+      @settings.find{|s|s["key"] == "meta_title"}["value"].insert(0,title)
+      # insert keywords
+      if record.tags.size > 0
+        keywords = record.tags.map(&:name).join(",") + ","
+        @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,keywords)
+      end
+      @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,record.category.name+",")
+      # insert description
+      unless record.content.nil? || record.content.length < 10
+        description = record.content[0..250]
+        unless record.content.index("!").nil?
+          if record.content.index("!") < 10
+            index_new_line = record.content[1..-1].index("\n")
+            description = record.content[index_new_line..index_new_line + 250]
+          end
+        end
+        @settings.find{|s|s["key"] == "meta_description"}["value"] = description
+      end
     end
   end
 
