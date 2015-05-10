@@ -209,7 +209,7 @@ $(document).ready(function(){
         if(location.href.indexOf("/edit") != -1){
           current_slug = location.href.replace(location.host,"").replace("http://","").replace("/screencasts/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
           $.ajax({
-            url: "/screencasts/" + current_slug + ".json",
+            url: "/users/" + current_user.name + "/screencasts/" + current_slug + ".json",
             type: "GET"
           }).done(function(response){
             $("#title").val(response.title);
