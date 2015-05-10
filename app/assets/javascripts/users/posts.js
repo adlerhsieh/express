@@ -88,6 +88,7 @@ $(document).ready(function(){
             var tags = $("#tags").val();
             var slug = $("#slug").val();
             var display_date = $("#display_date").val();
+            var video_embed = $("#video_embed").val();
             code = editor.session.getDocument().getAllLines();
 
             if(location.href.indexOf("/edit") == -1){
@@ -100,7 +101,8 @@ $(document).ready(function(){
                   "tags": tags,
                   "slug": slug,
                   "content": code,
-                  "display_date": display_date
+                  "display_date": display_date,
+                  "video_embed": video_embed,
                 }
               }).done(function(response){
                 location.href = "/users/" + current_user.name + "/posts/" + response.slug + "/edit";
@@ -120,7 +122,8 @@ $(document).ready(function(){
                   "tags": tags,
                   "slug": slug,
                   "content": code,
-                  "display_date": display_date
+                  "display_date": display_date,
+                  "video_embed": video_embed
                 }
               }).done(function(response){
                 if(response.slug == current_slug){
@@ -156,6 +159,7 @@ $(document).ready(function(){
         var post_title = $('#title').val();
         var post_category = $('#category').val();
         var post_tags = $('#tags').val();
+        var post_video = $('#video_embed').val();
         $("#pending").show();
 
         $.ajax({
@@ -168,8 +172,14 @@ $(document).ready(function(){
           $("#preview").show();
           $("#preview-content").html(response.post);
           $("#preview-title").html(post_title);
+          $("#preview-video").html(post_video);
           $("#preview-category").html(post_category);
           $("#preview-tags").html(post_tags);
+          if(post_video.length < 1){
+            $("#preview-video").hide();
+          }else{
+            $("#preview-video").show();
+          };
         });		    	
       };
 
@@ -214,6 +224,7 @@ $(document).ready(function(){
             $("#slug").val(response.post.slug);
             $("#tags").val(response.tags);
             $("#display_date").val(response.post.display_date);
+            $("#video_embed").val(response.post.video_embed);
             if(response.post.is_public == true){
               $("#is_public").css("display", "inline");
             }else{

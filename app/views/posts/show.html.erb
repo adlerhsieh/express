@@ -15,6 +15,11 @@
 
       <!-- Post Content -->
       <div class="post">
+        <% if @post.video_embed && @post.video_embed != "" %>
+          <div class="screencast">
+            <%= @post.video_embed.html_safe %>
+          </div>
+        <% end %>
         <%= @post.parse %>
       </div>
       <hr>

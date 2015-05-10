@@ -80,13 +80,14 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.permit(:title, :slug)
+      params.permit(:title, :slug, :video_embed)
     end
 
     def set_post_params
       @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
       @post.title = params[:title]
       @post.slug = params[:slug]
+      @post.video_embed = params[:video_embed]
       @post.category_id = @category[:id]
       @post.content = params[:content].join("\n")
       @post.display_date = params[:display_date]

@@ -19,13 +19,17 @@
 <div class="col-md-3 editor-attr">
   <input id="display_date" type="text" class="form-control" placeholder="日期 (格式2015-01-01)">
 </div>
+<div class="col-md-3 editor-attr">
+  <input id="video_embed" type="text" class="form-control" placeholder="影片嵌入碼">
+</div>
 
-<pre id="editor" class="editor-attr"></pre>
+<pre id="editor" class="editor-attr col-lg-12"></pre>
 
 <div id="preview" class="column">
   <h1 id="preview-title"></h1>
   <p><%= render_author(@post.author) %> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
   <hr>
+  <div id="preview-video"></div>
   <div id="preview-content"></div>
 </div>
 
