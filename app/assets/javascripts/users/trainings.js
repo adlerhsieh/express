@@ -105,6 +105,7 @@ $(document).ready(function(){
             var image_embed = $("#image_embed").val();
             var slug = $("#slug").val();
             var display_date = $("#display_date").val();
+            var skip = $("#skip").val();
             code = editor.session.getDocument().getAllLines();
 
             if(location.href.indexOf("/edit") == -1){
@@ -118,7 +119,8 @@ $(document).ready(function(){
                   "slug": slug,
                   "content": code,
                   "category": category,
-                  "display_date": display_date
+                  "display_date": display_date,
+                  "skip": skip
                 }
               }).done(function(response){
                 location.href = "/users/" + current_user.name + "/trainings/" + response.slug + "/edit";
@@ -139,7 +141,8 @@ $(document).ready(function(){
                   "slug": slug,
                   "content": code,
                   "category": category,
-                  "display_date": display_date
+                  "display_date": display_date,
+                  "skip": skip
                 }
               }).done(function(response){
                 if(response.slug == current_slug){
@@ -255,6 +258,7 @@ $(document).ready(function(){
             $("#category").val(response.category);
             $("#slug").val(response.slug);
             $("#display_date").val(response.display_date);
+            $("#skip").val(response.skip);
             if(response.is_public == true){
               $("#is_public").css("display", "inline");
             }else{

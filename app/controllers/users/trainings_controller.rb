@@ -91,6 +91,6 @@ class Users::TrainingsController < ApplicationController
 
   private
     def training_params
-      params.permit(:title, :video_embed, :image_embed, :slug, :display_date)
+      params.permit(:title, :video_embed, :image_embed, :slug, :display_date, :skip)
     end
 end
