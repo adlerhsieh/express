@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def load_settings
     @settings = Setting.all.map(&:serializable_hash)
     # binding.pry
-    if params[:action] == "show" && !(params[:controller].include? "users")
+    if params[:action] == "show" && !(params[:controller].include? "users") && params[:controller] != "categories"
       # find record
       model = params[:controller].singularize.capitalize.constantize
       if model == Post
