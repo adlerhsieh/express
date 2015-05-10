@@ -2,12 +2,17 @@
   <% if @training %>
     <span class="series-title"><%= @training.title %></span>
   <% end %>
-  <h1 class="screencast-titel"><%= @screencast.title %></h1>
+  <h1 class="screencast-title"><%= @screencast.title %></h1>
   <p><%= render_author(@screencast.author) %> @ <%= @screencast.display_date.strftime("%Y-%m-%d") %></p>
   <hr />
   <% if @screencast.video_embed %>
     <div class="screencast">
       <%= @screencast.video_embed.html_safe %>
+    </div>
+  <% end %>
+  <% if @screencast.image_embed %>
+    <div class="image">
+      <%= @screencast.image_embed.html_safe %>
     </div>
   <% end %>
   <div class="post <%= "col-lg-8" if @training %>">

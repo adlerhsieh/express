@@ -11,6 +11,8 @@ class TrainingsController < ApplicationController
         if @training.screencasts.size > 0 && @training[:skip]
           @screencast = @training.screencasts.order(:training_order => :asc).first
           redirect_to training_screencast_path(@training[:slug], @screencast[:slug])
+        else
+          @screencasts = @training.screencasts.order(:training_order => :asc)
         end
       }
       format.json {

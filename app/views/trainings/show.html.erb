@@ -1,0 +1,33 @@
+<div class="col-lg-12 column">
+  <h1 class="screencast-title"><%= @training.title %></h1>
+  <p><%= render_author(@training.author) %> @ <%= @training.display_date.strftime("%Y-%m-%d") %></p>
+  <hr />
+  <% if @training.video_embed.length > 0 %>
+    <div class="screencast">
+      <%= @training.video_embed.html_safe %>
+    </div>
+  <% end %>
+  <% if @training.image_embed %>
+    <div class="image">
+      <img src="<%= @training.image_embed.html_safe %>" />
+    </div>
+  <% end %>
+  <div class="post col-lg-8">
+    <%= @training.parse %>
+  </div>
+  <div class="col-lg-4">
+    <table class="table table-hover screencast_list">
+      <tr>
+        <td class="title"><%= @training.title %></td>
+      </tr>
+      <% @screencasts.each do |s| %>
+        <tr class="<%= "success" if s == @screencast %>" onclick="return location.href = '<%= training_screencast_path(@training[:slug], s[:slug]) %>'">
+          <td>
+            <span class="play-button glyphicon glyphicon-play-circle"></span>
+            <%= "#{(@screencasts.index(s)+1).to_s}. #{s.title}" %>
+          </td>
+        </tr>
+      <% end %>
+    </div>
+  </div>
+</div>
