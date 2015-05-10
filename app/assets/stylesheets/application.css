@@ -103,3 +103,7 @@ img {
 footer {
     margin: 50px 0;
 }
+
+.align-right {
+  text-align: right;
+}

@@ -2,32 +2,36 @@
   <table class="table table-bordered table-hover">
     <thead>
       <th>已選影片</th>
-      <th>ID</th>
+      <!-- <th>ID</th> -->
       <th>順序</td>
       <th>標題</th>
+      <th>slug</th>
     </thead>
     <tbody>
         <tr ng-repeat="s in selection">
           <td class="col-md-1"><button class="btn btn-danger" ng-click="remove(s)">移除</button></td>
-          <td class="col-md-1">{{s.id}}</td>
-          <td class="col-md-1"><input type="text" ng-model="s.training_order" class="form-control" /></td>
-          <td class="col-md-9"><a href="/screencasts/{{s.slug}}" target="_blank">{{s.title}}</a></td>
+          <!-- <td class="col&#45;md&#45;1">{{s.id}}</td> -->
+          <td class="col-md-2"><input type="text" ng-model="s.training_order" class="form-control" /></td>
+          <td class="col-md-5"><a href="/screencasts/{{s.slug}}" target="_blank">{{s.title}}</a></td>
+          <td class="col-md-4">{{s.slug}}</td>
         </tr>
     </tbody>
   </table>
   <table class="table table-bordered table-hover">
     <thead>
       <th>影片列表</th>
-      <th>ID</th>
+      <!-- <th>ID</th> -->
       <th>標題</th>
+      <th>slug</td>
       <th>已分配給</td>
     </thead>
     <tbody>
       <tr class="click-push" ng-repeat="l in list">
         <td class="col-md-1"><button class="btn btn-primary" ng-click="insert(l)">選擇</button></td>
-        <td class="col-md-1">{{l.id}}</td>
-        <td class="col-md-5"><a href="/screencasts/{{l.slug}}" target="_blank">{{l.title}}</a></td>
-        <td class="col-md-5"><a href="/users/{{current_user.name}}/trainings/{{l.training_slug}}/edit" onclick="return confirm('確定離開此畫面？請先儲存資料。')">{{l.training_title}}</a></td>
+        <!-- <td class="col&#45;md&#45;1">{{l.id}}</td> -->
+        <td class="col-md-4"><a href="/screencasts/{{l.slug}}" target="_blank">{{l.title}}</a></td>
+        <td class="col-md-3">{{l.slug}}</td>
+        <td class="col-md-4"><a href="/users/{{current_user.name}}/trainings/{{l.training_slug}}/edit" onclick="return confirm('確定離開此畫面？請先儲存資料。')">{{l.training_title}}</a></td>
       </tr>
     </tbody>
   </table>
