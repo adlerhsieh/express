@@ -19,7 +19,7 @@
   font-family: "Source Sans Pro";
   /* src: url("SourceSansPro-Regular.otf"); */
   /* src: url("SourceSansPro-Bold.otf"); */
-  src: url("SourceSansPro-Semibold.otf");
+  src: asset-url("SourceSansPro-Semibold.otf");
   font-weight: normal;
   font-style: normal;
 }
