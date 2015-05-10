@@ -3,7 +3,14 @@
     <tbody>
       <% @posts.each do |post| %>
         <tr>
-          <td class="td-left"><h4><%= link_to post.title, post_path(post[:slug]) %></h4></td>
+          <td class="td-left">
+            <h4>
+              <%= link_to post.title, post_path(post[:slug]) %>
+              <% if post.video_embed && post.video_embed != "" %>
+                <span class="suffix glyphicon glyphicon-film"></span>
+              <% end %>
+            </h4>
+          </td>
           <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
         </tr>
       <% end %>
