@@ -53,7 +53,11 @@ class Users::TrainingsController < ApplicationController
   def create
     @training = Training.new(training_params)
     @training.content = params[:content].join("\n")
-    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    if params[:category].nil? || params[:category] == ""
+      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+    else
+      category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
+    end
     @training.category_id = category[:id]
     if @training.save
       render json: {result: "success", slug: @training.slug}
@@ -62,7 +66,11 @@ class Users::TrainingsController < ApplicationController
 
   def update
     @training = Training.find_by_slug(params[:id])
-    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    if params[:category].nil? || params[:category] == ""
+      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+    else
+      category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
+    end
     @training.category_id = category[:id]
     if @training.update!(training_params) && @training.update_attribute(:content, params[:content].join("\n"))
       render json: {result: "success", slug: @training.slug}

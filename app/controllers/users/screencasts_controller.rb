@@ -28,7 +28,11 @@ class Users::ScreencastsController < ApplicationController
 
   def create
     @screencast = Screencast.new(screencast_params)
-    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    if params[:category].nil? || params[:category] == ""
+      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+    else
+      category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
+    end
     @screencast.category_id = category[:id]
     @screencast.content = params[:content].join("\n")
     if @screencast.save
@@ -38,7 +42,11 @@ class Users::ScreencastsController < ApplicationController
 
   def update
     @screencast = Screencast.find_by_slug(params[:id])
-    category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category]) unless params[:category].nil?
+    if params[:category].nil? || params[:category] == ""
+      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+    else
+      category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
+    end
     @screencast.category_id = category[:id]
     if @screencast.update!(screencast_params) && @screencast.update_attribute(:content, params[:content].join("\n"))
       render json: {result: "success", slug: @screencast.slug}
