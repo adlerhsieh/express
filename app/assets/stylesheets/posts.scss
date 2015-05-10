@@ -33,14 +33,14 @@
 .year-column {
   table, tr {
     width: 100%;
-  }
-  .td-left {
-    width: 80%;
-  }
-  .td-right {
-    width: 20%;
-    text-align: right;
-  }
+}
+.td-left {
+  width: 80%;
+}
+.td-right {
+  width: 20%;
+  text-align: right;
+}
 }
 
 .line-numbers {
@@ -56,7 +56,7 @@ div.post {
   img {
     display: block;
     margin: 0 auto;
-  }
+}
 }
 
 // .highlight-block {
@@ -104,7 +104,7 @@ blockquote {
   line-height: 48px;
   kbd, code {
     display: none;
-  }
+}
 }
 
 .instruction {
@@ -127,3 +127,19 @@ blockquote {
   margin-bottom: 0px;
   text-align: center;
 }
+
+// .video-container {
+#preview-video, .screencast {
+  position: relative;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  // height: 0;
+  iframe {
+    width: 100%;
+    height: 100%;
+    position: abosolute;
+    top: 0;
+    left: 0;
+  }
+}
+
