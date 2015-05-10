@@ -6,4 +6,8 @@ class Screencast < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug
   include DefaultSetter
+
+  def tags
+    []
+  end
 end

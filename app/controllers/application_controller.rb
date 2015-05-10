@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
     if params[:action] == "show" && params[:controller] != "users"
       # find record
       model = params[:controller].singularize.capitalize.constantize
-      record = model.includes(:category, :tags).find_by_slug(params[:id] || params[:slug])
+      if model == Post
+        record = model.includes(:category, :tags).find_by_slug(params[:id] || params[:slug])
+      else
+        record = model.includes(:category).find_by_slug(params[:id] || params[:slug])
+      end
       if record
         # insert title
         title = record[:title] + " | "
