@@ -118,7 +118,7 @@ namespace :import do
       {key: "ga", value: "<script>   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');    ga('create', 'UA-37175845-6', 'auto');   ga('send', 'pageview');  </script>", tag: "GA程式碼"}
     ])
     User.create!([
-      {email: "nkj20932@hotmail.com", encrypted_password: "$2a$10$Z4tKSUiuRMBr8SCRK2Bqte8v/wuPLHyoSyUCjqf73Roe8wn9PfcLq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2015-05-10 02:20:18", last_sign_in_at: "2015-05-03 05:03:33", current_sign_in_ip: "::1", last_sign_in_ip: "::1", is_admin: true, name: "adler"}
+      {email: "nkj20932@hotmail.com", encrypted_password: "$2a$10$Z4tKSUiuRMBr8SCRK2Bqte8v/wuPLHyoSyUCjqf73Roe8wn9PfcLq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2015-05-10 02:20:18", last_sign_in_at: "2015-05-03 05:03:33", current_sign_in_ip: "::1", last_sign_in_ip: "::1", is_admin: true, name: "adler", password: "adlerhsieh0806", password_confirmation: "adlerhsieh0806"}
     ])
   end
 end
