@@ -142,3 +142,20 @@ Category.create!([
   {name: "Showcase", slug: "Showcase"},
   {name: "Vim", slug: "Vim"}
 ])
+
+
+    Setting.create!([
+      {key: "site_title", value: "特快車 | Ruby、Rails、各式技術分享", tag: "網站標題"},
+      {key: "meta_title", value: "特快車：Ruby、Rails、網路、開發技術分享", tag: "META標題"},
+      {key: "meta_keywords", value: "ruby,rails,rspec,hexo,blog,tutorial,教學,技術分享", tag: "META關鍵字"},
+      {key: "meta_description", value: "以Ruby on Rails為中心的各式網路開發技術分享，歡迎大家多指教", tag: "META說明"},
+      {key: "og_title", value: "特快車 | Ruby、Rails、各式技術分享", tag: "社群分享：標題"},
+      {key: "og_url", value: "http://motion-express.com", tag: "社群分享：連結網址"},
+      {key: "og_site_name", value: "特快車 | Ruby、Rails、各式技術分享", tag: "社群分享：網站名稱"},
+      {key: "og_description", value: "以Ruby on Rails為中心的各式網路開發技術分享，歡迎大家多指教", tag: "社群分享：說明"},
+      {key: "favicon_location", value: "/favicon.png", tag: "網站Favicon"},
+      {key: "ga", value: "<script>   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');    ga('create', 'UA-37175845-6', 'auto');   ga('send', 'pageview');  </script>", tag: "GA程式碼"}
+    ])
+    User.create!([
+      {email: "nkj20932@hotmail.com", encrypted_password: "$2a$10$Z4tKSUiuRMBr8SCRK2Bqte8v/wuPLHyoSyUCjqf73Roe8wn9PfcLq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2015-05-10 02:20:18", last_sign_in_at: "2015-05-03 05:03:33", current_sign_in_ip: "::1", last_sign_in_ip: "::1", is_admin: true, name: "adler", password: "adlerhsieh0806", password_confirmation: "adlerhsieh0806"}
+    ])
