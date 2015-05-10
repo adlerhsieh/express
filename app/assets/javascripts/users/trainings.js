@@ -188,7 +188,12 @@ $(document).ready(function(){
           $("#list").hide();
           $("#preview-content").html(response.post);
           $("#preview-title").html(post_title);
-          $("#preview-video").html(video_tag);
+          if(video_tag.length < 1){
+            $("#preview-video").hide();
+            $("#preview-video").html(video_tag);
+          }else{
+            $("#preview-video").show();
+          };
           $("#preview-image").html("<img class='preview_image' src='" + image_tag + "' />");
         });		    	
       };
