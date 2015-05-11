@@ -11,12 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-ui
-//= require jquery_ujs
 //= require_tree .
-//= require ace
-//= require theme-twilight
-//= require mode-markdown
 
 // var height = 0
 //
