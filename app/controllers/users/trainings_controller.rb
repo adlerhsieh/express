@@ -1,4 +1,5 @@
 class Users::TrainingsController < ApplicationController
+  layout "backend"
   before_action :require_admin
   def index
     @trainings = Training.all

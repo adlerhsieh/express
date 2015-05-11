@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render partial: "layouts/meta" %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'backend/application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= render partial: "layouts/custom_js" %>
+</head>
+<body>
+
+<%= render partial: "layouts/navbar" %>
+
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible"><%= notice %></div>
+  <% end %>
+  <%= yield %>
+</div>
+
+</body>
+</html>
+

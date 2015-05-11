@@ -1,4 +1,5 @@
 class Users::PostsController < ApplicationController
+  layout "backend"
   before_action :require_admin
 
   def index

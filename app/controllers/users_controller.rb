@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout "backend"
   before_action :require_login
 
   def show
