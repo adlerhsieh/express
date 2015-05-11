@@ -17,6 +17,7 @@
   <% end %>
   <div class="post <%= "col-lg-8" if @training %>">
     <%= @screencast.parse %>
+    <%= render partial: "layouts/disqus" %>
   </div>
   <% if @training %>
     <div class="col-lg-4">
@@ -37,3 +38,5 @@
   <% end %>
 
 </div>
+
+
