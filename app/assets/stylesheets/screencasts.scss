@@ -18,6 +18,10 @@
 }
 
 .screencast_list {
+  $border: 1px solid #D8D8D8;
+  border-left: $border;
+  border-right: $border;
+  border-bottom: $border;
   tr:hover {
     cursor: pointer;
   }
