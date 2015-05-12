@@ -11,7 +11,12 @@
               <% end %>
             </h4>
           </td>
-          <td class="td-right"><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span></td>
+          <td class="td-right">
+            <span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span> 
+            <% if is_admin? %>
+              <%= link_to "編輯", edit_user_post_path(current_user["name"], post[:slug]), style: "color: red;font-size: 12px;" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

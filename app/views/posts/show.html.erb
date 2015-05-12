@@ -10,7 +10,7 @@
       <h1><%= @post[:title] %></h1>
 
       <!-- Author -->
-      <p><%= render_author(@post.author) %> @ <%= @post.display_date.strftime("%Y-%m-%d") %></p>
+      <p><%= render_author(@post.author) %> @ <%= @post.display_date.strftime("%Y-%m-%d") %> <% if is_admin? %><%= link_to "編輯", edit_user_post_path(current_user["name"], @post[:slug]), style: "color: red;" %><% end %></p>
       <hr>
 
       <!-- Post Content -->
