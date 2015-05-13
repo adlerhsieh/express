@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'globalize'
 gem 'bing_translator'
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-ace'
