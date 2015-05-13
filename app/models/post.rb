@@ -4,8 +4,11 @@ class Post < ActiveRecord::Base
   has_many :tags, :through => :post_tags
   # validates :title, :content, :slug, :presence => true
   before_save :default_columns
-  after_save :default_display_date, :default_category
+  after_save :default_display_date, :default_category, :translate
+  translates :title, :content
+  default_scope {includes(:translations)}
   include DefaultSetter
+  # include Translator
 
   def parse
     process = MarkdownHelper.new(self.content)
@@ -33,6 +36,10 @@ class Post < ActiveRecord::Base
       @groups.merge!(group_year.to_sym => posts) if post == @posts.last
     end
     @groups
+  end
+
+  def translate
+    Translator.new(self).to_CN
   end
 
 end
