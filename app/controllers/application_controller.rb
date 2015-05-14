@@ -3,7 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_devise_params, if: :devise_controller?
-  before_filter :load_settings
+  before_filter :load_settings, :set_locale
+
+  def set_locale
+    # I18n.locale = request.env["HTTP_ACCEPT_LANGUAGE"][0..4].to_sym
+    # binding.pry
+    # I18n.locale = :"zh-CN"
+  end
+
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:name, :email, :password, :password_confirmation)
