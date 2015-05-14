@@ -15,7 +15,7 @@ pre {
     .constant { 
       color: rgb(54,255,254); 
     }
-    .comment, .comment .string {
+    .comment, .comment .string, .comment .keyword {
       color: gray;
     }
     .key, 
