@@ -44,6 +44,10 @@ h4 {
   margin-bottom: 15px;
 }
 
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
 p {
   margin-bottom: 20px;
 }
