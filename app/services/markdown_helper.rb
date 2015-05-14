@@ -74,7 +74,7 @@ class MarkdownHelper
   def parse_custom_code_block_style(code, lang)
     case lang
     when :ruby
-      ["require ", "include ", "it ", "do \n"].each do |keyword|
+      ["require ", "require_relative ", "include ", "it ", "do \n"].each do |keyword|
         code.gsub!(keyword, "<span class='keyword'>#{keyword}</span>")
       end
     when :cmd
