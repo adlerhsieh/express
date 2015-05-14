@@ -18,9 +18,15 @@ class Translator
     target = "#{@class.to_s}::Translation".constantize.where(:locale => "zh-CN", "#{@class.to_s.downcase}_id".to_sym => @source[:id]).first_or_create
     @attributes.each do |key|
       content = @bing.translate(@source.send(key), from: "zh-TW", to: "zh-CN")
+      compact(content)
       target.send("#{key}=", content)
     end
     target.save
   end
 
+  private
+
+  def compact(content)
+    content.gsub!("! [", "![")
+  end
 end
