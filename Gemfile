@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rest-client'
+gem 'mailgun-ruby'
 gem 'bing_translator'
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-ace'
