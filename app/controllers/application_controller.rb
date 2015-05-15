@@ -47,17 +47,17 @@ class ApplicationController < ActionController::Base
         end
         @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,record.category.name+",")
         # insert description
-        unless record.content.nil? || record.content.length < 10
-          description = record.content[0..250]
-          unless record.content.index("!").nil?
-            if record.content.index("!") < 10
-              index_new_line = record.content[1..-1].index("\n")
-              description = record.content[index_new_line..index_new_line + 250]
-            end
-          end
-          @settings.find{|s|s["key"] == "meta_description"}["value"] = description
+        # unless record.content.nil? || record.content.length < 10
+        #   description = record.content[0..250]
+        #   unless record.content.index("!").nil?
+        #     if record.content.index("!") < 10
+              # index_new_line = record.content[1..-1].index("\n")
+              # description = record.content[index_new_line..index_new_line + 250]
+            # end
+          # end
+          # @settings.find{|s|s["key"] == "meta_description"}["value"] = description
           # @settings.find{|s|s["key"] == "og_description"}["value"] = description
-        end
+        # end
       end
     end
   end
