@@ -98,6 +98,7 @@ class MarkdownHelper
     @styled.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
     @styled.gsub!('&amp;gt;',"&gt;")
     @styled.gsub!('&amp;lt;',"&lt;")
+    @styled.gsub!('&amp;',"&")
   end
 
   private
