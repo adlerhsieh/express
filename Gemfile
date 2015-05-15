@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'sitemap_generator'
 gem 'rest-client'
 gem 'mailgun-ruby'
 gem 'bing_translator'
