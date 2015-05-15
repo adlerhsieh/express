@@ -26,4 +26,8 @@ module DefaultSetter
     process.remove_extras
     return process.styled.html_safe
   end
+
+  def translate_CN
+    Translator.new(self).to_CN
+  end
 end

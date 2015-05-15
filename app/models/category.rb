@@ -4,7 +4,8 @@ class Category < ActiveRecord::Base
   has_many :trainings
   translates :name
   default_scope {includes(:translations)}
-  after_save :translate
+  include DefaultSetter
+  after_save :translate_CN
   scope :from_posts, -> {
     all.inject([]){|array, c|
       if c.posts.count > 0
@@ -14,7 +15,4 @@ class Category < ActiveRecord::Base
       end
     }
   }
-  def translate
-    Translator.new(self).to_CN
-  end
 end
