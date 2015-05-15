@@ -6,8 +6,13 @@ class ApplicationController < ActionController::Base
   before_filter :load_settings, :set_locale
 
   def set_locale
-    # I18n.locale = request.env["HTTP_ACCEPT_LANGUAGE"][0..4].to_sym
-    # binding.pry
+    if request.env["HTTP_ACCEPT_LANGUAGE"].index("zh-TW")
+      I18n.locale = :"zh-TW"
+    elsif request.env["HTTP_ACCEPT_LANGUAGE"].index("zh-CN")
+      I18n.locale = :"zh-CN"
+    else
+      I18n.locale = :en
+    end
     # I18n.locale = :"zh-CN"
   end
 
