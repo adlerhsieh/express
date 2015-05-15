@@ -7,3 +7,8 @@ I18n.locale = :"zh-TW"
     p.save
   end
 end
+
+Category.all.each do |c|
+  puts "Translating: #{c.name}"
+  c.save
+end
