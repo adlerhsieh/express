@@ -27,6 +27,10 @@ class Translator
   private
 
   def compact(content)
-    content.gsub!("! [", "![")
+    if content.nil?
+      content
+    else
+      content.gsub!("! [", "![") 
+    end
   end
 end
