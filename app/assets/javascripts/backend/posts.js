@@ -13,6 +13,14 @@ $(document).ready(function(){
       initialize_content();
       get_category_list();
 
+      // editor.commands.addCommand({
+      //   name: "toggle_attr",
+      //   bindKey: {win: "Ctrl-U", mac: "Command-U"},
+      //   exec: function(editor){
+      //     console.log("word");
+      //   }
+      // });
+
       $(document).keydown(function(key){
         keys.push(key.which);
         if(keys.indexOf(75) != -1 && keys.indexOf(91) != -1) {
