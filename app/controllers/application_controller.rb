@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
         title = record[:title] + " | "
         @settings.find{|s|s["key"] == "site_title"}["value"].insert(0,title)
         @settings.find{|s|s["key"] == "meta_title"}["value"].insert(0,title)
+        @settings.find{|s|s["key"] == "og_title"}["value"].insert(0,title)
         # insert keywords
         if record.tags.size > 0
           keywords = record.tags.map(&:name).join(",") + ","
@@ -55,6 +56,7 @@ class ApplicationController < ActionController::Base
             end
           end
           @settings.find{|s|s["key"] == "meta_description"}["value"] = description
+          # @settings.find{|s|s["key"] == "og_description"}["value"] = description
         end
       end
     end
