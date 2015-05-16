@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def index
     set_all_public_posts
+    # SubscriptionMailer.hello("nkj20932@hotmail.com").deliver
   end
 
   def show

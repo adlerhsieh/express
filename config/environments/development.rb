@@ -39,4 +39,18 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.i18n.fallbacks = true
+  # config.action_mailer.delivery_method = :mailgun
+  ActionMailer::Base.smtp_settings = {
+    :port           => 587,
+    :address        => 'smtp.mailgun.org',
+    :user_name      => "postmaster@motion-express.com",
+    :password       => "299a2e8c64e6c3ab958cb9a0cdcb7b83",
+    :authentication => :plain,
+    :domain => "motion-express.com"
+  }
+  ActionMailer::Base.delivery_method = :smtp
+  # Mailgun.configure do |config|
+  #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
+  #   config.domain = "motion-express.com"
+  # end
 end
