@@ -31,6 +31,7 @@ class Translator
       content
     else
       content.gsub!("! [", "![") 
+      content.gsub!("` ``", "```") 
     end
   end
 end
