@@ -8,6 +8,7 @@ module ApplicationHelper
   end
 
   def set(setting)
-    @settings.find{|s|s["key"] == setting.to_s}["value"]
+    set = @settings.find{|s|s["key"] == setting.to_s}
+    set["value"] if set
   end
 end
