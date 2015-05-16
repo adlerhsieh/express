@@ -49,8 +49,8 @@ Rails.application.configure do
     :domain => "motion-express.com"
   }
   ActionMailer::Base.delivery_method = :smtp
-  # Mailgun.configure do |config|
-  #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
-  #   config.domain = "motion-express.com"
-  # end
+  Mailgun.configure do |config|
+    config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
+    config.domain = "motion-express.com"
+  end
 end

@@ -16,6 +16,12 @@
 </div>
 
 <div class="widget column">
+  <%= form_tag subscribe_users_path, :method => 'post' do %>
+    <%= text_field_tag :email, params[:email], :class => "form-control", :placeholder => "輸入Email訂閱" %>
+  <% end %>
+</div>
+
+<div class="widget column">
   <%= form_tag search_posts_path, :method => 'get' do %>
     <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "搜尋" %>
   <% end %>

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'globalize'
 gem 'sitemap_generator'
 gem 'rest-client'
-gem 'mailgun-ruby'
+gem 'mailgun'
 gem 'bing_translator'
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-ace'

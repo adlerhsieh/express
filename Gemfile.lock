@@ -127,9 +127,8 @@ GEM
       systemu (~> 2.6.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mailgun-ruby (1.0.3)
-      json (~> 1.8)
-      rest-client (~> 1.6)
+    mailgun (0.8)
+      rest-client
     method_source (0.8.2)
     mime-types (2.5)
     mini_portile (0.6.2)
@@ -292,7 +291,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
-  mailgun-ruby
+  mailgun
   mysql
   mysql2
   pry

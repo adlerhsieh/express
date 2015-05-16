@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    collection do
+      post :subscribe
+    end
     resources :posts, :controller => "users/posts"
     resources :categories, :controller => "users/categories" do
       collection do
