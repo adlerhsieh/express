@@ -74,7 +74,7 @@ class MarkdownHelper
   def parse_custom_code_block_style(code, lang)
     case lang
     when :ruby
-      ["require ", "include ", "it ", "do \n"].each do |keyword|
+      ["require ", "require_relative ", "private", "include ", "it ", "do \n", " if "].each do |keyword|
         code.gsub!(keyword, "<span class='keyword'>#{keyword}</span>")
       end
     when :cmd
@@ -98,6 +98,7 @@ class MarkdownHelper
     @styled.gsub!('&amp;#39;',"&#39;") # 去除其他單括號
     @styled.gsub!('&amp;gt;',"&gt;")
     @styled.gsub!('&amp;lt;',"&lt;")
+    @styled.gsub!('&amp;',"&")
   end
 
   private

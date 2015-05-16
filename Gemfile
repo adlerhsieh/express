@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'globalize'
+gem 'sitemap_generator'
+gem 'rest-client'
+gem 'mailgun-ruby'
 gem 'bing_translator'
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-ace'
@@ -45,6 +48,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
+  gem 'sshkit-sudo'
   gem 'seed_dump'
 end
 

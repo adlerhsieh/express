@@ -3,7 +3,6 @@ lock '3.4.0'
 
 set :application, 'rails'
 set :repo_url, 'git@bitbucket.org:nkj20932/express.git'
-# set :pty, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -78,7 +77,8 @@ namespace :deploy do
 
   task :server_restart do
     on roles(:web) do
-      execute :sudo, "service nginx restart"
+      # execute "service nginx restart"
+      execute! :sudo, :service, :nginx, :restart
     end
   end
 
@@ -86,5 +86,5 @@ namespace :deploy do
   after :deploy, "deploy:migrate"
   after :deploy, "deploy:symlink"
   after :deploy, "deploy:precompile"
-  # after :deploy, "deploy:server_restart"
+  after :deploy, "deploy:server_restart"
 end

@@ -7,8 +7,10 @@
 <meta property="og:title" content="<%= set(:og_title) %>">
 <meta property="og:url" content="<%= set(:og_url) %>">
 <meta property="og:site_name" content="<%= set(:og_site_name) %>">
-<meta property="og:description" content="<%= set(:og_description) %>">
+<!-- <meta property="og:description" content="<%= set(:og_description) %>"> -->
+<meta property="og:image" content="<%= set(:og_image) %>">
+
 
 <link rel="icon" href="<%= set(:favicon_location) %>" />
 
-<%= set(:ga).html_safe %>
+<%= set(:ga).html_safe unless Rails.env == "development" %>
