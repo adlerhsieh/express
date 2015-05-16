@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/blog/:slug', to: "posts#show", as: "post"
   get '/search', to: "posts#search", as: "search_posts"
   get '/author', to: "posts#author", as: "author"
+  get '/bing_balance', to: "users#balance", as: "bing_balance"
   resources :posts do
     collection do
       post :render_markdown
