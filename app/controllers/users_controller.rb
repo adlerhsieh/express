@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def unsubscribe
+    
+  end
+
   private
     def setup
       @mailgun = Mailgun()
