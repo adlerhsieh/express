@@ -32,6 +32,8 @@ class Translator
     else
       content.gsub!("! [", "![") 
       content.gsub!("` ``", "```") 
+      content.gsub!("对象", "物件") 
+      content.gsub!("仿真", "模拟") 
     end
   end
 end
