@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 20150513053107) do
     t.integer  "category_id",    limit: 4
   end
 
+  create_table "setting_translations", force: :cascade do |t|
+    t.integer  "setting_id", limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "value",      limit: 65535
+  end
+
+  add_index "setting_translations", ["locale"], name: "index_setting_translations_on_locale", using: :btree
+  add_index "setting_translations", ["setting_id"], name: "index_setting_translations_on_setting_id", using: :btree
+
   create_table "settings", force: :cascade do |t|
     t.string   "key",        limit: 255
     t.text     "value",      limit: 65535
