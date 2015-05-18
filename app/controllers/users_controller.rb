@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :require_login, :setup
   before_action :set_email, only: [:subscribe]
   # require 'rest-client'
+  require 'mailgun'
 
   def show
     @user = User.find_by_name(params[:name])
