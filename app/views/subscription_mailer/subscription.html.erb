@@ -75,7 +75,7 @@
     width:146px;
     text-decoration:none;
     text-align:center;
-    margin: 20px auto 20px auto;
+    margin: 40px auto 40px auto;
   }
   .button:hover {
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
@@ -101,10 +101,13 @@
     <span class="title">特快車</span>
   </div>
   <div class="content-container">
-    <h3 class="content-title"><%= @item.title %></h3>
-    <p class="date"><%= @item.display_date %></p>
-    <p class="content-text"><%= @item.parse %></p>
-    <a href="#" class="button">繼續閱讀</a>
+    <% @items.each do |item| %>
+      <h3 class="content-title"><%= item.title %></h3>
+      <p class="date"><%= item.display_date %></p>
+      <p class="content-text"><%= item.parse %></p>
+      <a href="#" class="button">繼續閱讀</a>
+      <hr />
+    <% end %>
     <a href="" class="unsubscribe">取消訂閱</a>
   </div>
 </div>
