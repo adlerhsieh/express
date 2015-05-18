@@ -1,1 +1,3 @@
-Hello, this is an email
+<% @items.each do |item| %>
+  <%= strip_tags(item.abstract_parse) %>
+<% end %>

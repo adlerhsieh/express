@@ -45,6 +45,10 @@
   .content-title {
     font-size: 26px;
   }
+  code {
+    color: red;
+    background-color: #EEEEEE;
+  }
   .button {
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
     background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
@@ -104,7 +108,8 @@
     <% @items.each do |item| %>
       <h3 class="content-title"><%= item.title %></h3>
       <p class="date"><%= item.display_date %></p>
-      <p class="content-text"><%= item.parse %></p>
+      <p class="content-text"><%= item.abstract_parse %></p>
+      <p>......</p>
       <a href="#" class="button">繼續閱讀</a>
       <hr />
     <% end %>

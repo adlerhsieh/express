@@ -13,7 +13,6 @@ class Post < ActiveRecord::Base
   def parse
     process = MarkdownHelper.new(self.content)
     process.remove_hexo_marks
-    # process.convert_to_blockquotes
     process.parse_markdown
     process.parse_code_block_style
     process.remove_extras
@@ -36,5 +35,14 @@ class Post < ActiveRecord::Base
       @groups.merge!(group_year.to_sym => posts) if post == @posts.last
     end
     @groups
+  end
+
+  def abstract_parse
+    process = MarkdownHelper.new(self.abstract)
+    process.remove_hexo_marks
+    process.parse_markdown
+    process.parse_code_block_style
+    process.remove_extras
+    return process.styled.html_safe
   end
 end
