@@ -1,3 +1,14 @@
+特快車電子報
+
+========================================
 <% @items.each do |item| %>
+
+  標題：
+  <%= item.title %>
+
+  內容：
   <%= strip_tags(item.abstract_parse) %>
+========================================
 <% end %>
+
+更多內容請上 http://motion-express.com
