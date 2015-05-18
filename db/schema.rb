@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513053107) do
+ActiveRecord::Schema.define(version: 20150518153943) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150513053107) do
     t.date     "display_date"
     t.boolean  "is_public",    limit: 1,     default: false
     t.text     "video_embed",  limit: 65535
+    t.text     "abstract",     limit: 65535
   end
 
   create_table "screencast_translations", force: :cascade do |t|
@@ -90,6 +91,17 @@ ActiveRecord::Schema.define(version: 20150513053107) do
     t.integer  "training_order", limit: 4
     t.integer  "category_id",    limit: 4
   end
+
+  create_table "setting_translations", force: :cascade do |t|
+    t.integer  "setting_id", limit: 4,     null: false
+    t.string   "locale",     limit: 255,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "value",      limit: 65535
+  end
+
+  add_index "setting_translations", ["locale"], name: "index_setting_translations_on_locale", using: :btree
+  add_index "setting_translations", ["setting_id"], name: "index_setting_translations_on_setting_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "key",        limit: 255
