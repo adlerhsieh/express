@@ -110,9 +110,9 @@
       <p class="date"><%= item.display_date %></p>
       <p class="content-text"><%= item.abstract_parse %></p>
       <p>......</p>
-      <a href="#" class="button">繼續閱讀</a>
+      <%= link_to "繼續閱讀", post_path(item[:slug]), class: "button" %>
       <hr />
     <% end %>
-    <a href="" class="unsubscribe">取消訂閱</a>
+    <%= link_to "取消訂閱", unsubscribe_users_path(email: @email), class: "unsubscribe" %>
   </div>
 </div>

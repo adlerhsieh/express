@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       post :subscribe
-      post :unsubscribe
+      get :unsubscribe
     end
     resources :posts, :controller => "users/posts"
     resources :categories, :controller => "users/categories" do

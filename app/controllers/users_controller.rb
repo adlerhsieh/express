@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout "backend"
   before_action :require_login, :setup
-  before_action :set_email, only: [:subscribe]
+  before_action :set_email, only: [:subscribe, :unsubscribe]
   # require 'rest-client'
   require 'mailgun'
 
@@ -11,20 +11,22 @@ class UsersController < ApplicationController
 
   def subscribe
     if email_formatted? && email_valid?
-      list = "service@mg.motion-express.com" 
-      @mailgun.list_members(list).add(@email)
-      flash[:notice] = "已將#{email}加入名單"
+      @mailgun.list_members(@list).add(@email)
+      flash[:notice] = "已將#{@email}加入名單"
       redirect_to posts_path
     end
   end
 
   def unsubscribe
-    
+    # @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
+    @mailgun.list_members(@list).remove params[:email]
+    redirect_to posts_path
   end
 
   private
     def setup
       @mailgun = Mailgun()
+      @list = "service@mg.motion-express.com" 
     end
 
     def set_email
