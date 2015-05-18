@@ -1,2 +1,110 @@
-<img src="https://farm9.staticflickr.com/8744/17682286022_046f4bf479_n.jpg" alt="特快車電子報" />    
+<style type="text/css" media="all">
+  body {
+    background-color: #E3E3E3;
+    font-family: sans-serif;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .container {
+    background-color: white;
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+  }
+  .title-container {
+    padding-top: 50px;
+  }
+  img.logo {
+    width: 40px;
+    height: 40px;
+    padding-left: 40px;
+    margin: 0 0;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: 90px;
+    margin-top: -35px;
+    color: #777777;
+    position: absolute;
+  }
+  .date {
+    color: #999999;
+    font-size: 12px;
+    margin-top: -15px;
+  }
+  .content-container {
+    border-top: 1px solid #E3E3E3;
+    width: 90%;
+    margin: 10px auto;
+  }
+  .content-title {
+    font-size: 26px;
+  }
+  .button {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+    background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+    background-color:#3d94f6;
+    -webkit-border-top-left-radius:6px;
+    -moz-border-radius-topleft:6px;
+    border-top-left-radius:6px;
+    -webkit-border-top-right-radius:6px;
+    -moz-border-radius-topright:6px;
+    border-top-right-radius:6px;
+    -webkit-border-bottom-right-radius:6px;
+    -moz-border-radius-bottomright:6px;
+    border-bottom-right-radius:6px;
+    -webkit-border-bottom-left-radius:6px;
+    -moz-border-radius-bottomleft:6px;
+    border-bottom-left-radius:6px;
+    text-indent:0;
+    border:1px solid #337fed;
+    display: block;
+    color:#ffffff;
+    font-family:Verdana;
+    font-size:17px;
+    font-weight:normal;
+    font-style:normal;
+    height:38px;
+    line-height:38px;
+    width:146px;
+    text-decoration:none;
+    text-align:center;
+    margin: 20px auto 20px auto;
+  }
+  .button:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+    background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+    background-color:#1e62d0;
+    }.button:active {
+    position:relative;
+    top:1px;
+  }
+  .unsubscribe {
+    text-align: right;
+    color: gray;
+    font-size: 12px;
+    padding-bottom: 20px;
+    display: inherit;
+  }
+</style>
 
+<div class="container">
+  <div class="title-container">
+    <img class="logo" src="https://farm9.staticflickr.com/8760/17634846109_622851a9b0_s.jpg" />
+    <span class="title">特快車</span>
+  </div>
+  <div class="content-container">
+    <h3 class="content-title"><%= @item.title %></h3>
+    <p class="date"><%= @item.display_date %></p>
+    <p class="content-text"><%= @item.parse %></p>
+    <a href="#" class="button">繼續閱讀</a>
+    <a href="" class="unsubscribe">取消訂閱</a>
+  </div>
+</div>
