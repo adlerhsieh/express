@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout "backend"
   before_action :require_login
-  before_action :set_email, only: [:subscribe, :unsubscribe]
+  before_action :set_email, only: [:subscribe, :unsubscribe, :send_post_emails]
   before_action :email_formatted?, only: [:subscribe]
   before_action :email_already_in_list_and_subscribed?, only: [:subscribe]
   # require 'rest-client'
@@ -27,13 +27,29 @@ class UsersController < ApplicationController
     redirect_to posts_path
   end
 
+  def send_post_email
+    a = [{"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>false, "vars"=>{}}]
+    i = 0
+    # @member_list.each do |object|
+    a.each do |object|
+      if object["subscribed"] == true
+        SubscriptionMailer.subscription(
+          object["address"], 
+          Array.new(1,Post.find(params[:format]))
+        ).deliver
+        i += 1
+      end
+    end
+    flash[:notice] = "已發送Email給 #{i} 位訂閱者：#{Post.find(params[:format]).title}"
+    redirect_to posts_path
+  end
+
   private
     def set_email
       @mailgun = Mailgun()
       @email = params[:email]
       @list = "service@mg.motion-express.com" 
       @member_list ||= @mailgun.list_members(@list).list 
-      puts @member_list
     end
 
     def email_already_in_list_and_subscribed?
