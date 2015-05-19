@@ -28,7 +28,10 @@ class UsersController < ApplicationController
   end
 
   def send_post_email
-    a = [{"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>false, "vars"=>{}}]
+    a = [
+      {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
+      {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
+    ]
     i = 0
     # @member_list.each do |object|
     a.each do |object|
