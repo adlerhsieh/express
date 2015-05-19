@@ -2,11 +2,13 @@ $(document).ready(function(){
   if(location.href.indexOf("/posts") != -1){
     if(location.href.indexOf("/edit") != -1 || location.href.indexOf("/new") != -1){
       var editor;
+      var post_abstract;
       var keys;
       var preview;
       var confirm_send;
       var confirm_leave;
       var current_slug;
+      var default_content = "";
 
       initialize_editor();
       $("#preview").hide();
@@ -15,9 +17,9 @@ $(document).ready(function(){
 
       // editor.commands.addCommand({
       //   name: "toggle_attr",
-      //   bindKey: {win: "Ctrl-U", mac: "Command-U"},
+      //   bindKey: {win: "Ctrl-K", mac: "Command-K"},
       //   exec: function(editor){
-      //     console.log("word");
+      //
       //   }
       // });
 
@@ -97,6 +99,7 @@ $(document).ready(function(){
             var slug = $("#slug").val();
             var display_date = $("#display_date").val();
             var video_embed = $("#video_embed").val();
+            abstract = post_abstract.session.getDocument().getAllLines();
             code = editor.session.getDocument().getAllLines();
 
             if(location.href.indexOf("/edit") == -1){
@@ -109,6 +112,7 @@ $(document).ready(function(){
                   "tags": tags,
                   "slug": slug,
                   "content": code,
+                  "abstract": abstract,
                   "display_date": display_date,
                   "video_embed": video_embed,
                 }
@@ -130,6 +134,7 @@ $(document).ready(function(){
                   "tags": tags,
                   "slug": slug,
                   "content": code,
+                  "abstract": abstract,
                   "display_date": display_date,
                   "video_embed": video_embed
                 }
@@ -206,10 +211,17 @@ $(document).ready(function(){
 
       function initialize_editor() {
         editor = ace.edit("editor");
+        post_abstract = ace.edit("post_abstract");
         keys = [];
         preview = false;
         confirm_send = 0;
         confirm_leave = 0;
+        post_abstract.setTheme("ace/theme/twilight");
+        post_abstract.getSession().setMode("ace/mode/markdown");
+        post_abstract.getSession().setUseWrapMode(true);
+        post_abstract.renderer.setPadding(10);
+        post_abstract.$blockScrolling = Infinity; // prevent browser message
+        document.getElementById('post_abstract').style.fontSize='14px';
         editor.setTheme("ace/theme/twilight");
         editor.getSession().setMode("ace/mode/markdown");
         editor.getSession().setUseWrapMode(true);
@@ -238,6 +250,9 @@ $(document).ready(function(){
             }else{
               $("#is_not_public").css("display", "inline");
             };
+            post_abstract.setValue(response.post.abstract);
+            post_abstract.gotoLine(1, current_column, true);
+            post_abstract.scrollToLine(1, true, true, function(){});
             editor.setValue(response.post.content);
             editor.gotoLine(1, current_column, true);
             editor.scrollToLine(1, true, true, function(){});
