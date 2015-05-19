@@ -2,7 +2,8 @@ class Translator
   def initialize(source)
     attrs = {
       :title => [:title, :content],
-      :name => [:name]
+      :name => [:name],
+      :key => [:value]
     }
     @bing = BingTranslator.new("motionexpress","XElPnc0gckRHGyAgi7Y6wV8nxiLU4GDPDUivxrfRoYo=", false, 'FPiShpptVGkvVNAIGXoV//zHZMtvIAgsG/PiVSztHb8')
     @source = source
@@ -31,6 +32,11 @@ class Translator
       content
     else
       content.gsub!("! [", "![") 
+      content.gsub!("` ``", "```") 
+      content.gsub!("`` `", "```") 
+      content.gsub!("对象", "物件") 
+      content.gsub!("仿真", "模拟") 
+      content.gsub!("正规表达式", "正则表达式") 
     end
   end
 end

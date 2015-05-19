@@ -35,7 +35,7 @@
       <ul class="list-unstyled">
         <li><%= link_to "所有文章", posts_path %></li>
         <% @categories.each do |category| %>
-          <li><%= link_to "#{category[:name]}", "/categories/#{category[:slug]}" %></a></li>
+          <li><%= link_to "#{category[:name]}", "/categories/#{category[:slug]}" %></li>
       <% end %>
     </ul>
   </div>

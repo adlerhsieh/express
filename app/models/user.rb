@@ -9,15 +9,4 @@ class User < ActiveRecord::Base
     is_admin
   end
 
-  def translator_balance
-    # t = BingTranslator.new("motionexpress","XElPnc0gckRHGyAgi7Y6wV8nxiLU4GDPDUivxrfRoYo=", false, 'FPiShpptVGkvVNAIGXoV//zHZMtvIAgsG/PiVSztHb8')
-    # t.balance
-    "暫不顯示"
-  end
-
-  def translator_usage
-    # days = Time.days_in_month(Time.now.month, Time.now.year)
-    # max = (2000000 - translator_balance).to_f
-    # (max / days).round(2)
-  end
 end
