@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def unsubscribe
     @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
-    redirect_to posts_path
+    @mail = params[:email]
   end
 
   def send_post_email
