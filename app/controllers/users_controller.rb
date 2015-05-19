@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout "backend"
   before_action :require_login
-  before_action :set_email, only: [:subscribe, :unsubscribe, :send_post_emails]
+  before_action :set_email, only: [:subscribe, :unsubscribe, :send_post_email]
   before_action :email_formatted?, only: [:subscribe]
   before_action :email_already_in_list_and_subscribed?, only: [:subscribe]
   # require 'rest-client'
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
 
   def send_post_email
     # a = [
-    #   {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
-    #   {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
-    #   {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
+      # {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
+      # {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
+      # {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
     # ]
     i = 0
     post = Post.find(params[:format])
