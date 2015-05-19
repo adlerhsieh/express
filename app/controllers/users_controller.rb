@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   layout "backend"
-  before_action :require_login, :setup
+  before_action :require_login
   before_action :set_email, only: [:subscribe, :unsubscribe]
+  before_action :email_formatted?, only: [:subscribe]
+  before_action :email_already_in_list_and_subscribed?, only: [:subscribe]
   # require 'rest-client'
   require 'mailgun'
 
@@ -10,37 +12,39 @@ class UsersController < ApplicationController
   end
 
   def subscribe
-    if email_formatted? && email_valid?
+    if in_list?
+      @mailgun.list_members(@list).update params[:email], {:subscribed => "yes"}
+      flash[:notice] = "已恢復#{@email}的訂閱狀態"
+    else
       @mailgun.list_members(@list).add(@email)
       flash[:notice] = "已將#{@email}加入名單"
-      redirect_to posts_path
     end
+    redirect_to posts_path
   end
 
   def unsubscribe
-    # @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
-    @mailgun.list_members(@list).remove params[:email]
+    @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
     redirect_to posts_path
   end
 
   private
-    def setup
-      @mailgun = Mailgun()
-      @list = "service@mg.motion-express.com" 
-    end
-
     def set_email
+      @mailgun = Mailgun()
       @email = params[:email]
+      @list = "service@mg.motion-express.com" 
+      @member_list ||= @mailgun.list_members(@list).list 
+      puts @member_list
     end
 
-    def email_valid?
-      list = @mailgun.list_members("service@mg.motion-express.com").list.map{|m|m["address"]}
-      if list.include? @email
-        flash[:alert] = "email已經存在於名單內"
-        redirect_to posts_path
-        return false
+    def email_already_in_list_and_subscribed?
+      address_list = @member_list.map{|m|m["address"]}
+      if address_list.include?(@email)
+        if already_subscribed?
+          flash[:alert] = "email先前已訂閱"
+          redirect_to posts_path
+          return
+        end
       end
-      true
     end
 
     def email_formatted?
@@ -50,5 +54,13 @@ class UsersController < ApplicationController
         return false
       end
       true
+    end
+
+    def in_list?
+      @member_list.find{|item| item["address"] == @email}
+    end
+
+    def already_subscribed?
+      @member_list.find{|item| item["address"] == @email}["subscribed"] == true
     end
 end
