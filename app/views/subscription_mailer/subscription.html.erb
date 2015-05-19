@@ -1,70 +1,4 @@
-<style type="text/css" media="all">
-  /* body { */
-    /*   background-color: #E3E3E3; */
-    /*   font-family: sans-serif; */
-    /* } */
-  /* img { */
-    /*   display: block; */
-    /*   max-width: 100%; */
-    /*   margin: 0 auto; */
-    /* } */
-  /* .container { */
-    /*   background-color: white; */
-    /*   width: 70%; */
-    /*   display: block; */
-    /*   margin: 0 auto; */
-    /* } */
-  /* .title-container { */
-    /*   padding-top: 50px; */
-    /* } */
-  /* img.logo { */
-    /*   width: 40px; */
-    /*   height: 40px; */
-    /*   padding-left: 40px; */
-    /*   margin: 0 0; */
-    /* } */
-  /* .title { */
-    /*   font-size: 20px; */
-    /*   font-weight: bold; */
-    /*   display: block; */
-    /*   margin-left: 90px; */
-    /*   margin-top: -35px; */
-    /*   color: #777777; */
-    /*   position: absolute; */
-    /* } */
-  /* .date { */
-    /* } */
-  /* .content-container { */
-    /*   border-top: 1px solid #E3E3E3; */
-    /*   width: 90%; */
-    /*   margin: 10px auto; */
-    /* } */
-  /* .content-title { */
-    /*   font-size: 26px; */
-    /* } */
-  /* code { */
-    /*   color: red; */
-    /*   background-color: #EEEEEE; */
-    /* } */
-  /* .button { */
-      
-    /* } */
-  /* .button:hover { */
-    /*   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) ); */
-    /*   background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% ); */
-    /*   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6'); */
-    /*   background-color:#1e62d0; */
-    /*   }.button:active { */
-    /*   position:relative; */
-    /*   top:1px; */
-    /* } */
-  /* .unsubscribe { */
-      
-    /* } */
-      
-</style>
-
-<table width="60%" align="center" style="background-color: white;padding-left: 40px; padding-right: 40px;" border="0" cellspacing="0", cellpadding="0">
+<table width="70%" align="center" style="background-color: white;padding-left: 40px; padding-right: 40px;" border="0" cellspacing="0", cellpadding="0">
   <tr class="title-container">
     <td style="padding-top: 40px; padding-bottom: 20px; border-bottom: 1px solid #E3E3E3;">
       <img width="40" height="40" src="https://farm9.staticflickr.com/8760/17634846109_622851a9b0_s.jpg" style="display: block; margin: 0 auto;" />
@@ -78,14 +12,14 @@
         <p style="color: #999999; font-size: 12px; text-align: center; padding-bottom: 20px;"><%= item.display_date %></p>
         <p class="content-text"><%= item.abstract_parse %></p>
         <p>......</p>
-        <%= link_to "繼續閱讀", post_path(item[:slug]), style: "background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) ); background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0'); background-color:#3d94f6; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #337fed; display: block; color:#ffffff; font-family:Verdana; font-size:17px; font-weight:normal; font-style:normal; height:38px; line-height:38px; width:146px; text-decoration:none; text-align:center; margin: 40px auto 40px auto;" %>
+        <%= link_to "繼續閱讀", "http://motion-express.com#{post_path(item[:slug])}", style: "background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) ); background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0'); background-color:#3d94f6; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #337fed; display: block; color:#ffffff; font-family:Verdana; font-size:17px; font-weight:normal; font-style:normal; height:38px; line-height:38px; width:146px; text-decoration:none; text-align:center; margin: 40px auto 40px auto;" %>
         <hr />
       </td>
     </tr>
   <% end %>
   <tr>
     <td>
-      <%= link_to "取消訂閱", unsubscribe_users_path(email: @email), style: "text-align: right; color: gray; font-size: 12px; padding-bottom: 20px; display: inherit;" %>
+      <%= link_to "取消訂閱", "http://motion-express.com#{unsubscribe_users_path(email: @email)}", style: "text-align: right; color: gray; font-size: 12px; padding-bottom: 20px; display: inherit;" %>
     </td>
   </tr>
 </table>

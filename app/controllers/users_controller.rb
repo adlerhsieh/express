@@ -28,13 +28,14 @@ class UsersController < ApplicationController
   end
 
   def send_post_email
-    a = [
-      {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
-      {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
-    ]
+    # a = [
+    #   {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
+    #   {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
+    #   {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
+    # ]
     i = 0
-    # @member_list.each do |object|
-    a.each do |object|
+    @member_list.each do |object|
+    # a.each do |object|
       if object["subscribed"] == true
         SubscriptionMailer.subscription(
           object["address"], 
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
       end
     end
     flash[:notice] = "已發送Email給 #{i} 位訂閱者：#{Post.find(params[:format]).title}"
-    redirect_to posts_path
+    redirect_to user_posts_path(current_user[:name])
   end
 
   private
