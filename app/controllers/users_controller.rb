@@ -41,17 +41,19 @@ class UsersController < ApplicationController
     #   {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
     # ]
     i = 0
+    post = Post.find(params[:format])
     @member_list.each do |object|
     # a.each do |object|
       if object["subscribed"] == true
         SubscriptionMailer.subscription(
           object["address"], 
-          Array.new(1,Post.find(params[:format]))
-        ).deliver
+          Array.new(1,post)
+        ).deliver_now
         i += 1
       end
     end
-    flash[:notice] = "已發送Email給 #{i} 位訂閱者：#{Post.find(params[:format]).title}"
+    flash[:notice] = "已發送Email給 #{i} 位訂閱者：#{post.title}"
+    post.update_column(:sent, true) if i > 0
     redirect_to user_posts_path(current_user[:name])
   end
 

@@ -38,11 +38,15 @@ class Post < ActiveRecord::Base
   end
 
   def abstract_parse
-    process = MarkdownHelper.new(self.abstract)
-    process.remove_hexo_marks
-    process.parse_markdown
-    process.parse_code_block_style
-    process.remove_extras
-    return process.styled.html_safe
+    if self.abstract
+      process = MarkdownHelper.new(self.abstract)
+      process.remove_hexo_marks
+      process.parse_markdown
+      process.parse_code_block_style
+      process.remove_extras
+      process.styled.html_safe
+    else
+      nil
+    end
   end
 end
