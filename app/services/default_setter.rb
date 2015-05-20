@@ -22,9 +22,10 @@ module DefaultSetter
   def parse
     process = MarkdownHelper.new(self.content)
     process.parse_markdown
-    process.parse_code_block_style
-    process.remove_extras
-    return process.styled.html_safe
+    # process.parse_code_block_style
+    # process.remove_extras
+    # return process.styled.html_safe
+    return process.parsed.html_safe
   end
 
   def translate_CN

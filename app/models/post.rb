@@ -12,11 +12,12 @@ class Post < ActiveRecord::Base
 
   def parse
     process = MarkdownHelper.new(self.content)
-    process.remove_hexo_marks
+    # process.remove_hexo_marks
     process.parse_markdown
-    process.parse_code_block_style
-    process.remove_extras
-    return process.styled.html_safe
+    # process.parse_code_block_style
+    # process.remove_extras
+    # return process.styled.html_safe
+    return process.parsed.html_safe
   end
 
   def self.group_by_year
