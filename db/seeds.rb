@@ -1,4 +1,19 @@
-Setting.find_by_key("og_image").update_column(:tag, "社群分享：圖片")
+time_2 = Time.now
+[Post, Screencast, Training].each do |m|
+  m.all.each do |p|
+    time_1 = Time.now
+    content = p.content
+    if /\$\S/ =~ content
+      content.gsub!("$", "$ ")
+    end
+    content.gsub!("```cmd", "```nohighlight")
+    # p.update_column(:content, content)
+    p.save!
+    puts "Updated & Translated: #{p.title} (#{Time.now - time_1}s)"
+  end
+end
+puts "Done (#{Time.now - time_2}s)"
+
 # I18n.locale = :"zh-TW"
 #
 # Setting.all.each do |s|
