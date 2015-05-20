@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require_tree .
+//= require highlight
 
 // var height = 0
 //

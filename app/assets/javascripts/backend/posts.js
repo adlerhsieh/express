@@ -188,6 +188,9 @@ $(document).ready(function(){
           $("#preview-video").html(post_video);
           $("#preview-category").html(post_category);
           $("#preview-tags").html(post_tags);
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
           if(post_video.length < 1){
             $("#preview-video").hide();
           }else{

@@ -198,6 +198,9 @@ $(document).ready(function(){
             $("#preview-video").show();
           };
           $("#preview-image").html("<img class='preview_image' src='" + image_tag + "' />");
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
         });		    	
       };
 

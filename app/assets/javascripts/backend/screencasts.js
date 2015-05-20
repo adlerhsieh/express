@@ -173,6 +173,9 @@ $(document).ready(function(){
           $("#preview-title").html(post_title);
           $("#preview-video").html(video_tag);
           $("#preview-image").html("<img class='preview_image' src='" + image_tag + "' />");
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
         });		    	
       };
 
