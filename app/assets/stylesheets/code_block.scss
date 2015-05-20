@@ -5,6 +5,19 @@ pre {
   // overflow-y: hidden;
   font-size: 14px;
 
+  span.hljs-symbol {
+    color: #ae81ff;
+  }
+  span.hljs-constant {
+    // color: #a6e22e;
+  }
+  span.hljs-class {
+    span.hljs-title, 
+    span.hljs-inheritance span.hljs-parent {
+      color: #66D9EF !important;
+    }
+  }
+
   // code.cmd {
   //   .line-numbers { display: none; }
   //   .prefix { opacity: 0.7; }
