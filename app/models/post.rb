@@ -50,4 +50,12 @@ class Post < ActiveRecord::Base
       nil
     end
   end
+
+  def thumbnail
+    if image && image.length > 0
+      image
+    else
+      self.category.image
+    end
+  end
 end
