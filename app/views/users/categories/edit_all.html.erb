@@ -7,6 +7,7 @@
       <th>id</th>
       <th>名稱</th>
       <th>網址代碼</th>
+      <th>預設圖片網址</th>
       <th></th>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
           <td class="id"><%= c[:id] %></td>
           <td class="content"><input type="text" class="form-control" value="<%= c[:name] %>" id="<%= "name-#{c[:id]}" %>" placeholder="必填" /></td>
           <td class="slug"><input type="text" class="form-control" value="<%= c[:slug] %>" id="<%= "slug-#{c[:id]}" %>" /></td>
+          <td class="image"><input type="text" class="form-control" value="<%= c[:image] %>" id="<%= "image-#{c[:id]}" %>" /></td>
           <td class="delete"><%= link_to "刪除", category_path(c), method: :delete, data: {confirm: "確認刪除？"} %></td>
         </tr>
       <% end %>

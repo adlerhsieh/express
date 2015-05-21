@@ -12,7 +12,8 @@ $(document).ready(function(){
       hash.push({
         "id": id,
         "name": $("#name-" + id).val(),
-        "slug": $("#slug-" + id).val()
+        "slug": $("#slug-" + id).val(),
+        "image": $("#image-" + id).val()
       });
     };
     $("#pending").show();

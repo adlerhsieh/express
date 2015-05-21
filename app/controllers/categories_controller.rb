@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
   def update_all
     params[:categories].each do |key, category|
       @category = Category.find(category["id"])
-      @category.update!(category.permit("name", "slug"))
+      @category.update!(category.permit("name", "slug", "image"))
     end
     render json: "success"
   end
