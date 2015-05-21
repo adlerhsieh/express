@@ -22,6 +22,9 @@
 <div class="col-md-3 editor-attr">
   <input id="video_embed" type="text" class="form-control" placeholder="影片嵌入碼">
 </div>
+<div class="col-md-3 editor-attr">
+  <input id="icon" type="text" class="form-control" placeholder="首頁圖示">
+</div>
 
 <hr />
 
@@ -34,6 +37,7 @@
   <h1 id="preview-title"></h1>
   <p><%= render_author(@post.author) %> @ <%= Date.today.strftime("%Y-%m-%d") %></p>
   <hr>
+  <!-- <div id="preview&#45;image"></div> -->
   <div id="preview-video"></div>
   <div id="preview-content"></div>
 </div>

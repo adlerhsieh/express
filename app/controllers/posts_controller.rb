@@ -96,6 +96,7 @@ class PostsController < ApplicationController
       @post.abstract = params[:abstract].join("\n")
       @post.content = params[:content].join("\n")
       @post.display_date = params[:display_date]
+      @post.icon = params[:icon]
     end
 
     def refresh_tags

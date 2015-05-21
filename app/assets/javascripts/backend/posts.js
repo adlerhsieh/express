@@ -99,6 +99,7 @@ $(document).ready(function(){
             var slug = $("#slug").val();
             var display_date = $("#display_date").val();
             var video_embed = $("#video_embed").val();
+            var icon = $("#icon").val();
             abstract = post_abstract.session.getDocument().getAllLines();
             code = editor.session.getDocument().getAllLines();
 
@@ -115,6 +116,7 @@ $(document).ready(function(){
                   "abstract": abstract,
                   "display_date": display_date,
                   "video_embed": video_embed,
+                  "icon": icon
                 }
               }).done(function(response){
                 location.href = "/users/" + current_user.name + "/posts/" + response.slug + "/edit";
@@ -136,7 +138,8 @@ $(document).ready(function(){
                   "content": code,
                   "abstract": abstract,
                   "display_date": display_date,
-                  "video_embed": video_embed
+                  "video_embed": video_embed,
+                  "icon": icon
                 }
               }).done(function(response){
                 if(response.slug == current_slug){
@@ -246,6 +249,7 @@ $(document).ready(function(){
             $("#category").val(response.category.name);
             $("#slug").val(response.post.slug);
             $("#tags").val(response.tags);
+            $("#icon").val(response.post.icon);
             $("#display_date").val(response.post.display_date);
             $("#video_embed").val(response.post.video_embed);
             if(response.post.is_public == true){

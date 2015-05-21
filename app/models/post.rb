@@ -52,8 +52,8 @@ class Post < ActiveRecord::Base
   end
 
   def thumbnail
-    if image && image.length > 0
-      image
+    if icon && icon.length > 0
+      icon
     else
       self.category.image
     end
