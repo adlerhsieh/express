@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519160424) do
+ActiveRecord::Schema.define(version: 20150521115957) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "slug",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "image",      limit: 255
   end
 
   create_table "category_translations", force: :cascade do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150519160424) do
     t.text     "video_embed",  limit: 65535
     t.text     "abstract",     limit: 65535
     t.boolean  "sent",         limit: 1,     default: false
+    t.string   "image",        limit: 255
   end
 
   create_table "screencast_translations", force: :cascade do |t|
