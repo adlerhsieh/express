@@ -48,7 +48,7 @@ class Translator
       end
 
       # content = @bing.translate(@source.send(key), from: "zh-TW", to: "zh-CN")
-      compact(content)
+      compact(translated)
       # target.send("#{key}=", content)
       target.send("#{key}=", translated)
     end
