@@ -4,7 +4,8 @@ class Post < ActiveRecord::Base
   has_many :tags, :through => :post_tags
   # validates :title, :content, :slug, :presence => true
   before_save :default_columns
-  after_save :default_display_date, :default_category, :translate_CN
+  # after_save :default_display_date, :default_category, :translate_CN
+  after_save :default_display_date, :default_category
   translates :title, :content
   default_scope {includes(:translations)}
   include DefaultSetter
