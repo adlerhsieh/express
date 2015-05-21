@@ -4,7 +4,7 @@
       <% @posts.each do |post| %>
         <tr>
           <td class="td-thumbnail">
-            <%= image_tag post.thumbnail, class: "thumbnail" %>
+            <%= link_to(image_tag(post.thumbnail, class: "thumbnail"), post_path(post[:slug])) %>
           </td>
           <td class="td-left">
             <h4>
