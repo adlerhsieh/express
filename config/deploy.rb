@@ -58,7 +58,7 @@ namespace :deploy do
 
   task :migrate do
     on roles(:web) do
-      execute "#{path_prefix}rake db:migrate"
+      execute "#{path_prefix}rake db:migrate RAILS_ENV=production"
     end
   end
 
