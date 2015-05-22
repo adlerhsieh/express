@@ -1,45 +1,44 @@
+# [Post, Screencast, Training].each do |m|
+#   m.all.each do |p|
+#     case p.category_id
+#     when 15
+#       p.update_column(:category_id, 6)
+#       puts "#{p.title}: 類別已修正"
+#     when 16
+#       p.update_column(:category_id, 2)
+#       puts "#{p.title}: 類別已修正"
+#     when 17
+#       p.update_column(:category_id, 10)
+#       puts "#{p.title}: 類別已修正"
+#     end
+#   end
+# end
+# Category::Translation.delete_all
+# Category.all.each do |c|
+#   if c.id < 11
+#     c.save
+#     Category::Translation.create(:category_id => c.id, :locale => "zh-TW", :name => c.name)
+#     puts "Translation added: #{c.name}"
+#   else
+#     c.delete
+#     puts "Deleted: No.#{c.id}"
+#   end
+# end
+
+time_2 = Time.now
 [Post, Screencast, Training].each do |m|
   m.all.each do |p|
-    case p.category_id
-    when 15
-      p.update_column(:category_id, 6)
-      puts "#{p.title}: 類別已修正"
-    when 16
-      p.update_column(:category_id, 2)
-      puts "#{p.title}: 類別已修正"
-    when 17
-      p.update_column(:category_id, 10)
-      puts "#{p.title}: 類別已修正"
+    time_1 = Time.now
+    if /\$\S/ =~ p.content
+      p.content.gsub!("$", "$ ")
     end
-  end
-end
-Category::Translation.delete_all
-Category.all.each do |c|
-  if c.id < 11
-    c.save
-    Category::Translation.create(:category_id => c.id, :locale => "zh-TW", :name => c.name)
-    puts "Translation added: #{c.name}"
-  else
-    c.delete
-    puts "Deleted: No.#{c.id}"
+    p.content.gsub!("```cmd", "```nohighlight")
+    # p.update_column(:content, content)
+    p.save!
+    puts "Syntax updated: #{p.title} (#{Time.now - time_1}s)"
   end
 end
 
-# time_2 = Time.now
-# [Post, Screencast, Training].each do |m|
-#   m.all.each do |p|
-#     time_1 = Time.now
-#     content = p.content
-#     if /\$\S/ =~ content
-#       content.gsub!("$", "$ ")
-#     end
-#     content.gsub!("```cmd", "```nohighlight")
-#     p.update_column(:content, content)
-#     # p.save!
-#     puts "Updated: #{p.title} (#{Time.now - time_1}s)"
-#   end
-# end
-#
 # puts "Done (#{Time.now - time_2}s)"
 #
 # Post.find(75).update_column(:category_id, 7)
