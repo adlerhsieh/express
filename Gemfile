@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'kaminari'
 gem 'globalize'
 gem 'sitemap_generator'
 gem 'rest-client'

@@ -57,6 +57,9 @@ class PostsController < ApplicationController
 
   def search
     @posts = Post.where("title LIKE ? OR content like ?", "%#{params[:search]}%", "%#{params[:search]}%")
+                 .where(:is_public => true)
+                 .order(:display_date => :desc)
+                 .page(params[:page])
   end
 
   def author
@@ -65,7 +68,7 @@ class PostsController < ApplicationController
   private
 
     def set_all_public_posts
-      @posts = Post.where(:is_public => true).order(:display_date => :desc)
+      @posts = Post.where(:is_public => true).order(:display_date => :desc).page(params[:page])
       @categories = Category.all
     end
 

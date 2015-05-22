@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
     @category = Category.find_by_slug(params[:slug])
     raise ActionController::RoutingError.new("無此分類") if not @category
     @categories = Category.all
-    @posts = Post.where(:category_id => @category[:id]).where(:is_public => true).order(:display_date => :desc)
+    @posts = Post.where(:category_id => @category[:id]).where(:is_public => true).order(:display_date => :desc).page(params[:page])
   end
 
   def index
