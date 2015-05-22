@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521145517) do
+ActiveRecord::Schema.define(version: 20150522163604) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20150521145517) do
     t.boolean  "is_public",    limit: 1,     default: false
     t.text     "video_embed",  limit: 65535
     t.text     "abstract",     limit: 65535
-    t.boolean  "sent",         limit: 1,     default: false
+    t.date     "sent"
     t.string   "image",        limit: 255
     t.string   "icon",         limit: 255
   end

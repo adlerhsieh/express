@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       end
     end
     flash[:notice] = "已發送Email給 #{i} 位訂閱者：#{post.title}"
-    post.update_column(:sent, true) if i > 0
+    post.update_column(:sent, Date.today) if i > 0
     redirect_to user_posts_path(current_user[:name])
   end
 
