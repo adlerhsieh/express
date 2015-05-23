@@ -48,6 +48,12 @@ class PostsController < ApplicationController
     render json: {result: "success", is_public: @post[:is_public]}
   end
 
+  def translate
+    @post = Post.find_by_slug(params[:slug])
+    @post.translate_CN
+    render json: {result: "success"}
+  end
+
   def render_markdown
     content = params[:post].join("\n")
     post = Post.new(:content => content)

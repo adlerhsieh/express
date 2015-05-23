@@ -68,17 +68,32 @@ $(document).ready(function(){
         };
 
         if(keys.indexOf(74) != -1 && keys.indexOf(91) != -1) {
-          confirm_leave ++;
-          keys.splice(keys.indexOf(74),1);
-          $("#leave").show();
-          setTimeout(function(){
-            $("#leave").delay(300).hide();
-            confirm_leave = 0;
-          }, 1000);
-          if(confirm_leave == 2){
+          // confirm_leave ++;
+          // keys.splice(keys.indexOf(74),1);
+          // $("#leave").show();
+          // setTimeout(function(){
+          //   $("#leave").delay(300).hide();
+          //   confirm_leave = 0;
+          // }, 1000);
+          // if(confirm_leave == 2){
+            // dismiss_message();
+            // location.href = "/users/" + current_user.name + "/posts";
+          // };
+          $("#pending").show();
+          var slug = $("#slug").val();
+          $.ajax({
+            url: "/posts/" + current_slug + "/translate",
+            type: "POST",
+            data: { "slug": slug }
+          }).done(function(response){
+            setTimeout(function(){ $("#success").show(); }, 50);
+            setTimeout(function(){ $("#success").hide(); }, 1500);
+          }).fail(function(response){
+            setTimeout(function(){ $("#error").show(); }, 50);
+            setTimeout(function(){ $("#error").hide(); }, 1500);
+          }).always(function(response){
             dismiss_message();
-            location.href = "/users/" + current_user.name + "/posts";
-          };
+          });
         };
 
         if(keys.indexOf(13) != -1 && keys.indexOf(91) != -1) {
