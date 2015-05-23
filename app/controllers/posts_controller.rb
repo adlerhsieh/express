@@ -1,10 +1,9 @@
 class PostsController < ApplicationController
+  before_action :set_all_public_posts, only: [:index, :show, :search]
   before_action :set_post, only: [:show, :toggle_public]
-  before_action :set_all_posts
   before_action :require_admin, only: [:create, :update]
 
   def index
-    set_all_public_posts
   end
 
   def show
@@ -68,18 +67,16 @@ class PostsController < ApplicationController
   private
 
     def set_all_public_posts
-      @posts = Post.where(:is_public => true).order(:display_date => :desc).page(params[:page])
-      @categories = Category.all
-    end
-
-    def set_all_posts
-      @posts = Post.all.order(:display_date => :desc)
+      @all_public_posts = Post.where(:is_public => true).order(:display_date => :desc)
+      @posts = @all_public_posts.page(params[:page])
       @categories = Category.all
     end
 
     def set_post
       @post = Post.find_by_slug(params[:slug])
-      # @post = Post.find_by_slug(params[:id])
+      index = @all_public_posts.index(@post)
+      @previous_post = index == 0 ? nil : @all_public_posts[index - 1]
+      @next_post = @all_public_posts[index + 1]
     end
 
     def post_params

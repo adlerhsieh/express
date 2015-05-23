@@ -22,8 +22,13 @@
           </div>
         <% end %>
         <%= @post.parse %>
+        <hr />
+        <div style="height: 25px;">
+          <%= previous_post_link %>
+          <%= next_post_link %>
+        </div>
       </div>
-      <hr>
+      <hr />
     <%= render partial: "layouts/disqus" %>
 
     </div>
