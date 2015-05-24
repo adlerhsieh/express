@@ -9,7 +9,11 @@ class PostsController < ApplicationController
   def show
     raise ActionController::RoutingError.new("無此文章") if not @post
     respond_to do |format|
-      format.html
+      format.html {
+        index = @all_public_posts.index(@post)
+        @previous_post = index == 0 ? nil : @all_public_posts[index - 1]
+        @next_post = @all_public_posts[index + 1]
+      }
       format.json {
         render :json => {
           post: @post,
@@ -80,9 +84,6 @@ class PostsController < ApplicationController
 
     def set_post
       @post = Post.find_by_slug(params[:slug])
-      index = @all_public_posts.index(@post)
-      @previous_post = index == 0 ? nil : @all_public_posts[index - 1]
-      @next_post = @all_public_posts[index + 1]
     end
 
     def post_params
