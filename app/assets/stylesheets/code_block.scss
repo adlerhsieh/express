@@ -5,6 +5,12 @@ pre {
   // overflow-y: hidden;
   font-size: 14px;
 
+  code {
+    span.hljs-comment {
+      color: #737373;
+    }
+  }
+
   code.ruby, code.erb {
     span.hljs-symbol {
       color: #ae81ff;
