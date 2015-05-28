@@ -77,7 +77,7 @@ class PostsController < ApplicationController
   private
 
     def set_all_public_posts
-      @all_public_posts = Post.where(:is_public => true).order(:display_date => :desc)
+      @all_public_posts = Post.includes(:category).where(:is_public => true).order(:display_date => :desc)
       @posts = @all_public_posts.page(params[:page])
       @categories = Category.all
     end
