@@ -3,17 +3,17 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_devise_params, if: :devise_controller?
-  before_filter :load_settings, :set_locale
+  before_filter :load_settings
 
   def set_locale
-    available_languages = ["zh-TW", "zh-HK", "zh-CN"]
-    zh_trad = ["zh-TW", "zh-HK"]
-    lang = http_accept_language.preferred_language_from(available_languages)
-    if zh_trad.include? lang
-      I18n.locale = :"zh-TW"
-    else
-      I18n.locale = :"zh-CN"
-    end
+    # available_languages = ["zh-TW", "zh-HK", "zh-CN"]
+    # zh_trad = ["zh-TW", "zh-HK"]
+    # lang = http_accept_language.preferred_language_from(available_languages)
+    # if zh_trad.include? lang
+    #   I18n.locale = :"zh-TW"
+    # else
+    #   I18n.locale = :"zh-CN"
+    # end
     # I18n.locale = :"zh-CN"
   end
 
