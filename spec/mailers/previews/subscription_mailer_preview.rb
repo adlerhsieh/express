@@ -2,6 +2,6 @@
 class SubscriptionMailerPreview < ActionMailer::Preview
 
   def subscription
-    @email = SubscriptionMailer.subscription("nkj20932@hotmail.com",Array.new(1, Post.last))
+    @email = SubscriptionMailer.subscription("nkj20932@hotmail.com",[Post.last, Post.first])
   end
 end

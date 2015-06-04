@@ -34,9 +34,9 @@ Rails.application.routes.draw do
     collection do
       post :subscribe
       get :unsubscribe
+      post :send_post_email
     end
     member do
-      post :send_post_email
     end
     resources :posts, :controller => "users/posts"
     resources :categories, :controller => "users/categories" do

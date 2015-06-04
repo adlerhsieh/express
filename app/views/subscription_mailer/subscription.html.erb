@@ -1,25 +1,33 @@
 <table width="70%" align="center" style="background-color: white;padding-left: 40px; padding-right: 40px;" border="0" cellspacing="0", cellpadding="0">
   <tr class="title-container">
+    <td style="border-bottom: 1px solid #E3E3E3;"></td>
     <td style="padding-top: 40px; padding-bottom: 20px; border-bottom: 1px solid #E3E3E3;">
       <img width="40" height="40" src="https://farm9.staticflickr.com/8760/17634846109_622851a9b0_s.jpg" style="display: block; margin: 0 auto;" />
       <p style="color: #555555; font-size: 12px; font-weight: bold; text-align: center;">特快車</p>
     </td>
   </tr>
+  <tr>
+    <td></td>
+    <td><p style="padding-top: 10px; text-align: center;">Hello! 感謝繼續支持特快車，以下是本週更新內容！</p></td>
+  </tr>
   <% @items.each do |item| %>
     <tr>
-      <td>
-        <h2 style="text-align: center; padding-top: 20px;"><%= item.title %></h2>
-        <p style="color: #999999; font-size: 12px; text-align: center; padding-bottom: 20px;"><%= item.display_date %></p>
-        <p class="content-text"><%= item.abstract_parse %></p>
-        <p>......</p>
-        <%= link_to "繼續閱讀", "http://motion-express.com#{post_path(item[:slug])}", style: "background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) ); background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0'); background-color:#3d94f6; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #337fed; display: block; color:#ffffff; font-family:Verdana; font-size:17px; font-weight:normal; font-style:normal; height:38px; line-height:38px; width:146px; text-decoration:none; text-align:center; margin: 40px auto 40px auto;" %>
-        <hr />
+      <td style="width: 100px; border-bottom: 1px solid #E3E3E3;">
+        <%= link_to(image_tag(item.thumbnail, style: "width: 75px; height: 75px;"), url_for(:controller => :posts, :action => :show, :slug => item[:slug], :host => "motion-express.com")) %>
+      </td>
+      <td style="border-bottom: 1px solid #E3E3E3;">
+        <h2 style="text-align: left; padding-top: 20px;"><%= link_to item.title, url_for(:controller => :posts, :action => :show, :slug => item[:slug], :host => "motion-express.com") %></h2>
+        <p style="color: #999999; font-size: 12px; text-align: left; padding-bottom: 0px;"><%= item.display_date %></p>
+        <!-- <p class="content&#45;text"><%= item.abstract_parse %></p> -->
+        <!-- <p>......</p> -->
+        <!--<%= link_to "繼續閱讀", "http://motion-express.com#{post_path(item[:slug])}", style: "background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) ); background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0'); background-color:#3d94f6; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #337fed; display: block; color:#ffffff; font-family:Verdana; font-size:17px; font-weight:normal; font-style:normal; height:38px; line-height:38px; width:146px; text-decoration:none; text-align:center; margin: 40px auto 40px auto;" %>-->
       </td>
     </tr>
   <% end %>
   <tr>
+    <td></td>
     <td>
-      <%= link_to "取消訂閱", "http://motion-express.com#{unsubscribe_users_path(email: @email)}", style: "text-align: right; color: gray; font-size: 12px; padding-bottom: 20px; display: inherit;" %>
+      <%= link_to "取消訂閱", "http://motion-express.com#{unsubscribe_users_path(email: @email)}", style: "float:right; color: gray; font-size: 12px; padding-bottom: 20px; padding-top: 20px; display: inherit;" %>
     </td>
   </tr>
 </table>

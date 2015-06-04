@@ -36,24 +36,31 @@ class UsersController < ApplicationController
 
   def send_post_email
     # a = [
-      # {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
-      # {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
+      # {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
+      # {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
       # {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
     # ]
     i = 0
-    post = Post.find(params[:format])
+    posts = []
+    if params[:array]
+      params[:array].each { |id| posts << Post.find(id) }
+    else
+      render json: "failed"
+      return
+    end
     @member_list.each do |object|
     # a.each do |object|
       if object["subscribed"] == true
         SubscriptionMailer.subscription(
           object["address"], 
-          Array.new(1,post)
+          # Array.new(1,post)
+          posts
         ).deliver_now
         i += 1
       end
     end
-    flash[:notice] = "已發送Email給 #{i} 位訂閱者：#{post.title}"
-    post.update_column(:sent, Date.today) if i > 0
+    flash[:notice] = "已發送Email給 #{i} 位訂閱者"
+    posts.each {|post| post.update_column(:sent, Date.today) if i > 0 }
     redirect_to user_posts_path(current_user[:name])
   end
 

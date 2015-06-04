@@ -4,6 +4,11 @@
     <div class="column year-column">
       <table>
         <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><button id="confirm_send" class="btn btn-primary">確認發送</button></td>
+          </tr>
           <% @posts.each do |post| %>
             <tr>
               <td class="">
@@ -17,7 +22,7 @@
               </td>
               <td class=""><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span><%= link_to "刪除", user_post_path(current_user["name"], post[:slug]), method: :delete, class: "delete", data: { confirm: "確定刪除？" } %></td>
               <td class="">
-                <%= mail_link(post) %>
+                <%= mail_toggle_button(post) %>
               </td>
             </tr>
           <% end %>
