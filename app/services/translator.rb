@@ -22,7 +22,7 @@ class Translator
       # only translates Chinese char, cause Bing erases whitespace for no reason
       raw = @source.send(key)
       translated = ""
-      if not raw[0].cjk?
+      if not raw[0].to_s.cjk?
         raw.each_char do |char|
           break if char.cjk?
           translated += char
