@@ -1,6 +1,8 @@
 <div class="col-lg-12 column">
   <% if @training %>
-    <span class="series-title"><%= @training.title %></span>
+    <span class="series-title">
+      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-arrow-left") + " " + @training.title, training_path(@training[:slug]) %>
+    </span>
   <% end %>
   <h1 class="screencast-title"><%= @screencast.title %></h1>
   <p><%= render_author(@screencast.author) %> @ <%= @screencast.display_date.strftime("%Y-%m-%d") %></p>
@@ -25,7 +27,7 @@
     <div class="col-lg-4">
       <table class="table table-hover screencast_list">
         <tr>
-          <td class="title"><%= @training.title %></td>
+          <td class="title" onclick="return location.href = '<%= training_path(@training[:slug]) %>'"><%= @training.title %></td>
         </tr>
         <% @screencasts.each do |s| %>
           <tr class="<%= "success" if s == @screencast %>" onclick="return location.href = '<%= training_screencast_path(@training[:slug], s[:slug]) %>'">
