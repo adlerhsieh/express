@@ -22,9 +22,13 @@ $(document).ready(function(){
         method: "POST",
         url: "/users/send_post_email",
         data: {array: send}
-      }).done(function(){
+      }).done(function(response){
         $("button#confirm_send").text("發送完成");
-        alert("發送完成！");
+        alert(response);
+        window.location.reload();
+      }).fail(function(response){
+        $("button#confirm_send").text("發送完成");
+        alert("發送失敗，請檢查回傳訊息");
       });
     };
   });
