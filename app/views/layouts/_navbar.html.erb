@@ -20,20 +20,18 @@
       <li><%= link_to("部落格", posts_path) %></li>
       <li><%= link_to("訓練課程", trainings_path) %></li>
       <li><%= link_to("關於作者", author_path) %></li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
       <% if user_signed_in? %>
         <li>
-        <% if is_admin? %>
-          <%= link_to("後台", user_path(current_user["name"])) %>
-        <% else %>
-          <%= link_to("帳號資訊", user_path(current_user["name"])) %>
-        <% end %>
+        <%= link_to(current_user["name"], user_path(current_user["name"])) %>
         </li>
         <li>
-        <%= link_to("登出", sign_out_path) %>
+        <%= link_to("登出", destroy_user_session_path, method: :get) %>
         </li>
       <% else %>
         <li>
-        <% link_to('登入', sign_in_path) %>
+        <%= link_to('Github登入', user_omniauth_authorize_path(:github)) %>
         </li>
       <% end %>
     </ul>
