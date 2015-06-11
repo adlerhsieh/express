@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, :skip => [:sessions]
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
   as :user do
-    get '/sign_in_as_adler', to: "devise/sessions#new", as: "sign_in"
-    post '/sign_in', to: "devise/sessions#create", as: "user_session"
-    delete '/sign_out', to: "devise/sessions#destroy", as: "destroy_user_session"
-    get '/sign_out', to: "devise/sessions#destroy", as: "sign_out"
-    get '/sign_up', to: "devise/registrations#new", as: "sign_up"
+    # get '/sign_in_as_adler', to: "devise/sessions#new", as: "sign_in"
+    # post '/sign_in', to: "devise/sessions#create", as: "user_session"
+    # delete '/sign_out', to: "devise/sessions#destroy", as: "destroy_user_session"
+    # get '/sign_out', to: "devise/sessions#destroy", as: "sign_out"
+    # get '/sign_up', to: "devise/registrations#new", as: "sign_up"
   end
   get '/blog', to: "posts#index", as: "posts"
   get '/blog/:slug', to: "posts#show", as: "post"
