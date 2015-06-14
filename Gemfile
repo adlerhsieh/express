@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'omniauth'
+gem 'omniauth-github'
 gem 'http_accept_language'
 gem 'kaminari'
 gem 'globalize'
