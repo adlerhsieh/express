@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614093603) do
+ActiveRecord::Schema.define(version: 20150614095757) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -153,6 +153,9 @@ ActiveRecord::Schema.define(version: 20150614093603) do
     t.string   "aasm_state",        limit: 255
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.datetime "order_time"
+    t.datetime "pay_time"
+    t.datetime "shipping_time"
   end
 
   create_table "store_payment_methods", force: :cascade do |t|
@@ -168,8 +171,9 @@ ActiveRecord::Schema.define(version: 20150614093603) do
     t.integer  "price",         limit: 4
     t.string   "default_image", limit: 255
     t.integer  "category_id",   limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "display",       limit: 1,   default: false
   end
 
   create_table "tag_translations", force: :cascade do |t|
