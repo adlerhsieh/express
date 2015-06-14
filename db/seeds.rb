@@ -16,3 +16,5 @@ if user = User.find_by_email("nkj20932@hotmail.com")
   user.update_column(:is_admin, true)
 end
 
+Store::PaymentMethod.create(:method => "匯款")
+Store::PaymentMethod.create(:method => "PayPal")
