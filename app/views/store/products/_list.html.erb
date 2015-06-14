@@ -1,6 +1,16 @@
 <% @products.each do |p| %>
   <div class="col-sm-3">
-    <%= link_to p.title, edit_store_product_path(p) %>
-    <%= link_to "刪除", store_product_path(p), method: :delete %>
+    <a href="<%= store_product_path(p) %>">
+      <div class="product col-lg-3">
+        <div class="image_tag"><%= image_tag(p.default_image) %></div>
+        <h4 class="title"><%= p.title %></h4>
+      </div>
+    </a>
+    <% if is_admin? %>
+    <div style="text-align: center">
+      <%= link_to "編輯", edit_store_product_path(p), class: "note" %> |
+      <%= link_to "刪除", store_product_path(p), method: :delete, class: "note", style: "color: red;" %>
+    </div>
+    <% end %>
   </div>
 <% end %>

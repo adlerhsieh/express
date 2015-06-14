@@ -1,1 +1,16 @@
+.product {
+  width: 250px;
 
+  .image_tag {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+  }
+}
