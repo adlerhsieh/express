@@ -13,6 +13,7 @@
 //= require jquery
 //= require_tree .
 //= require highlight
+//= require bootstrap
 
 // var height = 0
 //
