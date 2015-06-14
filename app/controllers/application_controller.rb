@@ -36,6 +36,10 @@ class ApplicationController < ActionController::Base
     redirect_to sign_in_path 
   end
 
+  def is_admin?
+    current_user.is_admin if current_user
+  end
+
   def load_settings
     @settings = Setting.all.map(&:serializable_hash)
     # binding.pry
