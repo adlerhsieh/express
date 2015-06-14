@@ -17,9 +17,10 @@
     <!-- <ul class="nav navbar&#45;nav"> -->
     <!-- </ul> -->
     <ul class="nav navbar-nav">
-      <li><%= link_to("部落格", posts_path) %></li>
-      <li><%= link_to("訓練課程", trainings_path) %></li>
-      <li><%= link_to("關於作者", author_path) %></li>
+      <li><%= link_to("Blog", posts_path) %></li>
+      <li><%= link_to("課程", trainings_path) %></li>
+      <li><%= link_to("商店", store_products_path) %></li>
+      <li><%= link_to("作者", author_path) %></li>
     </ul>
     <ul class="nav navbar-nav pull-right">
       <% if user_signed_in? %>
