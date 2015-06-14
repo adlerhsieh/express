@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'aasm'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'http_accept_language'
