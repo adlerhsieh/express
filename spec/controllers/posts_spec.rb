@@ -10,20 +10,38 @@ describe PostsController, type: :controller do
   end
 
   describe "#index" do
-    before { get :index }
-    it { expect(response).to have_http_status(200) }
-    it { expect(response).to render_template(:index) }
-    # it { expect(response.body).to include(public_post.title) }
-    # it { expect(response.body).not_to include(private_post.title) }
+    it "in html" do
+      get :index
+      expect(response).to have_http_status(200)
+      expect(response).to render_template(:index)
+    end
   end
 
   describe "#show" do
-    before { get :show, slug: public_post.slug }
-    it { expect(response).to have_http_status(200) }
+    it 'in html' do
+      get :show, slug: public_post.slug
+      expect(response).to have_http_status(200)
+    end
   end
+
   # specify "#new" do
   #   get :new
   #   expect(response).to have_http_status(200)
   #   expect(response).to render_template(:new)
   # end
+  
+  describe "#create" do
+    let(:post_params){{
+      :title => "new post",
+      :slug => "new slug",
+      :category => "未分類",
+      :content => ["new ", "content"],
+      :abstract => ["",""],
+      :display_date => "2015/10/10"
+    }}
+    it 'saves a new post' do
+      post :create, post_params
+      expect(response).to have_http_status(200)
+    end
+  end
 end
