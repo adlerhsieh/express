@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
   def load_settings
     @settings = Setting.all.map(&:serializable_hash)
-    # binding.pry
+    return if params[:controller].index("store")
     if params[:action] == "show" && !(params[:controller].include? "users") && params[:controller] != "categories" && params[:format] != "json"
       # find record
       model = params[:controller].singularize.capitalize.constantize
