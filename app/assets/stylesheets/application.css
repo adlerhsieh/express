@@ -102,6 +102,9 @@ img {
     text-align: center;
     border: 1px solid #D8D8D8;
   }
+  .pull-right {
+    float: none;
+  }
 }
 
 footer {
@@ -111,3 +114,4 @@ footer {
 .align-right {
   text-align: right;
 }
+
