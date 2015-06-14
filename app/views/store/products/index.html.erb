@@ -1,5 +1,7 @@
-<h2>商店</h2>
-<% if is_admin? %>
-  <%= link_to "新增", new_store_product_path, class: "btn btn-primary" %>
-<% end %>
+<h2>
+  商店 
+  <% if is_admin? %>
+    <%= link_to "新增商品", new_store_product_path, class: "btn btn-primary" %>
+  <% end %>
+</h2>
 <%= render partial: "list" %>
