@@ -3,9 +3,13 @@
     <a href="<%= store_product_path(p) %>">
       <div class="product col-lg-3">
         <div class="image_tag"><%= image_tag(p.default_image) %></div>
-        <h4 class="title"><%= p.title %></h4>
+        <p class="product_title"><%= p.title %></p>
       </div>
     </a>
+    <p class="price">
+      <span>$<%= p.price %> | </span>
+      <i class="price fa fa-cart-plus add-to-cart" id="p-<%= p.id %>"></i>
+    </p>
     <% if is_admin? %>
     <div style="text-align: center">
       <%= link_to "編輯", edit_store_product_path(p), class: "note" %> |
