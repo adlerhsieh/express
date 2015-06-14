@@ -69,14 +69,14 @@ class Store::ProductsController < ApplicationController
     end
 
     def update_images
-      new_images = [1..5].map {|n| params["image_#{n}".to_sym] }
+      new_images = [1,2,3,4,5].map {|n| params[:store_product]["image_#{n}".to_sym] }
       @product.update_images(new_images)
     end
 
     def set_attached_images
       images = @product.images.limit(5).map(&:image)
       images.each do |image|
-        index = images.index(image)
+        index = images.index(image)+1
         @product.send("image_#{index}=", image)
       end
     end
