@@ -76,6 +76,11 @@ Rails.application.routes.draw do
 
   namespace :store do
     resources :products
+    resources :orders do
+      member do
+        post :add_to_cart
+      end
+    end
   end
 
   root to: "index#index"
