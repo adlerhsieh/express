@@ -1,0 +1,6 @@
+<% @products.each do |p| %>
+  <div class="col-sm-3">
+    <%= link_to p.title, edit_store_product_path(p) %>
+    <%= link_to "刪除", store_product_path(p), method: :delete %>
+  </div>
+<% end %>

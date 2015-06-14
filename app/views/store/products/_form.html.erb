@@ -1,0 +1,41 @@
+<%= form_for @product do |p| %>
+  <div class="col-lg-6">
+    <table style="width: 100%;">
+      <tr class="height-50">
+        <td class="padding-right-20">名稱</td>
+        <td><%= p.text_field :title, class: "form-control" %></td>
+      </tr>
+      <tr class="height-50">
+        <td>庫存數量</td>
+        <td><%= p.text_field :stock, class: "form-control", placeholder: "數字" %></td>
+      </tr>
+      <tr class="height-50">
+        <td>價格</td>
+        <td><%= p.text_field :price, class: "form-control", placeholder: "數字" %></td>
+      </tr>
+      <tr class="height-50">
+        <td>首圖網址</td>
+        <td><%= p.text_field :default_image, class: "form-control" %></td>
+      </tr>
+      <tr class="height-50">
+        <td>類別</td>
+        <td><%= p.text_field :category, class: "form-control" %></td>
+      </tr>
+      <tr class="height-100">
+        <td>說明</td>
+        <td><%= p.text_area :description, class: "form-control height-100" %></td>
+      </tr>
+      <tr>
+        <td><%= p.submit "儲存", class: "btn btn-success btn-lg", style: "margin-top: 20px;" %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-lg-6" style="margin-top: 8px;">
+    <p><%= p.text_field :image_1, class: "form-control", placeholder: "其他圖片網址" %></p>
+    <p><%= p.text_field :image_2, class: "form-control", placeholder: "其他圖片網址" %></p>
+    <p><%= p.text_field :image_3, class: "form-control", placeholder: "其他圖片網址" %></p>
+    <p><%= p.text_field :image_4, class: "form-control", placeholder: "其他圖片網址" %></p>
+    <p><%= p.text_field :image_5, class: "form-control", placeholder: "其他圖片網址" %></p>
+    <p><%= link_to "圖片上傳：Imgur", "http://motionexpress.imgur.com/all/", target: "_blank" %></p>
+  </div>
+<% end %>

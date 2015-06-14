@@ -2,7 +2,7 @@ class Store::ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :show, :destroy, :toggle_display]
 
   def index
-    
+    @products = Store::Product.all
   end
 
   def new
@@ -12,6 +12,7 @@ class Store::ProductsController < ApplicationController
   def create
     @product = Store::Product.new(product_params)
     if @product.save
+      update_images
       flash[:notice] = "已建立新商品：#{@product.title}"
       redirect_to store_products_path
     else
@@ -20,21 +21,30 @@ class Store::ProductsController < ApplicationController
   end
 
   def edit
-    
+    set_attached_images
   end
 
   def update
-    
+    if @product.update(product_params)
+      update_images
+      flash[:notice] = "已更新商品內容"
+      redirect_to store_products_path
+    else
+      render :edit
+    end
+
   end
 
   def show
     if is_admin?
+
+    else
       redirect_to store_products_path
       return
     end
   end
 
-  def destory
+  def destroy
     @product.delete
     flash[:notice] = "產品已刪除"
     redirect_to store_products_path
@@ -51,10 +61,23 @@ class Store::ProductsController < ApplicationController
 
   private
     def set_product
-      @product = Store::Product.find(params[:id])
+      @product = Store::Product.includes(:images).find(params[:id])
     end
 
     def product_params
       params.require(:store_product).permit(:title, :description, :stock, :price, :default_image, :category_id, :display)
+    end
+
+    def update_images
+      new_images = [1..5].map {|n| params["image_#{n}".to_sym] }
+      @product.update_images(new_images)
+    end
+
+    def set_attached_images
+      images = @product.images.limit(5).map(&:image)
+      images.each do |image|
+        index = images.index(image)
+        @product.send("image_#{index}=", image)
+      end
     end
 end
