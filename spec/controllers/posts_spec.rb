@@ -6,7 +6,7 @@ describe PostsController, type: :controller do
   let(:private_post){create(:post, :private)}
   before do
     sign_in user 
-    allow(controller).to receive(:load_settings).and_return(nil)
+    set_meta_tags
   end
 
   describe "#index" do
