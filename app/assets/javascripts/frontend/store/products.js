@@ -8,7 +8,7 @@ $(document).ready(function(){
       method: "POST",
       data: {'CSRFToken': token}
     }).success(function(response){
-      console.log(response);
+      // console.log(response);
     });
   });
 });

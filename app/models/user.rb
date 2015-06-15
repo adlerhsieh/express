@@ -7,10 +7,14 @@ class User < ActiveRecord::Base
   has_many :orders, :class_name => "Store::Order"
   require 'bing_translator'
 
+  def has_cart?
+    self.orders.where(:aasm_state => "cart").order(:updated_at => :desc).first
+  end
+
   def cart
-    @cart ||= Store::Order.where(:aasm_state => "cart").order(:updated_at => :desc).first
+    @cart ||= self.orders.where(:aasm_state => "cart").order(:updated_at => :desc).first
     if not @cart
-      @cart = Store::Order.new
+      @cart = self.orders.new
       @cart.save!
     end
     return @cart

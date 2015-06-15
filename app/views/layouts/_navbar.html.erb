@@ -24,11 +24,16 @@
     </ul>
     <ul class="nav navbar-nav pull-right">
       <% if user_signed_in? %>
+        <% if current_user.has_cart? %>
+          <li>
+            <%= link_to(content_tag(:i, "", :class => 'fa fa-shopping-cart', :style => 'font-size: 18px;') + current_user.cart.items.count, "") %>
+          </li>
+        <% end %>
         <li>
-        <%= link_to(current_user["name"], user_path(current_user["name"])) %>
+          <%= link_to(current_user["name"], user_path(current_user["name"])) %>
         </li>
         <li>
-        <%= link_to("登出", destroy_user_session_path, method: :get) %>
+          <%= link_to("登出", destroy_user_session_path, method: :get) %>
         </li>
       <% else %>
         <li>
