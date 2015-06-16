@@ -59,6 +59,13 @@ class Store::ProductsController < ApplicationController
     render json: @product.display
   end
 
+  def add_to_cart
+    order = find_current_order
+    result = order.add_item(params[:id])
+    flash[:notice] = "已加入購物車：#{result[:title]}"
+    redirect_to request.referer
+  end
+
   private
     def set_product
       @product = Store::Product.includes(:images).find(params[:id])
