@@ -23,12 +23,13 @@
       <li><%= link_to("作者", author_path) %></li>
     </ul>
     <ul class="nav navbar-nav pull-right">
+      <% if current_order %>
+        <li>
+        <%= link_to(
+          content_tag(:i, "", :class => 'fa fa-shopping-cart', :style => 'font-size: 20px;'), "") %>
+        </li>
+      <% end %>
       <% if user_signed_in? %>
-        <% if current_user.has_cart? %>
-          <li>
-            <%= link_to(content_tag(:i, "", :class => 'fa fa-shopping-cart', :style => 'font-size: 18px;') + current_user.cart.items.count, "") %>
-          </li>
-        <% end %>
         <li>
           <%= link_to(current_user["name"], user_path(current_user["name"])) %>
         </li>
