@@ -1,0 +1,24 @@
+<h2>訂單內容</h2>
+<span class="status float-right">狀態：<%= @order.aasm_state %></span>
+<table class="table table-bordered table-hover items">
+  <thead>
+    <th>名稱</th>
+    <th>數量</th>
+    <th>價格</th>
+  </thead>
+  <tbody>
+    <% @order.items.each do |i| %>
+      <tr>
+        <td><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></td>
+        <td><%= i.quantity %></td>
+        <td><%= i.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="notes column">
+  <h4>注意事項</h4>
+  <p>1. 價格為新台幣計價。</p>
+  <p>2. 若未登入，購物車內容僅會保留7天。</p>
+</div>

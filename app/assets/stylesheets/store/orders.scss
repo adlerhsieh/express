@@ -1,0 +1,19 @@
+table.items {
+  background-color: white;
+  
+  tbody tr {
+    &:hover {
+      // cursor: pointer;
+    }
+  }
+}
+
+.float-right {
+  float: right;
+}
+
+.notes {
+  p {
+    line-height: 5px;
+  }
+}
