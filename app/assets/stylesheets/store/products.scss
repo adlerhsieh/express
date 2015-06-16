@@ -29,9 +29,10 @@
 i.price {
   font-size: 24px;
   cursor: pointer;
+  color: black;
 
   &:hover {
     color: green;
-    font-size: 26px;
+    // font-size: 26px;
   }
 }
