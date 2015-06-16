@@ -2,6 +2,8 @@ class Store::Order < ActiveRecord::Base
   belongs_to :user
   has_many :items, :class_name => "Store::OrderItem", :foreign_key => "order_id"
   include AASM
+  extend FriendlyId
+  friendly_id :token
   before_save :generate_token, :set_paid_false
 
   def generate_token
