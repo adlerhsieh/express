@@ -8,7 +8,7 @@
     </a>
     <p class="price">
       <span>$<%= p.price %> | </span>
-      <i class="price fa fa-cart-plus add-to-cart" id="p-<%= p.id %>"></i>
+      <%= link_to content_tag(:i, "", class: "price fa fa-cart-plus") ,add_to_cart_store_product_path(p), method: :post %>
     </p>
     <% if is_admin? %>
     <div style="text-align: center">
