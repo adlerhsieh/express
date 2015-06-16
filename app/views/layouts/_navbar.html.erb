@@ -26,7 +26,7 @@
       <% if current_order %>
         <li>
         <%= link_to(
-          content_tag(:i, "", :class => 'fa fa-shopping-cart', :style => 'font-size: 20px;'), "") %>
+          content_tag(:i, "", :class => 'fa fa-shopping-cart', :style => 'font-size: 20px;'), store_order_path(current_order)) %>
         </li>
       <% end %>
       <% if user_signed_in? %>
