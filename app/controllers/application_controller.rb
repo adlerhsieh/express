@@ -5,6 +5,30 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_devise_params, if: :devise_controller?
   before_filter :load_settings
+  before_action :clear_empty_order
+  helper_method :current_order
+
+  def current_order
+    @order ||= Store::Order.find_by_id(session[:order_id])
+  end
+
+  def find_current_order
+    if current_order
+      current_order
+    elsif current_user
+      cart = current_user.cart
+      session[:order_id] = cart.id
+      return cart
+    else
+      cart = Store::Order.create!
+      session[:order_id] = cart.id
+      return cart
+    end
+  end
+
+  def clear_empty_order
+    session[:order_id] = nil unless current_order
+  end
 
   def set_locale
     # available_languages = ["zh-TW", "zh-HK", "zh-CN"]
