@@ -3,6 +3,11 @@ class Store::OrdersController < ApplicationController
   before_action :set_order, only: [:place]
   # before_filter :authenticate_user!
   #
+  def index
+    # @orders = User.includes(:orders => [:items, :info]).find_by_id(session[:user_id]).orders
+    @orders = current_user.orders.where.not(:aasm_state => "cart")
+  end
+
   def show
     @order = Store::Order.includes(:items => [:product]).find_by_token(params[:id])
   end

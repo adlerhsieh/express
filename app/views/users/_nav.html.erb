@@ -2,7 +2,7 @@
   <li class="<%= "active" if params[:controller] == "users" %>">
     <%= link_to "帳號資訊", info_users_path %>
   </li>
-  <li class="<%= "active" if params[:controller] == "users" && params[:aciton] == "orders" %>">
+  <li class="<%= "active" if params[:controller] == "store/orders" && params[:action] == "index" %>">
     <%= link_to "所有訂單", store_orders_path %>
   </li>
   <% if is_admin? %>

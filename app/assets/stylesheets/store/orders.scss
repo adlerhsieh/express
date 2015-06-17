@@ -2,8 +2,14 @@ table.items {
   background-color: white;
   border-radius: 5px;
   border: 1px solid #D8D8D8;
+  thead th {
+    text-align: center;
+  }
   
   tbody tr {
+    td {
+      text-align: center;
+    }
     &:hover {
       // cursor: pointer;
     }
