@@ -45,7 +45,7 @@ class Store::Order < ActiveRecord::Base
     event :outdate do
       transitions from: [:cart, :placed], to: :outdated
     end
-    event :checkout do
+    event :place do
       transitions from: :cart, to: :placed
     end
     event :pay do

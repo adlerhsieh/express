@@ -82,7 +82,7 @@ Rails.application.routes.draw do
     end
     resources :orders do
       member do
-        get :checkout
+        get :place
       end
     end
   end
