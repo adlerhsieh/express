@@ -15,7 +15,6 @@
 //= require_tree .
 //= require highlight
 //= require bootstrap
-//= require pace
 
 // var height = 0
 //
