@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   end
 
   def cart
+    order = self.orders.where(:aasm_state => "placed").first
+    return order if order
     @cart ||= self.orders.where(:aasm_state => "cart").order(:updated_at => :desc).first
     if not @cart
       @cart = self.orders.new

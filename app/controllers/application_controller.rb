@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
   def current_order
-    @order ||= Store::Order.find_by_id(session[:order_id])
+    @current_order ||= Store::Order.find_by_id(session[:order_id])
   end
 
   def find_current_order
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       current_order
     elsif current_user
       cart = current_user.cart
-      session[:order_id] = cart.id
+      session[:order_id] = cart.id if cart.aasm_state == "cart"
       return cart
     else
       cart = Store::Order.create!
