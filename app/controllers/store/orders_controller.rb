@@ -14,7 +14,9 @@ class Store::OrdersController < ApplicationController
 
   def place
     @order.place!
+    @order.update_order_time
     session[:order_id] = nil
+    flash[:notice] = "再點選一次按鈕前往結帳頁面！"
     redirect_to store_order_path(@order)
   end
 

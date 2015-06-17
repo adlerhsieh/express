@@ -40,7 +40,7 @@ class Store::Order < ActiveRecord::Base
   aasm do
     state :outdated
     state :cart, :initial => true
-    state :placed, :after_commit => :update_order_time
+    state :placed
     state :paid
     state :shipped
     state :arrived

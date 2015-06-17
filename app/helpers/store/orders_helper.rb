@@ -56,6 +56,7 @@ module Store::OrdersHelper
     quantity = item.quantity
     stock = item.product.stock
     if quantity > stock 
+      @out_of_stock = true
       content_tag(:span, "不足", style: "color: red")
     else
       content_tag(:span, "有")
@@ -63,12 +64,13 @@ module Store::OrdersHelper
   end
 
   def action_button
-    _class = "btn btn-primary action"
+    @disabled = "disabled" if @out_of_stock
+    _class = "btn btn-primary action #{@disabled}"
     case @order.aasm_state
     when "cart"
       link_to("確認下單", place_store_order_path(@order), class: _class)
     when "placed"
-      link_to("前往付款頁面", "", class: _class)
+      link_to("前往付款", "", class: _class)
     else
       ""
     end
