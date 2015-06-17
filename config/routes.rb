@@ -30,11 +30,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do
+  resources :users, except: [:index, :show, :create, :update, :new, :edit, :destroy] do
     collection do
       post :subscribe
       get :unsubscribe
       post :send_post_email
+      get :info
     end
     member do
     end

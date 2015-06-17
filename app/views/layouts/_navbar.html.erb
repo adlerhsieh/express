@@ -31,7 +31,7 @@
       <% end %>
       <% if user_signed_in? %>
         <li>
-          <%= link_to(current_user["name"], user_path(current_user["name"])) %>
+          <%= link_to(current_user["name"], info_users_path) %>
         </li>
         <li>
           <%= link_to("登出", destroy_user_session_path, method: :get) %>
