@@ -58,7 +58,8 @@ class ApplicationController < ActionController::Base
         return
       end
     end
-    redirect_to sign_in_path 
+    flash[:alert] = "路徑錯誤"
+    redirect_to posts_path 
   end
 
   def is_admin?
