@@ -1,5 +1,7 @@
 table.items {
   background-color: white;
+  border-radius: 5px;
+  border: 1px solid #D8D8D8;
   
   tbody tr {
     &:hover {
@@ -13,7 +15,53 @@ table.items {
 }
 
 .notes {
+  margin-top: 0px;
   p {
     line-height: 5px;
   }
+}
+
+div.order {
+
+}
+
+.status-bar {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  margin-top: -10px;
+  margin-bottom: 40px;
+  text-align: center;
+  #place {
+    float: left;
+  }
+  #deliver {
+    float: right;
+  }
+}
+
+.buttons {
+  // width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-top: 1px solid #D8D8D8;
+  padding-top: 20px;
+
+  .btn {
+    float: right;
+    width: 150px;
+  }
+}
+
+.cancel-td {
+  text-align: right;
+  width: 60px;
+}
+
+.cancel {
+  color: red;
+  font-size: 12px;
+  text-align: right;
 }

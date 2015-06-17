@@ -8,24 +8,31 @@
   <span id="pay">付款</span>
   <span id="deliver">出貨</span>
 </div>
-<table class="table table-bordered table-hover items">
-  <thead>
-    <th>名稱</th>
-    <th>數量</th>
-    <th>價格</th>
-  </thead>
-  <tbody>
-    <% @order.items.each do |i| %>
-      <tr>
-        <td><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></td>
-        <td><%= i.quantity %></td>
-        <td><%= i.price %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<div class="notes column">
+<div class="order col-sm-6">
+  <table class="table items">
+    <thead>
+      <th>名稱</th>
+      <th>數量</th>
+      <th>價格</th>
+      <th>庫存</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @order.items.each do |i| %>
+        <tr>
+          <td><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></td>
+          <td><%= i.quantity %></td>
+          <td><%= i.price %></td>
+          <td><%= check_stock(i) %></td>
+          <td class="cancel-td"><%= link_to "取消", "", class: "cancel" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="notes column col-sm-6">
   <h4>注意事項</h4>
   <p>* 價格為新台幣計價。</p>
   <% unless current_user %>
@@ -33,7 +40,8 @@
   <% end %>
 </div>
 
-<div class="buttons">
-  <%= link_to "結帳", checkout_store_order_path(@order), class: "btn btn-primary" %>
+<div class="buttons col-lg-12">
+  <%= link_to "結帳", checkout_store_order_path(@order), class: "btn btn-primary checkout" %>
 </div>
+
 

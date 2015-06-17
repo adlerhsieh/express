@@ -42,4 +42,14 @@ module Store::OrdersHelper
     end
     content_tag(:progress, "", :max => "100", :value => value)
   end
+
+  def check_stock(item)
+    quantity = item.quantity
+    stock = item.product.stock
+    if quantity > stock 
+      content_tag(:span, "不足", style: "color: red")
+    else
+      content_tag(:span, "有")
+    end
+  end
 end
