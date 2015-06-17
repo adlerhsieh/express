@@ -4,4 +4,13 @@ class Store::OrdersController < ApplicationController
   def show
     @order = Store::Order.includes(:items => [:product]).find_by_token(params[:id])
   end
+
+  def checkout
+    @order.checkout!
+  end
+
+  private
+    def set_order
+      @order = Store::Order.find_by_token(params[:id])
+    end
 end

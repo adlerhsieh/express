@@ -80,7 +80,11 @@ Rails.application.routes.draw do
         post :add_to_cart
       end
     end
-    resources :orders
+    resources :orders do
+      member do
+        get :checkout
+      end
+    end
   end
 
   root to: "index#index"
