@@ -22,7 +22,7 @@ class Store::Order < ActiveRecord::Base
     if item
       quan = item.quantity + 1
       item.update_column(:quantity, quan)
-      item.update_column(:price, quan*item.price)
+      # item.update_column(:price, quan*item.price)
     else
       product = Store::Product.find(product_id)
       item = self.items.create(:product_id => product.id, 
@@ -30,11 +30,19 @@ class Store::Order < ActiveRecord::Base
                         :price => product.price
                        )
     end
+    self.update_total_price
     {title: item.product.title, quantity: item.quantity, price: item.price}
   end
 
   def update_order_time
     self.update_column(:order_time, Time.now)
+  end
+
+  def update_total_price
+    total_price = self.items.inject(0){|r,item|
+      r += (item.quantity * item.price)
+    }
+    self.update_column(:price, total_price)
   end
 
   aasm do
