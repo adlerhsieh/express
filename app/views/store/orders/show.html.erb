@@ -1,5 +1,13 @@
-<h2>訂單內容</h2>
-<span class="status float-right">狀態：<%= @order.aasm_state %></span>
+<%= order_title %>
+<% unless @order.aasm_state %>
+  <span class="status float-right">狀態：<%= status_print @order.aasm_state %></span>
+<% end %>
+<%= progress_bar %>
+<div class="status-bar">
+  <span id="place">下單</span>
+  <span id="pay">付款</span>
+  <span id="deliver">出貨</span>
+</div>
 <table class="table table-bordered table-hover items">
   <thead>
     <th>名稱</th>
@@ -19,6 +27,13 @@
 
 <div class="notes column">
   <h4>注意事項</h4>
-  <p>1. 價格為新台幣計價。</p>
-  <p>2. 若未登入，購物車內容僅會保留7天。</p>
+  <p>* 價格為新台幣計價。</p>
+  <% unless current_user %>
+    <p>* 若未登入，購物車內容僅會保留7天。</p>
+  <% end %>
 </div>
+
+<div class="buttons">
+  <%= link_to "結帳", checkout_store_order_path(@order), class: "btn btn-primary" %>
+</div>
+

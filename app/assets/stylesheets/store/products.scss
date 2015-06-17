@@ -36,3 +36,36 @@ i.price {
     // font-size: 26px;
   }
 }
+
+progress {
+  width: 60%;
+  display: block;
+  margin: 20px auto;
+}
+
+progress::-webkit-progress-bar {
+
+}
+
+progress::-webkit-progress-value {
+
+}
+
+.status-bar {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  text-align: center;
+  #place {
+    float: left;
+  }
+  #deliver {
+    float: right;
+  }
+}
+
+.buttons {
+  float: right;
+}
