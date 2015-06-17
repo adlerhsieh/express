@@ -86,6 +86,11 @@ Rails.application.routes.draw do
         get :place
       end
     end
+    resources :order_items do
+      member do
+        post :delete
+      end
+    end
   end
 
   root to: "index#index"

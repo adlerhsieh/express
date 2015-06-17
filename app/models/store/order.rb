@@ -33,10 +33,14 @@ class Store::Order < ActiveRecord::Base
     {title: item.product.title, quantity: item.quantity, price: item.price}
   end
 
+  def update_order_time
+    self.update_column(:order_time, Time.now)
+  end
+
   aasm do
     state :outdated
     state :cart, :initial => true
-    state :placed
+    state :placed, :after_commit => :update_order_time
     state :paid
     state :shipped
     state :arrived

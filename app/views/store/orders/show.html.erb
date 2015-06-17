@@ -21,7 +21,7 @@
           <td><%= i.quantity %></td>
           <td><%= i.price %></td>
           <td><%= check_stock(i) %></td>
-          <td class="cancel-td"><%= link_to "取消", "", class: "cancel" %></td>
+          <td class="cancel-td"><%= link_to "取消", delete_store_order_item_path(i), method: :post, class: "cancel" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -38,6 +38,9 @@
 
 <div class="buttons col-lg-12">
   <%= action_button %>
+  <% if @out_of_stock %>
+    <span class="warning">庫存不足，請將不足的品項移除才可結帳</span>
+  <% end %>
 </div>
 
 
