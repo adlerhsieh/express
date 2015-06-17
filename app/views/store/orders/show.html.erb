@@ -21,7 +21,7 @@
           <td><%= i.quantity %></td>
           <td><%= i.price %></td>
           <td><%= check_stock(i) %></td>
-          <td class="cancel-td"><%= link_to "取消", delete_store_order_item_path(i), method: :post, class: "cancel" %></td>
+          <td class="cancel-td"><%= link_to "移除", delete_store_order_item_path(i), method: :post, class: "cancel" %></td>
         </tr>
       <% end %>
     </tbody>

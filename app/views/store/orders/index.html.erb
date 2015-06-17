@@ -14,7 +14,7 @@
       <tbody>
         <% @orders.each do |order| %>
           <tr>
-            <td><%= link_to order.token[0..7], store_order_path(order), target: "_blank" %></td>
+            <td><%= link_to order.token[0..7], store_order_path(order) %></td>
             <td><%= order.items.count %></td>
             <td><%= order.items.map(&:quantity).inject(0){|r,m|r+m} %></td>
             <td><%= order.order_time.strftime("%Y-%m-%d") %></td>
