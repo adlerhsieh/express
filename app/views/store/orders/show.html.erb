@@ -3,11 +3,7 @@
   <span class="status float-right">狀態：<%= status_print @order.aasm_state %></span>
 <% end %>
 <%= progress_bar %>
-<div class="status-bar">
-  <span id="place">下單</span>
-  <span id="pay">付款</span>
-  <span id="deliver">出貨</span>
-</div>
+<%= progress_bar_status %>
 
 <div class="order col-sm-6">
   <table class="table items">
@@ -41,7 +37,7 @@
 </div>
 
 <div class="buttons col-lg-12">
-  <%= link_to "結帳", checkout_store_order_path(@order), class: "btn btn-primary checkout" %>
+  <%= action_button %>
 </div>
 
 
