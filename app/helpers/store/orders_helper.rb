@@ -52,6 +52,15 @@ module Store::OrdersHelper
                :class => "status-bar")
   end
 
+  def progress_bar_timestamp
+    return if @order.aasm_state == "cart"
+    content_tag(:div,
+               content_tag(:span, time(@order.order_time), id: "place") + 
+               content_tag(:span, time(@order.pay_time), id: "pay") + 
+               content_tag(:span, time(@order.shipping_time), id: "deliver"),
+               :class => "status-bar")
+  end
+
   def check_stock(item)
     quantity = item.quantity
     stock = item.product.stock
