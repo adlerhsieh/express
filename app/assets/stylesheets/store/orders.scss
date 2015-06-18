@@ -79,3 +79,17 @@ div.order {
   display: inherit;
   margin-top: 50px;
 }
+
+.go-to-shop {
+  display: block;
+  margin: 50px auto;
+  text-align: center;
+  p {
+    margin-top: 20px;
+  }
+  .btn {
+    width: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
