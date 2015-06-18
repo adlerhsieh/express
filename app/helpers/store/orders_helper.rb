@@ -63,6 +63,10 @@ module Store::OrdersHelper
     end
   end
 
+  def stock_warning
+    content_tag(:span, "庫存不足，請將不足的品項移除才可結帳", :class => "warning") if @out_of_stock
+  end
+
   def action_button
     @disabled = "disabled" if @out_of_stock
     _class = "btn btn-primary action #{@disabled}"
@@ -73,6 +77,22 @@ module Store::OrdersHelper
       link_to("前往付款", "", class: _class)
     else
       ""
+    end
+  end
+
+  def total_quantity
+    @order.items.inject(0){|r,i| r += i.quantity }
+  end
+
+  def total_price
+    @order.items.inject(0){|r,i| r += i.sum }
+  end
+
+  def time(time)
+    if time
+      time.strftime("%Y-%m-%d %H:%M:%S")
+    else
+      "--"
     end
   end
 end
