@@ -42,15 +42,16 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :mailgun
   ActionMailer::Base.smtp_settings = {
     :port           => 587,
-    :address        => 'smtp.mailgun.org',
-    :user_name      => "postmaster@motion-express.com",
-    :password       => "299a2e8c64e6c3ab958cb9a0cdcb7b83",
-    :authentication => :plain,
-    :domain => "motion-express.com"
+    :address        => 'smtp.gmail.com',
+    :user_name      => "info@motion-express.com",
+    :password       => "Biohazard123",
+    :authentication => "plain",
+    :domain => "motion-express.com",
+    :enable_starttls_auto => true
   }
   ActionMailer::Base.delivery_method = :smtp
-  Mailgun.configure do |config|
-    config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
-    config.domain = "motion-express.com"
-  end
+  # Mailgun.configure do |config|
+  #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
+  #   config.domain = "motion-express.com"
+  # end
 end
