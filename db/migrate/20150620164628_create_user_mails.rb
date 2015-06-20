@@ -1,8 +1,8 @@
 class CreateUserMails < ActiveRecord::Migration
   def change
-    create_table :user_mails do |t|
+    create_table :user_emails do |t|
       t.string :address
-      t.boolean :blog_scription
+      t.boolean :blog_subscription
       t.integer :user_id
 
       t.timestamps null: false

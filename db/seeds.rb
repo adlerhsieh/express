@@ -16,3 +16,10 @@ if user = User.find_by_email("nkj20932@hotmail.com")
   user.update_column(:is_admin, true)
 end
 
+User::Email.create(blog_subscription: true, address: "42thcoder@gmail.com")
+User::Email.create(blog_subscription: true, address: "781260203@qq.com")
+User::Email.create(blog_subscription: true, address: "a20209598@gmail.com")
+User::Email.create(blog_subscription: true, address: "acsd68500@gmail.com")
+User::Email.create(blog_subscription: true, address: "cstony0917@gmail.com")
+User::Email.create(blog_subscription: true, address: "dars94@gmail.com")
+User::Email.create(blog_subscription: true, address: "nkj20932@hotmail.com")

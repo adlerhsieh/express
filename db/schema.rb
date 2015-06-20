@@ -230,12 +230,12 @@ ActiveRecord::Schema.define(version: 20150620164628) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "user_mails", force: :cascade do |t|
-    t.string   "address",        limit: 255
-    t.boolean  "blog_scription", limit: 1
-    t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "user_emails", force: :cascade do |t|
+    t.string   "address",           limit: 255
+    t.boolean  "blog_subscription", limit: 1
+    t.integer  "user_id",           limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "user_products", force: :cascade do |t|
