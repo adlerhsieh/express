@@ -19,19 +19,19 @@ class UsersController < ApplicationController
   end
 
   def subscribe
-    # if in_list?
-    #   @mailgun.list_members(@list).update params[:email], {:subscribed => "yes"}
-    #   flash[:notice] = "已恢復#{@email}的訂閱狀態"
-    # else
-    #   @mailgun.list_members(@list).add(@email)
-    #   flash[:notice] = "已將#{@email}加入名單"
-    # end
+    if in_list?
+      address = User::Email.find_by_address(@mail).update_column(:blog_subscription, true)
+      flash[:notice] = "已恢復#{@email}的訂閱狀態"
+    else
+      User::Email.create!(blog_subscription: true, address: @email)
+      flash[:notice] = "已將#{@email}加入名單"
+    end
     redirect_to posts_path
   end
 
   def unsubscribe
-    # @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
-    # @mail = params[:email]
+    address = User::Email.find_by_address(@mail)
+    address.update_column(:blog_subscription, false) if address
   end
 
   def send_post_email
@@ -39,11 +39,6 @@ class UsersController < ApplicationController
       render json: "Authorization failed"
       return
     end
-    # list = [
-    #   {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
-    #   {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
-      # {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
-    # ]
     # emails = ["nkj20932@gmail.com"]
     i = 0
     posts = []
@@ -53,14 +48,7 @@ class UsersController < ApplicationController
       render json: "No posts are selected"
       return
     end
-    emails = []
-    # emails = @member_list.map {|member|
-    #   if member["subscribed"] == true
-    #     member["address"]
-    #   else
-    #     nil
-    #   end
-    # }.compact
+    emails = User::Email.where(:blog_subscription => true).map(&:address)
     SubscriptionMailer.subscription(emails, posts).deliver_now if emails.length > 0
     posts.each {|post| post.update_column(:sent, Date.today)}
     render json: "已發送Email給 #{emails.length} 位訂閱者"
@@ -68,14 +56,11 @@ class UsersController < ApplicationController
 
   private
     def set_email
-      # @mailgun = Mailgun()
-      # @email = params[:email]
-      # @list = "service@mg.motion-express.com" 
-      # @member_list ||= @mailgun.list_members(@list).list 
+      @email = params[:email]
     end
 
     def email_already_in_list_and_subscribed?
-      address_list = @member_list.map{|m|m["address"]}
+      address_list = User::Email.all.map(&:address)
       if address_list.include?(@email)
         if already_subscribed?
           flash[:alert] = "email先前已訂閱"
@@ -95,11 +80,11 @@ class UsersController < ApplicationController
     end
 
     def in_list?
-      @member_list.find{|item| item["address"] == @email}
+      User::Email.find_by_address(@email)
     end
 
     def already_subscribed?
-      @member_list.find{|item| item["address"] == @email}["subscribed"] == true
+      User::Email.where(:blog_subscription => true, :address => @email).any?
     end
 
     def translator_balance
