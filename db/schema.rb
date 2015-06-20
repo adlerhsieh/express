@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611143843) do
+ActiveRecord::Schema.define(version: 20150620164628) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -115,6 +115,68 @@ ActiveRecord::Schema.define(version: 20150611143843) do
     t.string   "tag",        limit: 255
   end
 
+  create_table "store_categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "store_images", force: :cascade do |t|
+    t.string   "image",      limit: 255
+    t.integer  "product_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "store_order_infos", force: :cascade do |t|
+    t.string   "shipping_name",    limit: 255
+    t.string   "shipping_address", limit: 255
+    t.integer  "order_id",         limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "store_order_items", force: :cascade do |t|
+    t.integer  "quantity",   limit: 4
+    t.integer  "price",      limit: 4
+    t.integer  "order_id",   limit: 4
+    t.integer  "product_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "store_orders", force: :cascade do |t|
+    t.integer  "price",             limit: 4
+    t.boolean  "paid",              limit: 1
+    t.string   "token",             limit: 255
+    t.integer  "payment_method_id", limit: 4
+    t.string   "aasm_state",        limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.datetime "order_time"
+    t.datetime "pay_time"
+    t.datetime "shipping_time"
+    t.integer  "user_id",           limit: 4
+  end
+
+  create_table "store_payment_methods", force: :cascade do |t|
+    t.string   "method",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "store_products", force: :cascade do |t|
+    t.string   "title",         limit: 255
+    t.string   "description",   limit: 255
+    t.integer  "stock",         limit: 4
+    t.integer  "price",         limit: 4
+    t.string   "default_image", limit: 255
+    t.integer  "category_id",   limit: 4
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "display",       limit: 1,   default: false
+  end
+
   create_table "tag_translations", force: :cascade do |t|
     t.integer  "tag_id",     limit: 4,   null: false
     t.string   "locale",     limit: 255, null: false
@@ -158,6 +220,29 @@ ActiveRecord::Schema.define(version: 20150611143843) do
     t.boolean  "is_public",    limit: 1,     default: false
     t.integer  "category_id",  limit: 4
     t.boolean  "skip",         limit: 1,     default: true
+  end
+
+  create_table "user_addresses", force: :cascade do |t|
+    t.string   "address",    limit: 255
+    t.string   "phone",      limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "user_mails", force: :cascade do |t|
+    t.string   "address",        limit: 255
+    t.boolean  "blog_scription", limit: 1
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "user_products", force: :cascade do |t|
+    t.integer  "product_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "users", force: :cascade do |t|

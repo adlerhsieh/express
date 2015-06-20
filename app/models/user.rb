@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:github]
+  has_one :mail, :class_name => "User::Mail"
   require 'bing_translator'
 
   def is_admin?
