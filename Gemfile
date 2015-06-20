@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'mail'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'http_accept_language'
@@ -7,7 +8,7 @@ gem 'kaminari'
 gem 'globalize'
 gem 'sitemap_generator'
 gem 'rest-client'
-gem 'mailgun'
+# gem 'mailgun'
 gem 'bing_translator'
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-ace'

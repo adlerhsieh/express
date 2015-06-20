@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :email_formatted?, only: [:subscribe]
   before_action :email_already_in_list_and_subscribed?, only: [:subscribe]
   # require 'rest-client'
-  require 'mailgun'
+  # require 'mailgun'
 
   def show
     @user = User.find_by_name(params[:name])
@@ -19,43 +19,48 @@ class UsersController < ApplicationController
   end
 
   def subscribe
-    if in_list?
-      @mailgun.list_members(@list).update params[:email], {:subscribed => "yes"}
-      flash[:notice] = "已恢復#{@email}的訂閱狀態"
-    else
-      @mailgun.list_members(@list).add(@email)
-      flash[:notice] = "已將#{@email}加入名單"
-    end
+    # if in_list?
+    #   @mailgun.list_members(@list).update params[:email], {:subscribed => "yes"}
+    #   flash[:notice] = "已恢復#{@email}的訂閱狀態"
+    # else
+    #   @mailgun.list_members(@list).add(@email)
+    #   flash[:notice] = "已將#{@email}加入名單"
+    # end
     redirect_to posts_path
   end
 
   def unsubscribe
-    @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
-    @mail = params[:email]
+    # @mailgun.list_members(@list).update params[:email], {:subscribed => "no"}
+    # @mail = params[:email]
   end
 
   def send_post_email
+    if not current_user.is_admin
+      render json: "Authorization failed"
+      return
+    end
     # list = [
     #   {"address"=>"nkj20932@hotmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}},
     #   {"address"=>"nkj20932@gmail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
       # {"address"=>"nkj20932@ymail.com", "name"=>"", "subscribed"=>true, "vars"=>{}}
     # ]
-    # emails = ["nkj20932@hotmail.com", "nkj20932@gmail.com"]
+    # emails = ["nkj20932@gmail.com"]
     i = 0
     posts = []
     if params[:array]
       params[:array].each { |id| posts << Post.find(id) }
     else
-      render json: "failed"
+      render json: "No posts are selected"
       return
     end
-    emails = @member_list.map {|member|
-      if member["subscribed"] == true
-        member["address"]
-      else
-        nil
-      end
-    }.compact
+    emails = []
+    # emails = @member_list.map {|member|
+    #   if member["subscribed"] == true
+    #     member["address"]
+    #   else
+    #     nil
+    #   end
+    # }.compact
     SubscriptionMailer.subscription(emails, posts).deliver_now if emails.length > 0
     posts.each {|post| post.update_column(:sent, Date.today)}
     render json: "已發送Email給 #{emails.length} 位訂閱者"
@@ -63,10 +68,10 @@ class UsersController < ApplicationController
 
   private
     def set_email
-      @mailgun = Mailgun()
-      @email = params[:email]
-      @list = "service@mg.motion-express.com" 
-      @member_list ||= @mailgun.list_members(@list).list 
+      # @mailgun = Mailgun()
+      # @email = params[:email]
+      # @list = "service@mg.motion-express.com" 
+      # @member_list ||= @mailgun.list_members(@list).list 
     end
 
     def email_already_in_list_and_subscribed?
