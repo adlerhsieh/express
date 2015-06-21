@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614171634) do
+ActiveRecord::Schema.define(version: 20150621133740) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -165,6 +165,15 @@ ActiveRecord::Schema.define(version: 20150614171634) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "store_payment_notifications", force: :cascade do |t|
+    t.text     "params",         limit: 65535
+    t.integer  "order_id",       limit: 4
+    t.string   "status",         limit: 255
+    t.string   "transaction_id", limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
   create_table "store_products", force: :cascade do |t|
     t.string   "title",         limit: 255
     t.string   "description",   limit: 255
@@ -228,6 +237,14 @@ ActiveRecord::Schema.define(version: 20150614171634) do
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "user_emails", force: :cascade do |t|
+    t.string   "address",           limit: 255
+    t.boolean  "blog_subscription", limit: 1
+    t.integer  "user_id",           limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "user_products", force: :cascade do |t|
