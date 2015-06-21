@@ -54,6 +54,7 @@
 
 <div class="buttons col-lg-12">
   <%= action_button %>
+  <%= link_to "付款", @order.paypal_url(store_products_url) %>
   <%= stock_warning %>
 </div>
 

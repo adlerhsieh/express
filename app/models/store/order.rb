@@ -17,6 +17,25 @@ class Store::Order < ActiveRecord::Base
     true
   end
 
+  def paypal_url(return_url)
+    values = {
+      :business => "nkj20932-facilitator@hotmail.com",
+      :cmd => "_cart",
+      :upload => "1",
+      :return => return_url,
+      :invoice => id
+    } 
+    items.each_with_index do |item, index|
+      values.merge!({
+        "amount_#{index+1}" => item.price,
+        "item_name_#{index+1}" => item.product.title,
+        "item_number_#{index+1}" => item.id,
+        "quantity_#{index+1}" => item.quantity
+      })
+    end
+    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
   def add_item(product_id)
     item = self.items.find_by_product_id(product_id)
     if item
