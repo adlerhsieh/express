@@ -3,6 +3,7 @@ class Store::PaymentNotification < ApplicationController
 
   def create
     Store::PaymentNotification.create!(:params => params.as_json)
+    puts "notify_url is getting notified!!!!!"
     render :nothing => true
   end
 end

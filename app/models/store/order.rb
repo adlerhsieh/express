@@ -23,7 +23,8 @@ class Store::Order < ActiveRecord::Base
       :cmd => "_cart",
       :upload => "1",
       :return => return_url,
-      :invoice => id
+      :invoice => id,
+      :notify_url => store_payment_notifications_url
     } 
     items.each_with_index do |item, index|
       values.merge!({
