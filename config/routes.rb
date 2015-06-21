@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/search', to: "posts#search", as: "search_posts"
   get '/author', to: "posts#author", as: "author"
   get '/bing_balance', to: "users#balance", as: "bing_balance"
+  get '/store' => redirect("/store/products")
 
   resources :posts do
     collection do
