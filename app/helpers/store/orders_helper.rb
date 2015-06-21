@@ -55,42 +55,9 @@ module Store::OrdersHelper
     when @order.placed?
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
-        link_to("下一步：前往付款", "", style: "font-size: 14px;")
+        content_tag(:span, "下一步：前往付款", style: "font-size: 14px;")
     end
     result.html_safe
-  end
-
-  def progress_bar
-    # return if @order.aasm_state == "cart"
-    # value = case @order.aasm_state
-    # when "placed"
-    #   "10"
-    # when "paid"
-    #   "50"
-    # when "delivered"
-    #   "100"
-    # else
-    #   "0"
-    # end
-    # content_tag(:progress, "", :max => "100", :value => value)
-  end
-
-  def progress_bar_status
-    # return if @order.aasm_state == "cart"
-    # content_tag(:div,
-    #            content_tag(:span, "下單", id: "place") + 
-    #            content_tag(:span, "付款", id: "pay") + 
-    #            content_tag(:span, "出貨", id: "deliver"),
-    #            :class => "status-bar")
-  end
-
-  def progress_bar_timestamp
-    # return if @order.aasm_state == "cart"
-    # content_tag(:div,
-    #            content_tag(:span, time(@order.order_time), id: "place") + 
-    #            content_tag(:span, time(@order.pay_time), id: "pay") + 
-    #            content_tag(:span, time(@order.shipping_time), id: "deliver"),
-    #            :class => "status-bar")
   end
 
   def check_stock(item)
@@ -106,19 +73,6 @@ module Store::OrdersHelper
 
   def stock_warning
     content_tag(:span, "庫存不足，請將不足的品項移除才可結帳", :class => "warning") if @out_of_stock
-  end
-
-  def action_button
-    @disabled = "disabled" if @out_of_stock
-    _class = "btn btn-primary action #{@disabled}"
-    case @order.aasm_state
-    when "cart"
-      link_to("確認下單", place_store_order_path(@order), class: _class)
-    when "placed"
-      link_to("前往付款", "", class: _class)
-    else
-      ""
-    end
   end
 
   def total_quantity
