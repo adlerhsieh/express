@@ -25,9 +25,9 @@
     <ul class="nav navbar-nav pull-right">
       <% if current_order %>
         <li>
-        <%= link_to(
+      <!--  <%= link_to(
           content_tag(:i, "", :class => 'fa fa-shopping-cart', :style => 'font-size: 20px;'), store_order_path(current_order)) %>
-        </li>
+        </li> -->
       <% end %>
       <% if user_signed_in? %>
         <li>
@@ -41,7 +41,7 @@
         </li>
       <% else %>
         <li>
-        <%= link_to('Github登入', user_omniauth_authorize_path(:github)) %>
+        <!--  <%= link_to('Github登入', user_omniauth_authorize_path(:github)) %> -->
         </li>
       <% end %>
     </ul>
