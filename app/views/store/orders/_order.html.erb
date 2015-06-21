@@ -1,9 +1,3 @@
-<% unless @order.aasm_state %>
-  <span class="status float-right">狀態：<%= status_print @order.aasm_state %></span>
-<% end %>
-<%= progress_bar %>
-<%= progress_bar_status %>
-
 <div class="order col-sm-8">
   <table class="table items">
     <thead>
@@ -28,7 +22,7 @@
       <% end %>
         <tr>
           <td>總計</td>
-          <td><%= total_quantity %></td>
+          <td>--</td>
           <td>--</td>
           <td><%= total_price %></td>
           <td>--</td>
@@ -39,11 +33,16 @@
 </div>
 
 <div class="notes column col-sm-4">
-  <h4>注意事項</h4>
-  <p>* 價格為新台幣計價。</p>
-  <% unless current_user %>
-    <p>* 若未登入，購物車內容僅會保留7天。</p>
-  <% end %>
+
+  <h4>訂單狀態</h4>
+  <%= progress %>
+  <p></p>
+  <hr />
+  <%= next_step %>
+  <!-- <p>* 價格為新台幣計價。</p> -->
+  <!-- <% unless current_user %> -->
+  <!--   <p>* 若未登入，購物車內容僅會保留7天。</p> -->
+  <!-- <% end %> -->
 </div>
 
 <div class="buttons col-lg-12">

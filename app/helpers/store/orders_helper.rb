@@ -28,37 +28,58 @@ module Store::OrdersHelper
     end
   end
 
-  def progress_bar
-    return if @order.aasm_state == "cart"
-    value = case @order.aasm_state
-    when "placed"
-      "10"
-    when "paid"
-      "50"
-    when "delivered"
-      "100"
-    else
-      "0"
+  def progress
+    result = String.new
+    if @order.order_time
+      result += 
+        content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
+        content_tag(:span, "已下單") + 
+        content_tag(:span, @order.order_time.strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp")
     end
-    content_tag(:progress, "", :max => "100", :value => value)
+    result.html_safe
+  end
+
+  def next_step
+    result = String.new
+    if @order.placed?
+      result += 
+        content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
+        link_to("下一步：前往付款", "", style: "font-size: 14px;")
+    end
+    result.html_safe
+  end
+
+  def progress_bar
+    # return if @order.aasm_state == "cart"
+    # value = case @order.aasm_state
+    # when "placed"
+    #   "10"
+    # when "paid"
+    #   "50"
+    # when "delivered"
+    #   "100"
+    # else
+    #   "0"
+    # end
+    # content_tag(:progress, "", :max => "100", :value => value)
   end
 
   def progress_bar_status
-    return if @order.aasm_state == "cart"
-    content_tag(:div,
-               content_tag(:span, "下單", id: "place") + 
-               content_tag(:span, "付款", id: "pay") + 
-               content_tag(:span, "出貨", id: "deliver"),
-               :class => "status-bar")
+    # return if @order.aasm_state == "cart"
+    # content_tag(:div,
+    #            content_tag(:span, "下單", id: "place") + 
+    #            content_tag(:span, "付款", id: "pay") + 
+    #            content_tag(:span, "出貨", id: "deliver"),
+    #            :class => "status-bar")
   end
 
   def progress_bar_timestamp
-    return if @order.aasm_state == "cart"
-    content_tag(:div,
-               content_tag(:span, time(@order.order_time), id: "place") + 
-               content_tag(:span, time(@order.pay_time), id: "pay") + 
-               content_tag(:span, time(@order.shipping_time), id: "deliver"),
-               :class => "status-bar")
+    # return if @order.aasm_state == "cart"
+    # content_tag(:div,
+    #            content_tag(:span, time(@order.order_time), id: "place") + 
+    #            content_tag(:span, time(@order.pay_time), id: "pay") + 
+    #            content_tag(:span, time(@order.shipping_time), id: "deliver"),
+    #            :class => "status-bar")
   end
 
   def check_stock(item)

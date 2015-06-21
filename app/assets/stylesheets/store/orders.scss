@@ -1,6 +1,6 @@
 table.items {
   background-color: white;
-  border-radius: 5px;
+  // border-radius: 10px;
   border: 1px solid #D8D8D8;
   thead th {
     text-align: center;
@@ -92,4 +92,10 @@ div.order {
     margin-left: 10px;
     margin-right: 10px;
   }
+}
+
+.timestamp {
+  padding-left: 8px;
+  font-size: 12px;
+  color: #858585;
 }
