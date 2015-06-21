@@ -1,9 +1,34 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  # protect_from_forgery with: :null_session
   protect_from_forgery with: :exception
   before_filter :configure_devise_params, if: :devise_controller?
   before_filter :load_settings
+  before_action :clear_empty_order
+  helper_method :current_order
+
+  def current_order
+    @current_order ||= Store::Order.find_by_id(session[:order_id])
+  end
+
+  def find_current_order
+    if current_order
+      current_order
+    elsif current_user
+      cart = current_user.cart
+      session[:order_id] = cart.id if cart.aasm_state == "cart"
+      return cart
+    else
+      cart = Store::Order.create!
+      session[:order_id] = cart.id
+      return cart
+    end
+  end
+
+  def clear_empty_order
+    session[:order_id] = nil unless current_order
+  end
 
   def set_locale
     # available_languages = ["zh-TW", "zh-HK", "zh-CN"]
@@ -33,12 +58,17 @@ class ApplicationController < ActionController::Base
         return
       end
     end
-    redirect_to sign_in_path 
+    flash[:alert] = "路徑錯誤"
+    redirect_to posts_path 
+  end
+
+  def is_admin?
+    current_user.is_admin if current_user
   end
 
   def load_settings
     @settings = Setting.all.map(&:serializable_hash)
-    # binding.pry
+    return if params[:controller].index("store")
     if params[:action] == "show" && !(params[:controller].include? "users") && params[:controller] != "categories" && params[:format] != "json"
       # find record
       model = params[:controller].singularize.capitalize.constantize

@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'mail'
+gem 'font-awesome-sass'
+gem 'aasm'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'http_accept_language'

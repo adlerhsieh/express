@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  before_action :require_admin
+
   def edit_all
     @title = Setting.create_with(:tag => "網站標題").find_or_create_by(key: "site_title")
     @meta_title = Setting.create_with(:tag => "META：標題").find_or_create_by(key: "meta_title")

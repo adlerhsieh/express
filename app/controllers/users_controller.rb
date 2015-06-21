@@ -8,7 +8,11 @@ class UsersController < ApplicationController
   # require 'mailgun'
 
   def show
-    @user = User.find_by_name(params[:name])
+  end
+
+  def info
+    render(:json => "尚未登入") unless current_user
+    @user = User.find_by_name(params[:id])
   end
 
   def balance

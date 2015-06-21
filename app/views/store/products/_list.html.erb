@@ -1,0 +1,20 @@
+<% @products.each do |p| %>
+  <div class="col-sm-3">
+    <a href="<%= store_product_path(p) %>">
+      <div class="product col-lg-3">
+        <div class="image_tag"><%= image_tag(p.default_image) %></div>
+        <p class="product_title"><%= p.title %></p>
+      </div>
+    </a>
+    <p class="price">
+      <span>$<%= p.price %> | </span>
+      <%= link_to content_tag(:i, "", class: "price fa fa-cart-plus") ,add_to_cart_store_product_path(p), method: :post %>
+    </p>
+    <% if is_admin? %>
+    <div style="text-align: center">
+      <%= link_to "編輯", edit_store_product_path(p), class: "note" %> |
+      <%= link_to "刪除", store_product_path(p), method: :delete, class: "note", style: "color: red;" %>
+    </div>
+    <% end %>
+  </div>
+<% end %>

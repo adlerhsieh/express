@@ -1,0 +1,59 @@
+<div class="order col-sm-8">
+  <table class="table items">
+    <thead>
+      <th>名稱</th>
+      <th>數量</th>
+      <th>單價</th>
+      <th>總價</th>
+      <th>庫存</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @order.items.each do |i| %>
+        <tr>
+          <td><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></td>
+          <!-- <td style="width: 65px;"><input type="text" value="<%= i.quantity %>" class="form&#45;control" /></td> -->
+          <td><%= i.quantity %></td>
+          <td><%= i.price %></td>
+          <td><%= i.sum %></td>
+          <td><%= check_stock(i) %></td>
+          <td class="cancel-td"><%= link_to "移除", delete_store_order_item_path(i), method: :post, class: "cancel" %></td>
+        </tr>
+      <% end %>
+        <tr>
+          <td>總計</td>
+          <td>--</td>
+          <td>--</td>
+          <td><%= total_price %></td>
+          <td>--</td>
+          <td></td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="column">
+    <h4>備註</h4>
+    <p>* 價格皆為新台幣計價</p>
+    <p>* 付款後，將在1~2天內出貨，出貨後將以email通知</p>
+    <p>* 正常到貨時間為7天內，送件進度可至<%= link_to "郵局查詢", "http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_SYS_ID=D&_MENU_ID=189&_ACTIVE_ID=190", target: "_blank" %></p>
+  </div>
+
+</div>
+
+<div class="notes column col-sm-4">
+
+  <h4>訂單狀態</h4>
+  <%= progress %>
+  <hr />
+  <%= next_step %>
+  <!-- <p>* 價格為新台幣計價。</p> -->
+  <!-- <% unless current_user %> -->
+  <!--   <p>* 若未登入，購物車內容僅會保留7天。</p> -->
+  <!-- <% end %> -->
+</div>
+
+<div class="buttons col-lg-12">
+  <%= link_to "付款", @order.paypal_url(store_products_url) %>
+  <%= stock_warning %>
+</div>
+
