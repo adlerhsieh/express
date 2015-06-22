@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     @auth = request.env["omniauth.auth"]
-    user = User.find_by_omniauth(auth_params)
+    user = User.find_by_omniauth(@auth)
     if not user
       user = User.create!(auth_params)
     end
@@ -21,7 +21,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     token = Devise.friendly_token[0,20]
     {
       email: @auth.info.email,
+      # encrypted_password: token,
       password: token,
+      # password_confirmation: token,
       password_confirmation: token,
       name: @auth.info.name,
       provider: @auth.provider,
