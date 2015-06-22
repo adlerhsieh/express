@@ -4,6 +4,7 @@ lock '3.4.0'
 set :application, 'rails'
 set :repo_url, 'git@bitbucket.org:nkj20932/express.git'
 
+# $ DEPLOY_PATH=staging cap production deploy
 if ENV["DEPLOY_PATH"]
   @folder = "staging"
   set :deploy_to, "/var/www/#{@folder}"
@@ -54,6 +55,10 @@ namespace :deploy do
     end
   end
 
+  user = "motionex"
+  server = "107.170.207.41"
+  local_path = "cd ~/projects/express;"
+  path_prefix_public_no_cd = "/var/www/#{@folder}/current/public"
   path_prefix = "cd /var/www/#{@folder}/current;"
   path_prefix_public = "cd /var/www/#{@folder}/current/public;"
 
@@ -71,14 +76,25 @@ namespace :deploy do
 
   task :precompile do
     on roles(:web) do
-      execute "#{path_prefix}rake assets:clean"
-      execute "#{path_prefix}rake assets:precompile"
+      # execute "#{path_prefix}rake assets:clean"
+      # execute "#{path_prefix}rake assets:precompile"
+      execute("#{path_prefix_public}rm -rf assets")
+      run_locally("#{local_path}rake assets:precompile")
+      run_locally("#{local_path}scp -r public/assets #{user}@#{server}:#{path_prefix_public_no_cd}/assets")
+      run_locally("#{local_path}rm -rf public/assets")
     end
   end
 
   task :symlink do
     on roles(:web) do
       execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/wp-content"
+    end
+  end
+
+  task :staging_robot do
+    on roles(:web) do
+      execute "#{path_prefix_public}rm robot.txt"
+      execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/robot.txt"
     end
   end
 
@@ -93,5 +109,6 @@ namespace :deploy do
   after :deploy, "deploy:migrate"
   after :deploy, "deploy:symlink"
   after :deploy, "deploy:precompile"
+  after :deploy, "deploy:staging_robot" if ENV["DEPLOY_PATH"] == "staging"
   after :deploy, "deploy:server_restart"
 end
