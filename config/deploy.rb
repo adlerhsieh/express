@@ -1,3 +1,4 @@
+require 'capistrano/local_precompile'
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
@@ -85,6 +86,6 @@ namespace :deploy do
   after :deploy, "deploy:bundle"
   after :deploy, "deploy:migrate"
   after :deploy, "deploy:symlink"
-  after :deploy, "deploy:precompile"
+  # after :deploy, "deploy:precompile"
   after :deploy, "deploy:server_restart"
 end
