@@ -85,6 +85,6 @@ namespace :deploy do
   after :deploy, "deploy:bundle"
   after :deploy, "deploy:migrate"
   after :deploy, "deploy:symlink"
-  # after :deploy, "deploy:precompile"
+  after :deploy, "deploy:precompile"
   after :deploy, "deploy:server_restart"
 end
