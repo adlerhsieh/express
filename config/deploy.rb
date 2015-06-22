@@ -79,9 +79,11 @@ namespace :deploy do
       # execute "#{path_prefix}rake assets:clean"
       # execute "#{path_prefix}rake assets:precompile"
       execute("#{path_prefix_public}rm -rf assets")
-      %x("#{local_path}rake assets:precompile")
-      %x("#{local_path}scp -r public/assets #{user}@#{server}:#{path_prefix_public_no_cd}/assets")
-      %x("#{local_path}rm -rf public/assets")
+      run_locally do
+        execute("#{local_path}rake assets:precompile")
+        execute("#{local_path}scp -r public/assets #{user}@#{server}:#{path_prefix_public_no_cd}/assets")
+        execute("#{local_path}rm -rf public/assets")
+      end
     end
   end
 
@@ -93,8 +95,8 @@ namespace :deploy do
 
   task :staging_robot do
     on roles(:web) do
-      execute "#{path_prefix_public}rm robot.txt"
-      execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/robot.txt"
+      execute "#{path_prefix_public}rm robots.txt"
+      execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/robots.txt"
     end
   end
 
