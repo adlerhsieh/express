@@ -5,8 +5,8 @@ set :application, 'rails'
 set :repo_url, 'git@bitbucket.org:nkj20932/express.git'
 
 if ENV["DEPLOY_PATH"]
-  set :deploy_to, ENV["DEPLOY_PATH"]
   @folder = "staging"
+  set :deploy_to, "/var/www/#{@folder}"
 else
   @folder = "rails"
 end
