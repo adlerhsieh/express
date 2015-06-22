@@ -79,9 +79,9 @@ namespace :deploy do
       # execute "#{path_prefix}rake assets:clean"
       # execute "#{path_prefix}rake assets:precompile"
       execute("#{path_prefix_public}rm -rf assets")
-      run_locally("#{local_path}rake assets:precompile")
-      run_locally("#{local_path}scp -r public/assets #{user}@#{server}:#{path_prefix_public_no_cd}/assets")
-      run_locally("#{local_path}rm -rf public/assets")
+      %x("#{local_path}rake assets:precompile")
+      %x("#{local_path}scp -r public/assets #{user}@#{server}:#{path_prefix_public_no_cd}/assets")
+      %x("#{local_path}rm -rf public/assets")
     end
   end
 
