@@ -4,6 +4,13 @@ lock '3.4.0'
 set :application, 'rails'
 set :repo_url, 'git@bitbucket.org:nkj20932/express.git'
 
+if ENV["DEPLOY_PATH"]
+  set :deploy_to, ENV["DEPLOY_PATH"]
+  @folder = "staging"
+else
+  @folder = "rails"
+end
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -47,8 +54,8 @@ namespace :deploy do
     end
   end
 
-  path_prefix = "cd /var/www/rails/current;"
-  path_prefix_public = "cd /var/www/rails/current/public;"
+  path_prefix = "cd /var/www/#{@folder}/current;"
+  path_prefix_public = "cd /var/www/#{@folder}/current/public;"
 
   task :bundle do
     on roles(:web) do
@@ -71,7 +78,7 @@ namespace :deploy do
 
   task :symlink do
     on roles(:web) do
-      execute "#{path_prefix_public}ln -s /var/www/rails/shared/public/wp-content"
+      execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/wp-content"
     end
   end
 
