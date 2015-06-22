@@ -235,9 +235,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   case Rails.env
   when "development"
-    config.omniauth :github, 'c57c95a89a314620c947', '695c6f579d75a6a57279e8f1fddafccd3b7d2029', scope: 'user'
+    config.omniauth :github, 'c57c95a89a314620c947', '695c6f579d75a6a57279e8f1fddafccd3b7d2029', scope: 'user:email'
   when "production"
-    config.omniauth :github, '1a08a7b5d360a5054b86', 'b17c7d541359099306c663f7e0d1b51175714bca', scope: 'user'
+    config.omniauth :github, '1a08a7b5d360a5054b86', 'b17c7d541359099306c663f7e0d1b51175714bca', scope: 'user:email'
   end
 
   # ==> Warden configuration
