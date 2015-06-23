@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
   # after_save :default_display_date, :default_category, :translate_CN
   after_save :default_display_date, :default_category
   translates :title, :content
+  extend FriendlyId
+  friendly_id :slug
   default_scope {includes(:translations)}
   include DefaultSetter
   # include Translator
