@@ -74,7 +74,7 @@ class Store::Order < ActiveRecord::Base
     state :outdated
     state :cart, :initial => true
     state :placed
-    state :paid, :after_commit => :update_pay_time
+    state :paid
     state :shipped
     state :arrived
     state :cancelled

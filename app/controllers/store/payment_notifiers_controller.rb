@@ -9,7 +9,9 @@ class Store::PaymentNotifiersController < ApplicationController
       :status => params[:payment_status],
     )
     if notification.status == "Completed"
-      Store::Order.find(notification.order_id).pay!
+      order = Store::Order.find(notification.order_id)
+      order.pay!
+      order.update_pay_time
     end
     render :nothing => true
   end
