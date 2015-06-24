@@ -10,7 +10,7 @@ module Store::OrdersHelper
   def status_print(state)
     case state
     when "cart"
-      "購物車"
+      "尚未下單"
     when "placed"
       "已下單，待結帳"
     when "paid"

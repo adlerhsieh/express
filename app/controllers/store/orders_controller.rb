@@ -5,7 +5,7 @@ class Store::OrdersController < ApplicationController
   #
   def index
     # @orders = User.includes(:orders => [:items, :info]).find_by_id(session[:user_id]).orders
-    @orders = current_user.orders.where.not(:aasm_state => "cart")
+    @orders = current_user.orders.all
   end
 
   def show
