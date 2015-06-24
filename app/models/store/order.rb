@@ -59,6 +59,10 @@ class Store::Order < ActiveRecord::Base
     self.update_column(:order_time, Time.now)
   end
 
+  def update_pay_time
+    self.update_column(:pay_time, Time.now)
+  end
+
   def update_total_price
     total_price = self.items.inject(0){|r,item|
       r += (item.quantity * item.price)
@@ -70,7 +74,7 @@ class Store::Order < ActiveRecord::Base
     state :outdated
     state :cart, :initial => true
     state :placed
-    state :paid
+    state :paid, :after_commit => :update_pay_time
     state :shipped
     state :arrived
     state :cancelled
