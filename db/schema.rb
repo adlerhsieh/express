@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621133740) do
+ActiveRecord::Schema.define(version: 20150624164233) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20150621133740) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "store_payment_notifications", force: :cascade do |t|
+  create_table "store_payment_notifiers", force: :cascade do |t|
     t.text     "params",         limit: 65535
     t.integer  "order_id",       limit: 4
     t.string   "status",         limit: 255
