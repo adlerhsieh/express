@@ -12,6 +12,7 @@
         <th>付款時間</th>
         <th>出貨時間</th>
         <th>狀態</th>
+        <th>動作</th>
       </thead>
       <tbody>
         <% @orders.each do |order| %>
@@ -24,6 +25,7 @@
             <td><%= time(order.pay_time) %></td>
             <td><%= time(order.shipping_time) %></td>
             <td><%= status_print(order.aasm_state) %></td>
+            <td><%= link_to "刪除", store_order_path(order), method: :delete %></td>
           </tr>
         <% end %>
       </tbody>

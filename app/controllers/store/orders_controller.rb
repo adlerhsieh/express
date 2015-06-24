@@ -1,6 +1,6 @@
 class Store::OrdersController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:add_to_cart]
-  before_action :set_order, only: [:place]
+  before_action :set_order, only: [:place, :destroy]
   # before_filter :authenticate_user!
   #
   def index
@@ -16,8 +16,15 @@ class Store::OrdersController < ApplicationController
     @order.place!
     @order.update_order_time
     session[:order_id] = nil
-    flash[:notice] = "再點選一次按鈕前往結帳頁面！"
+    flash[:notice] = "下單成功！"
     redirect_to store_order_path(@order)
+  end
+
+  def destroy
+    @order.items.delete_all
+    @order.delete
+    flash[:notice] = "訂單已刪除"
+    redirect_to store_orders_path
   end
 
   private

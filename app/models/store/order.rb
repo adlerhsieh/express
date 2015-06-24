@@ -1,6 +1,6 @@
 class Store::Order < ActiveRecord::Base
   belongs_to :user
-  has_many :items, :class_name => "Store::OrderItem", :foreign_key => "order_id"
+  has_many :items, :class_name => "Store::OrderItem", :foreign_key => "order_id", :dependent => :destroy
   has_one :info, :class_name => "Store::OrderInfo", :foreign_key => "order_id"
   include AASM
   extend FriendlyId
