@@ -70,7 +70,7 @@ module Store::OrdersHelper
       return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
     end
     if @order.placed?
-      return link_to "付款", @order.paypal_url(store_products_url), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
+      return link_to "付款", @order.paypal_url(store_order_url(@order)), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
     end
   end
 
