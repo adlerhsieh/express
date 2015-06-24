@@ -43,6 +43,7 @@ module Store::OrdersHelper
         content_tag(:span, "已付款") + 
         content_tag(:span, @order.pay_time.strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp")
     end
+    return nil if not result
     result.html_safe
   end
 
@@ -55,9 +56,22 @@ module Store::OrdersHelper
     when @order.placed?
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
-        content_tag(:span, "下一步：前往付款", style: "font-size: 14px;")
+        content_tag(:span, "下一步：付款", style: "font-size: 14px;")
+    when @order.cart?
+      result = 
+        content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
+        content_tag(:span, "下一步：結帳", style: "font-size: 14px;")
     end
     result.html_safe
+  end
+
+  def action_button
+    if @order.cart?
+      return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
+    end
+    if @order.placed?
+      return link_to "付款", @order.paypal_url(store_products_url), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
+    end
   end
 
   def check_stock(item)
