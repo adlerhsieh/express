@@ -1,0 +1,53 @@
+.product {
+  width: 250px;
+
+  .image_tag {
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+  }
+
+  .product_title {
+    font-size: 24px;
+    margin: 20px 0px 10px 0px;
+    text-align: center;
+  }
+}
+
+.price {
+  font-size: 18px;
+  text-align: center;
+}
+
+i.price {
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+
+  &:hover {
+    color: green;
+    // font-size: 26px;
+  }
+}
+
+progress {
+  width: 60%;
+  display: block;
+  margin: 20px auto;
+}
+
+progress::-webkit-progress-bar {
+
+}
+
+progress::-webkit-progress-value {
+
+}
+

@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.1.1)
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
       actionview (= 4.2.0)
@@ -99,6 +100,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    font-awesome-sass (4.3.2.1)
+      sass (~> 3.2)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
     globalid (0.3.5)
@@ -298,6 +301,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   better_errors
   binding_of_caller
   bing_translator
@@ -309,6 +313,7 @@ DEPENDENCIES
   colorize
   devise
   factory_girl_rails
+  font-awesome-sass
   friendly_id
   globalize
   http_accept_language

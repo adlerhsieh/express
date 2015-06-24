@@ -1,0 +1,11 @@
+<%= order_title %>
+<% if @order.items.size > 0 %>
+  <%= render partial: "order" %>
+<% else %>
+  <div class="go-to-shop">
+    <%= image_tag "http://i.imgur.com/RgFIAWu.png" %>
+    <p>訂單無任何品項</p>
+    <%= link_to "前往商店", store_products_path, :class => "btn btn-primary" %>
+    <%= link_to "所有訂單", store_orders_path, :class => "btn btn-default" %>
+  </div>
+<% end %>

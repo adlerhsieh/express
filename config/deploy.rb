@@ -75,6 +75,12 @@ namespace :deploy do
     end
   end
 
+  task :seed do
+    on roles(:web) do
+      execute "#{path_prefix}rake db:seed RAILS_ENV=production"
+    end
+  end
+
   task :precompile do
     on roles(:web) do
       execute("#{path_prefix_public}rm -rf assets")
@@ -112,6 +118,7 @@ namespace :deploy do
 
   after :deploy, "deploy:bundle"
   after :deploy, "deploy:migrate"
+  after :deploy, "deploy:seed"
   after :deploy, "deploy:symlink"
   after :deploy, "deploy:precompile"
   after :deploy, "deploy:staging_robot" if ENV["DEPLOY_PATH"] == "staging"
