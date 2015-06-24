@@ -18,13 +18,14 @@ class Store::Order < ActiveRecord::Base
   end
 
   def paypal_url(return_url)
+    url = Rails.application.routes.url_helpers.store_payment_notifications_url(:host => "staging.motion-express.com")
     values = {
       :business => "nkj20932-facilitator@hotmail.com",
       :cmd => "_cart",
       :upload => "1",
       :return => return_url,
       :invoice => id,
-      :notify_url => store_payment_notifications_url
+      :notify_url => url
     } 
     items.each_with_index do |item, index|
       values.merge!({
