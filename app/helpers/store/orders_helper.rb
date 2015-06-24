@@ -34,14 +34,14 @@ module Store::OrdersHelper
       result += 
         content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
         content_tag(:span, "已下單") + 
-        content_tag(:span, @order.order_time.strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") +
+        content_tag(:span, (@order.order_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") +
         content_tag(:p, "")
     end
     if @order.pay_time
       result += 
         content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
         content_tag(:span, "已付款") + 
-        content_tag(:span, @order.pay_time.strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp")
+        content_tag(:span, (@order.pay_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp")
     end
     return nil if not result
     result.html_safe
