@@ -92,7 +92,7 @@ Rails.application.routes.draw do
         post :delete
       end
     end
-    resources :payment_notifications, only: [:create]
+    resources :payment_notifiers, only: [:create]
   end
 
   root to: "index#index"
