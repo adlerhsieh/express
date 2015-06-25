@@ -99,6 +99,11 @@ namespace :deploy do
   task :symlink do
     on roles(:web) do
       execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/wp-content"
+      execute "cd /var/www/#{@folder}/current/config;ln -s /var/www/#{@folder}/shared/config/application.yml"
+      execute "cd /var/www/#{@folder}/current;mkdir certs"
+      execute "cd /var/www/#{@folder}/current/certs;ln -s /var/www/#{@folder}/shared/config/certs/paypal_cert.pem"
+      execute "cd /var/www/#{@folder}/current/certs;ln -s /var/www/#{@folder}/shared/config/certs/app_cert.pem"
+      execute "cd /var/www/#{@folder}/current/certs;ln -s /var/www/#{@folder}/shared/config/certs/app_key.pem"
     end
   end
 
