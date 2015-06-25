@@ -17,3 +17,9 @@
 /tmp
 /db/database.yml
 /db/secrets.yml
+
+# Ignore application configuration
+/config/application.yml
+
+# Ignore paypal certifications
+/certs
