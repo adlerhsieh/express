@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'figaro'
 gem 'mail'
 gem 'font-awesome-sass'
 gem 'aasm'
