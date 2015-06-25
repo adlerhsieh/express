@@ -1,32 +1,36 @@
 <%= render partial: "users/nav" %>
-<h2>所有訂單</h2>
-<div class="order col-sm-12">
-  <table class="table items">
-    <thead>
-      <th>序號</th>
-      <th>品項</th>
-      <th>數量</th>
-      <th>金額(新台幣)</th>
-      <th>下單時間</th>
-      <th>付款時間</th>
-      <th>出貨時間</th>
-      <th>狀態</th>
-      <th>動作</th>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td><%= link_to order.token[0..7], store_order_path(order) %></td>
-          <td><%= order.items.count %></td>
-          <td><%= order.items.map(&:quantity).inject(0){|r,m|r+m} %></td>
-          <td><%= order.price %></td>
-          <td><%= time(order.order_time) %></td>
-          <td><%= time(order.pay_time) %></td>
-          <td><%= time(order.shipping_time) %></td>
-          <td><%= status_print(order.aasm_state) %></td>
-          <td><%= link_to "刪除", store_order_path(order), method: :delete %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<% if @orders.size == 0 %>
+  <h2>無訂單</h2>
+<% else %>
+  <h2>所有訂單</h2>
+  <div class="order col-sm-12">
+    <table class="table items">
+      <thead>
+        <th>序號</th>
+        <th>品項</th>
+        <th>數量</th>
+        <th>金額(新台幣)</th>
+        <th>下單時間</th>
+        <th>付款時間</th>
+        <th>出貨時間</th>
+        <th>狀態</th>
+        <th>動作</th>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.token[0..7], store_order_path(order) %></td>
+            <td><%= order.items.count %></td>
+            <td><%= order.items.map(&:quantity).inject(0){|r,m|r+m} %></td>
+            <td><%= order.price %></td>
+            <td><%= time(order.order_time) %></td>
+            <td><%= time(order.pay_time) %></td>
+            <td><%= time(order.shipping_time) %></td>
+            <td><%= status_print(order.aasm_state) %></td>
+            <td><%= link_to "刪除", store_order_path(order), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

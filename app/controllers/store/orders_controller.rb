@@ -5,7 +5,7 @@ class Store::OrdersController < ApplicationController
   #
   def index
     # @orders = User.includes(:orders => [:items, :info]).find_by_id(session[:user_id]).orders
-    @orders = current_user.orders.all
+    @orders = current_user.orders.all.order(:created_at => :desc)
   end
 
   def show
@@ -15,7 +15,6 @@ class Store::OrdersController < ApplicationController
   def place
     @order.place!
     @order.update_order_time
-    session[:order_id] = nil
     flash[:notice] = "下單成功！"
     redirect_to store_order_path(@order)
   end

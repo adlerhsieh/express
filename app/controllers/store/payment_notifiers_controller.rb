@@ -12,6 +12,7 @@ class Store::PaymentNotifiersController < ApplicationController
       order = Store::Order.find(notification.order_id)
       order.pay!
       order.update_pay_time
+      clear_current_cart
     end
     render :nothing => true
   end

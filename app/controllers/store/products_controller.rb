@@ -60,7 +60,7 @@ class Store::ProductsController < ApplicationController
   end
 
   def add_to_cart
-    order = find_current_order
+    order = find_current_order || create_new_order
     result = order.add_item(params[:id])
     place = order.aasm_state == "cart" ? "購物車" : "訂單"
     flash[:notice] = "已加入#{place}：#{result[:title]}"

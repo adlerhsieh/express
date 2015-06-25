@@ -9,21 +9,31 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
   def current_order
-    @current_order ||= Store::Order.find_by_id(session[:order_id])
+    @current_order ||= find_current_order
   end
 
   def find_current_order
-    if current_order
-      current_order
-    elsif current_user
-      cart = current_user.cart
-      session[:order_id] = cart.id if cart.aasm_state == "cart"
-      return cart
-    else
-      cart = Store::Order.create!
-      session[:order_id] = cart.id
-      return cart
+    if session[:order_id]
+      order = Store::Order.find_by_id(session[:order_id])
+      if order
+        if order.placed? || order.cart?
+          return order
+        else
+          clear_current_cart
+        end
+      end
     end
+  end
+
+  def create_new_order
+    order = Store::Order.create!
+    order.update_column(:user_id, current_user.id) if current_user
+    session[:order_id] = order.id
+    return order
+  end
+
+  def clear_current_cart
+    session[:order_id] = nil
   end
 
   def clear_empty_order
