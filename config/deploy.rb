@@ -62,6 +62,7 @@ namespace :deploy do
   path_prefix_public_no_cd = "/var/www/#{@folder}/current/public"
   path_prefix = "cd /var/www/#{@folder}/current;"
   path_prefix_public = "cd /var/www/#{@folder}/current/public;"
+  path_certs = "cd /var/www/#{@folder}/current/certs;"
 
   task :bundle do
     on roles(:web) do
@@ -96,14 +97,15 @@ namespace :deploy do
     end
   end
 
+
   task :symlink do
     on roles(:web) do
       execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/wp-content"
       execute "cd /var/www/#{@folder}/current/config;ln -s /var/www/#{@folder}/shared/config/application.yml"
       execute "cd /var/www/#{@folder}/current;mkdir certs"
-      execute "cd /var/www/#{@folder}/current/certs;ln -s /var/www/#{@folder}/shared/config/certs/paypal_cert.pem"
-      execute "cd /var/www/#{@folder}/current/certs;ln -s /var/www/#{@folder}/shared/config/certs/app_cert.pem"
-      execute "cd /var/www/#{@folder}/current/certs;ln -s /var/www/#{@folder}/shared/config/certs/app_key.pem"
+      execute "#{path_certs}ln -s /var/www/#{@folder}/shared/config/certs/paypal_cert.pem"
+      execute "#{path_certs}ln -s /var/www/#{@folder}/shared/config/certs/app_cert.pem"
+      execute "#{path_certs}ln -s /var/www/#{@folder}/shared/config/certs/app_key.pem"
     end
   end
 
