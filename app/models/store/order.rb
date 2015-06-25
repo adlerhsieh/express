@@ -18,14 +18,15 @@ class Store::Order < ActiveRecord::Base
   end
 
   def paypal_url(return_url)
-    url = Rails.application.routes.url_helpers.store_payment_notifiers_url(:host => "staging.motion-express.com")
+    url = Rails.application.routes.url_helpers.store_payment_notifiers_url(:host => ENV["paypal_returning_host"])
     values = {
-      :business => "nkj20932-facilitator@hotmail.com",
+      :business => ENV["paypal_seller_email"],
       :cmd => "_cart",
       :upload => "1",
       :return => return_url,
       :invoice => id,
-      :notify_url => url
+      :notify_url => url,
+      :cert_id => ENV["paypal_cert_id"]
     } 
     items.each_with_index do |item, index|
       values.merge!({
@@ -35,7 +36,16 @@ class Store::Order < ActiveRecord::Base
         "quantity_#{index+1}" => item.quantity
       })
     end
-    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+    # "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+    encrypt_for_paypal(values)
+  end
+
+  def encrypt_for_paypal(values)
+    paypal_cert_pem = File.read("#{Rails.root}/certs/paypal_cert.pem")
+    app_cert_pem = File.read("#{Rails.root}/certs/app_cert.pem")
+    app_key_pem = File.read("#{Rails.root}/certs/app_key.pem")
+    signed = OpenSSL::PKCS7::sign(OpenSSL::X509::Certificate.new(app_cert_pem), OpenSSL::PKey::RSA.new(app_key_pem, ''), values.map { |k, v| "#{k}=#{v}"  }.join("\n"), [], OpenSSL::PKCS7::BINARY)
+    OpenSSL::PKCS7::encrypt([OpenSSL::X509::Certificate.new(paypal_cert_pem)], signed.to_der, OpenSSL::Cipher::Cipher::new("DES3"), OpenSSL::PKCS7::BINARY).to_s.gsub("\n", "")
   end
 
   def add_item(product_id)
