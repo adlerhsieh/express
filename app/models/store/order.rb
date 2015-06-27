@@ -23,6 +23,7 @@ class Store::Order < ActiveRecord::Base
       :business => ENV["paypal_seller_email"],
       :cmd => "_cart",
       :upload => "1",
+      :currency_code => "TWD",
       :return => return_url,
       :invoice => id,
       :notify_url => url,
