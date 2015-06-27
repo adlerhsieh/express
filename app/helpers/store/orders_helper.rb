@@ -10,9 +10,9 @@ module Store::OrdersHelper
   def status_print(state)
     case state
     when "cart"
-      "尚未下單"
+      "尚未結帳"
     when "placed"
-      "已下單，待結帳"
+      "已結帳，待付款"
     when "paid"
       "已付款，待出貨"
     when "shipped"
@@ -87,7 +87,7 @@ module Store::OrdersHelper
   end
 
   def stock_warning
-    content_tag(:span, "庫存不足，請將不足的品項移除才可結帳", :class => "warning") if @out_of_stock
+    content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳", :class => "warning") if @out_of_stock
   end
 
   def total_quantity

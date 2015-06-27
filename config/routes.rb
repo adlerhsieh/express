@@ -86,6 +86,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get :place
+        post :update_quantity
       end
     end
     resources :order_items do
