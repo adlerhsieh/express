@@ -8,7 +8,7 @@ class Store::PaymentNotifiersController < ApplicationController
       :order_id => params[:invoice],
       :status => params[:payment_status],
     )
-    if notification.status == "Completed"
+    if payment_completed? && params_valid?
       order = Store::Order.find(notification.order_id)
       order.pay!
       order.update_pay_time
@@ -16,4 +16,14 @@ class Store::PaymentNotifiersController < ApplicationController
     end
     render :nothing => true
   end
+
+  private
+
+    def payment_completed?
+      params[:status] == "Completed"
+    end
+
+    def params_valid?
+      params[:receiver_email] == ENV["paypal_seller_email"] && params[:receiver_id] == ENV["paypal_seller_id"]
+    end
 end
