@@ -80,6 +80,10 @@ class Store::Order < ActiveRecord::Base
     self.update_column(:price, total_price)
   end
 
+  def not_charged?
+    self.cart? || self.placed?
+  end
+
   aasm do
     state :outdated
     state :cart, :initial => true

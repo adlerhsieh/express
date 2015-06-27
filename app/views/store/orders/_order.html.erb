@@ -13,17 +13,20 @@
         <% @order.items.each do |i| %>
           <tr>
             <td><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></td>
-            <!-- <td style="width: 65px;"><input type="text" value="<%= i.quantity %>" class="form&#45;control" /></td> -->
-            <td style="width: 80px;"><%= text_field_tag i.id.to_s.to_sym, i.quantity, class: "form-control", style: "" %></td>
+            <% if @order.not_charged? %>
+              <td style="width: 80px;"><%= text_field_tag i.id.to_s.to_sym, i.quantity, class: "form-control", style: "" %></td>
+            <% else %>
+              <td style="width: 65px;"><%= i.quantity %></td>
+            <% end %>
             <td><%= number_with_delimiter i.price %></td>
             <td><%= number_with_delimiter i.sum %></td>
             <td><%= check_stock(i) %></td>
-            <td class="cancel-td"><%= link_to "移除", delete_store_order_item_path(i), method: :post, class: "cancel" %></td>
+            <td class="cancel-td"><%= link_to("移除", delete_store_order_item_path(i), method: :post, class: "cancel") if @order.not_charged? %></td>
           </tr>
         <% end %>
         <tr>
           <td></td>
-          <td><%= submit_tag "更新數量", class: "btn btn-warning" %></td>
+          <td><%= submit_tag "更新數量", class: "btn btn-warning" if @order.not_charged? %></td>
           <td></td>
           <td>共<%= number_with_delimiter total_price %>元</td>
           <td></td>
@@ -35,6 +38,7 @@
 
   <div class="column">
     <h4>備註</h4>
+    <p><%= "* 未登入帳號的購物車最多保留7天" unless current_user %></p>
     <p>* 價格皆為新台幣計價</p>
     <p>* 付款之前，庫存量隨時都會變，付款之後便會確定有貨。</p>
     <p>* 付款後，將在1~2天內出貨，出貨後將以email通知</p>
@@ -51,8 +55,8 @@
   <%= next_step %>
   <!-- <p>* 價格為新台幣計價。</p> -->
   <!-- <% unless current_user %> -->
-  <!--   <p>* 若未登入，購物車內容僅會保留7天。</p> -->
-  <!-- <% end %> -->
+    <!--   <p>* 若未登入，購物車內容僅會保留7天。</p> -->
+    <!-- <% end %> -->
 </div>
 
 <div class="buttons col-lg-12">
