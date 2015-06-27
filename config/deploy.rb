@@ -58,8 +58,10 @@ namespace :deploy do
   user = "motionex"
   server = "107.170.207.41"
   local_path = "cd ~/projects/express;"
+  local_path_config = "cd ~/projects/express/config;"
   local_path_public = "cd ~/projects/express/public;"
   path_prefix_public_no_cd = "/var/www/#{@folder}/current/public"
+  path_prefix_config_no_cd = "/var/www/#{@folder}/current/config"
   path_prefix = "cd /var/www/#{@folder}/current;"
   path_prefix_public = "cd /var/www/#{@folder}/current/public;"
   path_certs = "cd /var/www/#{@folder}/current/certs;"
@@ -117,6 +119,14 @@ namespace :deploy do
     end
   end
 
+  task :upload_yml do
+    on roles(:web) do
+      run_locally do
+        execute("#{local_path_config}scp application.yml #{user}@#{server}:#{path_prefix_config_no_cd}/application.yml")
+      end
+    end
+  end
+
   task :server_restart do
     on roles(:web) do
       # execute "service nginx restart"
@@ -130,5 +140,6 @@ namespace :deploy do
   after :deploy, "deploy:symlink"
   after :deploy, "deploy:precompile"
   after :deploy, "deploy:staging_robot" if ENV["DEPLOY_PATH"] == "staging"
+  after :deploy, "deploy:upload_yml" if ENV["DEPLOY_PATH"] == "staging"
   after :deploy, "deploy:server_restart"
 end
