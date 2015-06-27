@@ -20,7 +20,7 @@ class Store::PaymentNotifiersController < ApplicationController
   private
 
     def payment_completed?
-      params[:status] == "Completed"
+      params[:payment_status] == "Completed"
     end
 
     def params_valid?
