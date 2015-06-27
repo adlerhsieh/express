@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       get :unsubscribe
       post :send_post_email
       get :info
+      get :require_sign_in
     end
     member do
     end

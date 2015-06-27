@@ -26,6 +26,9 @@ class Store::OrdersController < ApplicationController
     redirect_to store_orders_path
   end
 
+  def require_account
+    redirect_to require_sign_in_users_path unless current_user
+  end
   private
     def set_order
       @order = Store::Order.find_by_token(params[:id])

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   layout "backend"
-  before_action :require_login, except: [:unsubscribe, :subscribe]
+  before_action :require_login, except: [:unsubscribe, :subscribe, :require_sign_in]
   before_action :set_email, only: [:subscribe, :unsubscribe, :send_post_email]
   before_action :email_formatted?, only: [:subscribe]
   before_action :email_already_in_list_and_subscribed?, only: [:subscribe]
@@ -8,6 +8,9 @@ class UsersController < ApplicationController
   # require 'mailgun'
 
   def show
+  end
+
+  def require_sign_in
   end
 
   def info
