@@ -1,5 +1,5 @@
 <%= form_tag ENV["paypal_checkout_url"] do %>
   <%= hidden_field_tag :cmd, "_s-xclick" %>
   <%= hidden_field_tag :encrypted, @order.paypal_url(store_order_url(@order)) %>
-  <%= submit_tag "付款", class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;" %>
+  <%= submit_tag "Paypal付款", @button_class %>
 <% end %>

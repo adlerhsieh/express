@@ -88,6 +88,7 @@ Rails.application.routes.draw do
         get :place
         post :update_quantity
       end
+      resources :order_infos, only: [:create]
     end
     resources :order_items do
       member do

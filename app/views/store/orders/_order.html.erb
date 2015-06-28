@@ -5,7 +5,7 @@
       <th>數量</th>
       <th>單價</th>
       <th>總價</th>
-      <th>庫存</th>
+      <%= content_tag(:th, "庫存") if @order.not_charged? %>
       <th></th>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
             <% end %>
             <td><%= number_with_delimiter i.price %></td>
             <td><%= number_with_delimiter i.sum %></td>
-            <td><%= check_stock(i) %></td>
+            <%= content_tag(:td, check_stock(i)) if @order.not_charged? %>
             <td class="cancel-td"><%= link_to("移除", delete_store_order_item_path(i), method: :post, class: "cancel") if @order.not_charged? %></td>
           </tr>
         <% end %>
@@ -28,8 +28,8 @@
           <td></td>
           <td><%= submit_tag "更新數量", class: "btn btn-warning" if @order.not_charged? %></td>
           <td></td>
-          <td>共<%= number_with_delimiter total_price %>元</td>
-          <td></td>
+          <td>共 <%= number_with_delimiter total_price %> 元</td>
+          <%= content_tag(:td, "") if @order.not_charged? %>
           <td></td>
         </tr>
       <% end %>
@@ -53,14 +53,35 @@
   <%= progress %>
   <hr />
   <%= next_step %>
-  <!-- <p>* 價格為新台幣計價。</p> -->
-  <!-- <% unless current_user %> -->
-    <!--   <p>* 若未登入，購物車內容僅會保留7天。</p> -->
-    <!-- <% end %> -->
+</div>
+
+<div class="col-lg-12" class="gray-border-top">
+  <h2>寄送資訊</h2>
+  <%= form_tag store_order_order_infos_path(@order) do %>
+    <table class="shipping">
+      <tbody>
+        <tr>
+          <td>收件人姓名</td>
+          <td><%= text_field_tag :shipping_name, @order_info.shipping_name, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td>收件人地址</td>
+          <td><%= text_field_tag :shipping_address, @order_info.shipping_address, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td>聯絡電話</td>
+          <td><%= text_field_tag :phone, @order_info.phone, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= submit_tag "更新寄送資訊", class: "btn btn-warning action" %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
 </div>
 
 <div class="buttons col-lg-12">
   <%= action_button %>
-  <%= stock_warning %>
+  <%= action_warning %>
 </div>
 

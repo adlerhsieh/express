@@ -53,6 +53,10 @@ div.order {
   }
 }
 
+.gray-border-top {
+  border-top: 1px solid #D8D8D8;
+}
+
 .buttons {
   // width: 90%;
   display: block;
@@ -62,10 +66,11 @@ div.order {
   border-top: 1px solid #D8D8D8;
   padding-top: 20px;
 
-  .btn.action {
-    float: right;
-    width: 150px;
-  }
+}
+
+.btn.action {
+  float: right;
+  width: 150px;
 }
 
 .cancel-td {
@@ -109,4 +114,18 @@ div.order {
 
 .centered-image {
   max-height: 130px;
+}
+
+.shipping {
+  tr {
+    height: 60px;
+    td {
+      &:nth-child(1){
+        width: 100px;
+      }
+      &:nth-child(2){
+        width: 300px;
+      }
+    }
+  }
 }

@@ -7,6 +7,13 @@ class Store::Order < ActiveRecord::Base
   friendly_id :token
   before_save :generate_token, :set_paid_false
 
+  def has_info
+    info = self.info
+    return false if not info
+    return false if info.shipping_name.nil? || info.shipping_address.nil? || info.phone.nil?
+    true
+  end
+
   def generate_token
     self.token = SecureRandom.hex if not self.token
     true
