@@ -114,6 +114,7 @@ class Store::Order < ActiveRecord::Base
     state :outdated
     state :cart, :initial => true
     state :placed
+    state :transferred
     state :paid
     state :shipped
     state :arrived
@@ -126,8 +127,11 @@ class Store::Order < ActiveRecord::Base
     event :place do
       transitions from: :cart, to: :placed
     end
+    event :transfer do
+      transitions from: :placed, to: :transferred
+    end
     event :pay do
-      transitions from: :placed, to: :paid
+      transitions from: [:placed,:transferred], to: :paid
     end
     event :ship do
       transitions from: :paid, to: :shipped
