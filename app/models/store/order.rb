@@ -10,7 +10,12 @@ class Store::Order < ActiveRecord::Base
   def has_info
     info = self.info
     return false if not info
-    return false if info.shipping_name.nil? || info.shipping_address.nil? || info.phone.nil?
+    return false if info.shipping_name.nil? || 
+                    info.shipping_name.blank? ||
+                    info.shipping_address.nil? || 
+                    info.shipping_address.blank? ||
+                    info.phone.nil? ||
+                    info.phone.blank?
     true
   end
 
