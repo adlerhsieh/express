@@ -62,6 +62,7 @@ class Store::ProductsController < ApplicationController
   def add_to_cart
     order = find_current_order || create_new_order
     result = order.add_item(params[:id])
+    order.update_total_price
     place = order.aasm_state == "cart" ? "購物車" : "訂單"
     flash[:notice] = "已加入#{place}：#{result[:title]}"
     redirect_to request.referer

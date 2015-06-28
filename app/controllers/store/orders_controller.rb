@@ -36,6 +36,7 @@ class Store::OrdersController < ApplicationController
       num = params[i.id.to_s.to_sym]
       i.update_column(:quantity, num.to_i) if !num.nil? && num.to_i > 0
     end
+    @order.update_total_price
     flash[:notice] = "數量已更新！"
     redirect_to store_order_path(@order)
   end
