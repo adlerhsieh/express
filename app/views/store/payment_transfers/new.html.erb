@@ -1,7 +1,7 @@
 <h2>轉帳資訊</h2>
-<div class="column col-lg-5">
-  <%= form_for store_order_payment_transfers_path(@order) do |t| %>
-    <table class="transfer">
+<div class="column col-lg-5 transfer">
+  <%= form_for [@order, @transfer], url: store_order_payment_transfers_path do |t| %>
+    <table class="">
       <tbody>
         <tr>
           <td>轉帳帳號末五碼</td>
@@ -17,9 +17,12 @@
     </table>
   <% end %>
 </div>
-<div class="column col-lg-6 transfer" style="margin-left: 20px;">
+<div class="column col-lg-6 transfer">
   <h4>轉帳帳號</h4>
   <p>銀行：808</p>
   <p>帳號：1111111111111</p>
   <p>金額：<%= @order.price %></p>
+  <h4>備註</h4>
+  <p>* 轉帳完成後，需要1~2個工作天進行確認</p>
+  <p>* 確認完成後即會出貨</p>
 </div>
