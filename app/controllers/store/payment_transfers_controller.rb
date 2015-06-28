@@ -7,8 +7,10 @@ class Store::PaymentTransfersController < ApplicationController
 
   def create
     @transfer = Store::PaymentTransfer.new(transfer_params)
-    if @transfer.save
+    t = @transfer.transaction_id
+    if @transfer.save && t.to_i.to_s.length == 5
       @order.transfer = @transfer
+      @order.under_transfer!
       flash[:notice] = "已送出轉帳資訊"
       redirect_to store_order_path(@order)
     else

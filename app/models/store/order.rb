@@ -96,6 +96,7 @@ class Store::Order < ActiveRecord::Base
   end
 
   def update_pay_time
+    self.update_column(:paid, true)
     self.update_column(:pay_time, Time.now)
   end
 
@@ -106,7 +107,7 @@ class Store::Order < ActiveRecord::Base
     self.update_column(:price, total_price)
   end
 
-  def not_charged?
+  def not_transferring_or_paid?
     self.cart? || self.placed?
   end
 
@@ -127,7 +128,7 @@ class Store::Order < ActiveRecord::Base
     event :place do
       transitions from: :cart, to: :placed
     end
-    event :transfer do
+    event :under_transfer do
       transitions from: :placed, to: :transferred
     end
     event :pay do

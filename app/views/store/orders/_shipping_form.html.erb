@@ -1,7 +1,7 @@
 <!-- <h3> -->
   <div class="column">
     <h4>寄送資訊</h4>
-    <% if @order.not_charged? %>
+    <% if not @order.paid %>
       <%= form_tag store_order_order_infos_path(@order) do %>
         <table class="shipping">
           <tbody>

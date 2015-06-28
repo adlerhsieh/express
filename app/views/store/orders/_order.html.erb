@@ -5,7 +5,7 @@
       <th>數量</th>
       <th>單價</th>
       <th>總價</th>
-      <%= content_tag(:th, "庫存") if @order.not_charged? %>
+      <%= content_tag(:th, "庫存") if @order.not_transferring_or_paid? %>
       <th></th>
     </thead>
     <tbody>
@@ -13,23 +13,23 @@
         <% @order.items.each do |i| %>
           <tr>
             <td><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></td>
-            <% if @order.not_charged? %>
+            <% if @order.not_transferring_or_paid? %>
               <td style="width: 80px;"><%= text_field_tag i.id.to_s.to_sym, i.quantity, class: "form-control", style: "" %></td>
             <% else %>
               <td style="width: 65px;"><%= i.quantity %></td>
             <% end %>
             <td><%= number_with_delimiter i.price %></td>
             <td><%= number_with_delimiter i.sum %></td>
-            <%= content_tag(:td, check_stock(i)) if @order.not_charged? %>
-            <td class="cancel-td"><%= link_to("移除", delete_store_order_item_path(i), method: :post, class: "cancel") if @order.not_charged? %></td>
+            <%= content_tag(:td, check_stock(i)) if @order.not_transferring_or_paid? %>
+            <td class="cancel-td"><%= link_to("移除", delete_store_order_item_path(i), method: :post, class: "cancel") if @order.not_transferring_or_paid? %></td>
           </tr>
         <% end %>
         <tr>
           <td></td>
-          <td><%= submit_tag "更新數量", class: "btn btn-warning" if @order.not_charged? %></td>
+          <td><%= submit_tag "更新數量", class: "btn btn-warning" if @order.not_transferring_or_paid? %></td>
           <td></td>
           <td>共 <%= number_with_delimiter total_price %> 元</td>
-          <%= content_tag(:td, "") if @order.not_charged? %>
+          <%= content_tag(:td, "") if @order.not_transferring_or_paid? %>
           <td></td>
         </tr>
       <% end %>
@@ -58,9 +58,12 @@
   <%= next_step %>
 </div>
 
-<% if @order.transfer %>
-  <div class="notes column col-sm-4">
+<% if @transfer %>
+  <div class="transfer-in-order column col-sm-4">
     <h4>轉帳資訊</h4>
+    <p>轉帳帳號末五碼： <%= @transfer.transaction_id %></p>
+    <p>送出時間： <%= @transfer.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+    <p>狀態：確認中</p>
     <%= link_to "修改", edit_store_order_payment_transfer_path(@order, @transfer), class: "btn btn-warning action" if not @transfer.confirm %>
   </div>
 <% end %>

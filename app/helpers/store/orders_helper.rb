@@ -37,6 +37,7 @@ module Store::OrdersHelper
         content_tag(:span, (@order.order_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") +
         content_tag(:p, "")
     end
+    # if @order.transfer.
     if @order.pay_time
       result += 
         content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
@@ -53,6 +54,10 @@ module Store::OrdersHelper
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
         content_tag(:span, "下一步：等待出貨通知", style: "font-size: 14px;")
+    when @order.transferred?
+      result = 
+        content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
+        content_tag(:span, "下一步：等待轉帳確認", style: "font-size: 14px;")
     when @order.placed?
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
