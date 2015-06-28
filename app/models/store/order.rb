@@ -21,6 +21,17 @@ class Store::Order < ActiveRecord::Base
     true
   end
 
+  def stock_ready
+    ready = true
+    self.items.each do |i|
+      if i.quantity > i.product.stock
+        ready = false
+        break
+      end
+    end
+    return ready
+  end
+
   def generate_token
     self.token = SecureRandom.hex if not self.token
     true

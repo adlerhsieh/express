@@ -70,7 +70,7 @@ module Store::OrdersHelper
       return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
     end
     @button_class = {class: "btn btn-primary", style: "float: right; width: 150px; margin-top: 20px; margin-left: 20px;", method: :get}
-    @button_class.merge!(disabled: "disabled") unless @order.has_info
+    @button_class.merge!(disabled: "disabled") if not @order.has_info && @order.stock_ready
     if @order.placed?
       render partial: "pay_form"
     end
@@ -87,14 +87,15 @@ module Store::OrdersHelper
     end
   end
 
-  def stock_warning
-    content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳", class: "warning") if @out_of_stock
-  end
-
-  def shipping_info_warning
-    if @order.placed?
-      content_tag(:span, "請完整填寫寄送資訊", class: "warning") unless @order.has_info
+  def warning
+    result = []
+    if @out_of_stock
+      result << content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳")
     end
+    if @order.placed?
+      result << content_tag(:span, "請完整填寫寄送資訊") unless @order.has_info
+    end
+    return result.join(content_tag(:p, "")).html_safe
   end
 
   def total_quantity
