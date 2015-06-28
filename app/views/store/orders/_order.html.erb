@@ -42,7 +42,8 @@
     <h4>備註</h4>
     <p><%= "* 未登入帳號的購物車最多保留7天" unless current_user %></p>
     <p>* 價格皆為新台幣計價</p>
-    <p>* 付款之前，庫存量隨時都會變，付款之後便會確定有貨。</p>
+    <p>* 付款之前，庫存量隨時都會變，付款之後才會保留品項</p>
+    <p>* 付款後，便不可再修改寄送資訊</p>
     <p>* 付款後，將在1~2天內出貨，出貨後將以email通知</p>
     <p>* 正常到貨時間為7天內，送件進度可至<%= link_to "郵局查詢", "http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_SYS_ID=D&_MENU_ID=189&_ACTIVE_ID=190", target: "_blank" %></p>
   </div>
@@ -57,6 +58,12 @@
   <%= next_step %>
 </div>
 
+<% if @order.transfer %>
+  <div class="notes column col-sm-4">
+    <h4>轉帳資訊</h4>
+    <%= link_to "修改", edit_store_order_payment_transfer_path(@order, @transfer), class: "btn btn-warning action" if not @transfer.confirm %>
+  </div>
+<% end %>
 
 <div class="buttons col-lg-12">
   <%= action_button %>

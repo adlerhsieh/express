@@ -2,12 +2,13 @@ class Store::PaymentTransfersController < ApplicationController
   before_action :set_order
 
   def new
-    @transfer = @order.transfers.new
+    @transfer = Store::PaymentTransfer.new
   end
 
   def create
-    @transfer = @order.transfers.new(transfer_params)
+    @transfer = Store::PaymentTransfer.new(transfer_params)
     if @transfer.save
+      @order.transfer = @transfer
       flash[:notice] = "已送出轉帳資訊"
       redirect_to store_order_path(@order)
     else
@@ -17,7 +18,7 @@ class Store::PaymentTransfersController < ApplicationController
   end
 
   def edit
-    @transfer = @order.transfers.last
+    @transfer = @order.transfer
   end
 
   def update
