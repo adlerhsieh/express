@@ -89,6 +89,7 @@ Rails.application.routes.draw do
         post :update_quantity
       end
       resources :order_infos, only: [:create]
+      resources :payment_transfers, only: [:new, :create]
     end
     resources :order_items do
       member do

@@ -1,0 +1,25 @@
+// Place all the styles related to the store/payment_transfers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.transfer {
+  .btn {
+    width: 150px;
+  }
+  tr {
+    height: 60px;
+    td {
+      &:nth-child(1){
+        width: 150px;
+      }
+      &:nth-child(2){
+        width: 300px;
+      }
+    }
+  }
+  p {
+    margin-bottom: 0px;
+  }
+}
+

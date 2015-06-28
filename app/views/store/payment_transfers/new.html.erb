@@ -1,0 +1,25 @@
+<h2>轉帳資訊</h2>
+<div class="column col-lg-5">
+  <%= form_for store_order_payment_transfers_path(@order) do |t| %>
+    <table class="transfer">
+      <tbody>
+        <tr>
+          <td>轉帳帳號末五碼</td>
+          <td><%= t.text_field :transaction_id, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <%= t.submit "送出", class: "btn btn-primary" %>
+            <%= link_to "取消", store_order_path(@order), style: "padding-left: 20px;" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+<div class="column col-lg-6 transfer" style="margin-left: 20px;">
+  <h4>轉帳帳號</h4>
+  <p>銀行：808</p>
+  <p>帳號：1111111111111</p>
+  <p>金額：<%= @order.price %></p>
+</div>
