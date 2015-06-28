@@ -1,6 +1,5 @@
-<h2>轉帳資訊</h2>
 <div class="column col-lg-5 transfer">
-    <%= form_for [@order, @transfer], url: store_order_payment_transfers_path, method: :post do |t| %>
+    <%= form_for [@order, @transfer], url: store_order_payment_transfer_path, method: :put do |t| %>
     <table class="">
       <tbody>
         <tr>

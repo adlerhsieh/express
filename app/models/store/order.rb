@@ -128,6 +128,9 @@ class Store::Order < ActiveRecord::Base
     event :place do
       transitions from: :cart, to: :placed
     end
+    event :cancel_transfer do
+      transitions from: :transferred, to: :placed
+    end
     event :under_transfer do
       transitions from: :placed, to: :transferred
     end

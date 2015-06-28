@@ -76,7 +76,7 @@ module Store::OrdersHelper
     end
     @button_class = {class: "btn btn-primary", style: "float: right; width: 150px; margin-top: 20px; margin-left: 20px;", method: :get}
     @button_class.merge!(disabled: "disabled") if not @order.has_info && @order.stock_ready
-    if @order.placed?
+    if @order.placed? || @order.transferred?
       render partial: "pay_form"
     end
   end
