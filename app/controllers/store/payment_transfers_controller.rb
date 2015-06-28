@@ -1,5 +1,6 @@
 class Store::PaymentTransfersController < ApplicationController
   before_action :set_order
+  before_filter :txn_id_format, only: [:create, :update]
 
   def new
     @transfer = Store::PaymentTransfer.new
@@ -8,7 +9,7 @@ class Store::PaymentTransfersController < ApplicationController
   def create
     @transfer = Store::PaymentTransfer.new(transfer_params)
     t = @transfer.transaction_id
-    if @transfer.save && t.to_i.to_s.length == 5
+    if @transfer.save
       @order.transfer = @transfer
       @order.under_transfer!
       flash[:notice] = "已送出轉帳資訊"
@@ -26,7 +27,7 @@ class Store::PaymentTransfersController < ApplicationController
   def update
     @transfer = Store::PaymentTransfer.find_by_order_id(@order.id)
     t = @transfer.transaction_id
-    if @transfer.update!(transfer_params) && t.to_i.to_s.length == 5
+    if @transfer.update!(transfer_params) 
       flash[:notice] = "轉帳資訊更新成功"
       redirect_to store_order_path(@order)
     else
@@ -46,6 +47,16 @@ class Store::PaymentTransfersController < ApplicationController
   end
 
   private
+    def txn_id_format
+      t = params[:store_payment_transfer][:transaction_id]
+      if not t.length == 5 && t.to_i.to_s.length == 5
+        flash[:alert] = "請確認已填入轉帳帳號末五碼"
+        # render :new if params[:action] == "create"
+        # render :edit if params[:action] == "update"
+        redirect_to :back
+      end
+    end
+
     def set_order
       @order = Store::Order.find_by_token(params[:order_id])
     end
