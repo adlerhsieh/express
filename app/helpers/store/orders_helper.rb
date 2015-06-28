@@ -87,9 +87,14 @@ module Store::OrdersHelper
     end
   end
 
-  def action_warning
+  def stock_warning
     content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳", class: "warning") if @out_of_stock
-    content_tag(:span, "請完整填寫寄送資訊", class: "warning") unless @order.has_info && @order.placed?
+  end
+
+  def shipping_info_warning
+    if @order.placed?
+      content_tag(:span, "請完整填寫寄送資訊", class: "warning") unless @order.has_info
+    end
   end
 
   def total_quantity

@@ -10,6 +10,7 @@ class Store::OrdersController < ApplicationController
 
   def show
     @order = Store::Order.includes(:items => [:product]).find_by_token(params[:id])
+    @order_info = @order.info || Store::OrderInfo.new
   end
 
   def place

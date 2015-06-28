@@ -36,6 +36,8 @@
     </tbody>
   </table>
 
+  <%= render partial: "shipping_form" unless @order.cart? %>
+
   <div class="column">
     <h4>備註</h4>
     <p><%= "* 未登入帳號的購物車最多保留7天" unless current_user %></p>
@@ -55,33 +57,10 @@
   <%= next_step %>
 </div>
 
-<div class="col-lg-12" class="gray-border-top">
-  <h2>寄送資訊</h2>
-  <%= form_tag store_order_order_infos_path(@order) do %>
-    <table class="shipping">
-      <tbody>
-        <tr>
-          <td>收件人姓名</td>
-          <td><%= text_field_tag :shipping_name, @order_info.shipping_name, class: "form-control" %></td>
-        </tr>
-        <tr>
-          <td>收件人地址</td>
-          <td><%= text_field_tag :shipping_address, @order_info.shipping_address, class: "form-control" %></td>
-        </tr>
-        <tr>
-          <td>聯絡電話</td>
-          <td><%= text_field_tag :phone, @order_info.phone, class: "form-control" %></td>
-        </tr>
-        <tr>
-          <td colspan="2"><%= submit_tag "更新寄送資訊", class: "btn btn-warning action" %></td>
-        </tr>
-      </tbody>
-    </table>
-  <% end %>
-</div>
 
 <div class="buttons col-lg-12">
   <%= action_button %>
-  <%= action_warning %>
+  <%= stock_warning %>
+  <%= shipping_info_warning %>
 </div>
 
