@@ -69,10 +69,10 @@ module Store::OrdersHelper
     if @order.cart?
       return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
     end
-    @button_class = {class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"}
+    @button_class = {class: "btn btn-primary", style: "float: right; width: 150px; margin-top: 20px; margin-left: 20px;", method: :get}
     @button_class.merge!(disabled: "disabled") unless @order.has_info
     if @order.placed?
-      render partial: "paypal_form"
+      render partial: "pay_form"
     end
   end
 

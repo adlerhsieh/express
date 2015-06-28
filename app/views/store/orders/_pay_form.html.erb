@@ -3,3 +3,4 @@
   <%= hidden_field_tag :encrypted, @order.paypal_url(store_order_url(@order)) %>
   <%= submit_tag "Paypal付款", @button_class %>
 <% end %>
+<%= button_to "轉帳付款", new_store_order_payment_notifier_path(@order), @button_class %>
