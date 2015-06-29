@@ -8,4 +8,9 @@ class Store::PaymentTransfer < ActiveRecord::Base
     self.confirm = false unless self.confirm
     return true
   end
+
+  def confirm!
+    self.update_column(:confirm, true)
+    self.update_column(:confirm_time, Time.now)
+  end
 end

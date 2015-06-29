@@ -46,6 +46,15 @@ class Store::PaymentTransfersController < ApplicationController
     end
   end
 
+  def confirm
+    @transfer = Store::PaymentTransfer.find_by_order_id(@order.id)
+    @transfer.confirm!
+    @order.pay!
+    @order.update_pay_time
+    flash[:notice] = "確認成功"
+    redirect_to store_order_path(@order)
+  end
+
   private
     def txn_id_format
       t = params[:store_payment_transfer][:transaction_id]
