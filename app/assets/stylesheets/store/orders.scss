@@ -6,20 +6,21 @@
 
 table.items {
   background-color: white;
-  // border-radius: 10px;
   border: 1px solid #D8D8D8;
   thead th {
     text-align: center;
   }
-  
   tbody tr {
     td {
       text-align: center;
-    }
-    &:hover {
-      // cursor: pointer;
+      vertical-align: baseline;
     }
   }
+}
+
+.header-tr {
+  background-color: teal;
+  color: white;
 }
 
 .float-right {
