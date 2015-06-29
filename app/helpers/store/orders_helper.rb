@@ -13,6 +13,8 @@ module Store::OrdersHelper
       "尚未結帳"
     when "placed"
       "已結帳，待付款"
+    when "transferred"
+      "已轉帳，待確認"
     when "paid"
       "已付款，待出貨"
     when "shipped"
@@ -54,6 +56,10 @@ module Store::OrdersHelper
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
         content_tag(:span, "下一步：等待出貨通知", style: "font-size: 14px;")
+    when !@order.has_info
+      result = 
+        content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
+        content_tag(:span, "下一步：填寫完整寄送資訊", style: "font-size: 14px;")
     when @order.transferred?
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
@@ -116,6 +122,14 @@ module Store::OrdersHelper
       time.strftime("%Y-%m-%d %H:%M:%S")
     else
       "--"
+    end
+  end
+
+  def shipping_class
+    if @order.info.nil?
+      "btn-primary"
+    else
+      "btn-warning"
     end
   end
 end
