@@ -145,3 +145,18 @@ div.order {
     float: right;
   }
 }
+
+.admin {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 200px;
+  h4 {
+    text-align: center;
+  }
+  a, input {
+    margin: 10px auto;
+    width: 80%;
+    display: block;
+
+  }
+}
