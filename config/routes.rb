@@ -87,11 +87,18 @@ Rails.application.routes.draw do
       member do
         get :place
         post :update_quantity
+        post :ship
+        post :arrive
+        post :return
+        post :cancel_return
+        post :cancel_arrive
+        post :cancel_ship
       end
       resources :order_infos, only: [:create]
       resources :payment_transfers, only: [:new, :create, :edit, :update, :destroy] do
         member do
           post :confirm
+          post :cancel_confirm
         end
       end
     end

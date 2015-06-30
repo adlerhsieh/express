@@ -91,8 +91,12 @@ class Store::Order < ActiveRecord::Base
     {title: item.product.title, quantity: item.quantity, price: item.price}
   end
 
-  def update_order_time
-    self.update_column(:order_time, Time.now)
+  def timestamp(time)
+    self.update_column(time, Time.now)
+  end
+
+  def clear_timestamp(time)
+    self.update_column(time, nil)
   end
 
   def update_pay_time
@@ -109,6 +113,14 @@ class Store::Order < ActiveRecord::Base
 
   def not_transferring_or_paid?
     self.cart? || self.placed?
+  end
+
+  def under_shipping?
+    self.paid? || self.shipped? || self.arrived? || self.returned?
+  end
+
+  def may_return?
+    self.arrived? || self.returned?
   end
 
   aasm do
@@ -132,7 +144,7 @@ class Store::Order < ActiveRecord::Base
       transitions from: :transferred, to: :placed
     end
     event :under_transfer do
-      transitions from: :placed, to: :transferred
+      transitions from: [:placed, :paid], to: :transferred
     end
     event :pay do
       transitions from: [:placed,:transferred], to: :paid
@@ -140,14 +152,23 @@ class Store::Order < ActiveRecord::Base
     event :ship do
       transitions from: :paid, to: :shipped
     end
+    event :cancel_ship do
+      transitions from: :shipped, to: :paid
+    end
     event :arrive do
       transitions from: :shipped, to: :arrived
+    end
+    event :cancel_arrive do
+      transitions from: :arrived, to: :shipped
     end
     event :cancel do
       transitions from: [:cart, :placed, :paid], to: :cancelled
     end
     event :return do
       transitions from: :arrived, to: :returned
+    end
+    event :cancel_return do
+      transitions from: :returned, to: :arrived
     end
   end
 end

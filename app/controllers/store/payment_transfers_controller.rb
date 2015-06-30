@@ -50,9 +50,18 @@ class Store::PaymentTransfersController < ApplicationController
     @transfer = Store::PaymentTransfer.find_by_order_id(@order.id)
     @transfer.confirm!
     @order.pay!
-    @order.update_pay_time
+    @order.timestamp(:pay_time)
     flash[:notice] = "確認成功"
     redirect_to store_order_path(@order)
+  end
+
+  def cancel_confirm
+    @transfer = Store::PaymentTransfer.find_by_order_id(@order.id)
+    @transfer.cancel_confirm!
+    @order.under_transfer!
+    @order.clear_timestamp(:pay_time)
+    flash[:notice] = "取消轉帳資訊的確認"
+    redirect_to :back
   end
 
   private

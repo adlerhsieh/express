@@ -12,5 +12,12 @@ class Store::PaymentTransfer < ActiveRecord::Base
   def confirm!
     self.update_column(:confirm, true)
     self.update_column(:confirm_time, Time.now)
+    self.update_column(:status, "Completed")
+  end
+
+  def cancel_confirm!
+    self.update_column(:confirm, false)
+    self.update_column(:confirm_time, nil)
+    self.update_column(:status, "Pending")
   end
 end

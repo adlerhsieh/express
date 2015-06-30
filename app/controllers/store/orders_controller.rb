@@ -1,6 +1,6 @@
 class Store::OrdersController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:add_to_cart]
-  before_action :set_order, only: [:place, :destroy, :update_quantity]
+  before_action :set_order, except: [:index, :show]
   before_filter :require_account, only: [:place]
   #
   def index
@@ -16,9 +16,51 @@ class Store::OrdersController < ApplicationController
 
   def place
     @order.place!
-    @order.update_order_time
+    @order.timestamp(:order_time)
     flash[:notice] = "下單成功！"
     redirect_to store_order_path(@order)
+  end
+
+  def ship
+    @order.ship!
+    @order.timestamp(:shipping_time)
+    flash[:notice] = "已設定為出貨"
+    redirect_to :back
+  end
+
+  def cancel_ship
+    @order.cancel_ship!
+    @order.clear_timestamp(:shipping_time)
+    flash[:notice] = "已取消出貨"
+    redirect_to :back
+  end
+
+  def arrive
+    @order.arrive!
+    @order.timestamp(:arrived_at)
+    flash[:notice] = "已設定為到貨"
+    redirect_to :back
+  end
+
+  def cancel_arrive
+    @order.cancel_arrive!
+    @order.clear_timestamp(:arrived_at)
+    flash[:notice] = "已退回至出貨"
+    redirect_to :back
+  end
+
+  def return
+    @order.return!
+    @order.timestamp(:returned_at)
+    flash[:notice] = "已設定為退貨"
+    redirect_to :back
+  end
+
+  def cancel_return
+    @order.cancel_return!
+    @order.clear_timestamp(:returned_at)
+    flash[:notice] = "已取消退貨"
+    redirect_to :back
   end
 
   def destroy

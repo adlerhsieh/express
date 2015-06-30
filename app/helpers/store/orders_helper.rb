@@ -44,7 +44,29 @@ module Store::OrdersHelper
       result += 
         content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
         content_tag(:span, "已付款") + 
-        content_tag(:span, (@order.pay_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp")
+        content_tag(:span, (@order.pay_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") + 
+        content_tag(:p, "")
+    end
+    if @order.shipping_time
+      result +=
+        content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
+        content_tag(:span, "已出貨") + 
+        content_tag(:span, (@order.shipping_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") +
+        content_tag(:p, "")
+    end
+    if @order.arrived_at
+      result +=
+        content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
+        content_tag(:span, "已到貨") + 
+        content_tag(:span, (@order.arrived_at + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") + 
+        content_tag(:p, "")
+    end
+    if @order.returned_at
+      result +=
+        content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
+        content_tag(:span, "已退回") + 
+        content_tag(:span, (@order.returned_at + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") + 
+        content_tag(:p, "")
     end
     return nil if not result
     result.html_safe
@@ -56,6 +78,12 @@ module Store::OrdersHelper
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
         content_tag(:span, "下一步：等待出貨通知", style: "font-size: 14px;")
+    when @order.arrived?
+       result = ""
+    when @order.shipping_time
+      result = 
+        content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
+        content_tag(:span, "下一步：等待到貨", style: "font-size: 14px;")
     when !@order.has_info
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
@@ -130,6 +158,31 @@ module Store::OrdersHelper
       "btn-primary"
     else
       "btn-warning"
+    end
+  end
+
+  def transfer_info
+    text = @transfer.confirm ? "已確認" : "已填，尚未確認"
+    content_tag(:p, text)
+  end
+
+  def shipping_info
+    case
+    when @order.paid?
+      content_tag(:p, "待出貨")
+    when @order.shipped?
+      content_tag(:p, "已出貨")
+    when @order.arrived?, @order.returned?
+      content_tag(:p, "已送達")
+    end
+  end
+
+  def returned_info
+    case
+    when @order.arrived?
+      content_tag(:p, "--")
+    when @order.returned?
+      content_tag(:p, "已退回")
     end
   end
 end
