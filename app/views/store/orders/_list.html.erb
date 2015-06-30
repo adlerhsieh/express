@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <% orders.each do |order| %>
-          <tr>
+          <tr class="<%= highlight_pending(order) if current_user.is_admin %>">
             <% if current_user.is_admin %>
               <td><%= order.user.id %></td>
               <td><%= order.user.name %></td>

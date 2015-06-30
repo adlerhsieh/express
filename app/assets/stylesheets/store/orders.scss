@@ -11,6 +11,9 @@ table.items {
     text-align: center;
   }
   tbody tr {
+    &.pending {
+      background-color: rgb(208,255,253);
+    }
     td {
       text-align: center;
       vertical-align: baseline;

@@ -30,6 +30,15 @@ module Store::OrdersHelper
     end
   end
 
+  def highlight_pending(order)
+    case order.aasm_state
+    when "transferred","paid","shipped"
+      "pending"
+    else
+      ""
+    end
+  end
+
   def progress
     result = String.new
     if @order.order_time
