@@ -84,6 +84,12 @@ class Store::OrdersController < ApplicationController
     redirect_to store_order_path(@order)
   end
 
+  def note
+    @order.update_column(:note, params[:note]) 
+    flash[:notice] = "註記已更新"
+    redirect_to :back
+  end
+
   private
     def set_order
       @order = Store::Order.find_by_token(params[:id])

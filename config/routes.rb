@@ -93,6 +93,7 @@ Rails.application.routes.draw do
         post :cancel_return
         post :cancel_arrive
         post :cancel_ship
+        post :note
       end
       resources :order_infos, only: [:create]
       resources :payment_transfers, only: [:new, :create, :edit, :update, :destroy] do
