@@ -10,13 +10,13 @@ module Store::OrdersHelper
   def status_print(state)
     case state
     when "cart"
-      "尚未結帳"
+      "尚未下單"
     when "placed"
-      "已結帳，待付款"
+      "待付款"
     when "transferred"
-      "已轉帳，待確認"
+      "待確認轉帳資訊"
     when "paid"
-      "已付款，待出貨"
+      "已付款"
     when "shipped"
       "已出貨"
     when "arrived"

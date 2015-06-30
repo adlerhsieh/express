@@ -4,11 +4,14 @@ class Store::OrdersController < ApplicationController
   before_filter :require_account, only: [:place]
   #
   def index
-    # @orders = User.includes(:orders => [:items, :info]).find_by_id(session[:user_id]).orders
     if current_user.is_admin
       @orders = Store::Order.all.order(:created_at => :desc)
+      @current_orders = @orders.where.not(:aasm_state => ["cancelled", "returned", "arrived"])
+      @past_orders = @orders.where(:aasm_state => ["cancelled", "returned", "arrived"])
     else
       @orders = current_user.orders.all.order(:created_at => :desc)
+      @current_orders = @orders.where.not(:aasm_state => ["cancelled", "returned", "arrived"])
+      @past_orders = @orders.where(:aasm_state => ["cancelled", "returned", "arrived"])
     end
   end
 
