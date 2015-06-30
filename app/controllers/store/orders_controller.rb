@@ -5,7 +5,11 @@ class Store::OrdersController < ApplicationController
   #
   def index
     # @orders = User.includes(:orders => [:items, :info]).find_by_id(session[:user_id]).orders
-    @orders = current_user.orders.all.order(:created_at => :desc)
+    if current_user.is_admin
+      @orders = Store::Order.all.order(:created_at => :desc)
+    else
+      @orders = current_user.orders.all.order(:created_at => :desc)
+    end
   end
 
   def show

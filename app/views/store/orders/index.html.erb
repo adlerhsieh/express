@@ -6,6 +6,10 @@
   <div class="order col-sm-12">
     <table class="table items">
       <thead class="header-tr">
+        <% if current_user.is_admin %>
+          <th>ID</th>
+          <th>消費者</th>
+        <% end %>
         <th>序號</th>
         <th>金額(新台幣)</th>
         <th>下單時間</th>
@@ -17,6 +21,10 @@
       <tbody>
         <% @orders.each do |order| %>
           <tr>
+            <% if current_user.is_admin %>
+              <td><%= order.user.id %></td>
+              <td><%= order.user.name %></td>
+            <% end %>
             <td><%= order.token[0..7] %></td>
             <td><%= order.price %></td>
             <td><%= time(order.order_time) %></td>
