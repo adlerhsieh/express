@@ -1,7 +1,24 @@
 <!-- <h3> -->
   <div class="column">
     <h4>寄送資訊</h4>
-    <% if not @order.paid %>
+    <% if @order.paid? %>
+      <table class="shipping">
+        <tbody class="shipping">
+          <tr>
+            <td>收件人姓名</td>
+            <td><%= @order_info.shipping_name %></td>
+          </tr>
+          <tr>
+            <td>收件人地址</td>
+            <td><%= @order_info.shipping_address %></td>
+          </tr>
+          <tr>
+            <td>聯絡電話</td>
+            <td><%= @order_info.phone %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% else %>
       <%= form_tag store_order_order_infos_path(@order) do %>
         <table class="shipping">
           <tbody>
@@ -21,24 +38,6 @@
         </table>
         <%= submit_tag "更新寄送資訊", class: "btn #{shipping_class} action", style: "margin-top: -30px;" %>
       <% end %>
-    <% else %>
-      <table class="shipping">
-        <tbody class="shipping">
-          <tr>
-            <td>收件人姓名</td>
-            <td><%= @order_info.shipping_name %></td>
-          </tr>
-          <tr>
-            <td>收件人地址</td>
-            <td><%= @order_info.shipping_address %></td>
-          </tr>
-          <tr>
-            <td>聯絡電話</td>
-            <td><%= @order_info.phone %></td>
-          </tr>
-        </tbody>
-      </table>
     <% end %>
-
   </div>
   <!-- </h3> -->

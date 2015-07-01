@@ -142,6 +142,10 @@ class Store::Order < ActiveRecord::Base
     self.cart? || self.placed? || self.transferred? || self.paid?
   end
 
+  def fill_pkg_id(id)
+    self.info.update_column(:pkg_id, id)
+  end
+
   aasm do
     state :outdated
     state :cart, :initial => true

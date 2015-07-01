@@ -2,6 +2,7 @@ class Store::OrdersController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:add_to_cart]
   before_action :set_order, except: [:index, :show]
   before_filter :require_account, only: [:place]
+  before_filter :validate_pkg_id, only: [:ship]
   #
   def index
     if current_user.is_admin
@@ -34,6 +35,8 @@ class Store::OrdersController < ApplicationController
   def ship
     @order.ship!
     @order.timestamp(:shipping_time)
+    @order.fill_pkg_id(params[:pkg_id])
+    # OrderMailer.notify_shipped(@order).deliver_now
     flash[:notice] = "已設定為出貨"
     redirect_to :back
   end
@@ -121,6 +124,13 @@ class Store::OrdersController < ApplicationController
             redirect_to store_products_path 
           end
         end
+      end
+    end
+
+    def validate_pkg_id
+      if params[:pkg_id].nil? || params[:pkg_id].blank?
+        flash[:alert] = "未填郵件編號"
+        redirect_to :back 
       end
     end
 end

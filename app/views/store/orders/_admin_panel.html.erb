@@ -5,6 +5,9 @@
     <p>消費者：<%= @order.user.name %></p>
     <p>消費者ID：<%= @order.user.id %></p>
     <p>Email：<%= @order.user.email %></p>
+    <% if @order.under_shipping? %>
+      <p>郵件編號：<%= link_to(@order.info.pkg_id || "", "http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_MENU_ID=189&_SYS_ID=D&_ACTIVE_ID=190", target: "_blank") %></p>
+    <% end %>
     <p>備註：<%= @order.note %></p>
   </div>
   <% if @notifiers.any? %>
@@ -33,7 +36,12 @@
     <div class="col-sm-2 column admin">
       <h4>出貨控制</h4>
       <%= shipping_info %>
-      <%= link_to "出貨", ship_store_order_path(@order), method: :post, class: "btn btn-primary" if @order.paid? %>
+      <% if @order.paid? %>
+        <%= form_tag ship_store_order_path(@order) do %>
+          <%= text_field_tag :pkg_id, "", class: "form-control", placeholder: "郵件編號" %>
+          <%= submit_tag "出貨", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
       <%= link_to "取消出貨", cancel_ship_store_order_path(@order), method: :post, class: "btn btn-default" if @order.shipped? %>
       <%= link_to "送達", arrive_store_order_path(@order), method: :post, class: "btn btn-primary" if @order.shipped? %>
       <%= link_to "取消送達", cancel_arrive_store_order_path(@order), method: :post, class: "btn btn-default" if @order.arrived? %>
