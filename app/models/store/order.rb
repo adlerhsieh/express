@@ -1,5 +1,6 @@
 class Store::Order < ActiveRecord::Base
   belongs_to :user
+  belongs_to :payment_method, :class => "Store::PaymentMethod", :foreign_key => "payment_method_id"
   has_many :items, :class_name => "Store::OrderItem", :foreign_key => "order_id", :dependent => :destroy
   has_many :notifiers, :class_name => "Store::PaymentNotifier", :foreign_key => "order_id", :dependent => :destroy
   has_one :transfer, :class_name => "Store::PaymentTransfer", :foreign_key => "order_id", :dependent => :destroy
@@ -30,6 +31,20 @@ class Store::Order < ActiveRecord::Base
       end
     end
     return ready
+  end
+
+  def use_paypal
+    id = Store::PaymentMethod.find_by_method("PayPal").id
+    update_column(:payment_method_id, id)
+  end
+
+  def use_transfer
+    id = Store::PaymentMethod.find_by_method("匯款").id
+    update_column(:payment_method_id, id)
+  end
+
+  def clear_payment_method
+    update_column(:payment_method_id, nil)
   end
 
   def generate_token

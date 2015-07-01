@@ -12,6 +12,7 @@ class Store::PaymentTransfersController < ApplicationController
     if @transfer.save
       @order.transfer = @transfer
       @order.under_transfer!
+      @order.use_transfer
       flash[:notice] = "已送出轉帳資訊"
       redirect_to store_order_path(@order)
     else
@@ -41,6 +42,7 @@ class Store::PaymentTransfersController < ApplicationController
     if @transfer
       @transfer.delete
       @order.cancel_transfer!
+      @order.clear_payment_method
       flash[:notice] = "刪除成功"
       redirect_to store_order_path(@order)
     end
@@ -51,7 +53,7 @@ class Store::PaymentTransfersController < ApplicationController
     @transfer.confirm!
     @order.pay!
     @order.timestamp(:pay_time)
-    OrderMailer.notify_paid(@transfer).deliver_now
+    OrderMailer.notify_paid(@order).deliver_now
     flash[:notice] = "確認成功"
     redirect_to store_order_path(@order)
   end

@@ -10,6 +10,7 @@ class Store::PaymentNotifiersController < ApplicationController
     )
     if payment_completed? && params_valid?
       order = Store::Order.find(notification.order_id)
+      order.use_paypal
       order.pay!
       order.update_pay_time
       clear_current_cart
