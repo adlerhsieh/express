@@ -50,8 +50,9 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
   ActionMailer::Base.delivery_method = :smtp
-  # config.action_mailer.perform_deliveries = true
+  ActionMailer::Base.default(:from => "特快車")
   config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.perform_deliveries = true
   # Mailgun.configure do |config|
   #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
   #   config.domain = "motion-express.com"
