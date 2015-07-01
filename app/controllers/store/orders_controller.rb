@@ -36,7 +36,7 @@ class Store::OrdersController < ApplicationController
     @order.ship!
     @order.timestamp(:shipping_time)
     @order.fill_pkg_id(params[:pkg_id])
-    # OrderMailer.notify_shipped(@order).deliver_now
+    OrderMailer.notify_shipped(@order).deliver_now
     flash[:notice] = "已設定為出貨"
     redirect_to :back
   end
