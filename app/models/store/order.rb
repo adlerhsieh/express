@@ -1,6 +1,6 @@
 class Store::Order < ActiveRecord::Base
   belongs_to :user
-  belongs_to :payment_method, :class => "Store::PaymentMethod", :foreign_key => "payment_method_id"
+  belongs_to :payment_method, :class_name => "Store::PaymentMethod", :foreign_key => "payment_method_id"
   has_many :items, :class_name => "Store::OrderItem", :foreign_key => "order_id", :dependent => :destroy
   has_many :notifiers, :class_name => "Store::PaymentNotifier", :foreign_key => "order_id", :dependent => :destroy
   has_one :transfer, :class_name => "Store::PaymentTransfer", :foreign_key => "order_id", :dependent => :destroy
