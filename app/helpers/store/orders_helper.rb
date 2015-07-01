@@ -22,7 +22,7 @@ module Store::OrdersHelper
     when "arrived"
       "已到貨"
     when "cancelled"
-      "已取消"
+      "已作廢"
     when "returned"
       "已退回"
     when "outdated"
@@ -77,6 +77,13 @@ module Store::OrdersHelper
         content_tag(:span, (@order.returned_at + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") + 
         content_tag(:p, "")
     end
+    if @order.cancelled_at
+      result +=
+        content_tag(:i, "", class: "fa fa-check-circle", style: "color: red; font-size: 20px; padding-right: 5px;") + 
+        content_tag(:span, "已作廢") + 
+        content_tag(:span, (@order.cancelled_at + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") + 
+        content_tag(:p, "")
+    end
     return nil if not result
     result.html_safe
   end
@@ -109,6 +116,8 @@ module Store::OrdersHelper
       result = 
         content_tag(:i, "", class: "fa fa-arrow-circle-right", style: "color: gray; font-size: 16px; padding-right: 5px;") + 
         content_tag(:span, "下一步：結帳", style: "font-size: 14px;")
+    else
+      return
     end
     result.html_safe
   end

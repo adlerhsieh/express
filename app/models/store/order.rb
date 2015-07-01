@@ -138,6 +138,10 @@ class Store::Order < ActiveRecord::Base
     self.arrived? || self.returned?
   end
 
+  def may_cancelled?
+    self.cart? || self.placed? || self.transferred? || self.paid?
+  end
+
   aasm do
     state :outdated
     state :cart, :initial => true
@@ -180,7 +184,7 @@ class Store::Order < ActiveRecord::Base
       transitions from: :arrived, to: :shipped
     end
     event :cancel do
-      transitions from: [:cart, :placed, :paid], to: :cancelled
+      transitions from: [:cart, :placed, :transferred, :paid, :returned], to: :cancelled
     end
     event :return do
       transitions from: :arrived, to: :returned

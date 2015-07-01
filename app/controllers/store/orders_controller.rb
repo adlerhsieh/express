@@ -9,7 +9,7 @@ class Store::OrdersController < ApplicationController
       @current_orders = @orders.where.not(:aasm_state => ["cancelled", "returned", "arrived"])
       @past_orders = @orders.where(:aasm_state => ["cancelled", "returned", "arrived"])
     else
-      @orders = current_user.orders.all.order(:created_at => :desc)
+      @orders = current_user.orders.where.not(:aasm_state => "cancelled").order(:created_at => :desc)
       @current_orders = @orders.where.not(:aasm_state => ["cancelled", "returned", "arrived"])
       @past_orders = @orders.where(:aasm_state => ["cancelled", "returned", "arrived"])
     end
@@ -97,6 +97,13 @@ class Store::OrdersController < ApplicationController
   def note
     @order.update_column(:note, params[:note]) 
     flash[:notice] = "註記已更新"
+    redirect_to :back
+  end
+
+  def cancel
+    @order.cancel!
+    @order.timestamp(:cancelled_at)
+    flash[:notice] = "訂單已作廢"
     redirect_to :back
   end
 

@@ -52,6 +52,9 @@
     <%= form_tag note_store_order_path(@order) do %>
       <%= text_field_tag :note, @order.note, class: "form-control", placeholder: "備註" %>
       <%= submit_tag "更新", class: "btn btn-default" %>
+      <% if @order.may_cancelled? %>
+        <%= link_to "訂單作廢", cancel_store_order_path(@order), method: :post, class: "btn btn-danger", data: { confirm: "確定要作廢嗎？" } %>
+      <% end %>
     <% end %>
   </div>
 </div>
