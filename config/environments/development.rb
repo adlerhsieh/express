@@ -52,6 +52,7 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.default(:from => "特快車")
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {:host => "localhost:3000"}
   # config.action_mailer.perform_deliveries = true
   # Mailgun.configure do |config|
   #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"

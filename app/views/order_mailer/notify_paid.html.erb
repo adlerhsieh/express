@@ -2,7 +2,7 @@
 
 <p></p>
 <h3 style="margin-top: 20px">購物明細</h3>
-<p>訂單編號：<%= @order.token %></p>
+<p>訂單編號：<%= link_to @order.token, store_order_url(@order) %></p>
 <p>付款時間：<%= @order.pay_time.strftime("%Y-%m-%d %H:%M:%S") %></p>
 <p>付款方式：<%= @order.payment_method.name %></p>
 <p>總價：新台幣 <%= @order.price %>元</p>

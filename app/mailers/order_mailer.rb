@@ -22,9 +22,15 @@ class OrderMailer < ApplicationMailer
   #
   #   en.order_mailer.notify_shipped.subject
   #
-  def notify_shipped
-    @greeting = "Hi"
+  def notify_shipped(order)
+    @order = order
+    @info = @order.info
+    email = @order.user.email
+    subject = "特快車出貨通知！ (訂單編號：#{@order.token})"
 
-    mail to: "to@example.org"
+    mail(to: email, subject: subject) do |format|
+      format.text
+      format.html
+    end
   end
 end
