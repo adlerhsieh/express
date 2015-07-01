@@ -1,34 +1,31 @@
-<h3>感謝您在特快車消費</h3>
+<h4><%= @order.user.name %>，感謝您在特快車購物！</h4>
 
-<p>訂單編號：<%= @order.token %></p>
+<p></p>
+<h3 style="margin-top: 20px">購物明細</h3>
+<p>訂單編號：<%= @order.token[0..7] %></p>
 <p>付款時間：<%= @order.pay_time.strftime("%Y-%m-%d %H:%M:%S") %></p>
 <p>付款方式：<%= @order.payment_method.name %></p>
+<p>總價：新台幣 <%= @order.price %>元</p>
+<p></p>
 
-<table>
+<table style="width: 400px; border: 1px solid gray; margin-top: 20px; margin-bottom: 20px;">
   <thead>
     <th>品項</th>
     <th>數量</th>
-    <th>單價</th>
-    <th></th>
+    <th>單價(新台幣)</th>
   </thead>
   <tbody>
     <% @order.items.each do |i| %>
       <tr>
-        <td><%= i.product.title %></td>
-        <td><%= i.quantity %></td>
-        <td><%= i.price %></td>
-        <td></td>
+        <td style="width: 200px;"><%= i.product.title %></td>
+        <td style="width: 100px;"><%= i.quantity %></td>
+        <td style="width: 100px;"><%= i.price %></td>
       </tr>
     <% end %>
-    <tr>
-      <td>總價</td>
-      <td></td>
-      <td></td>
-      <td><%= @order.price %></td>
-    </tr>
   </tbody>
 </table>
 
-
-<p>將會在1~2天內出貨，如有任何問題，歡迎回信 info@motion-express.com </p>
+<p></p>
+<p>* 將會在1~2天內出貨</p>
+<p>* 如有任何問題，歡迎回信至info@motion-express.com </p>
 
