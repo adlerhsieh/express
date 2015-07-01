@@ -20,7 +20,7 @@
               <td><%= order.user.id %></td>
               <td><%= order.user.name %></td>
             <% end %>
-            <td><%= order.token[0..7] %></td>
+            <td><%= order.token %></td>
             <td><%= order.price %></td>
             <td><%= time(order.order_time) %></td>
             <td><%= time(order.pay_time) %></td>

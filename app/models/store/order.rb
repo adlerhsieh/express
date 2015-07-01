@@ -48,7 +48,7 @@ class Store::Order < ActiveRecord::Base
   end
 
   def generate_token
-    self.token = SecureRandom.hex if not self.token
+    self.token = (1..4).map {(1..4).map { SecureRandom.random_number(9)  }.join + "-"}.join[0..-2] if not self.token
     true
   end
 

@@ -9,7 +9,7 @@ class OrderMailer < ApplicationMailer
     @order = order
     @info = @order.info
     email = @order.user.email
-    subject = "訂單：#{@order.token[0..7]} 付款成功！"
+    subject = "訂單：#{@order.token} 付款成功！"
 
     mail(to: email, subject: subject) do |format|
       format.text
