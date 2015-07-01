@@ -23,7 +23,7 @@
       <%= link_to "出貨", ship_store_order_path(@order), method: :post, class: "btn btn-primary" if @order.paid? %>
       <%= link_to "取消出貨", cancel_ship_store_order_path(@order), method: :post, class: "btn btn-default" if @order.shipped? %>
       <%= link_to "送達", arrive_store_order_path(@order), method: :post, class: "btn btn-primary" if @order.shipped? %>
-      <%= link_to "取消送達", cancel_arrive_store_order_path(@order), method: :post, class: "btn btn-default" if @order.arrived_at %>
+      <%= link_to "取消送達", cancel_arrive_store_order_path(@order), method: :post, class: "btn btn-default" if @order.arrived? %>
     </div>
   <% end %>
   <% if @order.arrived? || @order.returned? %>
@@ -38,7 +38,7 @@
     <h4>備註</h4>
     <%= form_tag note_store_order_path(@order) do %>
       <%= text_field_tag :note, @order.note, class: "form-control", placeholder: "備註" %>
-      <%= submit_tag "送出", class: "btn btn-primary" %>
+      <%= submit_tag "更新", class: "btn btn-default" %>
     <% end %>
   </div>
 </div>

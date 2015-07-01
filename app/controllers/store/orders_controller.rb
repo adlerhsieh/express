@@ -104,11 +104,13 @@ class Store::OrdersController < ApplicationController
     end
 
     def require_order_user
-      unless @order.cart?
-        if not current_user
-          redirect_to store_products_path 
-        elsif not current_user.id == @order.user.id
-          redirect_to store_products_path 
+      unless is_admin?
+        unless @order.cart?
+          if not current_user
+            redirect_to store_products_path 
+          elsif not current_user.id == @order.user.id
+            redirect_to store_products_path 
+          end
         end
       end
     end
