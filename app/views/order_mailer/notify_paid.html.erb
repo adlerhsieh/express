@@ -2,7 +2,7 @@
 
 <p>訂單編號：<%= @order.token %></p>
 <p>付款時間：<%= @order.pay_time.strftime("%Y-%m-%d %H:%M:%S") %></p>
-<p>付款方式：<%= @order.payment_method.method %></p>
+<p>付款方式：<%= @order.payment_method.name %></p>
 
 <table>
   <thead>
