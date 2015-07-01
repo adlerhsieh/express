@@ -51,6 +51,7 @@ class Store::PaymentTransfersController < ApplicationController
     @transfer.confirm!
     @order.pay!
     @order.timestamp(:pay_time)
+    OrderMailer.notify_paid(@transfer).deliver_now
     flash[:notice] = "確認成功"
     redirect_to store_order_path(@order)
   end
