@@ -200,4 +200,16 @@ module Store::OrdersHelper
       content_tag(:p, "已退回")
     end
   end
+
+  def paypal_info
+    case @notifier.status
+    when "Completed"
+      "已完成"
+    when "Pending"
+      "需至PayPal確認，txn_id: #{@notifier.transaction_id}"
+    when "Cancelled"
+      "已交易但取消"
+    end
+  end
+
 end

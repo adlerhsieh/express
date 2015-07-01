@@ -164,6 +164,9 @@ class Store::Order < ActiveRecord::Base
     event :pay do
       transitions from: [:placed,:transferred], to: :paid
     end
+    event :cancel_paid do
+      transitions from: :paid, to: :placed
+    end
     event :ship do
       transitions from: :paid, to: :shipped
     end

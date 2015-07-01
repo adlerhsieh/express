@@ -16,10 +16,12 @@ class Store::OrdersController < ApplicationController
   end
 
   def show
-    @order = Store::Order.includes(:items => [:product]).find_by_token(params[:id])
+    @order = Store::Order.includes(:transfer, :info, :notifiers, :items => [:product]).find_by_token(params[:id])
     require_order_user
     @order_info = @order.info || Store::OrderInfo.new
     @transfer = @order.transfer
+    @notifiers = @order.notifiers
+    @notifier = @notifiers.order(:updated_at => :desc).first
   end
 
   def place
