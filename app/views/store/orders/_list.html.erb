@@ -3,13 +3,14 @@
       <thead class="header-tr">
         <% if current_user.is_admin %>
           <th>ID</th>
-          <th>消費者</th>
+          <th>使用者</th>
         <% end %>
         <th>序號</th>
         <th>金額(新台幣)</th>
         <th>下單時間</th>
         <th>付款時間</th>
         <th>出貨時間</th>
+        <th>到貨時間</th>
         <th>狀態</th>
         <th></th>
       </thead>
@@ -22,9 +23,22 @@
             <% end %>
             <td><%= order.token %></td>
             <td><%= order.price %></td>
-            <td><%= time(order.order_time) %></td>
-            <td><%= time(order.pay_time) %></td>
-            <td><%= time(order.shipping_time) %></td>
+            <td>
+              <p><%= date(order.order_time) %></p>
+              <p><%= time(order.order_time) %></p>
+            </td>
+            <td>
+              <p><%= date(order.pay_time) %></p>
+              <p><%= time(order.pay_time) %></p>
+            </td>
+            <td>
+              <p><%= date(order.shipping_time) %></p>
+              <p><%= time(order.shipping_time) %></p>
+            </td>
+            <td>
+              <p><%= date(order.arrived_at) %></p>
+              <p><%= time(order.arrived_at) %></p>
+            </td>
             <td><%= status_print(order.aasm_state) %></td>
             <td><%= link_to "檢視", store_order_path(order), class: "btn btn-primary" %></td>
             <!-- <td><%= link_to "刪除", store_order_path(order), method: :delete %></td> -->

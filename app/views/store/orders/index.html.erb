@@ -2,8 +2,12 @@
 <% if @orders.size == 0 %>
   <h2>無訂單</h2>
 <% else %>
-  <h2>目前的訂單</h2>
-  <%= render partial: "list", locals: {:orders => @current_orders} %>
-  <h2>過去的訂單</h2>
-  <%= render partial: "list", locals: {:orders => @past_orders} %>
+  <% if @current_orders.size > 0 %>
+    <h2>目前的訂單</h2>
+    <%= render partial: "list", locals: {:orders => @current_orders} %>
+  <% end %>
+  <% if @past_orders.size > 0 %>
+    <h2>過去的訂單</h2>
+    <%= render partial: "list", locals: {:orders => @past_orders} %>
+  <% end %>
 <% end %>

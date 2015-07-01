@@ -154,11 +154,17 @@ module Store::OrdersHelper
     @order.items.inject(0){|r,i| r += i.sum }
   end
 
-  def time(time)
+  def date(time)
     if time
-      time.strftime("%Y-%m-%d %H:%M:%S")
+      time.strftime("%Y-%m-%d")
     else
       "--"
+    end
+  end
+
+  def time(time)
+    if time
+      time.strftime("%H:%M:%S")
     end
   end
 
