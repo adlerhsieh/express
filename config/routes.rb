@@ -108,7 +108,13 @@ Rails.application.routes.draw do
         post :delete
       end
     end
-    resources :payment_notifiers, only: [:create]
+    resources :payment_notifiers, only: [:create] do
+      member do
+        post :confirm
+        post :cancel
+        post :recover
+      end
+    end
   end
 
   root to: "index#index"

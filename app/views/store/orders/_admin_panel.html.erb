@@ -11,9 +11,13 @@
     <div class="col-sm-2 column admin">
       <h4>PayPal資訊</h4>
       <p><%= paypal_info %></p>
-      <%= link_to "取消交易", cancel_store_payment_notifier_path(@notifier), method: :post, class: "btn btn-default" if @order.paid? %>
-      <%= link_to "確認交易", confirm_store_payment_notifier_path(@notifier), method: :post, calss: "btn btn-primary" if @notifier.pending? %>
-      <%= link_to "恢復付款", recover_store_payment_notifier_path(@notifier), method: :post, class: "btn btn-primary" if @notifier.cancelled? %>
+      <% if not @transfer %>
+        <%= link_to "取消交易", cancel_store_payment_notifier_path(@notifier), method: :post, class: "btn btn-default" if @order.paid? %>
+        <%= link_to "確認交易", confirm_store_payment_notifier_path(@notifier), method: :post, calss: "btn btn-primary" if @notifier.pending? %>
+        <%= link_to "恢復付款", recover_store_payment_notifier_path(@notifier), method: :post, class: "btn btn-primary" if @notifier.cancelled? %>
+      <% else %>
+        <p>先刪除轉帳資訊才能繼續PayPal操作</p>
+      <% end %>
     </div>
   <% end %>
   <% if @transfer %>
