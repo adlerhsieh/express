@@ -17,6 +17,7 @@ class Store::OrdersController < ApplicationController
 
   def show
     @order = Store::Order.includes(:items => [:product]).find_by_token(params[:id])
+    require_order_user
     @order_info = @order.info || Store::OrderInfo.new
     @transfer = @order.transfer
   end
@@ -100,5 +101,15 @@ class Store::OrdersController < ApplicationController
   private
     def set_order
       @order = Store::Order.find_by_token(params[:id])
+    end
+
+    def require_order_user
+      unless @order.cart?
+        if not current_user
+          redirect_to store_products_path 
+        elsif not current_user.id == @order.user.id
+          redirect_to store_products_path 
+        end
+      end
     end
 end
