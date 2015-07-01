@@ -5,13 +5,13 @@ class OrderMailer < ApplicationMailer
   #
   #   en.order_mailer.notify_paid.subject
   #
-  def notify_paid(transfer)
-    @transfer = transfer
-    @order = transfer.order
-    email = transfer.order.user.email
-    subject = "訂單編號：#{transfer.order.token[0..7]} 付款已成功！"
+  def notify_paid(order)
+    @order = order
+    @info = @order.info
+    email = @order.user.email
+    subject = "訂單：#{@order.token[0..7]} 付款成功！"
 
-    mail(from: "info@motion-express.com", to: email, subject: subject) do |format|
+    mail(to: email, subject: subject) do |format|
       format.text
       format.html
     end
