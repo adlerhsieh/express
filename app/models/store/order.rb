@@ -34,12 +34,12 @@ class Store::Order < ActiveRecord::Base
   end
 
   def use_paypal
-    id = Store::PaymentMethod.find_by_method("PayPal").id
+    id = Store::PaymentMethod.find_by_name("PayPal").id
     update_column(:payment_method_id, id)
   end
 
   def use_transfer
-    id = Store::PaymentMethod.find_by_method("匯款").id
+    id = Store::PaymentMethod.find_by_name("匯款").id
     update_column(:payment_method_id, id)
   end
 
