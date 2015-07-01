@@ -27,6 +27,6 @@ unless User::Email.all.any?
 end
 
 unless Store::PaymentMethod.all.any?
-  Store::PaymentMethod.create(:method => "匯款")
-  Store::PaymentMethod.create(:method => "PayPal")
+  Store::PaymentMethod.create(:name => "匯款")
+  Store::PaymentMethod.create(:name => "PayPal")
 end
