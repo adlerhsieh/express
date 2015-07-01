@@ -13,8 +13,9 @@ class Store::PaymentNotifiersController < ApplicationController
       order = Store::Order.find(notification.order_id)
       order.use_paypal
       order.pay!
-      order.update_pay_time
+      order.timestamp(:pay_time)
       clear_current_cart
+      OrderMailer.notify_paid(order).deliver_now
     end
     render :nothing => true
   end
@@ -38,6 +39,7 @@ class Store::PaymentNotifiersController < ApplicationController
     def recover
       @notifier.update_column(:status, "Completed")
       @order.pay!
+      @order.use_paypal
       @order.update_column(:pay_time, @notifier[:created_at])
       flash[:notice] = "已回復原本交易為正常"
       redirect_to :back
