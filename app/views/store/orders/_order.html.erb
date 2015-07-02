@@ -72,7 +72,7 @@
   </div>
 <% end %>
 
-<% if @order.info.pkg_id %>
+<% if @order.info && @order.info.pkg_id %>
   <div class="transfer-in-order column col-sm-4">
     <h4>出貨資訊</h4>
     <p>郵件編號：<%= @order.info.pkg_id %></p>
