@@ -1,0 +1,17 @@
+<h1><%= @product.title %></h1>
+<hr />
+<div class="col-lg-8 column margin">
+  <%= image_tag @product.default_image, class: "product-image" %>
+  <% @product.images.each do |image| %>
+    <%= image_tag image.image, class: "product-image" %>
+  <% end %>
+</div>
+<% unless @product.description.blank? %>
+  <div class="col-lg-3 column margin">
+    <p><%= @product.description %></p>
+  </div>
+<% end %>
+<div class="col-lg-3 column margin">
+  <p>價格：<%= number_with_delimiter @product.price %>元</p>
+  <%= link_to "加入訂單", add_to_cart_store_product_path(@product), method: :post, class: "btn btn-success add" %>
+</div>
