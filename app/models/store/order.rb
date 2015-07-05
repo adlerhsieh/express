@@ -7,6 +7,7 @@ class Store::Order < ActiveRecord::Base
   has_one :info, :class_name => "Store::OrderInfo", :foreign_key => "order_id"
   include AASM
   extend FriendlyId
+  require 'slack-notifier'
   friendly_id :token
   before_save :generate_token, :set_paid_false
 
@@ -144,6 +145,21 @@ class Store::Order < ActiveRecord::Base
 
   def fill_pkg_id(id)
     self.info.update_column(:pkg_id, id)
+  end
+
+  def notify_admin(status,sub_status=nil)
+    notifier = Slack::Notifier.new(ENV["slack_payment"])
+    case status
+    when :transfer
+      update = sub_status ? "更新" : "新增"
+      message = "主旨：#{update}轉帳資訊\n" +
+        "使用者：#{self.user.name} \n" +
+        "訂單：[#{self.token}](http://#{ENV["host"]}/store/orders/#{self.token}) \n" +
+        "金額：新台幣#{self.price}元 \n" +
+        "轉帳帳號末五碼：#{self.transfer.transaction_id} \n"
+    end
+    message += "時間：#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}"
+    notifier.ping(Slack::Notifier::LinkFormatter.format(message))
   end
 
   aasm do

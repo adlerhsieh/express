@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'slack-notifier'
 gem 'figaro'
 gem 'mail'
 gem 'font-awesome-sass'

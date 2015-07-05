@@ -13,7 +13,8 @@ class Store::PaymentTransfersController < ApplicationController
       @order.transfer = @transfer
       @order.under_transfer!
       @order.use_transfer
-      flash[:notice] = "已送出轉帳資訊"
+      @order.notify_admin(:transfer)
+      flash[:notice] = "成功送出轉帳資訊，我們已收到通知，將儘速為您確認！"
       redirect_to store_order_path(@order)
     else
       flash[:alert] = "請確認已填入轉帳帳號末五碼"
@@ -29,7 +30,8 @@ class Store::PaymentTransfersController < ApplicationController
     @transfer = Store::PaymentTransfer.find_by_order_id(@order.id)
     t = @transfer.transaction_id
     if @transfer.update!(transfer_params) 
-      flash[:notice] = "轉帳資訊更新成功"
+      @order.notify_admin(:transfer,:update)
+      flash[:notice] = "轉帳資訊更新成功，我們已收到通知，將儘速為您確認！"
       redirect_to store_order_path(@order)
     else
       flash[:alert] = "請確認已填入轉帳帳號末五碼"
