@@ -5,6 +5,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if not user
       user = User.create!(auth_params)
     end
+    if current_order
+      if not current_order.user
+        current_order.user = user
+      end
+    end
     # if user.persisted?
     sign_in_and_redirect user, :event => :authentication
     set_flash_message(:notice, :success, :kind => "Github") if is_navigational_format?
