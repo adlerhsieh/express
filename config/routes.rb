@@ -79,7 +79,7 @@ Rails.application.routes.draw do
 
   namespace :store do
     resources :products do
-      member do
+      collection do
         post :add_to_cart
       end
     end

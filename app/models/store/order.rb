@@ -89,16 +89,16 @@ class Store::Order < ActiveRecord::Base
     OpenSSL::PKCS7::encrypt([OpenSSL::X509::Certificate.new(paypal_cert_pem)], signed.to_der, OpenSSL::Cipher::Cipher::new("DES3"), OpenSSL::PKCS7::BINARY).to_s.gsub("\n", "")
   end
 
-  def add_item(product_id)
+  def add_item(product_id, quantity)
     item = self.items.find_by_product_id(product_id)
     if item
-      quan = item.quantity + 1
+      quan = item.quantity + quantity
       item.update_column(:quantity, quan)
       # item.update_column(:price, quan*item.price)
     else
       product = Store::Product.find(product_id)
       item = self.items.create(:product_id => product.id, 
-                        :quantity => 1,
+                        :quantity => quantity,
                         :price => product.price
                        )
     end
