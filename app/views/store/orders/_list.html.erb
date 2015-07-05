@@ -18,8 +18,8 @@
         <% orders.each do |order| %>
           <tr class="<%= highlight_pending(order) if current_user.is_admin %>">
             <% if current_user.is_admin %>
-              <td><%= order.user.id %></td>
-              <td><%= order.user.name %></td>
+              <td><%= order.user.id if order.user %></td>
+              <td><%= order.user.name if order.user %></td>
             <% end %>
             <td><%= order.token %></td>
             <td><%= order.price %></td>
