@@ -129,3 +129,22 @@ footer {
 .height-100 {
   height: 100px;
 }
+
+.footer-logo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  float: right;
+}
+
+hr {
+  border-top: 1px solid rgb(200,200,200);
+}
+
+.copyright {
+  float: right;
+  line-height: 40px;
+  padding-left: 20px;
+  font-size: 12px;
+  color: gray;
+}
