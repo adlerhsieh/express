@@ -14,6 +14,7 @@ class Store::PaymentNotifiersController < ApplicationController
       order.use_paypal
       order.pay!
       order.timestamp(:pay_time)
+      order.notify_admin(:paypal)
       clear_current_cart
       OrderMailer.notify_paid(order).deliver_now
     end
