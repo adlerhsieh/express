@@ -2,9 +2,13 @@
 <div class="col-lg-12">
   <div class="column">
     <h4>訂單基本資訊</h4>
-    <p>消費者：<%= @order.user.name %></p>
-    <p>消費者ID：<%= @order.user.id %></p>
-    <p>Email：<%= @order.user.email %></p>
+    <% if @order.user %>
+      <p>消費者：<%= @order.user.name %></p>
+      <p>消費者ID：<%= @order.user.id %></p>
+      <p>Email：<%= @order.user.email %></p>
+    <% else %>
+      <p>本訂單無使用者</p>
+    <% end %>
     <% if @order.under_shipping? %>
       <p>郵件編號：<%= link_to(@order.info.pkg_id || "", "http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_MENU_ID=189&_SYS_ID=D&_ACTIVE_ID=190", target: "_blank") %></p>
     <% end %>
