@@ -150,9 +150,9 @@ class Store::Order < ActiveRecord::Base
   def notify_admin(status,sub_status=nil)
     notifier = Slack::Notifier.new(ENV["slack_payment"])
     body = 
-       "使用者：#{self.user.name} \n" +
-       "訂單：[#{self.token}](http://#{ENV["host"]}/store/orders/#{self.token}) \n" +
-       "金額：新台幣#{self.price}元 \n" +
+      "使用者：#{self.user.name} \n" + 
+      "訂單：[#{self.token}](http://#{ENV["host"]}/store/orders/#{self.token}) \n" + 
+      "金額：新台幣#{self.price}元 \n"
     case status
     when :transfer
       update = sub_status ? "更新" : "新增"
@@ -160,8 +160,7 @@ class Store::Order < ActiveRecord::Base
         "主旨：#{update}轉帳資訊\n" + body +
         "轉帳帳號末五碼：#{self.transfer.transaction_id} \n"
     when :paypal
-      message = "主旨：[Paypal](#{ENV["paypal_checkout_url"]})付款通知" + body
-    end
+      message = "主旨：[Paypal](#{ENV["paypal_checkout_url"]})付款通知" + body end
     message += "時間：#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}"
     notifier.ping(Slack::Notifier::LinkFormatter.format(message))
   end
