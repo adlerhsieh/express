@@ -2,9 +2,9 @@
   <%= hidden_field_tag :cmd, "_s-xclick" %>
   <%= hidden_field_tag :encrypted, @order.paypal_url(store_order_url(@order)) %>
   <% if @order.transfer %>
-    <%= submit_tag "Paypal付款", @button_class.merge(:disabled => "disabled") %>
+    <%= submit_tag "Paypal或刷卡付款", @button_class.merge(:disabled => "disabled") %>
   <% else %>
-    <%= submit_tag "Paypal付款", @button_class %>
+    <%= submit_tag "Paypal或刷卡付款", @button_class %>
   <% end %>
 <% end %>
   <% if @order.transfer %>
