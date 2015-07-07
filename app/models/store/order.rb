@@ -83,7 +83,7 @@ class Store::Order < ActiveRecord::Base
   end
 
   def encrypt_for_paypal(values)
-    paypal_cert_pem = File.read("#{Rails.root}/certs/paypal_cert.pem")
+    paypal_cert_pem = File.read("#{Rails.root}/certs/paypal_cert_#{ENV["deploy_env"]}.pem")
     app_cert_pem = File.read("#{Rails.root}/certs/app_cert.pem")
     app_key_pem = File.read("#{Rails.root}/certs/app_key.pem")
     signed = OpenSSL::PKCS7::sign(OpenSSL::X509::Certificate.new(app_cert_pem), OpenSSL::PKey::RSA.new(app_key_pem, ''), values.map { |k, v| "#{k}=#{v}"  }.join("\n"), [], OpenSSL::PKCS7::BINARY)
