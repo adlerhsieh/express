@@ -102,7 +102,7 @@ namespace :deploy do
 
   task :symlink do
     on roles(:web) do
-      @folder = "staging" if ENV["DEPLOY_PATH"] == "staging"
+      @folder = ENV["DEPLOY_PATH"] == "staging" ? "staging" : "rails"
       execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/wp-content"
       execute "cd /var/www/#{@folder}/current/config;ln -s /var/www/#{@folder}/shared/config/application.yml"
       execute "cd /var/www/#{@folder}/current;mkdir certs"
