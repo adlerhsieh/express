@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/author', to: "posts#author", as: "author"
   get '/bing_balance', to: "users#balance", as: "bing_balance"
   get '/store' => redirect("/store/products")
+  get '/store/terms_of_service', to: "store/services#terms", as: "terms_of_service"
 
   resources :posts do
     collection do
@@ -78,6 +79,11 @@ Rails.application.routes.draw do
   end
 
   namespace :store do
+    # resources :services, only: [] do
+    #   collection do
+    #     get :terms_of_service
+    #   end
+    # end
     resources :products do
       collection do
         post :add_to_cart
