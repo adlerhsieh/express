@@ -92,6 +92,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get :place
+        get :after_txn
         post :update_quantity
         post :ship
         post :arrive

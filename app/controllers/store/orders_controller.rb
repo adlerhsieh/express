@@ -3,7 +3,10 @@ class Store::OrdersController < ApplicationController
   before_action :set_order, except: [:index, :show]
   before_filter :require_account, only: [:place]
   before_filter :validate_pkg_id, only: [:ship]
-  #
+ 
+  def after_txn
+  end
+
   def index
     if current_user.is_admin
       @orders = Store::Order.all.order(:created_at => :desc)
