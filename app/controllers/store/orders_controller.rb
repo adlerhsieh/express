@@ -90,6 +90,7 @@ class Store::OrdersController < ApplicationController
   def update_quantity
     @order.items.each do |i|
       num = params[i.id.to_s.to_sym]
+      return if not quantity_valid(num)
       i.update_column(:quantity, num.to_i) if !num.nil? && num.to_i > 0
     end
     @order.update_total_price
@@ -133,4 +134,13 @@ class Store::OrdersController < ApplicationController
         redirect_to :back 
       end
     end
+
+    def quantity_valid(num)
+      if num.to_i < 1
+        flash[:alert] = "所有商品購買數量必須為數字且不可小於 1"
+        redirect_to store_order_path(@order) and return false
+      end
+      return true
+    end
+
 end

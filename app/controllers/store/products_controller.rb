@@ -60,6 +60,7 @@ class Store::ProductsController < ApplicationController
   end
 
   def add_to_cart
+    return if not quantity_valid(params[:quantity])
     order = find_current_order || create_new_order
     result = order.add_item(params[:product_id], params[:quantity].to_i)
     order.update_total_price
@@ -88,5 +89,14 @@ class Store::ProductsController < ApplicationController
         index = images.index(image)+1
         @product.send("image_#{index}=", image)
       end
+    end
+
+    def quantity_valid(quantity)
+      if quantity.to_i < 1
+        flash[:alert] = "請填入數字並確認數量大於 1"
+        redirect_to :back
+        return false
+      end
+      return true
     end
 end
