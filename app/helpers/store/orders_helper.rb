@@ -150,10 +150,8 @@ module Store::OrdersHelper
       result << content_tag(:span, "下單後即代表您已詳細閱讀及同意", style: "color: black") + 
         link_to("服務說明及使用規範", terms_of_service_path, target: "_blank")
     end
-    if @out_of_stock
-      result << content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳")
-    end
     if @order.placed?
+      result << content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳") if @out_of_stock
       result << content_tag(:span, "請完整填寫寄送資訊") unless @order.has_info
     end
     return result.join(content_tag(:p, "")).html_safe
