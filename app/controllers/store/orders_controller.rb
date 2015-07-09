@@ -5,12 +5,14 @@ class Store::OrdersController < ApplicationController
   before_filter :validate_pkg_id, only: [:ship]
  
   def after_txn
-    if not request.referer && request.referer.include?("paypal")
-      redirect_to store_order_path(@order) 
-    end
+    # if not request.referer && request.referer.include?("paypal")
+    flash[:notice] = "交易完成！ PayPal需要幾秒的時間完成交易，如果回到訂單畫面卻沒有更新付款資訊，請耐心等候數秒並重新整理網頁。"
+    redirect_to store_order_path(@order) 
+    # end
   end
 
   def index
+    redirect_to store_products_path and return if not current_user
     if current_user.is_admin
       @orders = Store::Order.all.order(:created_at => :desc)
       @current_orders = @orders.where.not(:aasm_state => ["cancelled", "returned", "arrived"])
