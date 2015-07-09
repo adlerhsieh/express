@@ -8,7 +8,7 @@
   <% end %>
 <% end %>
   <% if @order.transfer %>
-    <%= button_to "修改轉帳資訊", edit_store_order_payment_transfer_path(@order, @order.transfer), @button_class %>
+    <% button_to "修改轉帳資訊", edit_store_order_payment_transfer_path(@order, @order.transfer), @button_class %>
   <% else %>
-    <%= button_to "轉帳付款", new_store_order_payment_transfer_path(@order), @button_class %>
+    <% button_to "轉帳付款", new_store_order_payment_transfer_path(@order), @button_class %>
   <% end %>
