@@ -5,6 +5,9 @@ class Store::OrdersController < ApplicationController
   before_filter :validate_pkg_id, only: [:ship]
  
   def after_txn
+    if not request.referer && request.referer.include?("paypal")
+      redirect_to store_order_path(@order) 
+    end
   end
 
   def index
