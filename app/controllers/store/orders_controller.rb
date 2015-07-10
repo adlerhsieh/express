@@ -52,6 +52,7 @@ class Store::OrdersController < ApplicationController
   def cancel_ship
     @order.cancel_ship!
     @order.clear_timestamp(:shipping_time)
+    @order.clear_pkg
     flash[:notice] = "已取消出貨"
     redirect_to :back
   end

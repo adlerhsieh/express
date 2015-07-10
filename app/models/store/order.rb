@@ -22,6 +22,10 @@ class Store::Order < ActiveRecord::Base
     update_total_price
   end
 
+  def clear_pkg
+    info.update_column(:pkg_id, nil)
+  end
+
   def has_info
     info = self.info
     return false if not info
