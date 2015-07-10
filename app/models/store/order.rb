@@ -50,7 +50,10 @@ class Store::Order < ActiveRecord::Base
   end
 
   def takes_stock
-    items.each { |item| item.product.stock -= item.quantity }
+    items.each do |item| 
+      current = item.product.stock - item.quantity
+      item.product.update_column(:stock, current)
+    end
   end
 
   def use_transfer
