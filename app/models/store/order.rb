@@ -42,9 +42,15 @@ class Store::Order < ActiveRecord::Base
     return ready
   end
 
-  def use_paypal
+  def pay_with_paypal!
     id = Store::PaymentMethod.find_by_name("PayPal").id
     update_column(:payment_method_id, id)
+    pay!
+    timestamp(:pay_time)
+  end
+
+  def takes_stock
+    items.each { |item| item.product.stock -= item.quantity }
   end
 
   def use_transfer
