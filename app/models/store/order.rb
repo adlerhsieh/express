@@ -109,15 +109,13 @@ class Store::Order < ActiveRecord::Base
 
   def timestamp(time)
     self.update_column(time, Time.now)
+    if time == :pay_time
+      self.update_column(:paid, true)
+    end
   end
 
   def clear_timestamp(time)
     self.update_column(time, nil)
-  end
-
-  def update_pay_time
-    self.update_column(:paid, true)
-    self.update_column(:pay_time, Time.now)
   end
 
   def update_total_price
@@ -132,7 +130,7 @@ class Store::Order < ActiveRecord::Base
   end
 
   def under_shipping?
-    self.paid? || self.shipped? || self.arrived? || self.returned?
+    self.shipped? || self.arrived? || self.returned?
   end
 
   def may_return?
@@ -166,7 +164,7 @@ class Store::Order < ActiveRecord::Base
   end
 
   aasm do
-    state :outdated
+    # state :outdated
     state :cart, :initial => true
     state :placed
     state :transferred
@@ -176,9 +174,9 @@ class Store::Order < ActiveRecord::Base
     state :cancelled
     state :returned
 
-    event :outdate do
-      transitions from: [:cart, :placed], to: :outdated
-    end
+    # event :outdate do
+    #   transitions from: [:cart, :placed], to: :outdated
+    # end
     event :place do
       transitions from: :cart, to: :placed
     end
