@@ -36,7 +36,7 @@
       <%= link_to "取消確認", cancel_confirm_store_order_payment_transfer_path(@order, @transfer), method: :post, class: "btn btn-default" if @order.paid? %>
     </div>
   <% end %>
-  <% if @order.under_shipping? %>
+  <% if @order.paid %>
     <div class="col-sm-2 column admin">
       <h4>出貨控制</h4>
       <%= shipping_info %>
