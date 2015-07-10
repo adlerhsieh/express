@@ -124,12 +124,15 @@ module Store::OrdersHelper
 
   def action_button
     if @order.cart?
-      return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;"
+      return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;" 
     end
     @button_class = {class: "btn btn-primary", style: "float: right; width: 150px; margin-top: 20px; margin-left: 20px;", method: :get}
     @button_class.merge!(disabled: "disabled") if not @order.has_info && @order.stock_ready
     if @order.placed? || @order.transferred?
       render partial: "pay_form"
+    end
+    if @order.paid?
+      return content_tag(:p, "即將出貨，請耐心等候！", style: "float: right; margin-top: 20px;")
     end
   end
 
