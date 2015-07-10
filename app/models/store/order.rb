@@ -11,14 +11,22 @@ class Store::Order < ActiveRecord::Base
   friendly_id :token
   before_save :generate_token, :set_paid_false
 
+  scope :unpaid, -> { where(:paid => false).where.not(:aasm_state => "cancelled") }
+
+  def update_item_price(product_id)
+    items.each do |i|
+      if i.product.id == product_id
+        i.update_column(:price, i.product.price) 
+      end
+    end
+    update_total_price
+  end
+
   def has_info
     info = self.info
     return false if not info
-    return false if info.shipping_name.nil? || 
-                    info.shipping_name.blank? ||
-                    info.shipping_address.nil? || 
+    return false if info.shipping_name.blank? ||
                     info.shipping_address.blank? ||
-                    info.phone.nil? ||
                     info.phone.blank?
     true
   end

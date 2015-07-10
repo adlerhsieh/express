@@ -27,12 +27,12 @@ class Store::ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       update_images
+      update_prices(@product.id)
       flash[:notice] = "已更新商品內容"
       redirect_to store_products_path
     else
       render :edit
     end
-
   end
 
   def show
@@ -98,5 +98,9 @@ class Store::ProductsController < ApplicationController
         return false
       end
       return true
+    end
+
+    def update_prices(id)
+      Store::Order.includes(:items => [:product]).unpaid.each {|order| order.update_item_price(id) }
     end
 end
