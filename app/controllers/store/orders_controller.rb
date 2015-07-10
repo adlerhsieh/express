@@ -97,6 +97,7 @@ class Store::OrdersController < ApplicationController
   end
 
   def update_quantity
+    return if order_is_paid
     @order.items.each do |i|
       num = params[i.id.to_s.to_sym]
       return if not quantity_valid(num)
@@ -150,6 +151,13 @@ class Store::OrdersController < ApplicationController
         redirect_to store_order_path(@order) and return false
       end
       return true
+    end
+
+    def order_is_paid
+      if @order.paid
+        flash[:alert] = "已付款，無法再更改數量"
+        redirect_to store_order_path(@order) and return true
+      end
     end
 
 end
