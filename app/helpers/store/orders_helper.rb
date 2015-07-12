@@ -131,8 +131,13 @@ module Store::OrdersHelper
     if @order.paid?
       return content_tag(:p, "即將出貨，請耐心等候！", style: "float: right; margin-top: 20px;")
     end
-    if @order.placed? || @order.transferred?
-      render partial: "pay_form"
+    # if @order.placed? || @order.transferred?
+    if @order.placed?
+      if @order.info
+        render partial: "pay_form"
+      else
+        render partial: "shipping_new"
+      end
     end
   end
 
@@ -155,7 +160,7 @@ module Store::OrdersHelper
     end
     if @order.placed?
       result << content_tag(:span, "庫存不足，請將不足的品項移除或更新數量才可結帳") if @out_of_stock
-      result << content_tag(:span, "請完整填寫寄送資訊") unless @order.has_info
+      result << content_tag(:span, "請完整填寫寄送資訊") unless @order.has_info || !@order.info
     end
     return result.join(content_tag(:p, "")).html_safe
   end
