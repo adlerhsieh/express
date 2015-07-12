@@ -99,6 +99,15 @@ class Store::Order < ActiveRecord::Base
         "quantity_#{index+1}" => item.quantity
       })
     end
+    if shipping_fee > 0
+      index = items.count
+      values.merge!({
+        "amount_#{index+1}" => shipping_fee,
+        "item_name_#{index+1}" => "運費",
+        "item_number_#{index+1}" => items.last.id + 1,
+        "quantity_#{index+1}" => 1
+      })
+    end
     # "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
     encrypt_for_paypal(values)
   end
