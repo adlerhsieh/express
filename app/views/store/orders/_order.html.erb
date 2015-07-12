@@ -26,6 +26,13 @@
           </tr>
         <% end %>
         <tr>
+          <td>運費</td>
+          <td>--</td>
+          <td>--</td>
+          <td><%= @order.info ? @order.info.shipping_fee : "--" %></td>
+          <td>--</td>
+        </tr>
+        <tr>
           <td></td>
           <td><%= submit_tag "更新數量", class: "btn btn-warning" if @order.not_transferring_or_paid? %></td>
           <td></td>

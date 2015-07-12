@@ -170,7 +170,8 @@ module Store::OrdersHelper
   end
 
   def total_price
-    @order.items.inject(0){|r,i| r += i.sum }
+    @order.price
+    # @order.items.inject(0){|r,i| r += i.sum }
   end
 
   def date(time)
