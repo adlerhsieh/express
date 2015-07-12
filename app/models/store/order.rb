@@ -143,7 +143,17 @@ class Store::Order < ActiveRecord::Base
     total_price = self.items.inject(0){|r,item|
       r += (item.quantity * item.price)
     }
+    total_price += new_shipping_fee(total_price)
     self.update_column(:price, total_price)
+  end
+
+  def new_shipping_fee(price)
+    if price >= 100
+      self.update_column(:shipping_fee, 0)
+    else
+      self.update_column(:shipping_fee, 40)
+    end
+    return shipping_fee
   end
 
   def not_transferring_or_paid?
