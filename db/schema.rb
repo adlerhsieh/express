@@ -136,7 +136,6 @@ ActiveRecord::Schema.define(version: 20150712153435) do
     t.datetime "updated_at",                   null: false
     t.string   "phone",            limit: 255
     t.string   "pkg_id",           limit: 255
-    t.integer  "shipping_fee",     limit: 4
   end
 
   create_table "store_order_items", force: :cascade do |t|
@@ -154,8 +153,8 @@ ActiveRecord::Schema.define(version: 20150712153435) do
     t.string   "token",             limit: 255
     t.integer  "payment_method_id", limit: 4
     t.string   "aasm_state",        limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.datetime "order_time"
     t.datetime "pay_time"
     t.datetime "shipping_time"
@@ -164,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150712153435) do
     t.datetime "arrived_at"
     t.datetime "returned_at"
     t.datetime "cancelled_at"
+    t.integer  "shipping_fee",      limit: 4,     default: 0
   end
 
   create_table "store_payment_methods", force: :cascade do |t|

@@ -1,5 +1,5 @@
 class AddShippingFee < ActiveRecord::Migration
   def change
-    add_column :store_order_infos, :shipping_fee, :integer
+    add_column :store_orders, :shipping_fee, :integer, :default => 0
   end
 end
