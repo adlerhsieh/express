@@ -61,7 +61,7 @@ class Store::ProductsController < ApplicationController
 
   def add_to_cart
     return if not quantity_valid(params[:quantity])
-    order = find_current_order || create_new_order
+    order = find_current_order || find_or_create_new_order
     result = order.add_item(params[:product_id], params[:quantity].to_i)
     order.update_total_price
     place = order.aasm_state == "cart" ? "購物車" : "訂單"

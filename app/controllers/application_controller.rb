@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
   def current_order
-    @current_order ||= find_current_order
+    # @current_order ||= find_current_order
+    find_current_order
   end
 
   def find_current_order
@@ -25,7 +26,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def create_new_order
+  def find_or_create_new_order
+    if current_user && current_user.latest_order
+      session[:order_id] = current_user.latest_order.id
+      return current_user.latest_order 
+    end
     order = Store::Order.create!
     order.update_column(:user_id, current_user.id) if current_user
     session[:order_id] = order.id
