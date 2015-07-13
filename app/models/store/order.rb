@@ -157,7 +157,7 @@ class Store::Order < ActiveRecord::Base
   end
 
   def new_shipping_fee(price)
-    if price >= 100
+    if price >= 150
       self.update_column(:shipping_fee, 0)
     else
       self.update_column(:shipping_fee, 40)
