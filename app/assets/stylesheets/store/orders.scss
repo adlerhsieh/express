@@ -67,7 +67,7 @@ div.order {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  border-top: 1px solid #D8D8D8;
+  // border-top: 1px solid #D8D8D8;
   padding-top: 20px;
   margin-bottom: 60px;
 
@@ -135,6 +135,12 @@ div.order {
       &:nth-child(2){
         width: 300px;
       }
+    }
+  }
+  &.done {
+    margin-bottom: 15px;
+    tr {
+      height: 0px;
     }
   }
 }

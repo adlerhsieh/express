@@ -131,6 +131,15 @@ module Store::OrdersHelper
     if @order.paid?
       return content_tag(:p, "即將出貨，請耐心等候！", style: "float: right; margin-top: 20px;")
     end
+    if @order.shipped?
+      return content_tag(:p, "已出貨，請耐心等候！", style: "float: right; margin-top: 20px;")
+    end
+    if @order.arrived?
+      return content_tag(:p, "已到貨", style: "float: right; margin-top: 20px;")
+    end
+    if @order.returned?
+      return content_tag(:p, "已退貨", style: "float: right; margin-top: 20px;")
+    end
     # if @order.placed? || @order.transferred?
     if @order.placed?
       if @order.info
