@@ -67,15 +67,7 @@
 </div>
 
 <% render "transfer" %>
-
-<% if @order.info && @order.info.pkg_id %>
-  <div class="transfer-in-order column col-sm-4">
-    <h4>出貨資訊</h4>
-    <p>郵件編號：<%= @order.info.pkg_id %></p>
-    <p></p>
-    <p><%= link_to "查詢投遞進度", "http://postserv.post.gov.tw/webpost/CSController?cmd=POS4001_1&_SYS_ID=D&_MENU_ID=189&_ACTIVE_ID=190", target: "_blank", class: "btn btn-default", style: "float: right" %></p>
-  </div>
-<% end %>
+<% render "shipping_status" %>
 
 <div class="buttons col-lg-12">
   <%= action_button %>
