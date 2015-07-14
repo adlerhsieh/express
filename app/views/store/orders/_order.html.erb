@@ -52,8 +52,14 @@
     <p>* 價格皆為新台幣計價</p>
     <p>* 付款之前，庫存量隨時都會變，付款之後才會保留品項</p>
     <p>* 付款後，便不可再修改寄送資訊</p>
-    <p>* 付款後，將在1~2天內出貨，出貨後將以email通知</p>
+    <p>* 無開立收據</p>
+    <p>* 消費150元以上免運費</p>
+    <%= content_tag(:p, "* 付款後，將在1~2天內出貨，出貨後將以email通知") unless @order.under_shipping? %>
     <p>* 下單後代表您已詳細閱讀及同意<%= link_to "服務說明及使用規範", terms_of_service_path, target: "_blank" %></p>
+    <% if @order.arrived? %>
+      <%= content_tag(:p, "* 如欲辦理退貨，請來信附上訂單編號或email說明，我們會將退貨資訊回信給您。") %>
+      <%= content_tag(:p, "* 退貨來信地址：info@motion-express.com") %>
+    <% end %>
   </div>
 
 </div>
