@@ -5,11 +5,11 @@
     <table class="shipping">
       <tbody>
         <tr>
-          <td>收件人姓名</td>
+          <td>收件人</td>
           <td><%= text_field_tag :shipping_name, @order_info.shipping_name, class: "form-control" %></td>
         </tr>
         <tr>
-          <td>收件人地址</td>
+          <td>地址</td>
           <td><%= text_field_tag :shipping_address, @order_info.shipping_address, class: "form-control" %></td>
         </tr>
         <tr>
@@ -21,6 +21,6 @@
     <p></p>
     <p>* 運送僅限台澎金馬地區</p>
     <p>* 若因資訊錯誤導致無法送達，本站有權取消該筆交易並進行退款。</p>
-    <%= submit_tag "送出寄送資訊", class: "btn #{shipping_class} action", style: "margin-top: -30px;" %>
+    <%= submit_tag "送出寄送資訊", class: "btn #{shipping_class} action send-shipping" %>
   <% end %>
 </div>

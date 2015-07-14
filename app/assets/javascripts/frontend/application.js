@@ -28,3 +28,10 @@
 function dismiss_message() {
   $(".message").hide();
 };
+
+$(document).ready(function(){
+  if($(window).width() < 992){
+    $(".pull-right").removeClass("pull-right");
+    $(".product").css("width",null);
+  };
+});

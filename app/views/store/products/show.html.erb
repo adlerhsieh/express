@@ -1,21 +1,14 @@
 <h1><%= @product.title %></h1>
 <hr />
+<div class="product-top">
+  <%= render "side_desc" %>
+</div>
 <div class="col-lg-8 column margin">
   <%= image_tag @product.default_image, class: "product-image" %>
   <% @product.images.each do |image| %>
     <%= image_tag image.image, class: "product-image" %>
   <% end %>
 </div>
-<div class="col-lg-3 column margin">
-  <p>價格：<%= number_with_delimiter @product.price %>元</p>
-  <%= form_tag add_to_cart_store_products_path do %>
-    <%= hidden_field_tag :product_id, @product.id %>
-    <p>數量：<%= text_field_tag :quantity, "1", class: "form-control" %></p>
-    <p><%= submit_tag "加入訂單", class: "btn btn-success add" %></p>
-  <% end %>
+<div class="product-bottom">
+  <%= render "side_desc" %>
 </div>
-<% unless @product.description.blank? %>
-  <div class="col-lg-3 column margin">
-    <p><%= @product.description %></p>
-  </div>
-<% end %>
