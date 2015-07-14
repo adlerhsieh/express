@@ -1,5 +1,5 @@
 <div id="open-ship" class="btn btn-primary shipping-info">填寫寄送資訊</div>
-<div id="ship-col" class="column shipping-new col-lg-7" style="display: none;">
+<div id="ship-col" class="column shipping-new col-lg-8" style="display: none;">
   <h4>寄送資訊</h4>
   <%= form_tag store_order_order_infos_path(@order) do %>
     <table class="shipping">
@@ -18,7 +18,9 @@
         </tr>
       </tbody>
     </table>
+    <p></p>
     <p>* 運送僅限台澎金馬地區</p>
+    <p>* 若因資訊錯誤導致無法送達，本站有權取消該筆交易並進行退款。</p>
     <%= submit_tag "送出寄送資訊", class: "btn #{shipping_class} action", style: "margin-top: -30px;" %>
   <% end %>
 </div>
