@@ -1,4 +1,13 @@
+@media all and (min-width:992px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
 @media all and (max-width:992px) {
+  .desktop-only {
+    display: none;
+  }
   h1,h2,h3 {
     text-align: center;
   }
@@ -8,5 +17,20 @@
   }
   div.navbar-collapse ul.nav li a {
     font-size: 17px;
+  }
+  .dropdown-toggle {
+    width: 100%;
+    font-size: 20px;
+  }
+  .dropdown-menu {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    li {
+      height: 60px;
+      a {
+        line-height: 60px;
+      }
+    }
   }
 }

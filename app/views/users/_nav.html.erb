@@ -1,4 +1,4 @@
-<ul class="nav nav-pills">
+<ul class="nav nav-pills desktop-only">
   <li class="<%= "active" if params[:controller] == "users" %>">
     <%= link_to "帳號資訊", info_users_path %>
   </li>
@@ -32,3 +32,14 @@
     </li>
   <% end %>
 </ul>
+
+<div class="dropdown mobile-only">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    前往...
+  <!-- <span class="caret"></span> -->
+  </button>
+  <ul class="dropdown-menu">
+    <li><%= link_to "帳號資訊", info_users_path %></li>
+    <li><%= link_to "所有訂單", store_orders_path %></li>
+  </ul>
+</div>
