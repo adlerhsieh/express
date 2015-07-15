@@ -13,9 +13,9 @@
               <% end %>
               <%= link_to post.title, post_path(post[:slug]) %>
             </h4>
-            <span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span> 
+            <span class="date-display desktop-only"><%= post[:display_date].strftime("%Y-%m-%d") %></span> 
           </td>
-          <td class="td-right">
+          <td class="td-right desktop-only">
             <% if is_admin? %>
               <%= link_to "編輯", edit_user_post_path(current_user["name"], post[:slug]), style: "color: red;font-size: 12px;" %>
             <% end %>

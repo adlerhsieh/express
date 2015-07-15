@@ -65,7 +65,6 @@
             <td><%= order.token[0..3] %></td>
             <td><%= order.price %></td>
             <td><%= status_print(order.aasm_state) %></td>
-            <!-- <td><button class="btn btn&#45;primary">檢視</button></td> -->
             <td><%= link_to "檢視", store_order_path(order), class: "btn btn-primary" %></td>
           </tr>
         <% end %>
