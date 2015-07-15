@@ -17,13 +17,23 @@
   .product_title {
     font-size: 24px;
     margin: 20px 0px 10px 0px;
-    text-align: center;
+    // text-align: center;
+    line-height: 50px;
+    padding-left: 10px;
   }
+}
+
+.product_text {
+  margin-bottom: 10px;
 }
 
 .price {
   font-size: 18px;
-  text-align: center;
+  float: right;
+  // text-align: center;
+  color: black;
+  line-height: 50px;
+  padding-right: 10px;
 }
 
 i.price {

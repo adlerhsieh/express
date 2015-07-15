@@ -1,5 +1,5 @@
 <div class="order col-sm-8">
-  <table class="table items">
+  <table class="table items desktop-only">
     <thead>
       <th>名稱</th>
       <th>數量</th>
@@ -42,6 +42,43 @@
       <% end %>
     </tbody>
   </table>
+
+  <div class="column mobile-only">
+    <%= form_tag update_quantity_store_order_path(@order) do %>
+      <% @order.items.each do |i| %>
+        <table class="mobile-order-items">
+          <tr>
+            <td colspan="4"><h4><%= link_to i.product.title, store_product_path(i.product_id), target: "_blank" %></h4></td>
+          </tr>
+          <tr>
+            <td>數量：</td>
+            <td colspan="3">
+              <% if @order.not_transferring_or_paid? %>
+                <%= text_field_tag i.id.to_s.to_sym, i.quantity, class: "form-control", style: "", type: "number" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>單價：</td>
+            <td><%= number_with_delimiter i.price %></td>
+            <td style="width:80px;">總價：</td>
+            <td><%= number_with_delimiter i.sum %></td>
+          </tr>
+          <tr>
+            <td>庫存：</td>
+            <td><%= check_stock(i) %></td>
+            <td colspan=2>
+              <%= link_to("移除", delete_store_order_item_path(i), method: :post, class: "btn btn-danger", style: "float:right;width: 50%;") if @order.not_transferring_or_paid? %> 
+            </td>
+          </tr>
+        </table>
+        <hr />
+      <% end %>
+      <% if @order.not_transferring_or_paid? %>
+        <%= submit_tag "更新數量", class: "btn btn-warning", style: "width:100%; font-size: 20px;" %>
+      <% end %>
+    <% end %>
+  </div>
 
   <%= render partial: "shipping_edit" if @order.info %>
 
