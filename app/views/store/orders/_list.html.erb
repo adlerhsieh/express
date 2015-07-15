@@ -1,3 +1,4 @@
+<div class="desktop-only">
   <div class="order col-sm-12">
     <table class="table items">
       <thead class="header-tr">
@@ -47,4 +48,28 @@
       </tbody>
     </table>
   </div>
+</div>
 
+<div class="mobile-only">
+  <div class="enlarge-text order col-sm-12">
+    <table class="table items">
+      <thead>
+        <th>序號</th>
+        <th>金額</th>
+        <th>狀態</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% orders.each do |order| %>
+          <tr>
+            <td><%= order.token[0..3] %></td>
+            <td><%= order.price %></td>
+            <td><%= status_print(order.aasm_state) %></td>
+            <!-- <td><button class="btn btn&#45;primary">檢視</button></td> -->
+            <td><%= link_to "檢視", store_order_path(order), class: "btn btn-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
