@@ -124,7 +124,7 @@ module Store::OrdersHelper
 
   def action_button
     if @order.cart?
-      return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary", style: "float: right; width: 100px; margin-top: 20px;" 
+      return link_to "結帳", place_store_order_path(@order), class: "btn btn-primary checkout" 
     end
     @button_class = {class: "btn btn-primary paypal-send", method: :get}
     @button_class.merge!(disabled: "disabled") if not @order.has_info && @order.stock_ready
