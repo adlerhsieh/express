@@ -55,6 +55,8 @@
             <td colspan="3">
               <% if @order.not_transferring_or_paid? %>
                 <%= text_field_tag i.id.to_s.to_sym, i.quantity, class: "form-control", style: "", type: "number" %>
+              <% else %>
+                <%= i.quantity %>
               <% end %>
             </td>
           </tr>

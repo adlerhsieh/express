@@ -1,5 +1,5 @@
 <!-- <h3> -->
-  <div class="column shipping-edit">
+  <div class="column shipping-edit <%= "bottom-extend" unless @order.paid %>">
     <h4>寄送資訊</h4>
     <% if @order.paid %>
       <table class="shipping done">

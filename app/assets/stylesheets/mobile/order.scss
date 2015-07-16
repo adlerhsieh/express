@@ -23,7 +23,9 @@
     }
   }
   div.shipping-new, div.shipping-edit {
-    padding-bottom: 80px;
+    &.bottom-extend {
+      padding-bottom: 80px;
+    }
     p {
       margin-bottom: 0px;
     }
