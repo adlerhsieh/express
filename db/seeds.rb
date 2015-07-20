@@ -30,3 +30,5 @@ unless Store::PaymentMethod.all.any?
   Store::PaymentMethod.create(:name => "匯款")
   Store::PaymentMethod.create(:name => "PayPal")
 end
+
+Store::Product.delete_all
