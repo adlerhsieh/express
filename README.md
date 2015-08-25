@@ -1,8 +1,21 @@
-# README
+# Welcome
 
-## v1.10
+This is the source code of my blog [Motion Express](http://motion-express.com/).
 
-2015-06-23
+The following keywords bestow you a quick understanding on how this project is built.
 
-將jQuery等其他assets從assets資料夾中移出，變成利用cdn拉
-成功將檔案縮小許多
+### Backend
+
+- MySQL
+- Capistrano (Digital Ocean)
+- RSpec
+- ERB
+- Github login
+- PayPal checkout
+- ActionMailer with Gmail
+
+### Frontend
+
+- ACE editor
+- jQuery
+- AngularJS
