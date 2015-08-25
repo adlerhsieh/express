@@ -43,10 +43,10 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     :port           => 587,
     :address        => 'smtp.gmail.com',
-    :user_name      => "info@motion-express.com",
-    :password       => "Biohazard123",
+    :user_name      => ENV["gmail_user"],
+    :password       => ENV["gmail_pass"],
     :authentication => "plain",
-    :domain => "motion-express.com",
+    :domain => ENV["gmail_domain"],
     :enable_starttls_auto => true
   }
   ActionMailer::Base.delivery_method = :smtp

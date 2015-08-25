@@ -5,7 +5,8 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # config.secret_key = 'a23893963163453c3d840fa47ff2a24324a292f828c15a95d09f457f1a3b4a9bc67f23f19cd0f9f5399b11da9092635a998304151c7caae7d8b6cc85547d719e'
-  config.secret_key = ENV['DEVISE_SECRET_KEY'] if Rails.env.production?
+  # config.secret_key = ENV['DEVISE_SECRET_KEY'] if Rails.env.production?
+  config.secret_key = 'aae41a4a00def181610f43d38c3bc26d679d476ecf8a13aaf2aa0ca5847436dd499ba31abe68c88cb9f8336562663ee68bfab81df829e228a6e38c880a17c3cc'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -235,9 +236,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   case Rails.env
   when "development"
-    config.omniauth :github, 'c57c95a89a314620c947', '695c6f579d75a6a57279e8f1fddafccd3b7d2029', scope: 'user:email'
+    config.omniauth :github, ENV["github_auth_dev_id"], ENV["github_auth_dev_secret"], scope: 'user:email'
   when "production"
-    config.omniauth :github, '1a08a7b5d360a5054b86', 'b17c7d541359099306c663f7e0d1b51175714bca', scope: 'user:email'
+    config.omniauth :github, ENV["github_auth_production_id"], ENV["github_auth_production_secret"], scope: 'user:email'
   end
 
   # ==> Warden configuration
