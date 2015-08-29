@@ -55,7 +55,7 @@ namespace :deploy do
     end
   end
 
-  user = "motionex"
+  user = ENV["remote_user"]
   server = "107.170.207.41"
   local_path = "cd ~/projects/express;"
   local_path_config = "cd ~/projects/express/config;"
