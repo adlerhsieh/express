@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :user do
+    id 1
     name "adler"
     email "hello@gmail.com"
     is_admin true
