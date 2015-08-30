@@ -1,10 +1,10 @@
-# Welcome
+# Express
 
-This is the source code of my blog [Motion Express](http://motion-express.com/).
+Express is a blogging application I'm now using with [Motion Express](http://motion-express.com/).
 
-The following keywords bestow you a quick understanding on how this project is built.
+## Keywords
 
-### Backend
+#### Backend
 
 - MySQL
 - Capistrano (Digital Ocean)
@@ -14,8 +14,26 @@ The following keywords bestow you a quick understanding on how this project is b
 - PayPal checkout
 - ActionMailer with Gmail
 
-### Frontend
+#### Frontend
 
 - ACE editor
 - jQuery
 - AngularJS
+
+## Features
+
+#### Post Management with ease
+
+#### Tags & Categories
+
+#### Video Trainings & Tutorials Management
+
+#### Email Subscription
+
+#### Github Login
+
+#### Store & Shopping Cart
+
+## Installation
+
+Check wiki for details.
