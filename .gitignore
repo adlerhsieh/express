@@ -18,8 +18,8 @@
 /log/*
 !/log/.keep
 /tmp
-db/database.yml
-db/secrets.yml
+/config/database.yml
+/config/secrets.yml
 
 # Ignore application configuration
 # (should keep separate copies in staging and production env)
