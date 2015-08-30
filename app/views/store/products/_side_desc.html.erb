@@ -8,7 +8,7 @@
 </div>
 <% unless @product.description.blank? %>
   <div class="col-lg-3 column margin">
-    <p><%= @product.description %></p>
+    <p><%= simple_format @product.description %></p>
   </div>
 <% end %>
 
