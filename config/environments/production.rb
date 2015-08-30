@@ -89,12 +89,8 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.default(:from => "特快車")
   Rails.application.routes.default_url_options[:host] = ENV["host"]
-  # Mailgun.configure do |config|
-  #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
-  #   config.domain = "motion-express.com"
-  # end
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-    :slack => {
-      webhook_url: ENV["slack_payment"]
-  }
+  # Rails.application.config.middleware.use ExceptionNotification::Rack,
+  #   :slack => {
+  #     webhook_url: ENV["slack_payment"]
+  # }
 end

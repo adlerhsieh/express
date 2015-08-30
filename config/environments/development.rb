@@ -54,8 +54,4 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = {:host => "localhost:3000"}
   # config.action_mailer.perform_deliveries = true
-  # Mailgun.configure do |config|
-  #   config.api_key = "key-65e2y8z-mhar2gcncu7ryqcolm8et-q3"
-  #   config.domain = "motion-express.com"
-  # end
 end
