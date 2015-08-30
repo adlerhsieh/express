@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'httparty'
+gem 'exception_notification'
 gem 'slack-notifier'
 gem 'figaro'
 gem 'mail'
