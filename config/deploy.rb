@@ -55,16 +55,16 @@ namespace :deploy do
     end
   end
 
-  user = ENV["remote_user"]
-  server = "107.170.207.41"
-  local_path = "cd ~/projects/express;"
-  local_path_config = "cd ~/projects/express/config;"
-  local_path_public = "cd ~/projects/express/public;"
+  server                   = "107.170.207.41"
+  local_path               = "cd ~/projects/express;"
+  user                     = YAML.load_file(File.expand_path("../application.yml",__FILE__))["development"]["remote_user"]
+  local_path_config        = "cd ~/projects/express/config;"
+  local_path_public        = "cd ~/projects/express/public;"
   path_prefix_public_no_cd = "/var/www/#{@folder}/current/public"
   path_prefix_config_no_cd = "/var/www/#{@folder}/current/config"
-  path_prefix = "cd /var/www/#{@folder}/current;"
-  path_prefix_public = "cd /var/www/#{@folder}/current/public;"
-  path_certs = "cd /var/www/#{@folder}/current/certs;"
+  path_prefix              = "cd /var/www/#{@folder}/current;"
+  path_prefix_public       = "cd /var/www/#{@folder}/current/public;"
+  path_certs               = "cd /var/www/#{@folder}/current/certs;"
 
   task :bundle do
     on roles(:web) do
