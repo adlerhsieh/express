@@ -19,7 +19,7 @@
     <ul class="nav navbar-nav">
       <li><%= link_to("部落格", posts_path) %></li>
       <li><%= link_to("課程", trainings_path) %></li>
-      <li><%= link_to("商店", store_products_path) if Rails.env == "development" %></li>
+      <li><%= link_to("商店", store_products_path) %></li>
       <!-- <li><%= link_to("作者", author_path) %></li> -->
     </ul>
     <ul class="nav navbar-nav pull-right">
@@ -33,7 +33,7 @@
           <%= link_to(current_user["name"], info_users_path) %>
         </li>
         <li>
-          <%= link_to("訂單", store_orders_path) if Rails.env == "development" %>
+          <%= link_to("訂單", store_orders_path) %>
         </li>
         <li>
         <%= link_to("登出", destroy_user_session_path, method: :get) %>
