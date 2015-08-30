@@ -1,0 +1,41 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: 
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+
+development:
+  # Devise (for initialization)
+  devise_key:
+  # Paypal (all arguments are used in app/models/store/order.rb)
+  paypal_seller_email: 
+  paypal_cert_id: 
+  paypal_returning_host: 
+  paypal_checkout_url: 
+  host: 
+  # Slack (when a user pays an order, it sends a webhook message)
+  slack_payment: 
+  # Capistrano (see config/deploy.rb)
+  deploy_env: 
+  remote_user: 
+  # Gmail (see config/environments/development.rb and production.rb)
+  gmail_pass: 
+  gmail_user: 
+  gmail_domain: 
+  # Github Login (see config/initializers/devise.rb)
+  github_auth_dev_id: 
+  github_auth_dev_secret: 
+  github_auth_production_id: 
+  github_auth_production_secret: 
+
+# Copy the arguments to other env if needed
+
+test:  
+
+production:

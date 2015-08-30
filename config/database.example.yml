@@ -1,0 +1,19 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  host: localhost
+  username: username
+  password: password
+  socket: /tmp/mysql.sock
+
+development:
+  <<: *default
+  database: database
+
+test:
+  <<: *default
+  database: database_test
+
+production:
+  <<: *default
+  database: database_production
