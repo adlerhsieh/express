@@ -31,8 +31,6 @@ Express is a blogging application I'm now using with [Motion Express](http://mot
 
 ## Installation
 
-Check wiki for details.
-
 ### 1. Clone & Bundle
 
 ```
