@@ -4,7 +4,9 @@ Express is a blogging application I'm now using with [Motion Express](http://mot
 
 ## To Anyone who may concern
 
-If you are looking for my code sample, start from [app/models/order.rb](https://github.com/adlerhsieh/express/blob/master/app/models/store/order.rb) and related [controller actions](https://github.com/adlerhsieh/express/blob/master/app/controllers/store/orders_controller.rb) and [views](https://github.com/adlerhsieh/express/blob/master/app/views/store/orders/index.html.erb). More to checkout in [app/models/post.rb](https://github.com/adlerhsieh/express/blob/master/app/models/post.rb) in post management feature.
+If you are looking for my code sample, start from [app/models/order.rb](https://github.com/adlerhsieh/express/blob/master/app/models/store/order.rb) and related [controller actions](https://github.com/adlerhsieh/express/blob/master/app/controllers/store/orders_controller.rb) and [views](https://github.com/adlerhsieh/express/blob/master/app/views/store/orders/index.html.erb). Those are the code for [the store and shopping cart](http://motion-express.com/store/products).
+
+More to checkout in [app/models/post.rb](https://github.com/adlerhsieh/express/blob/master/app/models/post.rb) in post management feature.
 
 ## Keywords
 
