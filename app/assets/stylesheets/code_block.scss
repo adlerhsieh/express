@@ -1,81 +1,33 @@
 pre {
-  // border: 0px solid white;
-  background-color: #23241F;
-  color: #F8F8F2;
-  // overflow-y: hidden;
-  font-size: 14px;
+  // background-color: #23241F;
+  // color: #F8F8F2;
+  // font-size: 14px;
 
-  code {
-    span.hljs-comment {
-      color: #737373;
-    }
-  }
+  // code {
+  //   span.hljs-comment {
+  //     color: #737373;
+  //   }
+  // }
+  //
+  // code.ruby, code.erb {
+  //   span.hljs-symbol {
+  //     color: #ae81ff;
+  //   }
+  //   span.hljs-symbol {
+  //     span.hljs-string {
+  //       color: #ae81ff;
+  //     }
+  //   }
+  //   span.hljs-constant {
+  //     // color: #a6e22e;
+  //   }
+  //   span.hljs-class {
+  //     span.hljs-title, 
+  //     span.hljs-inheritance span.hljs-parent {
+  //       color: #66D9EF !important;
+  //     }
+  //   }
+  // }
 
-  code.ruby, code.erb {
-    span.hljs-symbol {
-      color: #ae81ff;
-    }
-    span.hljs-symbol {
-      span.hljs-string {
-        color: #ae81ff;
-      }
-    }
-    span.hljs-constant {
-      // color: #a6e22e;
-    }
-    span.hljs-class {
-      span.hljs-title, 
-      span.hljs-inheritance span.hljs-parent {
-        color: #66D9EF !important;
-      }
-    }
-  }
-
-  // code.cmd {
-  //   .line-numbers { display: none; }
-  //   .prefix { opacity: 0.7; }
-  // }
-  //
-  // code.ruby {
-  //   .class, 
-  //   .constant { 
-  //     color: rgb(54,255,254); 
-  //   }
-  //   .comment, .comment .string, .comment .keyword {
-  //     color: gray;
-  //   }
-  //   .key, 
-  //   .integer, 
-  //   .symbol { 
-  //     color: #B277E0; 
-  //   }
-  //   .keyword {
-  //     color: #E2005C; 
-  //   }
-  //   .function { 
-  //     color: #8AE806; 
-  //   }
-  //   .string, .string .key, .string .integer, .string .comment, .string .constant, .string .keyword {
-  //       color: #EAED8A; 
-  //   }
-  // }
-  //
-  // code.javascript {
-  //   .string, .string .comment, .string .constant {
-  //       color: #EAED8A; 
-  //   }
-  //   .integer { 
-  //     color: #B277E0; 
-  //   }
-  // }
-  //
-  // code.html {
-  //   .entity {
-  //
-  //   }
-  //   .ruby {
-  //     color: #E2005C;
-  //   }
-  // }
 }
 
