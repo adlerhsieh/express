@@ -3,7 +3,6 @@
 //= require dropdown
 //= require_tree .
 //= require ace
-//= require theme-twilight
 //= require mode-markdown
 //= require highlight
 //= require bootstrap
