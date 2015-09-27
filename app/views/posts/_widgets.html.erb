@@ -1,19 +1,19 @@
 <!-- Blog Sidebar Widgets Column -->
 
-<div class="widget column">
-  <%= link_to content_tag(:i, "", class: "fa fa-facebook-square widget-icon"), "https://www.facebook.com/motionex", target: "_blank" %>
-  <%= link_to content_tag(:i, "", class: "fa fa-twitter-square widget-icon"), "https://twitter.com/motionxpress", target: "_blank" %>
-</div>
+<!-- <div class="widget column"> -->
+  <% link_to content_tag(:i, "", class: "fa fa-facebook-square widget-icon"), "https://www.facebook.com/motionex", target: "_blank" %>
+  <% link_to content_tag(:i, "", class: "fa fa-twitter-square widget-icon"), "https://twitter.com/motionxpress", target: "_blank" %>
+<!-- </div> -->
 
 <div class="widget column">
   <%= form_tag subscribe_users_path, :method => 'post' do %>
-    <%= text_field_tag :email, params[:email], :class => "form-control", :placeholder => "輸入Email訂閱" %>
+    <%= text_field_tag :email, params[:email], :class => "form-control", :placeholder => "Email Subscription" %>
   <% end %>
 </div>
 
 <div class="widget column">
   <%= form_tag search_posts_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "搜尋" %>
+    <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Search" %>
   <% end %>
 </div>
 

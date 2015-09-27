@@ -70,7 +70,7 @@ class UsersController < ApplicationController
       address_list = User::Email.all.map(&:address)
       if address_list.include?(@email)
         if already_subscribed?
-          flash[:alert] = "email先前已訂閱"
+          flash[:alert] = "You are already in the subscription list"
           redirect_to posts_path
           return
         end
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
 
     def email_formatted?
       if not @email.include?("@")
-        flash[:alert] = "請輸入正確的email格式"
+        flash[:alert] = "Please enter correct email format"
         redirect_to posts_path
         return false
       end

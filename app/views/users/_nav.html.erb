@@ -3,7 +3,7 @@
     <%= link_to "帳號資訊", info_users_path %>
   </li>
   <li class="<%= "active" if params[:controller] == "store/orders" && params[:action] == "index" %>">
-    <%= link_to "所有訂單", store_orders_path %>
+    <% link_to "所有訂單", store_orders_path %>
   </li>
   <% if is_admin? %>
     <li class="<%= "active" if params[:controller] == "settings" && params[:action] == "edit_all" %>">
@@ -40,6 +40,6 @@
   </button>
   <ul class="dropdown-menu">
     <li><%= link_to "帳號資訊", info_users_path %></li>
-    <li><%= link_to "所有訂單", store_orders_path %></li>
+    <li><% link_to "所有訂單", store_orders_path %></li>
   </ul>
 </div>
