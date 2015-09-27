@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-lg-6">
       <ul class="list-unstyled">
-        <li><%= link_to "所有文章", posts_path %></li>
+        <!-- <li><%= link_to "All Posts", posts_path %></li> -->
         <% @categories.each do |category| %>
           <li><%= link_to "#{category[:name]}", "/categories/#{category[:slug]}" %></li>
       <% end %>
