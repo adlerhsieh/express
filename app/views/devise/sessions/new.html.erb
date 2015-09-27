@@ -3,7 +3,8 @@
 
 <div class="column log-in">
   <h4 style="text-align: center;">登入</h4>
-  <%= form_for(resource, as: resource_name, url: user_session_path) do |f| %>
+  <%= link_to('Github登入', user_omniauth_authorize_path(:github)) %>
+  <% form_for(resource, as: resource_name, url: user_session_path) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, class: "form-control" %>

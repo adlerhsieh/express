@@ -33,7 +33,7 @@
           <%= link_to(current_user["name"], info_users_path) %>
         </li>
         <li>
-          <%= link_to("訂單", store_orders_path) %>
+          <% link_to("訂單", store_orders_path) %>
         </li>
         <li>
         <%= link_to("登出", destroy_user_session_path, method: :get) %>
