@@ -108,7 +108,6 @@ class Store::Order < ActiveRecord::Base
         "quantity_#{index+1}" => 1
       })
     end
-    # "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
     encrypt_for_paypal(values)
   end
 
@@ -125,7 +124,6 @@ class Store::Order < ActiveRecord::Base
     if item
       quan = item.quantity + quantity
       item.update_column(:quantity, quan)
-      # item.update_column(:price, quan*item.price)
     else
       product = Store::Product.find(product_id)
       item = self.items.create(:product_id => product.id, 
@@ -204,7 +202,6 @@ class Store::Order < ActiveRecord::Base
   end
 
   aasm do
-    # state :outdated
     state :cart, :initial => true
     state :placed
     state :transferred
@@ -214,9 +211,6 @@ class Store::Order < ActiveRecord::Base
     state :cancelled
     state :returned
 
-    # event :outdate do
-    #   transitions from: [:cart, :placed], to: :outdated
-    # end
     event :place do
       transitions from: :cart, to: :placed
     end

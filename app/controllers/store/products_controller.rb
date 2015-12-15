@@ -36,12 +36,6 @@ class Store::ProductsController < ApplicationController
   end
 
   def show
-    # if is_admin?
-    #
-    # else
-    #   redirect_to store_products_path
-    #   return
-    # end
   end
 
   def destroy

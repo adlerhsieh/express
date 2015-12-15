@@ -24,12 +24,6 @@ describe PostsController, type: :controller do
     end
   end
 
-  # specify "#new" do
-  #   get :new
-  #   expect(response).to have_http_status(200)
-  #   expect(response).to render_template(:new)
-  # end
-  
   describe "#create" do
     let(:post_params){{
       :title => "new post",

@@ -16,10 +16,6 @@ class Users::ScreencastsController < ApplicationController
   def show
     @screencast = Screencast.find_by_slug(params[:id])
     cat = Category.find(@screencast[:category_id])[:name]
-    # if @screencast[:training_id]
-    #   @training = Training.includes(:screencasts).find(@screencast.training[:id])
-    #   @screencasts = @training.screencasts.order(:training_order => :asc)
-    # end
     render :json => @screencast.serializable_hash.merge(:category => cat)
   end
 

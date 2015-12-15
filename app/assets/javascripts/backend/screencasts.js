@@ -180,7 +180,6 @@ $(document).ready(function(){
       };
 
       function toggle_edit() {
-        // $("#editor").show();
         $(".editor-attr").show();
         $("#preview").hide();
         editor.focus();
@@ -202,7 +201,6 @@ $(document).ready(function(){
         editor.getSession().setMode("ace/mode/markdown");
         editor.getSession().setUseWrapMode(true);
         editor.$blockScrolling = Infinity; // prevent browser message
-        // editor.renderer.setShowGutter(false); // hide line number
         editor.renderer.setPadding(10);
         document.getElementById('editor').style.fontSize='14px';
         document.getElementById("title").focus();

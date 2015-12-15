@@ -21,12 +21,6 @@ $(document).ready(function(){
       url: "/categories/update_all",
       type: "POST",
       data: {"categories": hash}
-    // }).success(function(response){
-    //   setTimeout(function(){ $("#success").show(); }, 50);
-    //   setTimeout(function(){ $("#success").hide(); }, 1500);
-    // }).error(function(response){
-    //   setTimeout(function(){ $("#error").show(); }, 50);
-    //   setTimeout(function(){ $("#error").hide(); }, 1500);
     }).always(function(response){
       dismiss_message();
       setTimeout(function(){ $("#success").show(); }, 50);

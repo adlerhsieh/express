@@ -155,7 +155,6 @@ $(document).ready(function(){
                 setTimeout(function(){ $("#error").show(); }, 50);
                 setTimeout(function(){ $("#error").hide(); }, 1500);
               }).always(function(response){
-                // $("#pending").hide();
                 dismiss_message();
               });
             };
@@ -205,7 +204,6 @@ $(document).ready(function(){
       };
 
       function toggle_edit() {
-          // $("#editor").show();
           $(".editor-attr").show();
           $("#preview").hide();
           $("#list").hide();
@@ -220,12 +218,10 @@ $(document).ready(function(){
 
       function toggle_list(value){
         if(value == true){
-          // $("#editor").hide();
           $(".editor-attr").hide();
           $("#preview").hide();
           $("#list").show();
         }else{
-          // $("#editor").show();
           $(".editor-attr").show();
           $("#preview").hide();
           $("#list").hide();
@@ -242,7 +238,6 @@ $(document).ready(function(){
         editor.getSession().setMode("ace/mode/markdown");
         editor.getSession().setUseWrapMode(true);
         editor.$blockScrolling = Infinity; // prevent browser message
-        // editor.renderer.setShowGutter(false); // hide line number
         editor.renderer.setPadding(10);
         document.getElementById('editor').style.fontSize='14px';
         document.getElementById("title").focus();

@@ -15,14 +15,6 @@ $(document).ready(function(){
       initialize_content();
       get_category_list();
 
-      // editor.commands.addCommand({
-      //   name: "toggle_attr",
-      //   bindKey: {win: "Ctrl-K", mac: "Command-K"},
-      //   exec: function(editor){
-      //
-      //   }
-      // });
-
       $(document).keydown(function(key){
         keys.push(key.which);
         if(keys.indexOf(75) != -1 && keys.indexOf(91) != -1) {
@@ -68,17 +60,6 @@ $(document).ready(function(){
         };
 
         if(keys.indexOf(74) != -1 && keys.indexOf(91) != -1) {
-          // confirm_leave ++;
-          // keys.splice(keys.indexOf(74),1);
-          // $("#leave").show();
-          // setTimeout(function(){
-          //   $("#leave").delay(300).hide();
-          //   confirm_leave = 0;
-          // }, 1000);
-          // if(confirm_leave == 2){
-            // dismiss_message();
-            // location.href = "/users/" + current_user.name + "/posts";
-          // };
           $("#pending").show();
           var slug = $("#slug").val();
           $.ajax({
@@ -167,7 +148,6 @@ $(document).ready(function(){
                 setTimeout(function(){ $("#error").show(); }, 50);
                 setTimeout(function(){ $("#error").hide(); }, 1500);
               }).always(function(response){
-                // $("#pending").hide();
                 dismiss_message();
               });
             };
@@ -218,7 +198,6 @@ $(document).ready(function(){
       };
 
       function toggle_edit() {
-          // $("#editor").show();
           $(".editor-attr").show();
           $("#preview").hide();
           editor.focus();
@@ -247,7 +226,6 @@ $(document).ready(function(){
         editor.getSession().setMode("ace/mode/markdown");
         editor.getSession().setUseWrapMode(true);
         editor.$blockScrolling = Infinity; // prevent browser message
-        // editor.renderer.setShowGutter(false); // hide line number
         editor.renderer.setPadding(10);
         document.getElementById('editor').style.fontSize='14px';
         document.getElementById("title").focus();

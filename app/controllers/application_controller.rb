@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
   def current_order
-    # @current_order ||= find_current_order
     find_current_order
   end
 
@@ -46,15 +45,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    # available_languages = ["zh-TW", "zh-HK", "zh-CN"]
-    # zh_trad = ["zh-TW", "zh-HK"]
-    # lang = http_accept_language.preferred_language_from(available_languages)
-    # if zh_trad.include? lang
-    #   I18n.locale = :"zh-TW"
-    # else
-    #   I18n.locale = :"zh-CN"
-    # end
-    # I18n.locale = :"zh-CN"
   end
 
   def configure_devise_params
@@ -105,17 +95,6 @@ class ApplicationController < ActionController::Base
         end
         @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,record.category.name+",")
         # insert description
-        # unless record.content.nil? || record.content.length < 10
-        #   description = record.content[0..250]
-        #   unless record.content.index("!").nil?
-        #     if record.content.index("!") < 10
-              # index_new_line = record.content[1..-1].index("\n")
-              # description = record.content[index_new_line..index_new_line + 250]
-            # end
-          # end
-          # @settings.find{|s|s["key"] == "meta_description"}["value"] = description
-          # @settings.find{|s|s["key"] == "og_description"}["value"] = description
-        # end
       end
     end
   end

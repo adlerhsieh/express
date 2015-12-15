@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   before_action :set_email, only: [:subscribe, :unsubscribe, :send_post_email]
   before_action :email_formatted?, only: [:subscribe]
   before_action :email_already_in_list_and_subscribed?, only: [:subscribe]
-  # require 'rest-client'
-  # require 'mailgun'
 
   def show
   end
@@ -46,7 +44,6 @@ class UsersController < ApplicationController
       render json: "Authorization failed"
       return
     end
-    # emails = ["nkj20932@gmail.com"]
     i = 0
     posts = []
     if params[:array]
@@ -97,7 +94,6 @@ class UsersController < ApplicationController
     def translator_balance
       t = BingTranslator.new("motionexpress","XElPnc0gckRHGyAgi7Y6wV8nxiLU4GDPDUivxrfRoYo=", false, 'FPiShpptVGkvVNAIGXoV//zHZMtvIAgsG/PiVSztHb8')
       t.balance
-      # "暫不顯示"
     end
 
     def translator_usage

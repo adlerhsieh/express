@@ -12,7 +12,6 @@ $(document).ready(function(){
       send.splice(send.indexOf(id), 1);
       $("#check_"+id).remove();
     };
-    // console.log(send);
   });
   $("button#confirm_send").click(function(){
     if(send.length > 0){

@@ -48,7 +48,6 @@ module Store::OrdersHelper
         content_tag(:span, (@order.order_time + 28800).strftime("%Y-%m-%d %H:%M:%S"), class: "timestamp") +
         content_tag(:p, "")
     end
-    # if @order.transfer.
     if @order.pay_time
       result += 
         content_tag(:i, "", class: "fa fa-check-circle", style: "color: green; font-size: 20px; padding-right: 5px;") + 
@@ -140,7 +139,6 @@ module Store::OrdersHelper
     if @order.returned?
       return content_tag(:p, "已退貨", style: "float: right; margin-top: 20px;")
     end
-    # if @order.placed? || @order.transferred?
     if @order.placed?
       if @order.info
         render partial: "pay_form"
@@ -180,7 +178,6 @@ module Store::OrdersHelper
 
   def total_price
     @order.price
-    # @order.items.inject(0){|r,i| r += i.sum }
   end
 
   def date(time)
