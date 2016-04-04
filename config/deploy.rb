@@ -74,13 +74,13 @@ namespace :deploy do
 
   task :migrate do
     on roles(:web) do
-      execute "#{path_prefix}rake db:migrate RAILS_ENV=production"
+      execute "#{path_prefix}bundle exec rake db:migrate RAILS_ENV=production"
     end
   end
 
   task :seed do
     on roles(:web) do
-      execute "#{path_prefix}rake db:seed RAILS_ENV=production"
+      execute "#{path_prefix}bundle exec rake db:seed RAILS_ENV=production"
     end
   end
 
@@ -88,7 +88,7 @@ namespace :deploy do
     on roles(:web) do
       execute("#{path_prefix_public}rm -rf assets")
       run_locally do
-        execute("#{local_path}rake assets:precompile RAILS_ENV=production")
+        execute("#{local_path}bundle exec rake assets:precompile RAILS_ENV=production")
         execute("#{local_path_public}tar -jcvf assets.tar.bz2 assets")
         execute("#{local_path_public}scp assets.tar.bz2 #{user}@#{server}:#{path_prefix_public_no_cd}/assets.tar.bz2")
         execute("#{local_path_public}rm assets.tar.bz2")
