@@ -99,7 +99,7 @@ class PostsController < ApplicationController
       @post.slug = params[:slug]
       @post.video_embed = params[:video_embed]
       @post.category_id = @category[:id]
-      @post.abstract = params[:abstract].join("\n")
+      # @post.abstract = params[:abstract].join("\n")
       @post.content = params[:content].join("\n")
       @post.display_date = params[:display_date]
       @post.icon = params[:icon]
