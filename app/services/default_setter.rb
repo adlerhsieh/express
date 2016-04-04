@@ -10,9 +10,9 @@ module DefaultSetter
   end
 
   def default_columns
-    self.title = "無標題" if self.title == ""
-    self.content = "" if self.content == ""
-    self.slug = Time.now.strftime("%Y%m%d%H%M%S") if self.slug == ""
+    # self.content = "" if self.content == ""
+    self.title = "Unknown-#{Time.now.strftime("%Y%m%d%H%M%S")}"     if self.title == ""
+    self.slug = self.title.downcase.gsub(/[?!*]/, "").gsub(" ","-")
   end
 
   def default_category

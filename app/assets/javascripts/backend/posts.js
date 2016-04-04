@@ -92,7 +92,7 @@ $(document).ready(function(){
             var title = $("#title").val();
             var category = $("#category").val();
             var tags = $("#tags").val();
-            var slug = $("#slug").val();
+            // var slug = $("#slug").val();
             var display_date = $("#display_date").val();
             var video_embed = $("#video_embed").val();
             var icon = $("#icon").val();
@@ -107,7 +107,7 @@ $(document).ready(function(){
                   "title": title,
                   "category": category,
                   "tags": tags,
-                  "slug": slug,
+                  // "slug": slug,
                   "content": code,
                   // "abstract": abstract,
                   "display_date": display_date,
