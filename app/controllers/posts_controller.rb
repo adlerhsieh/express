@@ -82,7 +82,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.find_by_slug(params[:slug])
+      @post = Post.find_by_slug(params[:slug] || params[:id])
     end
 
     def post_params
