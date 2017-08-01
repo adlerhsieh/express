@@ -43,7 +43,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'web-console', '~> 2.0'
+  # gem 'web-console', '~> 2.0'
   gem 'spring'
 end
 gem 'redcarpet'
