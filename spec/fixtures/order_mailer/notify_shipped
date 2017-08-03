@@ -1,3 +1,0 @@
-OrderMailer#notify_shipped
-
-Hi, find me in app/views/order_mailer/notify_shipped
