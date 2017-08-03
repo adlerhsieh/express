@@ -1,6 +1,6 @@
 <div class="go-to-shop">
   <%= image_tag "http://i.imgur.com/RWXwVyb.png", class: "centered-image" %>
   <p>請先登入再進行下單</p>
-  <%= link_to "使用Github登入", user_omniauth_authorize_path(:github), :class => "btn btn-primary" %>
+  <%= link_to "使用Github登入", user_github_omniauth_authorize_path, :class => "btn btn-primary" %>
 </div>
 
