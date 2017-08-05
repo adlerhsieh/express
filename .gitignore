@@ -25,6 +25,10 @@ Gemfile.lock
 # Ignore application configuration
 # (should keep separate copies in staging and production env)
 /config/application.yml
+/config/deploy.yml
+
 # Ignore paypal certifications
 # (should keep separate copies in staging and production env)
 /certs
+
+

@@ -1,13 +1,18 @@
+require 'yaml'
+
+config_map = YAML.load_file(File.expand_path("../deploy.yml", __FILE__))
+
 # config valid only for current version of Capistrano
-lock '3.4.0'
+# lock '3.4.0'
 
 set :application, 'rails'
-set :repo_url, 'git@bitbucket.org:nkj20932/express.git'
+set :repo_url, 'git@github.com:adlerhsieh/express.git'
 
 # $ DEPLOY_PATH=staging cap production deploy
 if ENV["DEPLOY_PATH"]
   @folder = "staging"
-  set :deploy_to, "/var/www/#{@folder}"
+  # set :deploy_to, "/home/ubuntu/apps/#{@folder}"
+  set :deploy_to, "/home/ubuntu/apps/#{@folder}"
 else
   @folder = "rails"
 end
@@ -15,8 +20,8 @@ end
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+# Default deploy_to directory is /home/ubuntu/apps/my_app_name
+# set :deploy_to, '/home/ubuntu/apps/my_app_name'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -36,7 +41,8 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-role :web, %w{motionex@107.170.207.41}
+# role :web, %w{motionex@107.170.207.41}
+role :web, config_map["production"]["role"]["web"]
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -55,16 +61,17 @@ namespace :deploy do
     end
   end
 
-  server                   = "107.170.207.41"
+  # server                   = "107.170.207.41"
+  server                   = ""
   local_path               = "cd ~/projects/express;"
   user                     = YAML.load_file(File.expand_path("../application.yml",__FILE__))["development"]["remote_user"]
   local_path_config        = "cd ~/projects/express/config;"
   local_path_public        = "cd ~/projects/express/public;"
-  path_prefix_public_no_cd = "/var/www/#{@folder}/current/public"
-  path_prefix_config_no_cd = "/var/www/#{@folder}/current/config"
-  path_prefix              = "cd /var/www/#{@folder}/current;"
-  path_prefix_public       = "cd /var/www/#{@folder}/current/public;"
-  path_certs               = "cd /var/www/#{@folder}/current/certs;"
+  path_prefix_public_no_cd = "/home/ubuntu/apps/#{@folder}/current/public"
+  path_prefix_config_no_cd = "/home/ubuntu/apps/#{@folder}/current/config"
+  path_prefix              = "cd /home/ubuntu/apps/#{@folder}/current;"
+  path_prefix_public       = "cd /home/ubuntu/apps/#{@folder}/current/public;"
+  path_certs               = "cd /home/ubuntu/apps/#{@folder}/current/certs;"
 
   task :bundle do
     on roles(:web) do
@@ -103,19 +110,19 @@ namespace :deploy do
   task :symlink do
     on roles(:web) do
       @folder = ENV["DEPLOY_PATH"] == "staging" ? "staging" : "rails"
-      execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/wp-content"
-      execute "cd /var/www/#{@folder}/current/config;ln -s /var/www/#{@folder}/shared/config/application.yml"
-      execute "cd /var/www/#{@folder}/current;mkdir certs"
-      execute "#{path_certs}ln -s /var/www/#{@folder}/shared/config/certs/paypal_cert_#{@folder}.pem"
-      execute "#{path_certs}ln -s /var/www/#{@folder}/shared/config/certs/app_cert.pem"
-      execute "#{path_certs}ln -s /var/www/#{@folder}/shared/config/certs/app_key.pem"
+      execute "#{path_prefix_public}ln -s /home/ubuntu/apps/#{@folder}/shared/public/wp-content"
+      execute "cd /home/ubuntu/apps/#{@folder}/current/config;ln -s /home/ubuntu/apps/#{@folder}/shared/config/application.yml"
+      execute "cd /home/ubuntu/apps/#{@folder}/current;mkdir certs"
+      execute "#{path_certs}ln -s /home/ubuntu/apps/#{@folder}/shared/config/certs/paypal_cert_#{@folder}.pem"
+      execute "#{path_certs}ln -s /home/ubuntu/apps/#{@folder}/shared/config/certs/app_cert.pem"
+      execute "#{path_certs}ln -s /home/ubuntu/apps/#{@folder}/shared/config/certs/app_key.pem"
     end
   end
 
   task :staging_robot do
     on roles(:web) do
       execute "#{path_prefix_public}rm robots.txt"
-      execute "#{path_prefix_public}ln -s /var/www/#{@folder}/shared/public/robots.txt"
+      execute "#{path_prefix_public}ln -s /home/ubuntu/apps/#{@folder}/shared/public/robots.txt"
     end
   end
 

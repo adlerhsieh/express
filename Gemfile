@@ -29,12 +29,14 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+
 group :development do
-  gem 'capistrano-rails'
+  gem 'capistrano-rails', "~> 1.3"
   gem 'capistrano-passenger'
   gem 'sshkit-sudo'
   gem 'seed_dump'
 end
+
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
