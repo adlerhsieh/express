@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development do
   gem 'capistrano-rails', "~> 1.3"
   gem 'capistrano-passenger'
+  gem 'capistrano-rbenv'
   gem 'sshkit-sudo'
   gem 'seed_dump'
 end
