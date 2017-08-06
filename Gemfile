@@ -31,6 +31,7 @@ gem 'execjs'
 gem 'redcarpet'
 gem 'coderay'
 gem 'therubyracer', platforms: :ruby
+gem "unicorn-rails"
 
 group :development do
   gem 'capistrano-rails', "~> 1.3"
