@@ -162,7 +162,6 @@ GEM
     kaminari-core (1.0.1)
     kgio (2.11.0)
     libv8 (3.16.14.11)
-    libv8 (3.16.14.11-x86_64-darwin-15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     macaddr (1.7.1)
