@@ -160,6 +160,7 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
+    libv8 (3.16.14.11-x86_64-darwin-15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     macaddr (1.7.1)
@@ -241,6 +242,7 @@ GEM
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
     redcarpet (3.4.0)
+    ref (2.0.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -311,6 +313,9 @@ GEM
     sshkit-sudo (0.1.0)
       sshkit (~> 1.8)
     systemu (2.6.5)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -348,6 +353,7 @@ DEPENDENCIES
   colorize
   devise
   exception_notification
+  execjs
   factory_girl_rails
   figaro
   font-awesome-sass
@@ -377,6 +383,7 @@ DEPENDENCIES
   slack-notifier
   spring
   sshkit-sudo
+  therubyracer
   uglifier (>= 1.3.0)
 
 BUNDLED WITH

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'httparty'
 gem 'exception_notification'
 gem 'slack-notifier'
@@ -20,7 +19,6 @@ gem 'friendly_id'
 gem 'colorize'
 gem 'devise'
 gem 'rails', '4.2.0'
-# gem 'mysql'
 gem 'mysql2', '~> 0.3.18'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -29,6 +27,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'execjs'
+gem 'redcarpet'
+gem 'coderay'
+gem 'therubyracer', platforms: :ruby
 
 group :development do
   gem 'capistrano-rails', "~> 1.3"
@@ -47,8 +49,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
-  # gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-gem 'redcarpet'
-gem 'coderay'
