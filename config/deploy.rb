@@ -141,9 +141,9 @@ namespace :deploy do
   task :server_restart do
     on roles(:web) do
       # execute "service nginx restart"
-      execute! :sudo, :service, :unicorn_express, :stop
+      execute! :sudo, :service, :unicorn_express, :kill
       sleep(2)
-      execute! :sudo, :service, :unicorn_express, :start
+      execute! :sudo, :service, :unicorn_express, :init
     end
   end
   #
