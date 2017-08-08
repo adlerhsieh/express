@@ -1,4 +1,4 @@
-if Rails.env.production?
+if defined?(Rails).! || Rails.env.production?
   # set path to application
   app_dir = File.expand_path("../..", __FILE__)
   shared_dir = "#{app_dir}/../../shared"
