@@ -48,9 +48,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_devise_params
-    devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:name, :email, :password, :password_confirmation)
-    end
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i(name email password password_confirmation))
+    # devise_parameter_sanitizer.for(:sign_up) do |u|
+    #   u.permit(:name, :email, :password, :password_confirmation)
+    # end
   end
 
   def require_login
