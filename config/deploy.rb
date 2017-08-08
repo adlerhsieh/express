@@ -138,12 +138,14 @@ namespace :deploy do
   #   end
   # end
   #
-  # task :server_restart do
-  #   on roles(:web) do
-  #     # execute "service nginx restart"
-  #     execute! :sudo, :service, :nginx, :restart
-  #   end
-  # end
+  task :server_restart do
+    on roles(:web) do
+      # execute "service nginx restart"
+      execute! :sudo, :service, :unicorn_express, :stop
+      sleep(2)
+      execute! :sudo, :service, :unicorn_express, :start
+    end
+  end
   #
   # after :deploy, "deploy:bundle"
   # after :deploy, "deploy:migrate"
@@ -152,5 +154,5 @@ namespace :deploy do
   # after :deploy, "deploy:precompile"
   # after :deploy, "deploy:staging_robot" if ENV["DEPLOY_PATH"] == "staging"
   # after :deploy, "deploy:upload_yml" if ENV["DEPLOY_PATH"] == "staging"
-  # after :deploy, "deploy:server_restart"
+  after :deploy, "deploy:server_restart"
 end
