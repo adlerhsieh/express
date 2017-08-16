@@ -28,6 +28,6 @@ module DefaultSetter
   end
 
   def translate_CN
-    Translator.new(self).to_CN
+  #   Translator.new(self).to_CN
   end
 end
