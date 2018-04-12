@@ -19,7 +19,7 @@ class MarkdownHelper
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, 
                                         fenced_code_blocks: true
                                        )
-    @parsed = markdown.render(@raw)
+    @parsed = markdown.render(@raw || "")
   end
 
   # def remove_hexo_marks

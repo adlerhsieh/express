@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
       end
       if record
         # insert title
-        title = record[:title] + " | "
+        title = (record[:title] || "") + " | "
         @settings.find{|s|s["key"] == "site_title"}["value"].insert(0,title)
         @settings.find{|s|s["key"] == "meta_title"}["value"].insert(0,title)
         @settings.find{|s|s["key"] == "og_title"}["value"].insert(0,title)
