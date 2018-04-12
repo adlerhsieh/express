@@ -1,14 +1,16 @@
 class Post < ActiveRecord::Base
+
+  include DefaultSetter
+  extend FriendlyId
+
   belongs_to :category
   has_many :post_tags
   has_many :tags, :through => :post_tags
+
   before_save :default_columns
   after_save :default_display_date, :default_category
-  translates :title, :content
-  extend FriendlyId
+
   friendly_id :slug
-  default_scope {includes(:translations)}
-  include DefaultSetter
 
   def parse
     process = MarkdownHelper.new(self.content)
