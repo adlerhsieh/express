@@ -1,7 +1,9 @@
 module PostsHelper
+
   def render_author(text)
     link_to( text, author_path )
   end
+
   def render_blog_title(custom=nil)
     if custom
       content_tag(:h3, custom, class: "blog-title")
@@ -9,6 +11,7 @@ module PostsHelper
       content_tag(:h3, "Blog", class: "blog-title")
     end
   end
+
   def previous_post_link
     if @previous_post
       content_tag :span, :style => "float:left" do
@@ -18,6 +21,7 @@ module PostsHelper
       end
     end
   end
+
   def next_post_link
     if @next_post
       content_tag :span, :style => "float: right" do
@@ -27,4 +31,5 @@ module PostsHelper
       end
     end
   end
+
 end
