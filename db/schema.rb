@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412125653) do
+ActiveRecord::Schema.define(version: 20180414120819) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20180412125653) do
     t.boolean  "is_public",      limit: 1,     default: false
     t.integer  "training_order", limit: 4
     t.integer  "category_id",    limit: 4
+    t.string   "icon",           limit: 255
   end
 
   create_table "settings", force: :cascade do |t|
