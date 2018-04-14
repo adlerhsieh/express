@@ -47,6 +47,8 @@ group :development, :test do
   gem 'pry-nav'
   gem 'binding_of_caller'
   gem 'rspec-rails'
+  gem "database_cleaner"
+  gem "shoulda-matchers"
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'spring'

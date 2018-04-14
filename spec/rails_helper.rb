@@ -1,8 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
-require 'spec_helper'
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+
 require_relative 'custom_helpers'
 require_relative 'factory_helpers'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -53,4 +54,11 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include CustomHelpers
   config.include FactoryHelpers
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.library :rails
+    with.test_framework :rspec
+  end
 end
