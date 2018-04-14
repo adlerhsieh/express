@@ -45,7 +45,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-nav'
-  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails'
   gem 'capybara'
