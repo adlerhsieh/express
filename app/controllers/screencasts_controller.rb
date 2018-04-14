@@ -1,7 +1,7 @@
 class ScreencastsController < ApplicationController
 
   def index
-    @screencasts = Screencast.independent.public.page(params[:page])
+    @screencasts = Screencast.independent.is_public.page(params[:page])
   end
 
   def show
