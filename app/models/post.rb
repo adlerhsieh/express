@@ -12,6 +12,8 @@ class Post < ActiveRecord::Base
 
   friendly_id :slug
 
+  scope :is_public, -> { where(is_public: true) }
+
   def parse
     process = MarkdownHelper.new(self.content)
     process.parse_markdown
@@ -50,10 +52,6 @@ class Post < ActiveRecord::Base
   end
 
   def thumbnail
-    if icon && icon.length > 0
-      icon
-    else
-      self.category.image
-    end
+    icon.presence || category.image
   end
 end

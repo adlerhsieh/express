@@ -12,6 +12,7 @@ class Screencast < ActiveRecord::Base
   friendly_id :slug
 
   scope :independent, -> { where(training_id: nil) }
+  scope :is_public, -> { where(is_public: true) }
 
   def tags
     []
