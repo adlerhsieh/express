@@ -11,7 +11,13 @@ class Screencast < ActiveRecord::Base
 
   friendly_id :slug
 
+  scope :independent, -> { where(training_id: nil) }
+
   def tags
     []
+  end
+
+  def thumbnail
+    icon.presence || category.image
   end
 end

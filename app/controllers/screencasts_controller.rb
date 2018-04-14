@@ -1,4 +1,9 @@
 class ScreencastsController < ApplicationController
+
+  def index
+    @screencasts = Screencast.independent.page(params[:page])
+  end
+
   def show
     return redirection_to_training if sceeencast_belongs_to_training
     @screencast = Screencast.find_by_slug(params[:id])
