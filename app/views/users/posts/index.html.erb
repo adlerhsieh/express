@@ -7,18 +7,21 @@
           <tr>
             <td></td>
             <td></td>
-            <td><button id="confirm_send" class="btn btn-primary">確認發送</button></td>
+            <td></td>
+            <td></td>
+            <!-- <td><button id="confirm_send" class="btn btn&#45;primary">確認發送</button></td> -->
           </tr>
           <% @posts.each do |post| %>
-            <tr>
+            <tr class="list-item">
+              <td><%= post.id %>.</td>
               <td class="">
-                <h4>
+                <p>
                   <%= link_to post.title, edit_user_post_path(current_user["name"], post) %> 
                   <%= content_tag(:code, "未公開") unless post[:is_public] %>
                   <% if post.video_embed && post.video_embed != "" %>
                     <span class="suffix glyphicon glyphicon-film"></span>
                   <% end %>
-                </h4>
+                </p>
               </td>
               <td class=""><span class="date-display"><%= post[:display_date].strftime("%Y-%m-%d") %></span><%= link_to "刪除", user_post_path(current_user["name"], post), method: :delete, class: "delete", data: { confirm: "確定刪除？" } %></td>
               <td class="">
