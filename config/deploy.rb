@@ -46,15 +46,23 @@ role :web, config_map["production"]["role"]["web"]
 set :keep_releases, 3
 
 namespace :deploy do
+  namespace :db do
+    task :migrate do
+      on roles(:web) do
+        execute "cd #{fetch(:deploy_to)}/current && RAILS_ENV=production /home/#{config_map["production"]["user"]}/.rbenv/shims/bundle exec rake db:migrate"
+      end
+    end
+  end
 
   task :server_restart do
     on roles(:web) do
-      # execute "service nginx restart"
       execute! :sudo, :service, :unicorn_express, :kill
       sleep(2)
       execute! :sudo, :service, :unicorn_express, :init
     end
   end
 
-  after :deploy, "deploy:server_restart"
 end
+
+after :deploy, "deploy:db:migrate"
+after :deploy, "deploy:server_restart"
