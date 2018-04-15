@@ -1,0 +1,19 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  host: <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  socket: /tmp/mysql.sock
+
+development:
+  <<: *default
+  database: express
+
+test:
+  <<: *default
+  database: express_test
+
+production:
+  <<: *default
+  database: express_production

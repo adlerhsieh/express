@@ -15,7 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
-/config/database.yml
 /config/secrets.yml
 
 # Ignore application configuration
