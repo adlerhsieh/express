@@ -222,6 +222,7 @@ $(document).ready(function(){
             $("#category").val(response.category);
             $("#slug").val(response.slug);
             $("#display_date").val(response.display_date);
+            $("#icon").val(response.icon);
             if(response.is_public == true){
               $("#is_public").css("display", "inline");
             }else{
