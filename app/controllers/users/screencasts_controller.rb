@@ -69,6 +69,6 @@ class Users::ScreencastsController < ApplicationController
 
   private
     def screencast_params
-      params.permit(:title, :video_embed, :image_embed, :slug, :display_date)
+      params.permit(:title, :video_embed, :image_embed, :slug, :display_date, :icon)
     end
 end

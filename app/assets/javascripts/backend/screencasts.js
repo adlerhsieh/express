@@ -89,6 +89,7 @@ $(document).ready(function(){
             var image_embed = $("#image_embed").val();
             var slug = $("#slug").val();
             var display_date = $("#display_date").val();
+            var icon = $("#icon").val();
             code = editor.session.getDocument().getAllLines();
 
             if(location.href.indexOf("/edit") == -1){
@@ -102,7 +103,8 @@ $(document).ready(function(){
                   "slug": slug,
                   "content": code,
                   "category": category,
-                  "display_date": display_date
+                  "display_date": display_date,
+                  "icon": icon
                 }
               }).done(function(response){
                 location.href = "/users/" + current_user.name + "/screencasts/" + response.slug + "/edit";
@@ -123,7 +125,8 @@ $(document).ready(function(){
                   "slug": slug,
                   "content": code,
                   "category": category,
-                  "display_date": display_date
+                  "display_date": display_date,
+                  "icon": icon
                 }
               }).done(function(response){
                 if(response.slug == current_slug){
