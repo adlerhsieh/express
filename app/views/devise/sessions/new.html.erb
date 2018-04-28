@@ -2,8 +2,8 @@
 <p class="alert"><%= alert %></p>
 
 <div class="column log-in">
-  <h4 style="text-align: center;">登入</h4>
-  <%= link_to('Github登入', user_github_omniauth_authorize_path) %>
+  <h4 style="text-align: center;">Sign in</h4>
+  <%= link_to('Sign in with Github', user_github_omniauth_authorize_path, class: "btn btn-success", style: "width: 100%") %>
   <% form_for(resource, as: resource_name, url: user_session_path) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
