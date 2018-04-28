@@ -1,8 +1,9 @@
 class Users::ScreencastsController < ApplicationController
   layout "backend"
   before_action :require_admin
+
   def index
-    @screencasts = Screencast.all
+    @screencasts = Screencast.all.order(id: :desc)
     respond_to do |format|
       format.html
       format.json { render json: @screencasts }
