@@ -7,7 +7,7 @@ config_map = YAML.load_file(File.expand_path("../deploy.yml", __FILE__))
 
 set :application, 'express'
 set :repo_url, 'git@github.com:adlerhsieh/express.git'
-set :deploy_to, "/home/#{config_map["production"]["user"]}/apps/express"
+set :deploy_to, "/home/#{config_map["production"]["user"]}/express"
 set :rbenv_ruby, File.read(File.expand_path("../../.ruby-version", __FILE__)).strip
 
 @folder = "express"
