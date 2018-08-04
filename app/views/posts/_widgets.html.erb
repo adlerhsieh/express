@@ -5,11 +5,11 @@
   <% link_to content_tag(:i, "", class: "fa fa-twitter-square widget-icon"), "https://twitter.com/motionxpress", target: "_blank" %>
 <!-- </div> -->
 
-<div class="widget column">
-  <%= form_tag subscribe_users_path, :method => 'post' do %>
-    <%= text_field_tag :email, params[:email], :class => "form-control", :placeholder => "Email Subscription" %>
-  <% end %>
-</div>
+<!-- <div class="widget column"> -->
+<!--   <%= form_tag subscribe_users_path, :method => 'post' do %> -->
+<!--     <%= text_field_tag :email, params[:email], :class => "form&#45;control", :placeholder => "Email Subscription" %> -->
+<!--   <% end %> -->
+<!-- </div> -->
 
 <div class="widget column">
   <%= form_tag search_posts_path, :method => 'get' do %>
