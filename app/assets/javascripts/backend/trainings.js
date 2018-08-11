@@ -245,7 +245,7 @@ $(document).ready(function(){
 
       function initialize_content(){
         if(location.href.indexOf("/edit") != -1){
-          current_slug = location.href.replace(location.host,"").replace("http://","").replace("/trainings/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
+          current_slug = location.href.replace(location.host,"").replace("https://", "").replace("http://","").replace("/trainings/","").replace("/edit","").replace("/users/","").replace(current_user.name, "");
           $.ajax({
             url: "/trainings/" + current_slug + ".json",
             type: "GET"
