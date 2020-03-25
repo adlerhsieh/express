@@ -6,14 +6,12 @@ class User < ActiveRecord::Base
 
   has_one :address, :class_name => "User::Mail"
 
-  require 'bing_translator'
-
   def is_admin?
     is_admin
   end
 
   def self.find_by_omniauth(auth)
     find_by(provider: auth["provider"], uid: auth["uid"])
-  end 
+  end
 
 end
