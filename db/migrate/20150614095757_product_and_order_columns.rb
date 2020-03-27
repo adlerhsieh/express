@@ -1,4 +1,4 @@
-class ProductAndOrderColumns < ActiveRecord::Migration
+class ProductAndOrderColumns < ActiveRecord::Migration[6.0]
   def change
     add_column :store_products, :display, :boolean, :default => false
     add_column :store_orders, :order_time, :datetime

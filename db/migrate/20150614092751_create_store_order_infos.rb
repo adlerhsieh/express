@@ -1,4 +1,4 @@
-class CreateStoreOrderInfos < ActiveRecord::Migration
+class CreateStoreOrderInfos < ActiveRecord::Migration[6.0]
   def change
     create_table :store_order_infos do |t|
       t.string :shipping_name

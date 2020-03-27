@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
   protect_from_forgery with: :exception
-  before_filter :configure_devise_params, if: :devise_controller?
-  before_filter :load_settings
+  before_action :configure_devise_params, if: :devise_controller?
+  before_action :load_settings
   before_action :clear_empty_order
   helper_method :current_order
 
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def find_or_create_new_order
     if current_user && current_user.latest_order
       session[:order_id] = current_user.latest_order.id
-      return current_user.latest_order 
+      return current_user.latest_order
     end
     order = Store::Order.create!
     order.update_column(:user_id, current_user.id) if current_user
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
       end
     end
     flash[:alert] = "路徑錯誤"
-    redirect_to posts_path 
+    redirect_to posts_path
   end
 
   def is_admin?

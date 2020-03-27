@@ -1,4 +1,4 @@
-class CreateStorePaymentNotifications < ActiveRecord::Migration
+class CreateStorePaymentNotifications < ActiveRecord::Migration[6.0]
   def change
     create_table :store_payment_notifications do |t|
       t.text :params

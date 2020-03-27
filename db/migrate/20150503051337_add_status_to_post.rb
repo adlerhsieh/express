@@ -1,4 +1,4 @@
-class AddStatusToPost < ActiveRecord::Migration
+class AddStatusToPost < ActiveRecord::Migration[6.0]
   def up
     add_column :posts, :is_public, :boolean, :default => false
     Post.all.each do |p|
