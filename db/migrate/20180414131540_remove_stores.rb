@@ -1,4 +1,4 @@
-class RemoveStores < ActiveRecord::Migration
+class RemoveStores < ActiveRecord::Migration[6.0]
   def change
     drop_table :store_categories
     drop_table :store_images

@@ -1,41 +1,6 @@
 # Express
 
-Express is a blogging application I'm now using with [Motion Express](http://motion-express.com/).
-
-## To Anyone who may concern
-
-If you are looking for my code sample, start from [app/models/order.rb](https://github.com/adlerhsieh/express/blob/master/app/models/store/order.rb) and related [controller actions](https://github.com/adlerhsieh/express/blob/master/app/controllers/store/orders_controller.rb) and [views](https://github.com/adlerhsieh/express/blob/master/app/views/store/orders/index.html.erb). Those are the code for [the store and shopping cart](http://motion-express.com/store/products).
-
-More to checkout in [app/models/post.rb](https://github.com/adlerhsieh/express/blob/master/app/models/post.rb) in post management feature.
-
-## Keywords
-
-#### Backend
-
-- MySQL
-- Capistrano (Digital Ocean)
-- RSpec
-- ERB
-- Github login
-- PayPal checkout
-- ActionMailer with Gmail
-
-#### Frontend
-
-- ACE editor
-- jQuery
-- AngularJS
-
-## Features
-
-- Post Management with ease
-- Post Tags & Categories
-- Video Trainings & Tutorials Management
-- Email Subscription
-- Github Login
-- Store & Shopping Cart
-
-## Installation
+## Setup
 
 ### 1. Clone & Bundle
 
@@ -46,7 +11,14 @@ bundle
 
 ### 2. Setup DB
 
-This project uses MySQL as default. Go to `config/database.example.yml` and change it to `config/database.yml` with your username, password, db name in the content.
+This project uses MySQL as default. Rename `config/application.example.yml` to `config/application.yml` and assign values to the following:
+
+```yaml
+DB_HOST:
+DB_USERNAME:
+DB_PASSWORD:
+DB_PORT:
+```
 
 ### 3. Secrets
 
@@ -69,13 +41,7 @@ Use `rake secret` three times and paste them respectively into three key_base.
 
 ### 4. Migrate DB
 
-Run `rake db:migrate`
-
-### Optional: Services
-
-All sensetive information is kept with [Figaro](https://github.com/laserlemon/figaro), which allows you to keep all info in `config/application.yml`. 
-
-Change `config/application.example.yml` into `config/application.yml` and fill arguments with services you want to implement.
+Run `rake db:create db:migrate`
 
 ### Optional: ActionMailer
 

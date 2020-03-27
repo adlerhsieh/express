@@ -1,4 +1,4 @@
-class CreateStorePaymentTransfers < ActiveRecord::Migration
+class CreateStorePaymentTransfers < ActiveRecord::Migration[6.0]
   def change
     create_table :store_payment_transfers do |t|
       t.integer :order_id

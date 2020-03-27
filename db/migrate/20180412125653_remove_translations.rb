@@ -1,10 +1,10 @@
-class RemoveTranslations < ActiveRecord::Migration
+class RemoveTranslations < ActiveRecord::Migration[6.0]
   def change
-    drop_table :category_translations
-    drop_table :post_translations
-    drop_table :screencast_translations
-    drop_table :setting_translations
-    drop_table :training_translations
-    drop_table :tag_translations
+    # drop_table :category_translations
+    # drop_table :post_translations
+    # drop_table :screencast_translations
+    # drop_table :setting_translations
+    # drop_table :training_translations
+    # drop_table :tag_translations
   end
 end

@@ -1,4 +1,4 @@
-class AddColumnsToScreenCastsAndTrainings < ActiveRecord::Migration
+class AddColumnsToScreenCastsAndTrainings < ActiveRecord::Migration[6.0]
   def change
     add_column :trainings, :slug, :string
     add_column :trainings, :display_date, :date

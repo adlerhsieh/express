@@ -1,4 +1,4 @@
-class CreateScreenCasts < ActiveRecord::Migration
+class CreateScreenCasts < ActiveRecord::Migration[6.0]
   def change
     create_table :screen_casts do |t|
       t.string :title

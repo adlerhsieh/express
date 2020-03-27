@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'httparty'
-gem 'exception_notification'
 gem 'slack-notifier'
 gem 'figaro'
 gem 'mail'
@@ -11,18 +10,15 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'http_accept_language'
 gem 'kaminari'
-gem 'globalize'
 gem 'sitemap_generator'
 gem 'rest-client'
-gem 'bing_translator'
 gem 'friendly_id'
 gem 'colorize'
 gem 'devise'
-gem 'rails', '4.2.10'
-gem 'mysql2', '~> 0.3.18'
-gem 'sass-rails', '~> 5.0'
+gem 'rails', '6.0.2.2'
+gem 'mysql2', '0.5.3'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.0'
@@ -32,6 +28,7 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'therubyracer', platforms: :ruby
 gem "unicorn"
+gem 'bigdecimal', '>= 2.0.0'
 
 group :development do
   gem 'capistrano-rails', "~> 1.3"
@@ -39,6 +36,10 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'sshkit-sudo'
   gem 'seed_dump'
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'puma', '~> 4.1'
 end
 
 group :development, :test do
@@ -48,8 +49,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rspec-rails'
   gem "database_cleaner"
-  gem "shoulda-matchers"
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'spring'
 end
+

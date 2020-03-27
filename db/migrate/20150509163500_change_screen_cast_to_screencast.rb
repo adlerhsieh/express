@@ -1,4 +1,4 @@
-class ChangeScreenCastToScreencast < ActiveRecord::Migration
+class ChangeScreenCastToScreencast < ActiveRecord::Migration[6.0]
   def up
     rename_table :screen_casts, :screencasts
   end

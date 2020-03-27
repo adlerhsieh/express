@@ -1,4 +1,4 @@
-class CreateStoreOrders < ActiveRecord::Migration
+class CreateStoreOrders < ActiveRecord::Migration[6.0]
   def change
     create_table :store_orders do |t|
       t.integer :price
