@@ -33,6 +33,11 @@ development:
   github_auth_dev_secret: 
   github_auth_production_id: 
   github_auth_production_secret: 
+  # DB
+  DB_HOST:
+  DB_USERNAME:
+  DB_PASSWORD:
+  DB_PORT:
 
 # Copy the arguments to other env if needed
 
