@@ -36,7 +36,7 @@ set :linked_files, fetch(:linked_files, []).push('config/secrets.yml', 'config/a
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-# role :web, %w{motionex@107.170.207.41}
+# role :web, %w{username@0.0.0.0}
 role :web, config_map["production"]["role"]["web"]
 
 # Default value for default_env is {}
