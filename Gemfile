@@ -28,6 +28,7 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'therubyracer', platforms: :ruby
 gem "unicorn"
+gem 'bigdecimal', '>= 2.0.0'
 
 group :development do
   gem 'capistrano-rails', "~> 1.3"

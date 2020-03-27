@@ -63,6 +63,7 @@ GEM
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     bcrypt (3.1.13)
+    bigdecimal (2.0.0)
     bindex (0.8.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -352,6 +353,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  bigdecimal (>= 2.0.0)
   binding_of_caller
   byebug
   capistrano-passenger
