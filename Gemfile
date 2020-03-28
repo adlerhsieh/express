@@ -42,6 +42,10 @@ group :development do
   gem 'puma', '~> 4.1'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
@@ -53,4 +57,3 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'spring'
 end
-
