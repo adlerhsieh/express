@@ -26,8 +26,4 @@ module DefaultSetter
     # return process.styled.html_safe
     return process.parsed.html_safe
   end
-
-  def translate_CN
-  #   Translator.new(self).to_CN
-  end
 end

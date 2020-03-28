@@ -7,7 +7,7 @@ class Screencast < ActiveRecord::Base
   belongs_to :category
 
   before_save :default_columns
-  after_save :default_display_date, :default_category, :translate_CN
+  after_save :default_display_date, :default_category
 
   friendly_id :slug
 
