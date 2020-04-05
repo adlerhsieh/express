@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   get '/blog/:slug', to: "posts#show", as: "post"
   get '/search', to: "posts#search", as: "search_posts"
   get '/author', to: "posts#author", as: "author"
-  get '/store' => redirect("/store/products")
-  get '/store/terms_of_service', to: "store/services#terms", as: "terms_of_service"
 
   resources :posts do
     collection do
@@ -60,9 +58,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  # get '/users/:name', to: "users#show", as: "user"
-  # get '/users/:name/posts', to: "users#posts", as: "edit_posts"
-  # get '/users/:name/categories', to: "users#categories", as: "edit_categories"
 
   get '/categories/:slug', to: "categories#show"
   resources :categories do
@@ -76,53 +71,5 @@ Rails.application.routes.draw do
     resources :screencasts
   end
 
-  namespace :store do
-    # resources :services, only: [] do
-    #   collection do
-    #     get :terms_of_service
-    #   end
-    # end
-    resources :products do
-      collection do
-        post :add_to_cart
-      end
-    end
-    resources :orders do
-      member do
-        get :place
-        get :after_txn
-        post :update_quantity
-        post :ship
-        post :arrive
-        post :return
-        post :cancel_return
-        post :cancel_arrive
-        post :cancel_ship
-        post :note
-        post :cancel
-      end
-      resources :order_infos, only: [:create]
-      resources :payment_transfers, only: [:new, :create, :edit, :update, :destroy] do
-        member do
-          post :confirm
-          post :cancel_confirm
-        end
-      end
-    end
-    resources :order_items do
-      member do
-        post :delete
-      end
-    end
-    resources :payment_notifiers, only: [:create] do
-      member do
-        post :confirm
-        post :cancel
-        post :recover
-      end
-    end
-  end
-
   root to: "index#index"
-
 end
