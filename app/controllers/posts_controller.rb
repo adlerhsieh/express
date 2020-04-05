@@ -85,7 +85,7 @@ class PostsController < ApplicationController
 
     def set_post_params
       if params[:category].nil? || params[:category] == ""
-        @category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+        @category = Category.default_category
       else
         @category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
       end

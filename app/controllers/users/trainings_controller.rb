@@ -37,7 +37,7 @@ class Users::TrainingsController < ApplicationController
 
   def update_selections
     @training = Training.find_by_slug(params[:id])
-    Screencast.where(:training_id => @training[:id]).each do |s| 
+    Screencast.where(:training_id => @training[:id]).each do |s|
       s.update_column(:training_id, nil)
       s.update_column(:training_order, nil)
     end
@@ -55,7 +55,7 @@ class Users::TrainingsController < ApplicationController
     @training = Training.new(training_params)
     @training.content = params[:content].join("\n")
     if params[:category].nil? || params[:category] == ""
-      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+      category = Category.default_category
     else
       category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
     end
@@ -68,7 +68,7 @@ class Users::TrainingsController < ApplicationController
   def update
     @training = Training.find_by_slug(params[:id])
     if params[:category].nil? || params[:category] == ""
-      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+      category = Category.default_category
     else
       category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
     end

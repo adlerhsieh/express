@@ -4,7 +4,9 @@
       <% @posts.each do |post| %>
         <tr>
           <td class="td-thumbnail">
-            <%= link_to(image_tag(post.thumbnail, class: "thumbnail"), post_path(post[:slug])) %>
+            <% if post.thumbnail %>
+              <%= link_to(image_tag(post.thumbnail, class: "thumbnail"), post_path(post[:slug])) %>
+            <% end %>
           </td>
           <td class="td-left">
             <h4>
@@ -13,7 +15,7 @@
               <% end %>
               <%= link_to post.title, post_path(post[:slug]) %>
             </h4>
-            <span class="date-display desktop-only"><%= post[:display_date].strftime("%Y-%m-%d") %></span> 
+            <span class="date-display desktop-only"><%= post[:display_date].strftime("%Y-%m-%d") %></span>
           </td>
           <td class="td-right desktop-only">
             <% if is_admin? %>

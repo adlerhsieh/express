@@ -15,7 +15,9 @@ module DefaultSetter
   end
 
   def default_category
-    self.category_id = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")[:id] if self.category_id.nil?
+    if self.category_id.nil?
+      self.category_id = Category.defualt_category.id
+    end
   end
 
   def parse

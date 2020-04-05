@@ -52,6 +52,6 @@ class Post < ActiveRecord::Base
   end
 
   def thumbnail
-    icon.presence || category.image
+    icon.presence || category&.image
   end
 end

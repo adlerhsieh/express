@@ -91,7 +91,9 @@ class ApplicationController < ActionController::Base
           keywords = record.tags.map(&:name).join(",") + ","
           @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,keywords)
         end
-        @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,record.category.name+",")
+        if record.category
+          @settings.find{|s|s["key"] == "meta_keywords"}["value"].insert(0,record.category.name+",")
+        end
         # insert description
       end
     end

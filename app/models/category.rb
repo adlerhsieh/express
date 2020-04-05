@@ -16,4 +16,7 @@ class Category < ActiveRecord::Base
     }
   }
 
+  def self.default_category
+    create_with(slug: "uncategorized").find_or_create_by(name: "Uncategorized")
+  end
 end

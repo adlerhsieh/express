@@ -27,7 +27,7 @@ class Users::ScreencastsController < ApplicationController
   def create
     @screencast = Screencast.new(screencast_params)
     if params[:category].nil? || params[:category] == ""
-      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+      category = Category.default_category
     else
       category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
     end
@@ -41,7 +41,7 @@ class Users::ScreencastsController < ApplicationController
   def update
     @screencast = Screencast.find_by_slug(params[:id])
     if params[:category].nil? || params[:category] == ""
-      category = Category.create_with(slug: "uncategorized").find_or_create_by(name: "未分類")
+      category = Category.default_category
     else
       category = Category.create_with(slug: params[:category]).find_or_create_by(name: params[:category])
     end
