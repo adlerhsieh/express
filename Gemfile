@@ -39,7 +39,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'puma', '~> 4.1'
+  gem 'puma', '~> 4.3'
 end
 
 group :test do
